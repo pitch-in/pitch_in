@@ -1,5 +1,7 @@
 # PitchIn
 
+An app that connects professionals with campaigns looking for their skills.
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
