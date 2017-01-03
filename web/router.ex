@@ -17,6 +17,11 @@ defmodule PitchIn.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/campaigns", CampaignController
+    resources "/users", UserController
+    resources "/pros", ProController
+    resources "/asks", AskController
+    resources "/answers", AnswerController
   end
 
   # Other scopes may use custom stacks.

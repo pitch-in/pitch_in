@@ -63,10 +63,11 @@ module.exports = {
         loader: 'url?limit=10000&mimetype=application/font-woff'
       }, {
         test: /\.(png|jpg)(\?[a-z0-9#=&.]+)?$/,
-        loader: 'url?limit=10000&name=img-[hash:6].[ext]'
+        // loader: 'url?limit=10000&name=img-[hash:6].[ext]'
+        loader: 'url?limit=10000&name=[name].[ext]'
       }, {
         test: /favicon\.ico$/,
-        loader: 'url?limit=1&name=[name].[ext]'
+        loader: 'url?limit=0&name=[name].[ext]'
       }, {
         test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
         loader: 'file'

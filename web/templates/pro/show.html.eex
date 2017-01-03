@@ -1,0 +1,58 @@
+<h2>Show pro</h2>
+
+<ul>
+
+  <li>
+    <strong>Linkedin url:</strong>
+    <%= @pro.linkedin_url %>
+  </li>
+
+  <li>
+    <strong>Profession:</strong>
+    <%= @pro.profession %>
+  </li>
+
+  <li>
+    <strong>Address street:</strong>
+    <%= @pro.address_street %>
+  </li>
+
+  <li>
+    <strong>Address unit:</strong>
+    <%= @pro.address_unit %>
+  </li>
+
+  <li>
+    <strong>Address city:</strong>
+    <%= @pro.address_city %>
+  </li>
+
+  <li>
+    <strong>Address state:</strong>
+    <%= @pro.address_state %>
+  </li>
+
+  <li>
+    <strong>Address zip:</strong>
+    <%= @pro.address_zip %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @pro.phone %>
+  </li>
+
+  <li>
+    <strong>Experience starts at:</strong>
+    <%= @pro.experience_starts_at %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @pro.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: pro_path(@conn, :edit, @pro) %>
+<%= link "Back", to: pro_path(@conn, :index) %>

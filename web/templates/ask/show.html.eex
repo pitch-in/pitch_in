@@ -1,0 +1,38 @@
+<h2>Show ask</h2>
+
+<ul>
+
+  <li>
+    <strong>Role:</strong>
+    <%= @ask.role %>
+  </li>
+
+  <li>
+    <strong>Length:</strong>
+    <%= @ask.length %>
+  </li>
+
+  <li>
+    <strong>Profession:</strong>
+    <%= @ask.profession %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @ask.description %>
+  </li>
+
+  <li>
+    <strong>Experience:</strong>
+    <%= @ask.experience %>
+  </li>
+
+  <li>
+    <strong>Campaign:</strong>
+    <%= @ask.campaign_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: ask_path(@conn, :edit, @ask) %>
+<%= link "Back", to: ask_path(@conn, :index) %>

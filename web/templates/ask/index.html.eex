@@ -1,0 +1,36 @@
+<h2>Listing asks</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Length</th>
+      <th>Profession</th>
+      <th>Description</th>
+      <th>Experience</th>
+      <th>Campaign</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ask <- @asks do %>
+    <tr>
+      <td><%= ask.role %></td>
+      <td><%= ask.length %></td>
+      <td><%= ask.profession %></td>
+      <td><%= ask.description %></td>
+      <td><%= ask.experience %></td>
+      <td><%= ask.campaign_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: ask_path(@conn, :show, ask), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: ask_path(@conn, :edit, ask), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: ask_path(@conn, :delete, ask), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New ask", to: ask_path(@conn, :new) %>

@@ -1,0 +1,113 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :type, class: "control-label" %>
+    <%= number_input f, :type, class: "form-control" %>
+    <%= error_tag f, :type %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :state, class: "control-label" %>
+    <%= text_input f, :state, class: "form-control" %>
+    <%= error_tag f, :state %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :district, class: "control-label" %>
+    <%= text_input f, :district, class: "form-control" %>
+    <%= error_tag f, :district %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :candidate_name, class: "control-label" %>
+    <%= text_input f, :candidate_name, class: "form-control" %>
+    <%= error_tag f, :candidate_name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :measure_name, class: "control-label" %>
+    <%= text_input f, :measure_name, class: "form-control" %>
+    <%= error_tag f, :measure_name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :measure_position, class: "control-label" %>
+    <%= text_input f, :measure_position, class: "form-control" %>
+    <%= error_tag f, :measure_position %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :short_pitch, class: "control-label" %>
+    <%= text_input f, :short_pitch, class: "form-control" %>
+    <%= error_tag f, :short_pitch %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :long_pitch, class: "control-label" %>
+    <%= textarea f, :long_pitch, class: "form-control" %>
+    <%= error_tag f, :long_pitch %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :website_url, class: "control-label" %>
+    <%= text_input f, :website_url, class: "form-control" %>
+    <%= error_tag f, :website_url %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :twitter_url, class: "control-label" %>
+    <%= text_input f, :twitter_url, class: "form-control" %>
+    <%= error_tag f, :twitter_url %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :facebook_url, class: "control-label" %>
+    <%= text_input f, :facebook_url, class: "form-control" %>
+    <%= error_tag f, :facebook_url %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :candidate_profession, class: "control-label" %>
+    <%= text_input f, :candidate_profession, class: "form-control" %>
+    <%= error_tag f, :candidate_profession %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :election_date, class: "control-label" %>
+    <%= date_select f, :election_date, class: "form-control" %>
+    <%= error_tag f, :election_date %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :is_partisan, class: "control-label" %>
+    <%= checkbox f, :is_partisan, class: "form-control" %>
+    <%= error_tag f, :is_partisan %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :percent_dem, class: "control-label" %>
+    <%= number_input f, :percent_dem, class: "form-control" %>
+    <%= error_tag f, :percent_dem %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :current_party, class: "control-label" %>
+    <%= number_input f, :current_party, class: "form-control" %>
+    <%= error_tag f, :current_party %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<h2>Show answer</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @answer.user_id %>
+  </li>
+
+  <li>
+    <strong>Ask:</strong>
+    <%= @answer.ask_id %>
+  </li>
+
+  <li>
+    <strong>Share email:</strong>
+    <%= @answer.share_email %>
+  </li>
+
+  <li>
+    <strong>Share phone:</strong>
+    <%= @answer.share_phone %>
+  </li>
+
+  <li>
+    <strong>Share address:</strong>
+    <%= @answer.share_address %>
+  </li>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @answer.message %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: answer_path(@conn, :edit, @answer) %>
+<%= link "Back", to: answer_path(@conn, :index) %>

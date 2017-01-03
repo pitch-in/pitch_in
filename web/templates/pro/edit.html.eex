@@ -1,0 +1,6 @@
+<h2>Edit pro</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: pro_path(@conn, :update, @pro) %>
+
+<%= link "Back", to: pro_path(@conn, :index) %>

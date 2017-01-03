@@ -1,0 +1,65 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :linkedin_url, class: "control-label" %>
+    <%= text_input f, :linkedin_url, class: "form-control" %>
+    <%= error_tag f, :linkedin_url %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :profession, class: "control-label" %>
+    <%= text_input f, :profession, class: "form-control" %>
+    <%= error_tag f, :profession %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address_street, class: "control-label" %>
+    <%= text_input f, :address_street, class: "form-control" %>
+    <%= error_tag f, :address_street %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address_unit, class: "control-label" %>
+    <%= text_input f, :address_unit, class: "form-control" %>
+    <%= error_tag f, :address_unit %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address_city, class: "control-label" %>
+    <%= text_input f, :address_city, class: "form-control" %>
+    <%= error_tag f, :address_city %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address_state, class: "control-label" %>
+    <%= text_input f, :address_state, class: "form-control" %>
+    <%= error_tag f, :address_state %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address_zip, class: "control-label" %>
+    <%= text_input f, :address_zip, class: "form-control" %>
+    <%= error_tag f, :address_zip %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :phone, class: "control-label" %>
+    <%= text_input f, :phone, class: "form-control" %>
+    <%= error_tag f, :phone %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :experience_starts_at, class: "control-label" %>
+    <%= date_select f, :experience_starts_at, class: "form-control" %>
+    <%= error_tag f, :experience_starts_at %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
