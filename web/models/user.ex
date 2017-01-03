@@ -17,7 +17,9 @@ defmodule PitchIn.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
+    |> IO.inspect
     |> cast(params, [:name, :email])
+    |> cast_assoc(:pro)
     |> validate_required([:name, :email])
     |> unique_constraint(:email)
   end

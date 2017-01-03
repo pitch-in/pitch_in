@@ -26,4 +26,8 @@
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
+
+  <%= if assigns[:pro] do %>
+    <%= render PitchIn.ProView, "form.html", changeset: @changeset, user_form: f %>
+  <% end %>
 <% end %>

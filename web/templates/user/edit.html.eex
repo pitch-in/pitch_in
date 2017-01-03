@@ -1,6 +1,8 @@
 <h2>Edit user</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: user_path(@conn, :update, @user) %>
+                        action: user_path(@conn, :update, @user),
+                        pro: true %>
 
+<%= link "Delete", to: user_path(@conn, :delete, @user), method: :delete, class: "btn btn-danger" %>
 <%= link "Back", to: user_path(@conn, :index) %>
