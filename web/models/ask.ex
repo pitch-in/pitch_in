@@ -4,10 +4,10 @@ defmodule PitchIn.Ask do
   schema "asks" do
     belongs_to :campaign, PitchIn.Campaign
     field :role, :string
-    field :length, :integer
+    field :length, AskLengthEnum
     field :profession, :string
     field :description, :string
-    field :experience, :integer
+    field :experience, ExperienceEnum
 
     timestamps()
   end

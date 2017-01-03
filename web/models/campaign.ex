@@ -5,7 +5,7 @@ defmodule PitchIn.Campaign do
     many_to_many :users, PitchIn.User, join_through: "campaign_staff"
     has_many :asks, PitchIn.Ask
     field :name, :string
-    field :type, :integer
+    field :type, CampaignTypeEnum
     field :state, :string
     field :district, :string
     field :candidate_name, :string
@@ -20,7 +20,7 @@ defmodule PitchIn.Campaign do
     field :election_date, Ecto.Date
     field :is_partisan, :boolean, default: false
     field :percent_dem, :integer
-    field :current_party, :integer
+    field :current_party, PartyEnum
 
     timestamps()
   end
