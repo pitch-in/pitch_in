@@ -1,0 +1,23 @@
+<nav class="top-bar navbar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li>
+        <a class="logo" href="/">
+          <img src="<%= webpack_path(@conn, "/img/logo.png") %>" />
+        </a>
+      </li>
+      <li>
+        <%= link "Search Campaigns", to: campaign_path(@conn, :new) %>
+      </li>
+      <li>
+        <%= link "New Campaign", to: campaign_path(@conn, :new) %>
+      </li>
+      <li>
+        <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
+      </li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <button>Log out</button>
+  </div>
+</nav>

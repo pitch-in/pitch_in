@@ -11,7 +11,7 @@ defmodule PitchIn.Pro do
     field :address_state, :string
     field :address_zip, :string
     field :phone, :string
-    field :experience_starts_at, Ecto.Date
+    field :experience_starts_at, Timex.Ecto.Date
 
     timestamps()
   end

@@ -23,70 +23,82 @@
   </li>
 
   <li>
-    <strong>Candidate name:</strong>
-    <%= @campaign.candidate_name %>
-  </li>
-
-  <li>
-    <strong>Measure name:</strong>
-    <%= @campaign.measure_name %>
-  </li>
-
-  <li>
-    <strong>Measure position:</strong>
-    <%= @campaign.measure_position %>
-  </li>
-
-  <li>
     <strong>Short pitch:</strong>
     <%= @campaign.short_pitch %>
   </li>
+
+  <%# CANDIDATE %>
+  <%= if candidate?(@campaign) do %>
+    <li>
+      <strong>Candidate name:</strong>
+      <%= @campaign.candidate_name %>
+    </li>
+
+    <li>
+      <strong>Candidate profession:</strong>
+      <%= @campaign.candidate_profession %>
+    </li>
+  <% end %>
+
+  <%# MEASURE %>
+  <%= if measure?(@campaign) do %>
+    <li>
+      <strong>Measure name:</strong>
+      <%= @campaign.measure_name %>
+    </li>
+
+    <li>
+      <strong>Measure position:</strong>
+      <%= @campaign.measure_position %>
+    </li>
+  <% end %>
+
+  <%# ELECTION %>
+  <%= if election?(@campaign) do %>
+    <li>
+      <strong>Election date:</strong>
+      <%= format_date @campaign.election_date %>
+    </li>
+
+    <li>
+      <strong>
+        <%= if @campaign.is_partisan, do: "Partisan", else: "Non-Partisan" %>
+      </strong>
+    </li>
+
+    <%= if @campaign.is_partisan do %>
+      <li>
+        <strong>Percent dem:</strong>
+        <%= @campaign.percent_dem %>
+      </li>
+
+      <li>
+        <strong>Current party:</strong>
+        <%= @campaign.current_party %>
+      </li>
+    <% end %>
+  <% end %>
 
   <li>
     <strong>Long pitch:</strong>
     <%= @campaign.long_pitch %>
   </li>
 
+  <%# URLS %>
   <li>
     <strong>Website url:</strong>
-    <%= @campaign.website_url %>
+    <%= format_url @campaign.website_url %>
   </li>
 
   <li>
     <strong>Twitter url:</strong>
-    <%= @campaign.twitter_url %>
+    <%= format_url @campaign.twitter_url %>
   </li>
 
   <li>
     <strong>Facebook url:</strong>
-    <%= @campaign.facebook_url %>
+    <%= format_url @campaign.facebook_url %>
   </li>
-
-  <li>
-    <strong>Candidate profession:</strong>
-    <%= @campaign.candidate_profession %>
-  </li>
-
-  <li>
-    <strong>Election date:</strong>
-    <%= @campaign.election_date %>
-  </li>
-
-  <li>
-    <strong>Is partisan:</strong>
-    <%= @campaign.is_partisan %>
-  </li>
-
-  <li>
-    <strong>Percent dem:</strong>
-    <%= @campaign.percent_dem %>
-  </li>
-
-  <li>
-    <strong>Current party:</strong>
-    <%= @campaign.current_party %>
-  </li>
-
 </ul>
 
 <%= link "Edit", to: campaign_path(@conn, :edit, @campaign) %>

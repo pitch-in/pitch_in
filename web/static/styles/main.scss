@@ -2,4 +2,4 @@
 @import './variables/index';
 // Foundation
 @import 'foundation-sites/scss/foundation';
-@include foundation-everything;
+@include foundation-everything(true);

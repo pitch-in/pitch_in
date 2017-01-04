@@ -2,7 +2,6 @@ defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
 
   alias PitchIn.User
-  alias PitchIn.Pro
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -10,10 +9,7 @@ defmodule PitchIn.UserController do
   end
 
   def create(conn, %{"user" => user_params} = params) do
-    changeset =
-      %User{}
-      # |> build_assoc(:pro, %Pro{})
-      |> User.changeset(user_params)
+    changeset = User.changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->

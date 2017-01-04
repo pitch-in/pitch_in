@@ -19,6 +19,7 @@ defmodule PitchIn.Web do
   def model do
     quote do
       use Ecto.Schema
+      use Timex.Ecto.Timestamps
 
       import Ecto
       import Ecto.Changeset
@@ -50,6 +51,7 @@ defmodule PitchIn.Web do
       use Phoenix.HTML
 
       import PitchIn.Router.Helpers
+      import PitchIn.ViewHelpers
       import PitchIn.ErrorHelpers
       import PitchIn.Gettext
     end

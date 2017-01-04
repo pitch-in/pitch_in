@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :type, class: "control-label" %>
-    <%= number_input f, :type, class: "form-control" %>
+    <%= select f, :type, enum_to_options(CampaignTypeEnum), class: "form-control" %>
     <%= error_tag f, :type %>
   </div>
 
@@ -103,7 +103,7 @@
 
   <div class="form-group">
     <%= label f, :current_party, class: "control-label" %>
-    <%= number_input f, :current_party, class: "form-control" %>
+    <%= select f, :current_party, enum_to_options(PartyEnum), class: "form-control" %>
     <%= error_tag f, :current_party %>
   </div>
 

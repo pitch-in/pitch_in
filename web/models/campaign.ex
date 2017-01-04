@@ -17,7 +17,7 @@ defmodule PitchIn.Campaign do
     field :twitter_url, :string
     field :facebook_url, :string
     field :candidate_profession, :string
-    field :election_date, Ecto.Date
+    field :election_date, Timex.Ecto.Date
     field :is_partisan, :boolean, default: false
     field :percent_dem, :integer
     field :current_party, PartyEnum

@@ -35,7 +35,6 @@
       <td><%= campaign.measure_name %></td>
       <td><%= campaign.measure_position %></td>
       <td><%= campaign.short_pitch %></td>
-      <td><%= campaign.long_pitch %></td>
       <td><%= campaign.website_url %></td>
       <td><%= campaign.twitter_url %></td>
       <td><%= campaign.facebook_url %></td>

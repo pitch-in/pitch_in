@@ -16,6 +16,7 @@
 </head>
 
 <body class="view-login">
+	<%= render "_navbar.html", conn: @conn %>
   <%= render @view_module, @view_template, assigns %>
 
   <%= if Mix.env == :dev do %>

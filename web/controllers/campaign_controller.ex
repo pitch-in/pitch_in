@@ -14,7 +14,9 @@ defmodule PitchIn.CampaignController do
   end
 
   def create(conn, %{"campaign" => campaign_params}) do
-    changeset = Campaign.changeset(%Campaign{}, campaign_params)
+    changeset =
+      Campaign.changeset(%Campaign{}, campaign_params)
+      # |> put_assoc(:user, user)
 
     case Repo.insert(changeset) do
       {:ok, _campaign} ->
