@@ -1,56 +1,23 @@
-<h2>Listing campaigns</h2>
+<h2>Manage Campaigns</h2>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>State</th>
-      <th>District</th>
-      <th>Candidate name</th>
-      <th>Measure name</th>
-      <th>Measure position</th>
-      <th>Short pitch</th>
-      <th>Long pitch</th>
-      <th>Website url</th>
-      <th>Twitter url</th>
-      <th>Facebook url</th>
-      <th>Candidate profession</th>
-      <th>Election date</th>
-      <th>Is partisan</th>
-      <th>Percent dem</th>
-      <th>Current party</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for campaign <- @campaigns do %>
-    <tr>
-      <td><%= campaign.name %></td>
-      <td><%= campaign.type %></td>
-      <td><%= campaign.state %></td>
-      <td><%= campaign.district %></td>
-      <td><%= campaign.candidate_name %></td>
-      <td><%= campaign.measure_name %></td>
-      <td><%= campaign.measure_position %></td>
-      <td><%= campaign.short_pitch %></td>
-      <td><%= campaign.website_url %></td>
-      <td><%= campaign.twitter_url %></td>
-      <td><%= campaign.facebook_url %></td>
-      <td><%= campaign.candidate_profession %></td>
-      <td><%= campaign.election_date %></td>
-      <td><%= campaign.is_partisan %></td>
-      <td><%= campaign.percent_dem %></td>
-      <td><%= campaign.current_party %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: campaign_path(@conn, :show, campaign), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: campaign_path(@conn, :edit, campaign), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: campaign_path(@conn, :delete, campaign), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
+    <%= for campaign <- @campaigns do %>
+      <tr>
+        <td>
+          <%= campaign.name %>
+        </td>
+        <td>
+          <%= link "Show", to: campaign_path(@conn, :show, campaign), class: "btn btn-default btn-xs" %>
+        </td>
+        <td>
+          <%= link "Edit", to: campaign_path(@conn, :edit, campaign), class: "btn btn-default btn-xs" %>
+        </td>
+        <td>
+          <%= link "Delete", to: campaign_path(@conn, :delete, campaign), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

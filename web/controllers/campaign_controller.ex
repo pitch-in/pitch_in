@@ -4,8 +4,8 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Campaign
 
   def index(conn, _params) do
-    campaigns = Repo.all(Campaign)
-    render(conn, "index.html", campaigns: campaigns)
+    user = get_user |> Repo.preload(:campaigns)
+    render(conn, "index.html", campaigns: user.campaigns)
   end
 
   def new(conn, _params) do
@@ -16,7 +16,7 @@ defmodule PitchIn.CampaignController do
   def create(conn, %{"campaign" => campaign_params}) do
     changeset =
       Campaign.changeset(%Campaign{}, campaign_params)
-      # |> put_assoc(:user, user)
+      |> Ecto.Changeset.put_assoc(:users, [get_user])
 
     case Repo.insert(changeset) do
       {:ok, _campaign} ->
@@ -24,6 +24,7 @@ defmodule PitchIn.CampaignController do
         |> put_flash(:info, "Campaign created successfully.")
         |> redirect(to: campaign_path(conn, :index))
       {:error, changeset} ->
+        IO.inspect changeset
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -63,5 +64,9 @@ defmodule PitchIn.CampaignController do
     conn
     |> put_flash(:info, "Campaign deleted successfully.")
     |> redirect(to: campaign_path(conn, :index))
+  end
+
+  defp get_user do
+    Repo.get!(PitchIn.User, 2)
   end
 end

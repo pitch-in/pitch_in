@@ -17,7 +17,12 @@
 
 <body class="view-login">
 	<%= render "_navbar.html", conn: @conn %>
-  <%= render @view_module, @view_template, assigns %>
+
+  <div class="row">
+    <div class="column">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+  </div>
 
   <%= if Mix.env == :dev do %>
     <script src='http://localhost:4001/main.js'></script>

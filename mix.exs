@@ -21,6 +21,7 @@ defmodule PitchIn.Mixfile do
      applications: [
        :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
        :phoenix_ecto, :postgrex,
+       :timex,
        # :uberauth, :ueberauth_identity
      ]]
   end
@@ -41,8 +42,8 @@ defmodule PitchIn.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:timex, "~> 3.0"},
-     {:timex_ecto, "~> 3.0"},
+     {:timex, "~> 3.1.7"},
+     {:timex_ecto, "~> 3.1.1"},
      {:ecto_enum, "~> 1.0"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},
