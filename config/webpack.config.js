@@ -67,7 +67,7 @@ module.exports = {
         loader: 'file?name=[path][name].[ext]&context=web/static'
       }, {
         test: /favicon\.ico$/,
-        loader: 'url?limit=0&name=[name].[ext]&context=web/static'
+        loader: 'file?name=[name].[ext]&context=web/static'
       }, {
         test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
         loader: 'file'

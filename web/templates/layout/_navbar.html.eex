@@ -7,7 +7,7 @@
         </a>
       </li>
       <li>
-        <%= link "Search Campaigns", to: campaign_path(@conn, :new) %>
+        <%= link "Search Campaigns", to: campaign_path(@conn, :index) %>
       </li>
       <li>
         <%= link "New Campaign", to: campaign_path(@conn, :new) %>

@@ -1,6 +1,9 @@
 require IEx
 
 defmodule PitchIn.ViewHelpers do
+  import PitchIn.Router.Helpers
+  use Phoenix.HTML
+
   @moduledoc """
   This module holds random shared helpers for the views.
   """
@@ -31,7 +34,7 @@ defmodule PitchIn.ViewHelpers do
     if Mix.env == :dev do
       "http://localhost:4001#{path}"
     else
-      Phoenix.HTML.static_path(conn, path)
+      static_path(conn, path)
     end
   end
 
@@ -50,6 +53,6 @@ defmodule PitchIn.ViewHelpers do
   def format_url(nil), do: ""
   def format_url(""), do: ""
   def format_url(url) do
-    Phoenix.HTML.Link.link(url, to: url)
+    link(url, to: url)
   end
 end
