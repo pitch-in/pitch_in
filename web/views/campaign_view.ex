@@ -2,6 +2,7 @@ defmodule PitchIn.CampaignView do
   use PitchIn.Web, :view
 
   alias PitchIn.Campaign
+  alias PitchIn.Issue
 
   def candidate?(campaign), do: campaign.type == :candidate
   def measure?(campaign), do: campaign.type == :measure

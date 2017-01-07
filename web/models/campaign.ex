@@ -4,6 +4,7 @@ defmodule PitchIn.Campaign do
   schema "campaigns" do
     many_to_many :users, PitchIn.User, join_through: "campaign_staff"
     has_many :asks, PitchIn.Ask
+    has_many :issues, PitchIn.Issue
     field :name, :string
     field :type, CampaignTypeEnum
     field :state, :string
@@ -31,6 +32,7 @@ defmodule PitchIn.Campaign do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :type, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :percent_dem, :current_party])
+    |> cast_assoc(:issues)
     |> validate_required([:name, :type, :short_pitch])
   end
 end

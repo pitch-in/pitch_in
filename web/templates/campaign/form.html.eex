@@ -59,6 +59,15 @@
     <%= error_tag f, :long_pitch %>
   </div>
 
+  <hr/>
+  <label>Top 5 Issues</label>
+  <%= inputs_for f, :issues, fn fi -> %>
+    <%= fi.index %>
+    <%= text_input fi, :issue, class: "form-control" %>
+    <%= error_tag fi, :issue %>
+  <% end %>
+  <hr/>
+
   <div class="form-group">
     <%= label f, :website_url, class: "control-label" %>
     <%= text_input f, :website_url, class: "form-control" %>

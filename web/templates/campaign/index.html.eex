@@ -8,13 +8,10 @@
           <%= campaign.name %>
         </td>
         <td>
-          <%= link "Show", to: campaign_path(@conn, :show, campaign), class: "btn btn-default btn-xs" %>
+          <%= link "Manage", to: campaign_path(@conn, :edit, campaign), class: "button" %>
         </td>
         <td>
-          <%= link "Edit", to: campaign_path(@conn, :edit, campaign), class: "btn btn-default btn-xs" %>
-        </td>
-        <td>
-          <%= link "Delete", to: campaign_path(@conn, :delete, campaign), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          <%= link "Delete", to: campaign_path(@conn, :delete, campaign), method: :delete, data: [confirm: "Are you sure?"], class: "alert button" %>
         </td>
       </tr>
     <% end %>
