@@ -1,36 +1,34 @@
-<h2>Listing asks</h2>
+<h2>Search for open asks</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Role</th>
-      <th>Length</th>
-      <th>Profession</th>
-      <th>Description</th>
-      <th>Experience</th>
-      <th>Campaign</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for ask <- @asks do %>
-    <tr>
-      <td><%= ask.role %></td>
-      <td><%= ask.length %></td>
-      <td><%= ask.profession %></td>
-      <td><%= ask.description %></td>
-      <td><%= ask.experience %></td>
-      <td><%= ask.campaign_id %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: ask_path(@conn, :show, ask), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: ask_path(@conn, :edit, ask), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: ask_path(@conn, :delete, ask), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
+<%= form_for @conn, ask_path(@conn, :index), [as: :filter, method: :get], fn f -> %>
+  <div class="row">
+    <%= render "_search_field.html", form: f, field: :profession %>
+    <%= render "_search_field.html", form: f, field: :role %>
+    <%= render "_search_field.html", form: f, field: :state %>
+  </div>
+  <%= submit "Search", class: "button" %>
 <% end %>
-  </tbody>
-</table>
 
-<%= link "New ask", to: ask_path(@conn, :new) %>
+<%= case @asks do %>
+  <% nil -> %>
+  <h3>Start a search to find how you can pitch in!</h3>
+  <% [] -> %>
+  <h3>Sorry, no results found. Try widening your search?</h3>
+  <% _ -> %>
+  <%= for ask <- @asks do %>
+    <div><strong>Role</strong></div>
+    <div><%= ask.role %></div>
+    <div><strong>Length</strong></div>
+    <div><%= ask.length %></div>
+    <div><strong>Profession</strong></div>
+    <div><%= ask.profession %></div>
+    <div><strong>Experience</strong></div>
+    <div><%= ask.experience %></div>
+    <div><strong>Description</strong></div>
+    <div><%= ask.description %></div>
+
+    <%= link "Show", to: ask_path(@conn, :show, ask), class: "button" %>
+    <%= link "Answer", to: ask_path(@conn, :show, ask), class: "success button" %>
+  <% end %>
+<% end %>
+

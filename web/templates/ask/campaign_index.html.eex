@@ -1,32 +1,20 @@
 <h2>Open Asks for <%= @campaign.name %></h2>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Role</th>
-      <th>Length</th>
-      <th>Profession</th>
-      <th>Description</th>
-      <th>Experience</th>
-      <th>Campaign</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for ask <- @asks do %>
-    <tr>
-      <td>
-        <%= ask.role %>
-      </td>
-      <td>
-        <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "button" %>
-      </td>
-      <td>
-        <%= link "Delete", to: campaign_ask_path(@conn, :delete, @campaign, @ask), method: :delete, data: [confirm: "Are you sure?"], class: "alert button" %>
-      </td>
-    </tr>
-<% end %>
+    <%= for ask <- @asks do %>
+      <tr>
+        <td>
+          <%= ask.role %>
+        </td>
+        <td>
+          <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, ask), class: "button" %>
+        </td>
+        <td>
+          <%= link "Close", to: campaign_ask_path(@conn, :delete, @campaign, ask), method: :delete, data: [confirm: "Are you sure?"], class: "alert button" %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

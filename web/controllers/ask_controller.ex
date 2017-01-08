@@ -12,9 +12,24 @@ defmodule PitchIn.AskController do
     render(conn, "campaign_index.html", campaign: campaign, asks: campaign.asks)
   end
 
-  def index(conn, _params) do
-    asks = Repo.all(Ask)
+  def index(conn, %{"filter" => filter}) do
+    profession = like_value(filter["profession"])
+    role = like_value(filter["role"])
+    state = like_value(filter["state"])
+
+    query =
+      from a in Ask,
+      join: c in Campaign, where: c.id == a.campaign_id,
+      where: like(a.profession, ^profession),
+      where: like(c.state, ^state),
+      where: like(a.role, ^role)
+    
+    asks = Repo.all(query)
     render(conn, "index.html", asks: asks)
+  end
+
+  def index(conn, _params) do
+    render(conn, "index.html", asks: nil)
   end
 
   def new(conn, %{"campaign_id" => campaign_id}) do
@@ -88,4 +103,7 @@ defmodule PitchIn.AskController do
     Repo.get!(Campaign, id)
     |> Repo.preload(:asks)
   end
+
+  defp like_value(nil), do: "%"
+  defp like_value(value), do: "%#{value}%"
 end
