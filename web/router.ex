@@ -19,7 +19,9 @@ defmodule PitchIn.Router do
     get "/", PageController, :index
     resources "/asks", AskController, only: [:index, :show]
     resources "/campaigns", CampaignController do
-      resources "/asks", AskController
+      resources "/asks", AskController do
+        resources "/answers", AnswerController
+      end
     end
     resources "/users", UserController
     resources "/pros", ProController
