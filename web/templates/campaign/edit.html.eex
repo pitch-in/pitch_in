@@ -3,4 +3,5 @@
 <%= render "form.html", changeset: @changeset,
                         action: campaign_path(@conn, :update, @campaign) %>
 
-<%= link "Back", to: campaign_path(@conn, :index) %>
+<%= link "Mange Asks", to: campaign_ask_path(@conn, :index, @campaign), class: "button" %>
+<%= link "Back", to: campaign_path(@conn, :index), class: "button" %>

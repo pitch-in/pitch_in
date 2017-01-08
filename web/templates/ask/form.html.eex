@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :length, class: "control-label" %>
-    <%= number_input f, :length, class: "form-control" %>
+    <%= select f, :length, enum_to_options(AskLengthEnum), class: "form-control" %>
     <%= error_tag f, :length %>
   </div>
 
@@ -31,7 +31,7 @@
 
   <div class="form-group">
     <%= label f, :experience, class: "control-label" %>
-    <%= number_input f, :experience, class: "form-control" %>
+    <%= select f, :experience, enum_to_options(ExperienceEnum), class: "form-control" %>
     <%= error_tag f, :experience %>
   </div>
 

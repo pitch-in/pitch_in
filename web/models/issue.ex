@@ -3,7 +3,7 @@ defmodule PitchIn.Issue do
 
   schema "issues" do
     field :issue, :string
-    belongs_to :campaign, PitchIn.Campaign
+    belongs_to :campaign, PitchIn.Campaign 
 
     timestamps()
   end
