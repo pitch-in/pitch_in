@@ -1,2 +1,2 @@
-npm run deploy
+npm run deploy 
 mix phoenix.digest
