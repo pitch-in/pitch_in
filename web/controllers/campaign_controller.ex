@@ -60,7 +60,6 @@ defmodule PitchIn.CampaignController do
         |> redirect(to: campaign_path(conn, :edit, campaign))
       {:error, changeset} ->
         changeset = fill_issues(changeset)
-        IO.inspect(changeset)
         render(conn, "edit.html", campaign: campaign, changeset: changeset)
     end
   end

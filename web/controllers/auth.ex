@@ -2,20 +2,40 @@ defmodule PitchIn.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  defmacro __using__(methods \\ nil) do
+  defmacro __using__(opts) do
+    
+    methods = opts[:protect]
     guard =
-      if methods do
+      case methods do
+        nil ->
+          false
+        :all ->
+          true
+        _ ->
+          quote do
+            var!(action) in unquote(methods)
+          end
+      end
+
+    action =
+      if opts[:pass_user] do
         quote do
-          var!(action) in unquote(methods)
+          def action(conn, _) do
+            apply(
+              __MODULE__,
+              action_name(conn),
+              [conn, conn.params, conn.assigns.current_user]
+            )
+          end
         end
-      else
-        quote do true end
       end
 
     quote do
       import PitchIn.Auth, only: [authenticate: 2]
 
       plug :authenticate when unquote(guard)
+
+      unquote(action)
     end
   end
 
@@ -28,9 +48,6 @@ defmodule PitchIn.Auth do
     user_id = get_session(conn, :user_id)
     user = user_id && repo.get(PitchIn.User, user_id)
 
-    IO.puts("-----CURRENT_USER-----")
-    IO.inspect(user)
-    IO.puts("-----/CURRENT_USER-----")
     assign(conn, :current_user, user)
   end
 

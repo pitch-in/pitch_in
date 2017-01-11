@@ -2,9 +2,8 @@ defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
   alias PitchIn.User
 
-  use PitchIn.Auth, [:show, :edit, :update, :delete]
-  # import PitchIn.Auth, only: [authenticate: 2]
-  # plug :authenticate when action in [:show, :edit, :update, :delete]
+  use PitchIn.Auth, protect: [:show, :edit, :update, :delete]
+  plug :verify_user when action in [:show, :edit, :update, :delete]
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -65,5 +64,19 @@ defmodule PitchIn.UserController do
   defp get_pro_user(id) do
     Repo.get!(User, id)
     |> Repo.preload(:pro)
+  end
+
+  def verify_user(conn, _opts) do
+    {param_id, _} = Integer.parse(conn.params["id"])
+
+    if param_id == conn.assigns.current_user.id do
+      conn
+    else
+      conn
+      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
+      |> put_status(404)
+      |> render(PitchIn.ErrorView, "404.html")
+      |> halt
+    end
   end
 end
