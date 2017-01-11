@@ -2,6 +2,23 @@ defmodule PitchIn.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
+  defmacro __using__(methods \\ nil) do
+    guard =
+      if methods do
+        quote do
+          var!(action) in unquote(methods)
+        end
+      else
+        quote do true end
+      end
+
+    quote do
+      import PitchIn.Auth, only: [authenticate: 2]
+
+      plug :authenticate when unquote(guard)
+    end
+  end
+
   def init(opts) do
     # Raises if no repo is passed in.
     Keyword.fetch!(opts, :repo)
@@ -11,6 +28,9 @@ defmodule PitchIn.Auth do
     user_id = get_session(conn, :user_id)
     user = user_id && repo.get(PitchIn.User, user_id)
 
+    IO.puts("-----CURRENT_USER-----")
+    IO.inspect(user)
+    IO.puts("-----/CURRENT_USER-----")
     assign(conn, :current_user, user)
   end
 
@@ -43,6 +63,13 @@ defmodule PitchIn.Auth do
   end
 
   @doc """
+  Log the user out, destroying their session.
+  """
+  def logout(conn) do
+    configure_session(conn, drop: true)
+  end
+
+  @doc """
   A function Plug to authenticate a route.
   """
   def authenticate(conn, _opts) do
@@ -50,8 +77,9 @@ defmodule PitchIn.Auth do
       conn
     else
       conn
-      |> put_flash(:error, "You must log in to view this page.")
-      |> redirect(to: "")
+      |> Phoenix.Controller.put_flash(:error, "You must log in to view this page.")
+      |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
+      |> halt
     end
   end
 end

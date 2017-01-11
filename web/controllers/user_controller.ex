@@ -2,8 +2,9 @@ defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
   alias PitchIn.User
 
-  import PitchIn.Auth, only: [:authenticate]
-  plug :authenticate when action in [:show, :edit, :update, :delete]
+  use PitchIn.Auth, [:show, :edit, :update, :delete]
+  # import PitchIn.Auth, only: [authenticate: 2]
+  # plug :authenticate when action in [:show, :edit, :update, :delete]
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})

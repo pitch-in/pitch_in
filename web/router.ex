@@ -17,14 +17,15 @@ defmodule PitchIn.Router do
   scope "/", PitchIn do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    resources "/asks", AskController, only: [:index, :show]
+    get "/", AskController, :index
+    resources "/asks", AskController, only: [:show]
     resources "/campaigns", CampaignController do
       resources "/asks", AskController do
         resources "/answers", AnswerController
       end
     end
     resources "/users", UserController
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController
     resources "/answers", AnswerController
   end

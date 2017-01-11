@@ -15,8 +15,8 @@ defmodule PitchIn.ViewHelpers do
     enum_module.__enum_map__()
     |> Keyword.keys
     |> Enum.reverse
-    |> Enum.reduce([], fn
-      atom, acc -> Keyword.put(acc, String.to_atom(titleize_key(atom)), atom)
+    |> Enum.reduce([], fn atom, acc ->
+      Keyword.put(acc, String.to_atom(titleize_key(atom)), atom)
     end)
   end
 

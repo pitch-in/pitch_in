@@ -36,10 +36,10 @@ defmodule PitchIn.User do
     |> put_pass_hash
   end
 
-  defp put_hash_change(changeset) do
+  defp put_pass_hash(changeset) do
     case changeset do
-      %Ecto.Change.Changeset{valid?: true, changes: %{password: password}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
       _ ->
         changeset
     end

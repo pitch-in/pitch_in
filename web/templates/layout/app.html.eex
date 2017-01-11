@@ -16,7 +16,17 @@
 </head>
 
 <body class="view-login">
-	<%= render "_navbar.html", conn: @conn %>
+	<%= render "_navbar.html", conn: @conn, current_user: @current_user %>
+
+  <%= for {code, message} <- get_flash(@conn) do %>
+    <div class="callout <%= code %>" data-closable>
+      <p><%= message %></p>
+
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
 
   <div class="row">
     <div class="column">
