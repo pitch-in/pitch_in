@@ -1,10 +1,13 @@
 <h2>Search for open asks</h2>
 
-<%= form_for @conn, ask_path(@conn, :index), [as: :filter, method: :get], fn f -> %>
+<%= form_for @conn, ask_path(@conn, :index), [
+  as: :filter, method: :get, csrf_token: false, enforce_utf8: false
+], fn f -> %>
   <div class="row">
     <%= render "_search_field.html", form: f, field: :profession %>
-    <%= render "_search_field.html", form: f, field: :role %>
     <%= render "_search_field.html", form: f, field: :state %>
+    <%= render "_search_field.html", form: f, field: :role %>
+    <%= render "_search_field.html", form: f, field: :issue %>
   </div>
   <%= submit "Search", class: "button" %>
 <% end %>

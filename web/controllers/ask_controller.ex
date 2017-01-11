@@ -5,6 +5,7 @@ defmodule PitchIn.AskController do
 
   alias PitchIn.Ask
   alias PitchIn.Campaign
+  alias PitchIn.Issue
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
@@ -16,20 +17,40 @@ defmodule PitchIn.AskController do
     profession = like_value(filter["profession"])
     role = like_value(filter["role"])
     state = like_value(filter["state"])
+    issue = filter["issue"]
 
     query =
       from a in Ask,
-      join: c in Campaign, where: c.id == a.campaign_id,
-      where: like(a.profession, ^profession),
-      where: like(c.state, ^state),
-      where: like(a.role, ^role)
-    
+      select: a,
+      join: c in Campaign, on: c.id == a.campaign_id,
+      where: ilike(a.profession, ^profession),
+      where: ilike(c.state, ^state),
+      where: ilike(a.role, ^role),
+      where: fragment("""
+        ? IN (
+          SELECT campaign_id
+          FROM issues
+          WHERE issue ILIKE ?
+        )
+      """, c.id, ^like_value(issue))
+
     asks = Repo.all(query)
     render(conn, "index.html", asks: asks)
   end
 
   def index(conn, _params) do
-    render(conn, "index.html", asks: nil)
+    user = conn.assigns.current_user |> Repo.preload(:pro)
+    # TODO: Remove defaults.
+    pro = user.pro || %PitchIn.Pro{profession: "Software Engineer", address_state: "CA"}
+
+    conn
+    |> Map.put(:params, %{
+      "filter" => %{
+        "profession" => pro.profession,
+        "state" => pro.address_state
+      }
+    })
+    |> render("index.html", asks: nil)
   end
 
   def new(conn, %{"campaign_id" => campaign_id}) do

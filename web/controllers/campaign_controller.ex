@@ -6,10 +6,10 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Issue
   alias PitchIn.User
 
-  use PitchIn.Auth, protect: [:edit, :update, :delete]
+  use PitchIn.Auth, protect: [:edit, :update, :delete], pass_user: true
 
-  def index(conn, _params) do
-    user = conn.assigns.current_user |> Repo.preload(:campaigns)
+  def index(conn, _params, user) do
+    user = user |> Repo.preload(:campaigns)
     render(conn, "index.html", campaigns: user.campaigns)
   end
 
@@ -21,10 +21,14 @@ defmodule PitchIn.CampaignController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"campaign" => campaign_params}) do
+  def create(conn, %{"campaign" => campaign_params}, user) do
+    campaign_params = 
+      campaign_params
+      |> Map.update!("issues", &clean_up_issues/1)
+
     changeset =
       Campaign.changeset(%Campaign{}, campaign_params)
-      |> Ecto.Changeset.put_assoc(:users, [conn.assigns.current_user])
+      |> Ecto.Changeset.put_assoc(:users, [user])
 
     case Repo.insert(changeset) do
       {:ok, _campaign} ->
@@ -41,22 +45,19 @@ defmodule PitchIn.CampaignController do
     render(conn, "show.html", campaign: campaign)
   end
 
-  def edit(conn, %{"id" => id}) do
-    campaign = get_campaign(id, conn.assigns.current_user)
+  def edit(conn, %{"id" => id}, user) do
+    campaign = get_campaign(id, user)
 
-
-    IO.puts("-----CAMP----")
     changeset =
       campaign
-      |> IO.inspect
       |> Campaign.changeset
       |> fill_issues
 
     render(conn, "edit.html", campaign: campaign, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "campaign" => campaign_params}) do
-    campaign = get_campaign(id)
+  def update(conn, %{"id" => id, "campaign" => campaign_params}, user) do
+    campaign = get_campaign(id, user)
 
     campaign_params = 
       campaign_params
@@ -75,8 +76,8 @@ defmodule PitchIn.CampaignController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    campaign = Repo.get!(Campaign, id)
+  def delete(conn, %{"id" => id}, user) do
+    campaign = get_campaign(id, user)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -127,10 +128,6 @@ defmodule PitchIn.CampaignController do
     # TODO: Handle not found.
     [campaign] = user.campaigns
     campaign |> Repo.preload(:issues)
-  end
-
-  defp verify_ownership(campaign, user) do
-    
   end
 
   defp verify_staff(conn, _opts) do
