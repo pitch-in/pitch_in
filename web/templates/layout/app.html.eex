@@ -11,7 +11,7 @@
     <title>PitchIn!</title>
 
     <%= if Mix.env != :dev do %>
-      <link href="<%= static_path(@conn, "/main.min.css") %>" rel="stylesheet" type="text/css"></link>
+      <link href="<%= static_path(@conn, "/main.min.css") %>" rel="stylesheet" type="text/css" />
     <% end %>
 </head>
 
