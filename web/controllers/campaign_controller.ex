@@ -12,7 +12,7 @@ defmodule PitchIn.CampaignController do
 
   def new(conn, _params) do
     changeset =
-      %Campaign{}
+      %Campaign{issues: []}
       |> Campaign.changeset
       |> fill_issues
     render(conn, "new.html", changeset: changeset)
@@ -87,15 +87,8 @@ defmodule PitchIn.CampaignController do
     else
       blanks = Enum.map(1..missing_issues, fn _ -> %Issue{} end)
 
-      blanks_changeset =
-        changeset
-        |> Ecto.Changeset.put_assoc(:issues, campaign.issues ++ blanks)
-
-      # changeset = 
-      #   changeset
-      #   |> update_in_struct([:data, :issues], &(&1 ++ blanks))
-
-      # changeset
+      changeset
+      |> Ecto.Changeset.put_assoc(:issues, campaign.issues ++ blanks)
     end
   end
 
