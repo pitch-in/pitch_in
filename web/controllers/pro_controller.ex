@@ -27,8 +27,4 @@ defmodule PitchIn.ProController do
         render(conn, "edit.html", pro: pro, changeset: changeset)
     end
   end
-
-  defp get_user do
-    Repo.get!(PitchIn.User, 2)
-  end
 end

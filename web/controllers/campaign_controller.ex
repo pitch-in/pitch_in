@@ -4,9 +4,12 @@ defmodule PitchIn.CampaignController do
 
   alias PitchIn.Campaign
   alias PitchIn.Issue
+  alias PitchIn.User
+
+  use PitchIn.Auth, protect: [:edit, :update, :delete]
 
   def index(conn, _params) do
-    user = get_user |> Repo.preload(:campaigns)
+    user = conn.assigns.current_user |> Repo.preload(:campaigns)
     render(conn, "index.html", campaigns: user.campaigns)
   end
 
@@ -21,7 +24,7 @@ defmodule PitchIn.CampaignController do
   def create(conn, %{"campaign" => campaign_params}) do
     changeset =
       Campaign.changeset(%Campaign{}, campaign_params)
-      |> Ecto.Changeset.put_assoc(:users, [get_user])
+      |> Ecto.Changeset.put_assoc(:users, [conn.assigns.current_user])
 
     case Repo.insert(changeset) do
       {:ok, _campaign} ->
@@ -39,8 +42,16 @@ defmodule PitchIn.CampaignController do
   end
 
   def edit(conn, %{"id" => id}) do
-    campaign = get_campaign(id)
-    changeset = Campaign.changeset(campaign) |> fill_issues
+    campaign = get_campaign(id, conn.assigns.current_user)
+
+
+    IO.puts("-----CAMP----")
+    changeset =
+      campaign
+      |> IO.inspect
+      |> Campaign.changeset
+      |> fill_issues
+
     render(conn, "edit.html", campaign: campaign, changeset: changeset)
   end
 
@@ -80,7 +91,6 @@ defmodule PitchIn.CampaignController do
     campaign = Ecto.Changeset.apply_changes(changeset)
     issues = campaign.issues
     missing_issues = 5 - length(issues)
-    IO.puts "--------MISSING: #{missing_issues}"
 
     if missing_issues < 1 do
       changeset
@@ -109,8 +119,31 @@ defmodule PitchIn.CampaignController do
   defp get_campaign(id) do
     Repo.get!(PitchIn.Campaign, id) |> Repo.preload(:issues)
   end
+  defp get_campaign(id, user) do
+    user =
+      user
+      |> Repo.preload(campaigns: from(c in Campaign, where: c.id == ^id))
 
-  defp get_user do
-    Repo.get!(PitchIn.User, 2)
+    # TODO: Handle not found.
+    [campaign] = user.campaigns
+    campaign |> Repo.preload(:issues)
+  end
+
+  defp verify_ownership(campaign, user) do
+    
+  end
+
+  defp verify_staff(conn, _opts) do
+    {param_id, _} = Integer.parse(conn.params["id"])
+
+    if param_id == conn.assigns.current_user.id do
+      conn
+    else
+      conn
+      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
+      |> put_status(404)
+      |> render(PitchIn.ErrorView, "404.html")
+      |> halt
+    end
   end
 end
