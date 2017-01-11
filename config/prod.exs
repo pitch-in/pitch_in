@@ -15,18 +15,25 @@ config :pitch_in, PitchIn.Endpoint,
   http: [port: {:system, "PORT"}],
   cache_static_manifest: "priv/static/manifest.json"
 
-# Use heroku-style env vars.
-config :pitch_in, PitchIn.Endpoint,
-  secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  url: [scheme: "https", host: "pitch-in-app.herokuapp.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+try do
+  # Use prod.secret if it exists.
+  import_config "prod.secret.exs"
+rescue
+  e in Mix.Config.LoadError ->
+    # Otherwise use heroku-style env vars.
 
-# Configure your database
-config :hello_phoenix, HelloPhoenix.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+    config :pitch_in, PitchIn.Endpoint,
+      secret_key_base: System.get_env("SECRET_KEY_BASE"),
+      url: [scheme: "https", host: "pitch-in-app.herokuapp.com", port: 443],
+      force_ssl: [rewrite_on: [:x_forwarded_proto]]
+
+    # Configure your database
+    config :hello_phoenix, HelloPhoenix.Repo,
+      adapter: Ecto.Adapters.Postgres,
+      url: System.get_env("DATABASE_URL"),
+      pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+      ssl: true
+end
 
 # Do not print debug messages in production
 config :logger, level: :info
