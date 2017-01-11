@@ -1,6 +1,10 @@
 <h2>Edit pro</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: pro_path(@conn, :update, @user, @pro) %>
+<p>
+  This is your professional profile. It both helps you search for good
+  ways to volunteer your skills, and helps campaigns get you know you
+  a little better. 
+</p>
 
-<%= link "Back", to: pro_path(@conn, :index, @user) %>
+<%= render "form.html", changeset: @changeset,
+                        action: pro_path(@conn, :update, @user) %>

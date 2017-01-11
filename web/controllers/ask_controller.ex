@@ -39,17 +39,24 @@ defmodule PitchIn.AskController do
   end
 
   def index(conn, _params) do
-    user = conn.assigns.current_user |> Repo.preload(:pro)
-    # TODO: Remove defaults.
-    pro = user.pro || %PitchIn.Pro{profession: "Software Engineer", address_state: "CA"}
+    user = conn.assigns.current_user
 
-    conn
-    |> Map.put(:params, %{
-      "filter" => %{
-        "profession" => pro.profession,
-        "state" => pro.address_state
-      }
-    })
+    if user do
+      user = user |> Repo.preload(:pro)
+
+      conn
+      |> Map.put(
+        :params,
+        %{
+          "filter" => %{
+            "profession" => user.pro.profession,
+            "state" => user.pro.address_state
+          }
+        }
+      )
+    else
+      conn
+    end
     |> render("index.html", asks: nil)
   end
 

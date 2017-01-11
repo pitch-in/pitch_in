@@ -1,6 +1,7 @@
 defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
   alias PitchIn.User
+  alias PitchIn.Pro
 
   use PitchIn.Auth, protect: [:show, :edit, :update, :delete]
   plug :verify_user when action in [:show, :edit, :update, :delete]
@@ -11,7 +12,7 @@ defmodule PitchIn.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.registration_changeset(%User{}, user_params)
+    changeset = User.registration_changeset(%User{pro: %Pro{}}, user_params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->

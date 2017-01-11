@@ -1,6 +1,11 @@
 <h2>Show pro</h2>
 
 <ul>
+  <li>
+    <strong>
+      <%= @user.name %>
+    </strong>
+  </li>
 
   <li>
     <strong>Linkedin url:</strong>
@@ -45,11 +50,6 @@
   <li>
     <strong>Experience starts at:</strong>
     <%= @pro.experience_starts_at %>
-  </li>
-
-  <li>
-    <strong>User:</strong>
-    <%= @pro.user_id %>
   </li>
 
 </ul>

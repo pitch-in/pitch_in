@@ -1,21 +1,25 @@
 defmodule PitchIn.ProController do
   use PitchIn.Web, :controller
+  use PitchIn.Auth, protect: :all, pass_user: true
+  plug :verify_user when action in [:edit, :update]
 
+  alias PitchIn.User
   alias PitchIn.Pro
 
-  def show(conn, %{"id" => id}) do
-    pro = Repo.get!(Pro, id)
-    render(conn, "show.html", pro: pro)
+  def show(conn, %{"id" => id}, _user) do
+    user = Repo.get!(User, id) |> Repo.preload(:pro)
+    render(conn, "show.html", user: user, pro: user.pro)
   end
 
-  def edit(conn, %{"id" => id}) do
-    pro = Repo.get!(Pro, id)
+  def edit(conn, %{"id" => _id}, user) do
+    pro = get_pro(user)
+
     changeset = Pro.changeset(pro)
-    render(conn, "edit.html", pro: pro, changeset: changeset)
+    render(conn, "edit.html", user: user, pro: pro, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "pro" => pro_params}) do
-    pro = Repo.get!(Pro, id)
+  def update(conn, %{"id" => _id, "pro" => pro_params}, user) do
+    pro = get_pro(user)
     changeset = Pro.changeset(pro, pro_params)
 
     case Repo.update(changeset) do
@@ -24,7 +28,32 @@ defmodule PitchIn.ProController do
         |> put_flash(:primary, "Pro updated successfully.")
         |> redirect(to: pro_path(conn, :show, pro))
       {:error, changeset} ->
-        render(conn, "edit.html", pro: pro, changeset: changeset)
+        render(conn, "edit.html", user: user, pro: pro, changeset: changeset)
+    end
+  end
+
+  defp get_pro(user) do
+    user = user |> Repo.preload(:pro)
+
+    pro =
+    if user.pro do
+      user.pro
+    else
+      user |> build_assoc(:pro)
+    end
+  end
+
+  def verify_user(conn, _opts) do
+    {param_id, _} = Integer.parse(conn.params["id"])
+
+    if param_id == conn.assigns.current_user.id do
+      conn
+    else
+      conn
+      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that user.")
+      |> put_status(404)
+      |> render(PitchIn.ErrorView, "404.html")
+      |> halt
     end
   end
 end

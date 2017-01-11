@@ -17,17 +17,22 @@
       </li>
     </ul>
   </div>
-  <ul class="top-bar-right">
-    <%= if @current_user do %>
-      <li>
-        <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link "Log In", to: session_path(@conn, :new) %>
-        <%= link "Sign Up", to: user_path(@conn, :new) %>
-      </li>
-
-    <% end %>
-  </ul>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <%= if @current_user do %>
+        <li>
+          <%= link "Profile", to: pro_path(@conn, :edit, @current_user) %>
+        </li>
+        <li>
+          <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>
+        </li>
+      <% else %>
+        <li>
+          <%= link "Log In", to: session_path(@conn, :new) %>
+        </li>
+        <li>
+          <%= link "Sign Up", to: user_path(@conn, :new) %>
+        </li>
+      <% end %>
+    </ul>
 </nav>
