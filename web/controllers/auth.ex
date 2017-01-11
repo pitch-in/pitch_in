@@ -77,7 +77,7 @@ defmodule PitchIn.Auth do
       conn
     else
       conn
-      |> Phoenix.Controller.put_flash(:error, "You must log in to view this page.")
+      |> Phoenix.Controller.put_flash(:alert, "You must log in to view this page.")
       |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
       |> halt
     end

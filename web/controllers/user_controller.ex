@@ -18,7 +18,7 @@ defmodule PitchIn.UserController do
       {:ok, user} ->
         conn
         |> PitchIn.Auth.login(user)
-        |> put_flash(:info, "User created successfully.")
+        |> put_flash(:primary, "User created successfully.")
         |> redirect(to: user_path(conn, :edit, user))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -43,7 +43,7 @@ defmodule PitchIn.UserController do
     case Repo.update(changeset) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "User updated successfully.")
+        |> put_flash(:primary, "User updated successfully.")
         |> redirect(to: user_path(conn, :edit, user))
       {:error, changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
@@ -58,7 +58,7 @@ defmodule PitchIn.UserController do
     Repo.delete!(user)
 
     conn
-    |> put_flash(:info, "User deleted successfully.")
+    |> put_flash(:primary, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
 

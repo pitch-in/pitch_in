@@ -19,7 +19,7 @@ defmodule PitchIn.AnswerController do
     case Repo.insert(changeset) do
       {:ok, _answer} ->
         conn
-        |> put_flash(:info, "Answer created successfully.")
+        |> put_flash(:primary, "Answer created successfully.")
         |> redirect(to: answer_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +44,7 @@ defmodule PitchIn.AnswerController do
     case Repo.update(changeset) do
       {:ok, answer} ->
         conn
-        |> put_flash(:info, "Answer updated successfully.")
+        |> put_flash(:primary, "Answer updated successfully.")
         |> redirect(to: answer_path(conn, :show, answer))
       {:error, changeset} ->
         render(conn, "edit.html", answer: answer, changeset: changeset)
@@ -59,7 +59,7 @@ defmodule PitchIn.AnswerController do
     Repo.delete!(answer)
 
     conn
-    |> put_flash(:info, "Answer deleted successfully.")
+    |> put_flash(:primary, "Answer deleted successfully.")
     |> redirect(to: answer_path(conn, :index))
   end
 end

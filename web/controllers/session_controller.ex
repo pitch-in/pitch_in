@@ -10,11 +10,11 @@ defmodule PitchIn.SessionController do
     case Auth.login_by_identity(conn, email, password, repo: Repo) do
       {:ok, conn} ->
         conn
-        |> put_flash(:info, "Welcome back!")
+        |> put_flash(:primary, "Welcome back!")
         |> redirect(to: ask_path(conn, :index))
       {:error, _reason, conn} ->
         conn
-        |> put_flash(:error, "Invalid username/password combination.")
+        |> put_flash(:alert, "Invalid username/password combination.")
         |> render("new.html")
     end
   end
