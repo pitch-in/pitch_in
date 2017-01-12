@@ -39,3 +39,18 @@ config :pitch_in, PitchIn.Repo,
   database: "pitch_in_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :pitch_in, PitchIn.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  server: "smtp.domain",
+  port: 1025,
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
+
+try do
+  # Use prod.secret if it exists.
+  import_config "dev.secret.exs"
+rescue
+  e in Mix.Config.LoadError -> nil
+end

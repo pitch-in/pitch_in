@@ -1,58 +1,11 @@
-<h2>Show pro</h2>
+<h2>Edit pro</h2>
 
-<ul>
-  <li>
-    <strong>
-      <%= @user.name %>
-    </strong>
-  </li>
+<p>
+  This is your professional profile. It both helps you search for good
+  ways to volunteer your skills, and helps campaigns get you know you
+  a little better. 
+</p>
 
-  <li>
-    <strong>Linkedin url:</strong>
-    <%= @pro.linkedin_url %>
-  </li>
-
-  <li>
-    <strong>Profession:</strong>
-    <%= @pro.profession %>
-  </li>
-
-  <li>
-    <strong>Address street:</strong>
-    <%= @pro.address_street %>
-  </li>
-
-  <li>
-    <strong>Address unit:</strong>
-    <%= @pro.address_unit %>
-  </li>
-
-  <li>
-    <strong>Address city:</strong>
-    <%= @pro.address_city %>
-  </li>
-
-  <li>
-    <strong>Address state:</strong>
-    <%= @pro.address_state %>
-  </li>
-
-  <li>
-    <strong>Address zip:</strong>
-    <%= @pro.address_zip %>
-  </li>
-
-  <li>
-    <strong>Phone:</strong>
-    <%= @pro.phone %>
-  </li>
-
-  <li>
-    <strong>Experience starts at:</strong>
-    <%= @pro.experience_starts_at %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: pro_path(@conn, :edit, @pro) %>
-<%= link "Back", to: pro_path(@conn, :index) %>
+<h3><%= @user.name %></h3>
+<%= render "form.html", changeset: @changeset, conn: @conn, user: @user,
+                        action: pro_path(@conn, :update, @user) %>

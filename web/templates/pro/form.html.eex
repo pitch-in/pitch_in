@@ -64,6 +64,7 @@
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "button" %>
+    <%= submit "Update", class: "button" %>
+    <%= link "Edit User Info", to: user_path(@conn, :edit, @user), class: "warning button" %>
   </div>
 <% end %>

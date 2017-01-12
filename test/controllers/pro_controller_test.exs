@@ -40,7 +40,7 @@ defmodule PitchIn.ProControllerTest do
 
   test "renders form for editing chosen resource", %{conn: conn} do
     pro = Repo.insert! %Pro{}
-    conn = get conn, pro_path(conn, :edit, pro)
+    conn = get conn, pro_path(conn, :show, pro)
     assert html_response(conn, 200) =~ "Edit pro"
   end
 

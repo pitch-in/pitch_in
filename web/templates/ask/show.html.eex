@@ -34,5 +34,7 @@
 
 </ul>
 
-<%= link "Edit", to: ask_path(@conn, :edit, @ask) %>
-<%= link "Back", to: ask_path(@conn, :index) %>
+<div>
+  <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "button" %>
+  <%= link "Back", to: ask_path(@conn, :index), class: "secondary button" %>
+</div>

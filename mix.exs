@@ -21,7 +21,7 @@ defmodule PitchIn.Mixfile do
      applications: [
        :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
        :phoenix_ecto, :postgrex,
-       :timex, :comeonin
+       :timex, :comeonin, :bamboo
 
        # :uberauth, :ueberauth_identity
      ]]
@@ -47,6 +47,7 @@ defmodule PitchIn.Mixfile do
      {:timex_ecto, "~> 3.1.1"},
      {:ecto_enum, "~> 1.0"},
      {:comeonin, "~> 3.0.0"},
+     {:bamboo, "~> 0.8"},
 
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},

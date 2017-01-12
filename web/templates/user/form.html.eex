@@ -28,10 +28,7 @@
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= submit "Submit", class: "button" %>
+    <%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
   </div>
-
-  <%= if assigns[:pro] do %>
-    <%= render PitchIn.ProView, "form.html", changeset: @changeset, user_form: f %>
-  <% end %>
 <% end %>

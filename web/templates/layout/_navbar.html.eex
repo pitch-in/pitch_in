@@ -21,7 +21,7 @@
     <ul class="menu">
       <%= if @current_user do %>
         <li>
-          <%= link "Profile", to: pro_path(@conn, :edit, @current_user) %>
+          <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
         </li>
         <li>
           <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>

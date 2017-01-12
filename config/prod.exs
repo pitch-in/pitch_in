@@ -33,6 +33,15 @@ rescue
       url: System.get_env("DATABASE_URL"),
       pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
       ssl: true
+
+    config :pitch_in, PitchIn.Mailer,
+      adapter: Bamboo.SendgridAdapter,
+      api_key: SYSTEM.get_env("SENDGRID_API_KEY"),
+      server: "smtp.domain",
+      port: 1025,
+      tls: :if_available, # can be `:always` or `:never`
+      ssl: false, # can be `true`
+      retries: 1
 end
 
 # Do not print debug messages in production

@@ -16,6 +16,8 @@ defmodule PitchIn.UserController do
 
     case Repo.insert(changeset) do
       {:ok, user} ->
+        Email.welcome_email(user.email) |> Mailer.deliver_later
+
         conn
         |> PitchIn.Auth.login(user)
         |> put_flash(:primary, "User created successfully.")

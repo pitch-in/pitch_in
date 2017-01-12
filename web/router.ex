@@ -26,8 +26,9 @@ defmodule PitchIn.Router do
     end
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    resources "/pros", ProController
+    resources "/pros", ProController, only: [:show, :update]
     resources "/answers", AnswerController
+    get "/email_test", EmailTestController, :test
   end
 
   # Other scopes may use custom stacks.

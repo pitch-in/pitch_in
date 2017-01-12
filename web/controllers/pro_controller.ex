@@ -1,21 +1,16 @@
 defmodule PitchIn.ProController do
   use PitchIn.Web, :controller
   use PitchIn.Auth, protect: :all, pass_user: true
-  plug :verify_user when action in [:edit, :update]
+  plug :verify_user when action in [:show, :update]
 
   alias PitchIn.User
   alias PitchIn.Pro
 
-  def show(conn, %{"id" => id}, _user) do
-    user = Repo.get!(User, id) |> Repo.preload(:pro)
-    render(conn, "show.html", user: user, pro: user.pro)
-  end
-
-  def edit(conn, %{"id" => _id}, user) do
+  def show(conn, %{"id" => _id}, user) do
     pro = get_pro(user)
 
     changeset = Pro.changeset(pro)
-    render(conn, "edit.html", user: user, pro: pro, changeset: changeset)
+    render(conn, "show.html", user: user, pro: pro, changeset: changeset)
   end
 
   def update(conn, %{"id" => _id, "pro" => pro_params}, user) do
@@ -26,9 +21,9 @@ defmodule PitchIn.ProController do
       {:ok, pro} ->
         conn
         |> put_flash(:primary, "Pro updated successfully.")
-        |> redirect(to: pro_path(conn, :show, pro))
+        |> redirect(to: pro_path(conn, :show, user))
       {:error, changeset} ->
-        render(conn, "edit.html", user: user, pro: pro, changeset: changeset)
+        render(conn, "show.html", user: user, pro: pro, changeset: changeset)
     end
   end
 
