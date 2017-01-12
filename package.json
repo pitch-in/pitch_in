@@ -4,7 +4,7 @@
   "scripts": {
     "test": "",
     "watch": "node server",
-    "deploy": "rimraf ./priv/static && webpack --config ./config/webpack.production.config.js --progress --profile --colors",
+    "deploy": "rimraf ./priv/static && webpack --config ./config/webpack.production.config.js --progress --profile --colors --display-error-details",
     "lint": "tslint ."
   },
   "keywords": [
