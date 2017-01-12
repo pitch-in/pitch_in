@@ -35,6 +35,11 @@
 </ul>
 
 <div>
-  <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "button" %>
-  <%= link "Back", to: ask_path(@conn, :index), class: "secondary button" %>
+  <%= if @is_staff do %>
+    <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "button" %>
+    <%= link "Back to Asks", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary button" %>
+  <%= else %>
+    <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "success button" %>
+    <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
+  <% end %>
 </div>

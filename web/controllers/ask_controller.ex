@@ -7,6 +7,10 @@ defmodule PitchIn.AskController do
   alias PitchIn.Campaign
   alias PitchIn.Issue
 
+  use PitchIn.Auth, protect: [:show, :create, :edit, :update, :delete]
+  plug :check_campaign_staff when action in [:show, :create, :edit, :update, :delete]
+  plug :verify_campaign_staff when action in [:create, :edit, :update, :delete]
+
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
 
@@ -135,11 +139,30 @@ defmodule PitchIn.AskController do
   defp like_value(nil), do: "%"
   defp like_value(value), do: "%#{value}%"
 
+  defp check_campaign_staff(conn, _opts) do
+    user_id = conn.assigns.current_user.id
+    {campaign_id, _} = Integer.parse(conn.params["campaign_id"])
 
-  defp verify_staff(conn, _opts) do
-    {param_id, _} = Integer.parse(conn.params["campaign_id"])
+    staff_query =
+      from s in PitchIn.CampaignStaff,
+      select: count(s.user_id),
+      where: s.campaign_id == ^campaign_id,
+      where: s.user_id == ^user_id
 
-    if param_id == conn.assigns.current_user.id do
+    count = Repo.one(staff_query)
+    |> IO.inspect
+
+    if count > 0 do
+      assign(conn, :is_staff, true)
+    else
+      assign(conn, :is_staff, false)
+    end
+  end
+
+  defp verify_campaign_staff(conn, _opts) do
+    is_staff = conn.assigs.is_staff
+
+    if is_staff do
       conn
     else
       conn

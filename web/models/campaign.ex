@@ -6,6 +6,7 @@ defmodule PitchIn.Campaign do
     has_many :asks, PitchIn.Ask
     has_many :issues, PitchIn.Issue, on_replace: :delete
     field :name, :string
+    field :email, :string
     field :type, CampaignTypeEnum
     field :state, :string
     field :district, :string
@@ -31,8 +32,8 @@ defmodule PitchIn.Campaign do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :type, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :percent_dem, :current_party])
+    |> cast(params, [:name, :email, :type, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :percent_dem, :current_party])
     |> cast_assoc(:issues)
-    |> validate_required([:name, :type, :short_pitch])
+    |> validate_required([:name, :email, :type, :short_pitch])
   end
 end

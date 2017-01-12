@@ -1,31 +1,47 @@
 <h2>Show answer</h2>
 
 <ul>
-
   <li>
-    <strong>User:</strong>
-    <%= @answer.user_id %>
+    <strong>Campaign:</strong>
+    <%= @campaign.name %>
+  </li>
+  
+  <li>
+    <strong>Ask</strong>
+    <%= @ask.role %>
   </li>
 
-  <li>
-    <strong>Ask:</strong>
-    <%= @answer.ask_id %>
-  </li>
+
+  <hr/>
 
   <li>
-    <strong>Share email:</strong>
-    <%= @answer.share_email %>
+    <strong>Volunteer:</strong>
+    <%= @user.name %>
   </li>
 
-  <li>
-    <strong>Share phone:</strong>
-    <%= @answer.share_phone %>
-  </li>
+  <%= if @answer.show_email do %>
+    <li>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </li>
+  <% end %>
 
-  <li>
-    <strong>Share address:</strong>
-    <%= @answer.share_address %>
-  </li>
+
+  <%= if @answer.show_phone do %>
+    <li>
+      <strong>Phone:</strong>
+      <%= @user.phone %>
+    </li>
+  <% end %>
+
+  <%= if @answer.show_address do %>
+    <li>
+      <strong>Location:</strong>
+      <%= @user.address_city %>
+      <%= @user.address_state %>
+      <%= @user.address_zip %>
+    </li>
+  <% end %>
 
   <li>
     <strong>Message:</strong>

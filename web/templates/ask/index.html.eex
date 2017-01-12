@@ -30,7 +30,7 @@
     <div><strong>Description</strong></div>
     <div><%= ask.description %></div>
 
-    <%= link "Show", to: ask_path(@conn, :show, ask), class: "button" %>
+    <%= link "Show", to: campaign_ask_path(@conn, :show, ask.campaign_id, ask), class: "button" %>
     <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, ask.campaign_id, ask), class: "success button" %>
   <% end %>
 <% end %>
