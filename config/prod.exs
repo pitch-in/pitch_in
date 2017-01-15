@@ -36,12 +36,16 @@ rescue
 
     config :pitch_in, PitchIn.Mailer,
       adapter: Bamboo.SendgridAdapter,
-      api_key: SYSTEM.get_env("SENDGRID_API_KEY"),
+      api_key: System.get_env("SENDGRID_API_KEY"),
       server: "smtp.domain",
       port: 1025,
       tls: :if_available, # can be `:always` or `:never`
       ssl: false, # can be `true`
       retries: 1
+
+    config :pitch_in, PitchIn.Email,
+      test_email: System.get_env("TEST_EMAIL"),
+      from_email: "pitch_in@pitch_in.com"
 end
 
 # Do not print debug messages in production
