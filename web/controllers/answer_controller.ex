@@ -122,7 +122,7 @@ defmodule PitchIn.AnswerController do
       {:ok, answer} ->
         conn
         |> put_flash(:primary, "Answer updated successfully.")
-        |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
+        |> redirect(to: campaign_ask_answer_path(conn, :show, campaign, ask, answer))
       {:error, changeset} ->
         render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
     end

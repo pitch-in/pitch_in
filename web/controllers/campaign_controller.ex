@@ -13,7 +13,7 @@ defmodule PitchIn.CampaignController do
     render(conn, "index.html", campaigns: user.campaigns)
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _user) do
     changeset =
       %Campaign{issues: []}
       |> Campaign.changeset
@@ -24,7 +24,7 @@ defmodule PitchIn.CampaignController do
   def create(conn, %{"campaign" => campaign_params}, user) do
     campaign_params = 
       campaign_params
-      |> Map.update!("issues", &clean_up_issues/1)
+      |> Map.update("issues", [], &clean_up_issues/1)
 
     changeset =
       Campaign.changeset(%Campaign{}, campaign_params)
@@ -36,6 +36,7 @@ defmodule PitchIn.CampaignController do
         |> put_flash(:primary, "Campaign created successfully.")
         |> redirect(to: campaign_path(conn, :index))
       {:error, changeset} ->
+        IO.inspect changeset.errors
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -61,7 +62,7 @@ defmodule PitchIn.CampaignController do
 
     campaign_params = 
       campaign_params
-      |> Map.update!("issues", &clean_up_issues/1)
+      |> Map.update("issues", [], &clean_up_issues/1)
 
     changeset = Campaign.changeset(campaign, campaign_params)
 
