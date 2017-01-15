@@ -2,6 +2,8 @@ defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
   alias PitchIn.User
   alias PitchIn.Pro
+  alias PitchIn.Email
+  alias PitchIn.Mailer
 
   use PitchIn.Auth, protect: [:show, :edit, :update, :delete]
   plug :verify_user when action in [:show, :edit, :update, :delete]

@@ -150,7 +150,6 @@ defmodule PitchIn.AskController do
       where: s.user_id == ^user_id
 
     count = Repo.one(staff_query)
-    |> IO.inspect
 
     if count > 0 do
       assign(conn, :is_staff, true)

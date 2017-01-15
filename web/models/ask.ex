@@ -3,6 +3,7 @@ defmodule PitchIn.Ask do
 
   schema "asks" do
     belongs_to :campaign, PitchIn.Campaign
+    has_many :answers, PitchIn.Answer
     field :role, :string
     field :length, AskLengthEnum
     field :profession, :string

@@ -6,8 +6,22 @@ defmodule PitchIn.Email do
   def welcome_email(email_address) do
     email_address
     |> base_email
-    |> subject("Thanks for pitching in!")
+    |> subject("Thanks for signing up to pitch in!")
     |> render("welcome.html")
+  end
+
+  def user_answer_email(email_address, conn, campaign, ask, answer) do
+    email_address
+    |> base_email
+    |> subject("Thanks for pitching in!")
+    |> render("user_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
+  end
+
+  def campaign_answer_email(email_address, conn, campaign, ask, answer) do
+    email_address
+    |> base_email
+    |> subject("You've received a new answer!")
+    |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
   def test_email(email_address) do

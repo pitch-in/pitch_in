@@ -1,0 +1,45 @@
+<p>
+  You've received a new volunteer request for
+  <strong><%= @campaign.name %></strong> <%= @ask.role %> role!
+</p>
+
+<p>
+  Here's the data they shared:
+</p>
+<ul>
+  <li>
+    <strong>Volunteer:</strong>
+    <%= @answer.user.name %>
+  </li>
+
+  <%= if @answer.share_email do %>
+    <li>
+      <strong>Email:</strong>
+      <%= @answer.user.email %>
+    </li>
+  <% end %>
+
+
+  <%= if @answer.share_phone do %>
+    <li>
+      <strong>Phone:</strong>
+      <%= @answer.user.pro.phone %>
+    </li>
+  <% end %>
+
+  <%= if @answer.share_address do %>
+    <li>
+      <strong>Location:</strong>
+      <%= @answer.user.pro.address_city %>
+      <%= @answer.user.pro.address_state %>
+      <%= @answer.user.pro.address_zip %>
+    </li>
+  <% end %>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @answer.message %>
+  </li>
+</ul>
+
+<%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, @answer), class: "button" %>

@@ -16,30 +16,30 @@
 
   <li>
     <strong>Volunteer:</strong>
-    <%= @user.name %>
+    <%= @answer.user.name %>
   </li>
 
-  <%= if @answer.show_email do %>
+  <%= if @answer.share_email do %>
     <li>
       <strong>Email:</strong>
-      <%= @user.email %>
+      <%= @answer.user.email %>
     </li>
   <% end %>
 
 
-  <%= if @answer.show_phone do %>
+  <%= if @answer.share_phone do %>
     <li>
       <strong>Phone:</strong>
-      <%= @user.phone %>
+      <%= @answer.user.pro.phone %>
     </li>
   <% end %>
 
-  <%= if @answer.show_address do %>
+  <%= if @answer.share_address do %>
     <li>
       <strong>Location:</strong>
-      <%= @user.address_city %>
-      <%= @user.address_state %>
-      <%= @user.address_zip %>
+      <%= @answer.user.pro.address_city %>
+      <%= @answer.user.pro.address_state %>
+      <%= @answer.user.pro.address_zip %>
     </li>
   <% end %>
 
@@ -50,5 +50,7 @@
 
 </ul>
 
-<%= link "Edit", to: answer_path(@conn, :edit, @answer) %>
-<%= link "Back", to: answer_path(@conn, :index) %>
+<div>
+<%= link "Edit", to: campaign_ask_answer_path(@conn, :edit, @campaign, @ask, @answer), class: "button" %>
+<%= link "Back", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "button" %>
+</div>

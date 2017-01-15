@@ -1,14 +1,15 @@
 <h2>Listing answers</h2>
+<h4>
+Campaign: <%= @campaign.name %>
+Ask: <%= @ask.role %>
+</h4>
 
 <table class="table">
   <thead>
     <tr>
       <th>User</th>
-      <th>Ask</th>
-      <th>Share email</th>
-      <th>Share phone</th>
-      <th>Share address</th>
-      <th>Message</th>
+      <th>Profession</th>
+      <th>Show</th>
 
       <th></th>
     </tr>
@@ -16,21 +17,13 @@
   <tbody>
 <%= for answer <- @answers do %>
     <tr>
-      <td><%= answer.user_id %></td>
-      <td><%= answer.ask_id %></td>
-      <td><%= answer.share_email %></td>
-      <td><%= answer.share_phone %></td>
-      <td><%= answer.share_address %></td>
-      <td><%= answer.message %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: answer_path(@conn, :show, answer), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: answer_path(@conn, :edit, answer), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: answer_path(@conn, :delete, answer), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      <td><%= answer.user.name %></td>
+      <td><%= answer.user.pro.profession %></td>
+      <td>
+        <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, answer), class: "button" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New answer", to: answer_path(@conn, :new) %>

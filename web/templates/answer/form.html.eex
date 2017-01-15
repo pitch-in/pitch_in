@@ -1,3 +1,14 @@
+<div>
+  <strong>Campaign:</strong>
+  <%= @campaign.name %>
+</div>
+
+<div>
+  <strong>Ask:</strong>
+  <%= @ask.role %>
+</div>
+
+
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">

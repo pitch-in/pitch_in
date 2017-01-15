@@ -1,57 +1,141 @@
 defmodule PitchIn.AnswerController do
   use PitchIn.Web, :controller
 
+  alias PitchIn.Campaign
+  alias PitchIn.Ask
   alias PitchIn.Answer
+  alias PitchIn.Email
+  alias PitchIn.Mailer
 
-  def index(conn, _params) do
-    answers = Repo.all(Answer)
-    render(conn, "index.html", answers: answers)
-  end
+  def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id) |> Repo.preload(answers: [user: :pro])
+    answers = ask.answers
 
-  def new(conn, _params) do
-    changeset = Answer.changeset(%Answer{})
-    render(conn, "new.html", changeset: changeset)
-  end
-
-  def create(conn, %{"answer" => answer_params}) do
-    changeset = Answer.changeset(%Answer{}, answer_params)
-
-    case Repo.insert(changeset) do
-      {:ok, _answer} ->
-        conn
-        |> put_flash(:primary, "Answer created successfully.")
-        |> redirect(to: answer_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+    if ask.campaign_id == campaign.id do
+      render(conn, "index.html", campaign: campaign, ask: ask, answers: answers)
+    else
+      conn
+      |> put_status(404)
+      |> render(PitchIn.ErrorView, "404.html")
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    answer = Repo.get!(Answer, id)
-    render(conn, "show.html", answer: answer)
+  def new(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
+
+    changeset =
+      ask
+      |> build_assoc(:answers)
+      |> Answer.changeset
+      
+    render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def create(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "answer" => answer_params
+    }) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
+    
+    changeset =
+      ask
+      |> build_assoc(:answers)
+      |> Answer.changeset(answer_params)
+      |> Ecto.Changeset.put_assoc(:user, conn.assigns.current_user)
+
+    case Repo.insert(changeset) do
+      {:ok, answer} ->
+        answer = answer |> Repo.preload(user: :pro)
+
+        Email.user_answer_email(
+          conn.assigns.current_user.email,
+          conn,
+          campaign,
+          ask,
+          answer
+        )
+        |> Mailer.deliver_later
+
+        Email.campaign_answer_email(
+          campaign.email,
+          conn,
+          campaign,
+          ask,
+          answer
+        )
+        |> Mailer.deliver_later
+
+        conn
+        |> put_flash(:primary, "Answer created successfully.")
+        |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
+      {:error, changeset} ->
+        render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
+    end
+  end
+
+  def show(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "id" => id
+    }) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
+    answer = Repo.get!(Answer, id) |> Repo.preload([user: :pro])
+
+    render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
+  end
+
+  def edit(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "id" => id
+    }) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
     answer = Repo.get!(Answer, id)
+
     changeset = Answer.changeset(answer)
-    render(conn, "edit.html", answer: answer, changeset: changeset)
+    render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "answer" => answer_params}) do
+  def update(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "id" => id,
+      "answer" => answer_params
+    }) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
     answer = Repo.get!(Answer, id)
+
     changeset = Answer.changeset(answer, answer_params)
 
     case Repo.update(changeset) do
       {:ok, answer} ->
         conn
         |> put_flash(:primary, "Answer updated successfully.")
-        |> redirect(to: answer_path(conn, :show, answer))
+        |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
       {:error, changeset} ->
-        render(conn, "edit.html", answer: answer, changeset: changeset)
+        render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "id" => id
+    }) do
+    campaign = Repo.get(Campaign, campaign_id)
+    ask = Repo.get(Ask, ask_id)
     answer = Repo.get!(Answer, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -60,6 +144,6 @@ defmodule PitchIn.AnswerController do
 
     conn
     |> put_flash(:primary, "Answer deleted successfully.")
-    |> redirect(to: answer_path(conn, :index))
+    |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
   end
 end

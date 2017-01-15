@@ -27,7 +27,6 @@ defmodule PitchIn.Router do
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
-    resources "/answers", AnswerController
     get "/email_test", EmailTestController, :test
   end
 
