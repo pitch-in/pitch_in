@@ -29,6 +29,5 @@
 
   <div class="form-group">
     <%= submit "Submit", class: "button" %>
-    <%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
   </div>
 <% end %>

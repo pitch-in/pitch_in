@@ -9,3 +9,5 @@
 
   <%= submit "Log In", class: "button" %>
 <% end %>
+
+<%= link "Sign Up", to: user_path(@conn, :new) %>

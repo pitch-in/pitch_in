@@ -159,7 +159,7 @@ defmodule PitchIn.AskController do
   end
 
   defp verify_campaign_staff(conn, _opts) do
-    is_staff = conn.assigs.is_staff
+    is_staff = conn.assigns.is_staff
 
     if is_staff do
       conn

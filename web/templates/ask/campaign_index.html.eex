@@ -11,6 +11,9 @@
           <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, ask), class: "button" %>
         </td>
         <td>
+          <%= link "View Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, ask), class: "success button" %>
+        </td>
+        <td>
           <%= link "Close", to: campaign_ask_path(@conn, :delete, @campaign, ask), method: :delete, data: [confirm: "Are you sure?"], class: "alert button" %>
         </td>
       </tr>
