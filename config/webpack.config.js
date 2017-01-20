@@ -69,6 +69,9 @@ module.exports = {
         test: /favicon\.ico$/,
         loader: 'file?name=[name].[ext]&context=web/static'
       }, {
+        test: /robots\.txt$/,
+        loader: 'file?name=robots.txt&context=web/static'
+      }, {
         test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
         loader: 'file'
       }
