@@ -1,0 +1,28 @@
+<ul>
+  <li>
+    <strong>Role:</strong>
+    <%= link to: campaign_ask_path(@conn, :show, @campaign, @ask) do %>
+      <%= @ask.role %>
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Length:</strong>
+    <%= @ask.length %>
+  </li>
+
+  <li>
+    <strong>Profession:</strong>
+    <%= @ask.profession %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @ask.description %>
+  </li>
+
+  <li>
+    <strong>Experience:</strong>
+    <%= @ask.experience %>
+  </li>
+</ul>

@@ -1,6 +1,6 @@
 <h2>Edit answer</h2>
 
-<%= render "form.html", changeset: @changeset, campaign: @campaign, ask: @ask,
+<%= render "form.html", changeset: @changeset, conn: @conn, campaign: @campaign, ask: @ask,
                         action: campaign_ask_answer_path(@conn, :update, @campaign, @ask, @answer) %>
 
 <%= link "Back", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask) %>

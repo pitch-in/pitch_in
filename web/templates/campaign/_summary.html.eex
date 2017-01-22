@@ -1,7 +1,7 @@
 <ul>
   <li>
     <strong>Campaign:</strong>
-    <%= link to: campaign_path(@conn, :show, @campaign.id) do %>
+    <%= link to: campaign_path(@conn, :show, @campaign) do %>
       <%= @campaign.name %>
     <% end %>
   </li>

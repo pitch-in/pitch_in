@@ -1,18 +1,11 @@
 <h2>Show answer</h2>
 
+<%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
+<hr/>
+<%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
+<hr/>
+
 <ul>
-  <li>
-    <strong>Campaign:</strong>
-    <%= @campaign.name %>
-  </li>
-  
-  <li>
-    <strong>Ask</strong>
-    <%= @ask.role %>
-  </li>
-
-
-  <hr/>
 
   <li>
     <strong>Volunteer:</strong>
@@ -50,7 +43,7 @@
 
 </ul>
 
-<div>
+<div class="button-group">
 <%= link "Edit", to: campaign_ask_answer_path(@conn, :edit, @campaign, @ask, @answer), class: "button" %>
-<%= link "Back", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "button" %>
+<%= link "Back", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
 </div>

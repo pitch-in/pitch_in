@@ -1,6 +1,6 @@
 <h2>Ask</h2>
 
-<%= render "_campaign_summary.html", conn: @conn, campaign: @campaign %>
+<%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
 <hr/>
 
 <ul>
