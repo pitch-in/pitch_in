@@ -1,0 +1,28 @@
+<ul>
+  <li>
+    <strong>Campaign:</strong>
+    <%= link to: campaign_path(@conn, :show, @campaign.id) do %>
+      <%= @campaign.name %>
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @campaign.type %>
+  </li>
+
+  <li>
+    <strong>State:</strong>
+    <%= @campaign.state %>
+  </li>
+
+  <li>
+    <strong>District:</strong>
+    <%= @campaign.district %>
+  </li>
+
+  <li>
+    <strong>Short pitch:</strong>
+    <%= @campaign.short_pitch %>
+  </li>
+</ul>

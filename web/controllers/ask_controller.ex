@@ -91,9 +91,10 @@ defmodule PitchIn.AskController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"campaign_id" => campaign_id, "id" => id}) do
+    campaign = get_campaign(campaign_id)
     ask = Repo.get!(Ask, id)
-    render(conn, "show.html", ask: ask)
+    render(conn, "show.html", campaign: campaign, ask: ask)
   end
 
   def edit(conn, %{"campaign_id" => campaign_id, "id" => id}) do

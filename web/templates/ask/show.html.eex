@@ -1,7 +1,9 @@
-<h2>Show ask</h2>
+<h2>Ask</h2>
+
+<%= render "_campaign_summary.html", conn: @conn, campaign: @campaign %>
+<hr/>
 
 <ul>
-
   <li>
     <strong>Role:</strong>
     <%= @ask.role %>
@@ -26,12 +28,6 @@
     <strong>Experience:</strong>
     <%= @ask.experience %>
   </li>
-
-  <li>
-    <strong>Campaign:</strong>
-    <%= @ask.campaign_id %>
-  </li>
-
 </ul>
 
 <div>
