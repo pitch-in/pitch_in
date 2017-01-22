@@ -44,6 +44,10 @@
 </ul>
 
 <div class="button-group">
-<%= link "Edit", to: campaign_ask_answer_path(@conn, :edit, @campaign, @ask, @answer), class: "button" %>
-<%= link "Back", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
+  <%= if @is_owner do %>
+    <%= link "Edit", to: campaign_ask_answer_path(@conn, :edit, @campaign, @ask, @answer), class: "button" %>
+  <% end %>
+  <%= if @is_staff do %>
+    <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
+  <% end %>
 </div>

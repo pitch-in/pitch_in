@@ -7,6 +7,11 @@ defmodule PitchIn.AnswerController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
+  use PitchIn.Auth, protect: :all
+  plug :check_campaign_staff
+  plug :verify_campaign_staff when action in [:index]
+  plug :get_answer when action in [:show, :edit, :update, :delete]
+
   def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
     campaign = Repo.get(Campaign, campaign_id)
     ask = Repo.get(Ask, ask_id) |> Repo.preload(answers: [user: :pro])
@@ -86,7 +91,7 @@ defmodule PitchIn.AnswerController do
     }) do
     campaign = Repo.get(Campaign, campaign_id)
     ask = Repo.get(Ask, ask_id)
-    answer = Repo.get!(Answer, id) |> Repo.preload([user: :pro])
+    answer = conn.assigns.answer |> Repo.preload([user: :pro])
 
     render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
   end
@@ -99,7 +104,7 @@ defmodule PitchIn.AnswerController do
     }) do
     campaign = Repo.get(Campaign, campaign_id)
     ask = Repo.get(Ask, ask_id)
-    answer = Repo.get!(Answer, id)
+    answer = conn.assigns.answer
 
     changeset = Answer.changeset(answer)
     render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
@@ -114,7 +119,7 @@ defmodule PitchIn.AnswerController do
     }) do
     campaign = Repo.get(Campaign, campaign_id)
     ask = Repo.get(Ask, ask_id)
-    answer = Repo.get!(Answer, id)
+    answer = conn.assigns.answer
 
     changeset = Answer.changeset(answer, answer_params)
 
@@ -136,7 +141,7 @@ defmodule PitchIn.AnswerController do
     }) do
     campaign = Repo.get(Campaign, campaign_id)
     ask = Repo.get(Ask, ask_id)
-    answer = Repo.get!(Answer, id)
+    answer = conn.assigns.answer
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -145,5 +150,17 @@ defmodule PitchIn.AnswerController do
     conn
     |> put_flash(:primary, "Answer deleted successfully.")
     |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
+  end
+
+  defp get_answer(conn, _opts) do
+    id = conn.params["id"]
+    answer = Repo.get!(Answer, id)
+    IO.puts("--------USER_IDS-----------")
+    IO.puts("CURRENT: #{conn.assigns.current_user.id}")
+    IO.puts("OWNER: #{answer.user_id}")
+
+    conn
+    |> Plug.Conn.assign(:answer, answer)
+    |> Plug.Conn.assign(:is_owner, answer.user_id == conn.assigns.current_user.id)
   end
 end

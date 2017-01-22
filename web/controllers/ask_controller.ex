@@ -139,37 +139,4 @@ defmodule PitchIn.AskController do
 
   defp like_value(nil), do: "%"
   defp like_value(value), do: "%#{value}%"
-
-  defp check_campaign_staff(conn, _opts) do
-    user_id = conn.assigns.current_user.id
-    {campaign_id, _} = Integer.parse(conn.params["campaign_id"])
-
-    staff_query =
-      from s in PitchIn.CampaignStaff,
-      select: count(s.user_id),
-      where: s.campaign_id == ^campaign_id,
-      where: s.user_id == ^user_id
-
-    count = Repo.one(staff_query)
-
-    if count > 0 do
-      assign(conn, :is_staff, true)
-    else
-      assign(conn, :is_staff, false)
-    end
-  end
-
-  defp verify_campaign_staff(conn, _opts) do
-    is_staff = conn.assigns.is_staff
-
-    if is_staff do
-      conn
-    else
-      conn
-      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
-      |> put_status(404)
-      |> render(PitchIn.ErrorView, "404.html")
-      |> halt
-    end
-  end
 end

@@ -6,7 +6,9 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Issue
   alias PitchIn.User
 
-  use PitchIn.Auth, protect: [:edit, :update, :delete], pass_user: true
+  use PitchIn.Auth, protect: :all, pass_user: true
+  plug :check_campaign_staff, [id: "id"] when action in [:show, :create, :edit, :update, :delete]
+  plug :verify_campaign_staff when action in [:create, :edit, :update, :delete]
 
   def index(conn, _params, user) do
     user = user |> Repo.preload(:campaigns)
@@ -131,17 +133,4 @@ defmodule PitchIn.CampaignController do
     campaign |> Repo.preload(:issues)
   end
 
-  defp verify_staff(conn, _opts) do
-    {param_id, _} = Integer.parse(conn.params["id"])
-
-    if param_id == conn.assigns.current_user.id do
-      conn
-    else
-      conn
-      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
-      |> put_status(404)
-      |> render(PitchIn.ErrorView, "404.html")
-      |> halt
-    end
-  end
 end
