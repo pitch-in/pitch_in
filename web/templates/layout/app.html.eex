@@ -29,11 +29,15 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="column">
-      <%= render @view_module, @view_template, assigns %>
+  <div class="body-background">
+    <div class="row">
+      <div class="column">
+        <%= render @view_module, @view_template, assigns %>
+      </div>
     </div>
   </div>
+
+	<%= render "_footer.html", conn: @conn, current_user: @current_user %>
 
   <%= if Mix.env == :dev do %>
     <script src='http://localhost:4001/main.js'></script>
