@@ -1,0 +1,19 @@
+$foundation-palette: (
+  primary: $blue,
+  secondary: #767676,
+  success: #3adb76,
+  warning: #ffae00,
+  alert: $red,
+);
+
+$base-font-family:  "Open Sans", sans-serif;
+
+$header-font-family: Phosphate, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-weight: bold;
+$header-font-style: normal;
+$header-font-color: #222;
+
+$body-font-family: $base-font-family;
+$body-font-weight: regular;
+
+$input-font-family: $base-font-family;

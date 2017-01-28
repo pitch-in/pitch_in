@@ -57,7 +57,7 @@ module.exports = {
       }, {
         test: /\.scss$/,
         exclude: [/node_modules/], // sassLoader will include node_modules explicitly.
-        loader: 'style!css!sass?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+        loader: 'style!css!resolve-url!sass?modules&localIdentName=[name]---[local]---[hash:base64:5]'
       }, {
         test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff'

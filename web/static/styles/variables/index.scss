@@ -1,2 +1,16 @@
-$blue: #12122e;
+$blue: #3f68bf;
+$gray: #55698a;
+$red: #d92623;
 $white: #f2f2f2;
+
+@font-face {
+  font-family: "Phosphate";
+  src: url("../fonts/Phosphate-Solid.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Phosphate-Inline";
+  src: url("../fonts/Phosphate-Inline.ttf");
+  font-weight: bold;
+}

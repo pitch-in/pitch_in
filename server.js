@@ -14,7 +14,7 @@ var app = new WebpackDevServer(webpack(config), {
   noInfo: false,
   stats: {
     // Config for minimal console.log mess.
-    assets: false,
+    assets: true,
     colors: true,
     version: false,
     hash: false,
