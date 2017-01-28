@@ -1,10 +1,12 @@
 // Do this first, since it includes foundation overrides.
 @import './variables/index';
-@import './foundation_overrides';
+@import './foundation_overrides/variables';
 
 // Foundation
 @import 'foundation-sites/scss/foundation';
 @include foundation-everything(true);
+
+@import './foundation_overrides/html';
 
 // Other
 @import './components/index';
