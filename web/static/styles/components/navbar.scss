@@ -1,0 +1,26 @@
+.navbar {
+  .logo {
+    .name {
+      margin: 0 0 0 10px;
+      color: $white;
+
+      &:hover, &:active {
+        color: $light-gray;
+      }
+    }
+    
+    img {
+      height: 40px;
+      width: 40px;
+      margin: -5px 0;
+    }
+  }
+
+  a {
+    color: $white;
+
+    &:hover, &:active {
+      color: $light-gray;
+    }
+  }
+}

@@ -3,7 +3,8 @@
     <ul class="menu">
       <li>
         <a class="logo" href="/">
-          <img src="<%= webpack_path(@conn, "/img/logo.png") %>" />
+          <img src="<%= webpack_path(@conn, "/img/shovels.png") %>" />
+          <h5 class="name">Pitch In</h5>
         </a>
       </li>
       <li>

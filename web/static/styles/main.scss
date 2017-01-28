@@ -5,3 +5,6 @@
 // Foundation
 @import 'foundation-sites/scss/foundation';
 @include foundation-everything(true);
+
+// Other
+@import './components/index';

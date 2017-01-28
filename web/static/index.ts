@@ -6,7 +6,7 @@ import './fonts/Phosphate-Inline.ttf';
 import './fonts/Phosphate-Solid.ttf';
 import './favicon.ico';
 import './robots.txt';
-const logo = require('./img/logo.png');
+import './img/logo.png';
+import './img/shovels.png';
 
 console.log("Hello world!");
-console.log(logo);
