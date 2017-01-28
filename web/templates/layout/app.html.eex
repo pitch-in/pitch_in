@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
     <meta name="description" content="Pitch in!">
     <meta name="author" content="Will Ockelmann-Wagner">
     <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(@conn, "/favicon.ico") %>" />
@@ -17,27 +17,33 @@
 </head>
 
 <body class="view-login">
-	<%= render "_navbar.html", conn: @conn, current_user: @current_user %>
 
-  <%= for {code, message} <- get_flash(@conn) do %>
-    <div class="callout <%= code %>" data-closable>
-      <p><%= message %></p>
 
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
+  <%= if @conn.path_info == [] && !@current_user do %>
+    <%= render PitchIn.PageView, "index.html", conn: @conn %>
+  <% else %>
+    <%= render "_navbar.html", conn: @conn, current_user: @current_user %>
 
-  <div class="body-background">
-    <div class="row">
-      <div class="column">
-        <%= render @view_module, @view_template, assigns %>
+    <%= for {code, message} <- get_flash(@conn) do %>
+      <div class="callout <%= code %>" data-closable>
+        <p><%= message %></p>
+
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <div class="body-background">
+      <div class="row">
+        <div class="column">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </div>
     </div>
-  </div>
 
-	<%= render "_footer.html", conn: @conn, current_user: @current_user %>
+    <%= render "_footer.html", conn: @conn, current_user: @current_user %>
+  <% end %>
 
   <%= if Mix.env == :dev do %>
     <script src='http://localhost:4001/main.js'></script>

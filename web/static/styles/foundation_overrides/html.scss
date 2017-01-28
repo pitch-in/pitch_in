@@ -1,4 +1,10 @@
-.button.success {
-  // Success buttons are black color for some reason.
-  color: $white;
+.button {
+  &.success, &.alert {
+    // Success buttons are black color for some reason.
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
 }

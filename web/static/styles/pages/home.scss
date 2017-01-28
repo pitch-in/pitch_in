@@ -1,0 +1,23 @@
+.home {
+  padding: 20px;
+  background: $blue;
+
+  .home-logo {
+    margin-top: 20px;
+    max-width: 15rem;
+    width: 75%;
+  }
+
+  h1 {
+    // Don't shrink on small screens.
+    font-size: 3rem;
+  }
+
+  h1, p {
+    color: $white;
+  }
+
+  .button {
+    border: 1px solid $white;
+  }
+}

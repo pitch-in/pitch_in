@@ -1,1 +1,19 @@
-<h1>PitchIn!</h1>
+<div class="home">
+  <section class="row home-section text-center" >
+    <div class="column" >
+      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.png") %>" />
+
+      <h1 class="capitalize">
+        Democratize our Democracy
+      </h1>
+
+      <p><strong>First time here? then</strong></p>
+
+      <%= link "Sign Up!", to: user_path(@conn, :new), class: "large expanded alert button" %>
+
+      <p><strong>or</strong></p>
+
+      <%= link "Log in", to: session_path(@conn, :new), class: "large expanded secondary button" %>
+    </div>
+  </section>
+</div>
