@@ -25,8 +25,8 @@ rescue
     config :pitch_in, PitchIn.Endpoint,
       secret_key_base: System.get_env("SECRET_KEY_BASE"),
       # TODO: https
-      url: [scheme: "http", host: "pitch-in.us", port: 443],
-      force_ssl: [rewrite_on: [:x_forwarded_proto]]
+      url: [scheme: "http", host: "pitch-in.us", port: 443]
+      # force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
     # Configure your database
     config :pitch_in, PitchIn.Repo,
