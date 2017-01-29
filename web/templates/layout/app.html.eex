@@ -17,8 +17,6 @@
 </head>
 
 <body class="view-login">
-
-
   <%= if @conn.path_info == [] && !@current_user do %>
     <%= render PitchIn.PageView, "index.html", conn: @conn %>
   <% else %>

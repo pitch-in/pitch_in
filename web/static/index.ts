@@ -9,4 +9,16 @@ import './robots.txt';
 import './img/logo.png';
 import './img/shovels.png';
 
-console.log("Hello world!");
+// Expose jquery, for Foundation.
+const $ = require('expose?$!expose?jQuery!jquery');
+// Import foundation stuff.
+import 'foundation-sites/js/foundation.core';
+import 'foundation-sites/js/foundation.util.mediaQuery';
+import 'foundation-sites/js/foundation.util.motion';
+import 'foundation-sites/js/foundation.util.triggers';
+
+$(document).ready(($) => {
+  $(document).foundation();
+  console.log("Hello world!");
+});
+
