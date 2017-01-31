@@ -18,4 +18,4 @@
   </tbody>
 </table>
 
-<%= link "New campaign", to: campaign_path(@conn, :new) %>
+<%= link "New campaign", to: campaign_path(@conn, :new), class: "warning button" %>
