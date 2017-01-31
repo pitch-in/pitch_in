@@ -24,6 +24,7 @@ defmodule PitchIn.User do
     |> cast(params, [:name, :email])
     |> cast_assoc(:pro)
     |> validate_required([:name, :email])
+    |> update_change(:email, &String.downcase/1)
     |> unique_constraint(:email)
   end
 
