@@ -12,33 +12,21 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :github_handle, class: "control-label" %>
+    <%= text_input f, :github_handle, class: "form-control" %>
+    <%= error_tag f, :github_handle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :twitter_handle, class: "control-label" %>
+    <%= text_input f, :twitter_handle, class: "form-control" %>
+    <%= error_tag f, :twitter_handle %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :profession, class: "control-label" %>
     <%= text_input f, :profession, class: "form-control" %>
     <%= error_tag f, :profession %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :address_street, class: "control-label" %>
-    <%= text_input f, :address_street, class: "form-control" %>
-    <%= error_tag f, :address_street %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :address_unit, class: "control-label" %>
-    <%= text_input f, :address_unit, class: "form-control" %>
-    <%= error_tag f, :address_unit %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :address_city, class: "control-label" %>
-    <%= text_input f, :address_city, class: "form-control" %>
-    <%= error_tag f, :address_city %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :address_state, class: "control-label" %>
-    <%= text_input f, :address_state, class: "form-control" %>
-    <%= error_tag f, :address_state %>
   </div>
 
   <div class="form-group">

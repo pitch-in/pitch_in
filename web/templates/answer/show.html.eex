@@ -6,19 +6,12 @@
 <hr/>
 
 <ul>
-
-  <li>
-    <strong>Volunteer:</strong>
-    <%= @answer.user.name %>
-  </li>
-
   <%= if @answer.share_email do %>
     <li>
       <strong>Email:</strong>
       <%= @answer.user.email %>
     </li>
   <% end %>
-
 
   <%= if @answer.share_phone do %>
     <li>
@@ -30,9 +23,34 @@
   <%= if @answer.share_address do %>
     <li>
       <strong>Location:</strong>
-      <%= @answer.user.pro.address_city %>
-      <%= @answer.user.pro.address_state %>
       <%= @answer.user.pro.address_zip %>
+    </li>
+  <% end %>
+
+  <%= if @answer.user.pro.linkedin_url do %>
+    <li>
+      <strong>LinkedIn:</strong>
+      <a href="<%= @answer.user.pro.linkedin_url %>" target="_blank">
+        <%= @answer.user.pro.linkedin_url %>
+      </a>
+    </li>
+  <% end %>
+
+  <%= if @answer.user.pro.twitter_handle do %>
+    <li>
+      <strong>Twitter:</strong>
+      <a href="https://twitter.com/<%= @answer.user.pro.twitter_handle %>" target="_blank">
+        <%= @answer.user.pro.twitter_handle %>
+      </a>
+    </li>
+  <% end %>
+
+  <%= if @answer.user.pro.github_handle do %>
+    <li>
+      <strong>Github:</strong>
+      <a href="https://github.com/<%= @answer.user.pro.github_handle %>" target="_blank">
+        <%= @answer.user.pro.github_handle %>
+      </a>
     </li>
   <% end %>
 

@@ -4,11 +4,9 @@ defmodule PitchIn.Pro do
   schema "pros" do
     belongs_to :user, PitchIn.User
     field :linkedin_url, :string
+    field :twitter_handle, :string
+    field :github_handle, :string
     field :profession, :string
-    field :address_street, :string
-    field :address_unit, :string
-    field :address_city, :string
-    field :address_state, :string
     field :address_zip, :string
     field :phone, :string
     field :experience_starts_at, Timex.Ecto.Date
@@ -21,7 +19,17 @@ defmodule PitchIn.Pro do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:linkedin_url, :profession, :address_street, :address_unit, :address_city, :address_state, :address_zip, :phone, :experience_starts_at])
+    |> cast(params,
+    [
+      :linkedin_url,
+      :twitter_handle,
+      :github_handle,
+      :profession,
+      :address_zip,
+      :phone,
+      :experience_starts_at
+    ])
+    |> validate_required([:phone])
     |> unique_constraint(:user_id)
   end
 end

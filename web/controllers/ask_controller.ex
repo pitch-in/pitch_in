@@ -53,8 +53,7 @@ defmodule PitchIn.AskController do
         :params,
         %{
           "filter" => %{
-            "profession" => user.pro.profession,
-            "state" => user.pro.address_state
+            "profession" => user.pro.profession
           }
         }
       )

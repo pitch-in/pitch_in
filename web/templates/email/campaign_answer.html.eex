@@ -29,9 +29,7 @@
 
   <%= if @answer.share_address do %>
     <li>
-      <strong>Location:</strong>
-      <%= @answer.user.pro.address_city %>
-      <%= @answer.user.pro.address_state %>
+      <strong>ZIP Code:</strong>
       <%= @answer.user.pro.address_zip %>
     </li>
   <% end %>

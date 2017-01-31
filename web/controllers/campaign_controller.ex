@@ -7,8 +7,8 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.User
 
   use PitchIn.Auth, protect: :all, pass_user: true
-  plug :check_campaign_staff, [id: "id"] when action in [:show, :create, :edit, :update, :delete]
-  plug :verify_campaign_staff when action in [:create, :edit, :update, :delete]
+  plug :check_campaign_staff, [id: "id"] when action in [:show, :edit, :update, :delete]
+  plug :verify_campaign_staff when action in [:edit, :update, :delete]
 
   def index(conn, _params, user) do
     user = user |> Repo.preload(:campaigns)
