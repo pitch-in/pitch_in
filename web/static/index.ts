@@ -12,10 +12,15 @@ import './img/shovels.png';
 // Expose jquery, for Foundation.
 const $ = require('expose?$!expose?jQuery!jquery');
 // Import foundation stuff.
-import 'foundation-sites/js/foundation.core';
+const f = require('foundation-sites/js/foundation.core');
 import 'foundation-sites/js/foundation.util.mediaQuery';
 import 'foundation-sites/js/foundation.util.motion';
 import 'foundation-sites/js/foundation.util.triggers';
+import 'foundation-sites/js/foundation.responsiveMenu';
+import 'foundation-sites/js/foundation.responsiveToggle';
+import 'motion-ui';
+
+console.log(f);
 
 $(document).ready(($) => {
   $(document).foundation();

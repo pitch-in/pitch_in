@@ -1,5 +1,40 @@
 .navbar {
+  .no-js {
+    @include breakpoint(small only) {
+      .top-bar {
+        display: none;
+      }
+    }
+
+    @include breakpoint(medium) {
+      .title-bar {
+        display: none;
+      }
+    }
+  }
+
+  .title-bar {
+    background: $blue;
+
+    .logo {
+      // Copy styles from the top-bar logo.
+      justify-content: flex-start;
+      display: flex;
+      padding: 0.7rem 1rem;
+      line-height: 1;
+    }
+
+    // Update menu-icon hover color.
+    // TOOD: Is there a variable for this?
+    .menu-icon:hover::after {
+      background: $light-gray;
+      box-shadow: 0 7px 0 $light-gray, 0 14px 0 $light-gray;
+    }
+  }
+
   .logo {
+    align-items: center;
+
     .name {
       margin: 0 0 0 10px;
       color: $white;

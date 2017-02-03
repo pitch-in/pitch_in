@@ -6,6 +6,11 @@
 @import 'foundation-sites/scss/foundation';
 @include foundation-everything(true);
 
+// Motion-ui. For somereason importing just motion-ui doesn't work.
+@import 'motion-ui/src/motion-ui';
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
 @import './foundation_overrides/html';
 
 // Other
