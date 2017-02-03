@@ -58,4 +58,12 @@
       color: $light-gray;
     }
   }
+
+  // Port over styles for links into forms for DELETE links.
+  .menu > li > form a {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.7rem 1rem;
+    line-height: 1;
+  }
 }

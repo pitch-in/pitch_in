@@ -1,3 +1,21 @@
+body {
+  // Anchor for footer logo.
+  position: relative;
+}
+
 footer {
   min-height: 100px;
+
+  .logo {
+    // Position to always be at the bottom,
+    // but centered in a min-height footer.
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 50px;
+    width: 50px;
+    margin: -5px 0;
+  }
 }
