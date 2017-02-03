@@ -5,10 +5,14 @@ $red: #d92623;
 $green: #55A854;
 $gray: #55698a;
 $light-gray: #f3f5f2;
+$shadow-gray: #c7c7c7;
 $medium-gray: $gray;
 $dark-gray: darken($gray, 10);
 $white: #fff;
 
+$down-shadow-light: 0 2px 1px $shadow-gray;
+$down-shadow-button-light: 0 3px 1px $shadow-gray;
+$down-shadow-dark: 0 2px 1px $gray;
 
 @font-face {
   font-family: "Phosphate";

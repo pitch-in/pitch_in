@@ -23,3 +23,9 @@ $input-color: $gray-blue;
 $input-background: $light-gray;
 
 $topbar-background: $blue;
+
+$input-shadow: $down-shadow-light;
+
+.button {
+  box-shadow: $down-shadow-button-light;
+}
