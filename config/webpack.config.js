@@ -9,7 +9,7 @@ var SOURCE_DIR = path.join(__dirname, '../web/static/');
 var DIST_DIR = path.join(__dirname, '../priv/static/');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-eval-source-map',
   entry: [
     'webpack-dev-server/client?' + publicPath,
     'webpack/hot/only-dev-server',
@@ -43,17 +43,22 @@ module.exports = {
     preLoaders: [{
       test: /\.tsx?$/,
       exclude: /node_modules/,
-      loader: 'tslint'
+      loader: 'tslint-loader'
     }],
     loaders: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel', 'ts']
+        loaders: ['babel-loader', 'ts-loader']
+      }, {
+        // foundation needs to be run through babel.
+        test: /\.jsx?$/,
+        // exclude: /node_modules/,
+        loaders: ['babel-loader']
       }, {
         test: /\.json?$/,
-        loader: 'json'
+        loader: 'json-loader'
       }, {
         test: /\.scss$/,
         exclude: [/node_modules/], // sassLoader will include node_modules explicitly.

@@ -63,13 +63,17 @@ module.exports = {
     preLoaders: [{
       test: /\.tsx?$/,
       exclude: /node_modules/,
-      loader: 'tslint'
+      loader: 'tslint-loader'
     }],
     // loaders handle the assets, like transforming sass to css or jsx to js.
     loaders: [{
       test: /\.tsx?$/,
       exclude: /node_modules/,
-      loaders: ['babel', 'ts']
+      loaders: ['babel-loader', 'ts-loader']
+    }, {
+      test: /\.jsx?$/,
+      // exclude: /node_modules/,
+      loaders: ['babel-loader']
     }, {
       test: /\.json?$/,
       loader: 'json'
