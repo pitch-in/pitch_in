@@ -33,5 +33,9 @@ $topbar-background: $blue;
   &.dark-shadow {
     box-shadow: $down-shadow-dark;
   }
+
+  &.cyan {
+    background-color: $cyan;
+  }
 }
 
