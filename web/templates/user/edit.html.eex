@@ -1,3 +1,4 @@
+<section class="content-block">
 <h2>Edit user</h2>
 
 <%= render "form.html", changeset: @changeset, conn: @conn,
@@ -5,3 +6,4 @@
                         pro: true %>
 
 <%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
+</section>

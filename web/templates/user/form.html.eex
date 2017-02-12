@@ -23,11 +23,11 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :password_confirmation, class: "control-label" %>
+    <%= label f, :password_confirmation, "Confirm Password", class: "control-label" %>
     <%= password_input f, :password_confirmation, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "button" %>
+    <%= submit "Submit", class: "expanded alert button" %>
   </div>
 <% end %>

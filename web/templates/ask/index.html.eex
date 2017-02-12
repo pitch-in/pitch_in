@@ -1,37 +1,53 @@
-<h2>Search for open asks</h2>
+<div class="row">
+  <section class="expanded content-block">
+    <h2>Search Needs</h2>
+    <p>
+      Start a search to find how you can pitch in!
+    </p>
 
-<%= form_for @conn, ask_path(@conn, :index), [
-  as: :filter, method: :get, csrf_token: false, enforce_utf8: false
-], fn f -> %>
-  <div class="row">
-    <%= render "_search_field.html", form: f, field: :profession %>
-    <%= render "_search_field.html", form: f, field: :state %>
-    <%= render "_search_field.html", form: f, field: :role %>
-    <%= render "_search_field.html", form: f, field: :issue %>
-  </div>
-  <%= submit "Search", class: "button" %>
-<% end %>
+    <%= form_for @conn, ask_path(@conn, :index), [
+      as: :filter, method: :get, csrf_token: false, enforce_utf8: false
+    ], fn f -> %>
+      <div>
+        <%= label f, :profession %>
+        <%= text_input f, :profession %>
+        <%= error_tag f, :profession %>
+      </div>
+      <div>
+        <%= label f, :role %>
+        <%= text_input f, :role %>
+        <%= error_tag f, :role %>
+      </div>
+      <div>
+        <%= label f, :issue %>
+        <%= text_input f, :issue %>
+        <%= error_tag f, :issue %>
+      </div>
+      <%= submit "Search", class: "expanded button" %>
+    <% end %>
+  </section>
+</div class="row">
 
 <%= case @asks do %>
   <% nil -> %>
-  <h3>Start a search to find how you can pitch in!</h3>
   <% [] -> %>
-  <h3>Sorry, no results found. Try widening your search?</h3>
+    <h3>Sorry, no results found. Try widening your search?</h3>
   <% _ -> %>
-  <%= for ask <- @asks do %>
-    <div><strong>Role</strong></div>
-    <div><%= ask.role %></div>
-    <div><strong>Length</strong></div>
-    <div><%= ask.length %></div>
-    <div><strong>Profession</strong></div>
-    <div><%= ask.profession %></div>
-    <div><strong>Experience</strong></div>
-    <div><%= ask.experience %></div>
-    <div><strong>Description</strong></div>
-    <div><%= ask.description %></div>
+    <section class="content-block">
+      <%= for ask <- @asks do %>
+        <div><strong>Role</strong></div>
+        <div><%= ask.role %></div>
+        <div><strong>Length</strong></div>
+        <div><%= ask.length %></div>
+        <div><strong>Profession</strong></div>
+        <div><%= ask.profession %></div>
+        <div><strong>Experience</strong></div>
+        <div><%= ask.experience %></div>
+        <div><strong>Description</strong></div>
+        <div><%= ask.description %></div>
 
-    <%= link "Show", to: campaign_ask_path(@conn, :show, ask.campaign_id, ask), class: "button" %>
-    <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, ask.campaign_id, ask), class: "success button" %>
-  <% end %>
+        <%= link "Show", to: campaign_ask_path(@conn, :show, ask.campaign_id, ask), class: "button" %>
+        <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, ask.campaign_id, ask), class: "success button" %>
+      <% end %>
+    </section>
 <% end %>
-

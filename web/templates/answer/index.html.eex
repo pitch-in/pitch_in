@@ -1,3 +1,4 @@
+<section class="content-block">
 <h2>Listing answers</h2>
 <h4>
 Campaign: <%= @campaign.name %>
@@ -26,4 +27,4 @@ Ask: <%= @ask.role %>
 <% end %>
   </tbody>
 </table>
-
+</section>

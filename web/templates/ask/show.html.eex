@@ -1,3 +1,4 @@
+<section class="content-block">
 <h2>Ask</h2>
 
 <%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
@@ -39,3 +40,4 @@
     <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
   <% end %>
 </div>
+</section>

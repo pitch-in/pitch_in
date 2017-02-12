@@ -1,3 +1,4 @@
+<section class="content-block">
 <h2>Show user</h2>
 
 <ul>
@@ -19,5 +20,8 @@
 
 </ul>
 
-<%= link "Edit", to: user_path(@conn, :edit, @user) %>
-<%= link "Back", to: user_path(@conn, :index) %>
+<div class="button-group">
+  <%= link "Edit", to: user_path(@conn, :edit, @user), class: "button" %>
+  <%= link "Back", to: user_path(@conn, :index), class: "secondary button" %>
+</div>
+</section>

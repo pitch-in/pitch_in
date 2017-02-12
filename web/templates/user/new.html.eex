@@ -1,6 +1,8 @@
-<h2>New user</h2>
+<section class="content-block">
+  <h2>New activist!</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: user_path(@conn, :create) %>
+  <%= render "form.html", changeset: @changeset,
+  action: user_path(@conn, :create) %>
 
-<%= link "Log In", to: session_path(@conn, :new) %>
+  <%= link "Log In", to: session_path(@conn, :new) %>
+</section>

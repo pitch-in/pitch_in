@@ -49,7 +49,7 @@ config :pitch_in, PitchIn.Mailer,
   retries: 1
 
 try do
-  # Use prod.secret if it exists.
+  # Use dev.secret if it exists.
   import_config "dev.secret.exs"
 rescue
   e in Mix.Config.LoadError -> nil

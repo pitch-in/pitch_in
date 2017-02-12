@@ -9,5 +9,10 @@
   &:first-child {
     margin-top: 1rem;
   }
+
+  &.expanded {
+    margin: 0 0 1rem 0;
+    padding: 1rem 2rem;
+  }
 }
 
