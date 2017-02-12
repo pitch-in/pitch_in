@@ -9,7 +9,7 @@
 
 <p>
   Make sure to finish setting up the campaign profile for
-  <%= link @campaign.name, to: campaign_path(@conn, :edit, @campaign.id) %>!
+  <%= link @campaign.name, to: full_domain(@conn) <> campaign_path(@conn, :edit, @campaign.id) %>!
   The more information you fill out, the easier it is for activists to
   decide to help you out!
 </p>
@@ -17,7 +17,7 @@
 <p>
   Once your campaign profile is set up, don't forget to tell us 
   about your 
-  <%= link "Needs!", to: campaign_ask_path(@conn, :index, @campaign.id) %>
+  <%= link "Needs!", to: full_domain(@conn) <> campaign_ask_path(@conn, :index, @campaign.id) %>
   Needs!
   Activists won't be able to find your campaign until you
   tell them what you're looking for!

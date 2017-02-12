@@ -1,6 +1,43 @@
 <section class="content-block">
   <h2>New campaign staff user</h2>
 
-  <%= render "form.html", changeset: @changeset,
-  action: user_path(@conn, :create, staff: true) %>
+  <%= form_for @changeset, user_path(@conn, :create, staff: true), fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= label f, :name %>
+      <%= text_input f, :name %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :email %>
+      <%= email_input f, :email %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <%= inputs_for f, :campaigns, fn i -> %>
+      <hr/>
+      <%= render PitchIn.CampaignView, "_basic_form.html", campaign: i %>
+      <hr/>
+    <% end %>
+
+    <div class="form-group">
+      <%= label f, :password %>
+      <%= password_input f, :password %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :password_confirmation, "Confirm Password" %>
+      <%= password_input f, :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Submit", class: "expanded alert button" %>
+    </div>
+  <% end %>
 </section>

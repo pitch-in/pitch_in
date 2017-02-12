@@ -1,0 +1,35 @@
+<div class="form-group">
+  <%= label @campaign, :name, "Campaign Name", class: "control-label" %>
+  <%= text_input @campaign, :name, class: "form-control" %>
+  <%= error_tag @campaign, :name %>
+</div>
+
+<div class="form-group">
+  <%= label @campaign, :type, class: "control-label" %>
+  <%= select @campaign, :type, enum_to_options(CampaignTypeEnum), class: "form-control" %>
+  <%= error_tag @campaign, :type %>
+</div>
+
+<div class="form-group">
+  <%= label @campaign, :candidate_name, class: "control-label" %>
+  <%= text_input @campaign, :candidate_name, class: "form-control" %>
+  <%= error_tag @campaign, :candidate_name %>
+</div>
+
+<div class="form-group">
+  <%= label @campaign, :measure_name, class: "control-label" %>
+  <%= text_input @campaign, :measure_name, class: "form-control" %>
+  <%= error_tag @campaign, :measure_name %>
+</div>
+
+<div class="form-group">
+  <%= label @campaign, :measure_position, class: "control-label" %>
+  <%= text_input @campaign, :measure_position, class: "form-control" %>
+  <%= error_tag @campaign, :measure_position %>
+</div>
+
+<div class="form-group">
+  <%= label @campaign, :short_pitch, class: "control-label" %>
+  <%= text_input @campaign, :short_pitch, class: "form-control" %>
+  <%= error_tag @campaign, :short_pitch %>
+</div>

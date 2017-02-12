@@ -10,7 +10,7 @@ defmodule PitchIn.UserController do
   plug :verify_user when action in [:show, :edit, :update, :delete]
 
   def new(conn, %{"staff" => _}) do
-    changeset = User.changeset(%User{})
+    changeset = User.changeset(%User{campaigns: [%Campaign{}]})
     render(conn, "new_staff.html", changeset: changeset)
   end
 
@@ -23,15 +23,17 @@ defmodule PitchIn.UserController do
   end
 
   def create(conn, %{"user" => user_params, "staff" => _}) do
+    # Use staff email for campaign as a default.
+    user_params = put_in(user_params, ["campaigns", "0", "email"], user_params["email"])
+
     changeset = 
-      User.staff_registration_changeset(
-        %User{pro: %Pro{}, campaigns: [%Campaign{}]},
-        user_params
-      )
+      %User{}
+      |> User.staff_registration_changeset(user_params)
+      |> IO.inspect
 
     case Repo.insert(changeset) do
-      {:ok, user} ->
-        Email.staff_welcome_email(user.email, conn, user)
+      {:ok, %User{campaigns: [campaign]} = user} ->
+        Email.staff_welcome_email(user.email, conn, user, campaign)
         |> Mailer.deliver_later
 
         conn
@@ -40,7 +42,7 @@ defmodule PitchIn.UserController do
           Welcome to Pitch In! You can now create a campaign, and then start
           posting what you need to get your campaign going!
         """)
-        |> redirect(to: campaign_path(conn, :new))
+        |> redirect(to: campaign_path(conn, :edit, campaign))
       {:error, changeset} ->
         render(conn, "new_staff.html", changeset: changeset)
     end

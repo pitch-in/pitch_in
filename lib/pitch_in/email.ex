@@ -7,7 +7,7 @@ defmodule PitchIn.Email do
     email_address
     |> base_email
     |> subject("Thanks for signing up to pitch in!")
-    |> render("staff_welcome.html", conn: conn, campaign: campaign)
+    |> render("staff_welcome.html", conn: conn, user: user, campaign: campaign)
   end
 
   def activist_welcome_email(email_address, conn, user) do
@@ -31,11 +31,11 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
-  def test_email(email_address) do
+  def test_email(email_address, conn) do
     email_address
     |> base_email
     |> subject("Just a test")
-    |> render("test.html")
+    |> render("test.html", conn: conn)
   end
 
   defp base_email(email_address) do

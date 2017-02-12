@@ -38,7 +38,7 @@ defmodule PitchIn.User do
     struct
     |> registration_changeset(params)
     |> cast_assoc(:campaigns)
-    |> cast_assoc(:pro)
+    |> put_assoc(:pro, %PitchIn.Pro{})
   end
 
   defp registration_changeset(struct, params \\ %{}) do

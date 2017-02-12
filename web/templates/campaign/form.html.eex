@@ -5,22 +5,12 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
-  </div>
+  <%= render "_basic_form.html", campaign: f %>
 
   <div class="form-group">
-    <%= label f, :email, class: "control-label" %>
+    <%= label f, :email, "Campaign Email", class: "control-label" %>
     <%= email_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :type, class: "control-label" %>
-    <%= select f, :type, enum_to_options(CampaignTypeEnum), class: "form-control" %>
-    <%= error_tag f, :type %>
   </div>
 
   <div class="form-group">
@@ -32,34 +22,10 @@
   <div class="form-group">
     <%= label f, :district, class: "control-label" %>
     <p class="description">
-      The legal name of the district the election is taking place in.
+    The legal name of the district the election is taking place in.
     </p>
     <%= text_input f, :district, class: "form-control" %>
     <%= error_tag f, :district %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :candidate_name, class: "control-label" %>
-    <%= text_input f, :candidate_name, class: "form-control" %>
-    <%= error_tag f, :candidate_name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :measure_name, class: "control-label" %>
-    <%= text_input f, :measure_name, class: "form-control" %>
-    <%= error_tag f, :measure_name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :measure_position, class: "control-label" %>
-    <%= text_input f, :measure_position, class: "form-control" %>
-    <%= error_tag f, :measure_position %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :short_pitch, class: "control-label" %>
-    <%= text_input f, :short_pitch, class: "form-control" %>
-    <%= error_tag f, :short_pitch %>
   </div>
 
   <div class="form-group">

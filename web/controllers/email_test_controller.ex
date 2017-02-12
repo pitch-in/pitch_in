@@ -6,7 +6,7 @@ defmodule PitchIn.EmailTestController do
 
   def test(conn, _) do
     email = Application.get_env(:pitch_in, PitchIn.Email)[:test_email]
-    Email.test_email(email) |> Mailer.deliver_now
+    Email.test_email(email, conn) |> Mailer.deliver_now
 
     text conn, "Email sent!"
   end
