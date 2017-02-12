@@ -1,6 +1,6 @@
 <section class="content-block">
-  <h2>New activist!</h2>
+  <h2>New campaign staff user</h2>
 
   <%= render "form.html", changeset: @changeset,
-  action: user_path(@conn, :create) %>
+  action: user_path(@conn, :create, staff: true) %>
 </section>

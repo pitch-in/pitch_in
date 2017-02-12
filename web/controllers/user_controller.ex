@@ -2,30 +2,70 @@ defmodule PitchIn.UserController do
   use PitchIn.Web, :controller
   alias PitchIn.User
   alias PitchIn.Pro
+  alias PitchIn.Campaign
   alias PitchIn.Email
   alias PitchIn.Mailer
 
   use PitchIn.Auth, protect: [:show, :edit, :update, :delete]
   plug :verify_user when action in [:show, :edit, :update, :delete]
 
-  def new(conn, _params) do
+  def new(conn, %{"staff" => _}) do
     changeset = User.changeset(%User{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new_staff.html", changeset: changeset)
   end
 
-  def create(conn, %{"user" => user_params}) do
-    changeset = User.registration_changeset(%User{pro: %Pro{}}, user_params)
+  def new(conn, params) do
+    changeset = 
+      %User{}
+      |> User.changeset
+      |> Ecto.Changeset.put_assoc(:pro, %Pro{})
+    render(conn, "new_activist.html", changeset: changeset)
+  end
+
+  def create(conn, %{"user" => user_params, "staff" => _}) do
+    changeset = 
+      User.staff_registration_changeset(
+        %User{pro: %Pro{}, campaigns: [%Campaign{}]},
+        user_params
+      )
 
     case Repo.insert(changeset) do
       {:ok, user} ->
-        Email.welcome_email(user.email) |> Mailer.deliver_later
+        Email.staff_welcome_email(user.email, conn, user)
+        |> Mailer.deliver_later
 
         conn
         |> PitchIn.Auth.login(user)
-        |> put_flash(:primary, "User created successfully.")
-        |> redirect(to: user_path(conn, :edit, user))
+        |> put_flash(:primary, """
+          Welcome to Pitch In! You can now create a campaign, and then start
+          posting what you need to get your campaign going!
+        """)
+        |> redirect(to: campaign_path(conn, :new))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new_staff.html", changeset: changeset)
+    end
+  end
+
+  def create(conn, %{"user" => user_params}) do
+    changeset = 
+      %User{}
+      |> User.activist_registration_changeset(user_params)
+      |> IO.inspect
+
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        Email.activist_welcome_email(user.email, conn, user)
+        |> Mailer.deliver_later
+
+        conn
+        |> PitchIn.Auth.login(user)
+        |> put_flash(:success, """
+          Welcome to Pitch In! Feel free to check out what help campaigns are looking
+          for, or finish filling out your profile!
+        """)
+        |> redirect(to: ask_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "new_activist.html", changeset: changeset)
     end
   end
 

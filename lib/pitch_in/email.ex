@@ -3,11 +3,18 @@ defmodule PitchIn.Email do
 
   @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
 
-  def welcome_email(email_address) do
+  def staff_welcome_email(email_address, conn, user, campaign) do
     email_address
     |> base_email
     |> subject("Thanks for signing up to pitch in!")
-    |> render("welcome.html")
+    |> render("staff_welcome.html", conn: conn, campaign: campaign)
+  end
+
+  def activist_welcome_email(email_address, conn, user) do
+    email_address
+    |> base_email
+    |> subject("Thanks for signing up with pitch in!")
+    |> render("activist_welcome.html", conn: conn, user: user)
   end
 
   def user_answer_email(email_address, conn, campaign, ask, answer) do

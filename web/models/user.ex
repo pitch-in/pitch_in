@@ -28,10 +28,24 @@ defmodule PitchIn.User do
     |> unique_constraint(:email)
   end
 
-  def registration_changeset(struct, params \\ %{}) do
+  def activist_registration_changeset(struct, params \\ %{}) do
+    struct
+    |> registration_changeset(params)
+    |> cast_assoc(:pro)
+  end
+
+  def staff_registration_changeset(struct, params \\ %{}) do
+    struct
+    |> registration_changeset(params)
+    |> cast_assoc(:campaigns)
+    |> cast_assoc(:pro)
+  end
+
+  defp registration_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
-    |> cast(params, [:password])
+    |> cast(params, [:name, :email, :password])
+    |> validate_required([:name, :email, :password])
     |> validate_confirmation(:password)
     |> validate_length(:password, min: 6, max: 100)
     |> put_pass_hash

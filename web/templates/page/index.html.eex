@@ -20,7 +20,7 @@
 
       <div class="expanded button-group">
         <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
-        <%= link "Sign up as a Campaign", to: session_path(@conn, :new), class: "large warning button" %>
+        <%= link "Sign up as a Campaign", to: user_path(@conn, :new, staff: true), class: "large warning button" %>
       </div>
     </section>
 
