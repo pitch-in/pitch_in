@@ -27,7 +27,7 @@
         <%= submit "Search", class: "expanded button" %>
       <% end %>
     </section>
-  </div class="row">
+  </div>
 
   <%= case @asks do %>
     <% nil -> %>
