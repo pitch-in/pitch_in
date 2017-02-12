@@ -1,0 +1,27 @@
+.ask-index {
+  .campaign-logo {
+    width: 100%;
+    padding-bottom: 100%;
+    background-image: url("/img/shovels.png");
+    background-position: left;
+    background-size: cover;
+
+    &.red {
+      background-color: $light-red;
+    }
+    &.yellow {
+      background-color: $dark-yellow;
+    }
+    &.green {
+      background-color: $green;
+    }
+  }
+  .search-summary-details {
+    background: $off-white;
+    border: 1px solid $black;
+
+    .need-text {
+      padding: 10px;
+    }
+  }
+}

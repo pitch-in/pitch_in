@@ -1,8 +1,8 @@
 <section class="content-block">
-<h2>Edit Ask for <%= @campaign.name %></h2>
+  <h2>Edit Ask for <%= @campaign.name %></h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: campaign_ask_path(@conn, :update, @campaign, @ask) %>
+  <%= render "form.html", changeset: @changeset,
+                          action: campaign_ask_path(@conn, :update, @campaign, @ask) %>
 
-<%= link "Back", to: campaign_ask_path(@conn, :index, @campaign) %>
+  <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "secondary button" %>
 </section>

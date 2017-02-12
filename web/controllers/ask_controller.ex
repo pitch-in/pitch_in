@@ -36,7 +36,8 @@ defmodule PitchIn.AskController do
           FROM issues
           WHERE issue ILIKE ?
         )
-      """, c.id, ^like_value(issue))
+      """, c.id, ^like_value(issue)),
+      preload: :campaign
 
     asks = Repo.all(query)
     render(conn, "index.html", asks: asks)

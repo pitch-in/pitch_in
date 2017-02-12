@@ -1,0 +1,33 @@
+<section class="ask-search-summary content-block">
+  <h3><%= @ask.campaign.name %></h3>
+
+  <div class="column row">
+    <div class="search-summary-details text-center">
+      <%= campaign_logo(@ask.campaign) %>
+
+      <div class="need-text">
+        <div><strong>Role</strong></div>
+        <div><%= @ask.role %></div>
+        <div><strong>Length</strong></div>
+        <div><%= @ask.length %></div>
+        <div><strong>Profession</strong></div>
+        <div><%= @ask.profession %></div>
+        <div><strong>Experience</strong></div>
+        <div><%= @ask.experience %></div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div><strong>Description</strong></div>
+      <div><%= @ask.description %></div>
+    </div>
+  </div>
+
+  <br/>
+  <div class="clearfix">
+    <div class="button-group float-right">
+      <%= link "Show", to: campaign_ask_path(@conn, :show, @ask.campaign_id, @ask), class: "button" %>
+      <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "success button" %>
+    </div>
+  </div>
+</div>
