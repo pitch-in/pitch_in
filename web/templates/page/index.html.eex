@@ -1,6 +1,6 @@
 <div class="home">
   <%= render "_home_navbar.html", conn: @conn %>
-  <section class="row home-section text-center" >
+  <section class="home-section text-center" >
     <div class="column" >
       <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo_216.png") %>" />
 
@@ -9,32 +9,35 @@
       </h1>
     </div>
   </section>
-  <section class="content-block">
-    <h2>First time here?</h2>
 
-    <p>
-    We create the resources needed for progressive activists with any of the skills needed to start a movement to connect with local campaings and causes they care about most.
-    </p>
+  <div class="row column">
+    <section class="content-block">
+      <h2>First time here?</h2>
 
-    <div class="expanded button-group">
-      <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
-      <%= link "Sign up as a Campaign", to: session_path(@conn, :new), class: "large warning button" %>
-    </div>
-  </section>
+      <p>
+      We create the resources needed for progressive activists with any of the skills needed to start a movement to connect with local campaings and causes they care about most.
+      </p>
 
-  <section class="content-block">
-    <h2>How this works</h2>
-    <p>
-    Blah blah blah blah blah
-    Blah blah blah blah blah
-    Blah blah blah blah blah
-    Blah blah blah blah blah
-    Blah blah blah blah blah
-    Blah blah blah blah blah
-    </p>
+      <div class="expanded button-group">
+        <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
+        <%= link "Sign up as a Campaign", to: session_path(@conn, :new), class: "large warning button" %>
+      </div>
+    </section>
 
-    <div class="text-center">
-      <%= link "Show more", to: user_path(@conn, :new), class: "button" %>
-    </div>
-  </section>
+    <section class="content-block">
+      <h2>How this works</h2>
+      <p>
+      Blah blah blah blah blah
+      Blah blah blah blah blah
+      Blah blah blah blah blah
+      Blah blah blah blah blah
+      Blah blah blah blah blah
+      Blah blah blah blah blah
+      </p>
+
+      <div class="text-center">
+        <%= link "Show more", to: user_path(@conn, :new), class: "button" %>
+      </div>
+    </section>
+  </div>
 </div>
