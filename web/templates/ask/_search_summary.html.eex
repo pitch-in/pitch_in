@@ -26,8 +26,8 @@
   <br/>
   <div class="clearfix">
     <div class="button-group float-right">
-      <%= link "Show", to: campaign_ask_path(@conn, :show, @ask.campaign_id, @ask), class: "button" %>
-      <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "success button" %>
+      <%= link "Show more", to: campaign_ask_path(@conn, :show, @ask.campaign_id, @ask), class: "button" %>
+      <%= link "Pitch In", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "warning button" %>
     </div>
   </div>
 </div>

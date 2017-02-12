@@ -3,7 +3,7 @@ require IEx
 defmodule PitchIn.AskView do
   use PitchIn.Web, :view
 
-  @colors List.to_tuple(~w(red green yellow))
+  @colors List.to_tuple(~w(red green yellow, cyan))
 
   def campaign_logo(campaign) do
     color = campaign_logo_color(campaign)
