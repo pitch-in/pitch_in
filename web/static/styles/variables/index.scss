@@ -44,3 +44,11 @@ $down-shadow-dark: 0 2px 1px $gray;
   src: url("../fonts/Phosphate-Inline.ttf");
   font-weight: bold;
 }
+
+.text-shadow-dark {
+  text-shadow: $down-shadow-dark;
+}
+
+.text-shadow-light {
+  text-shadow: $down-shadow-light;
+}

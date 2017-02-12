@@ -1,19 +1,40 @@
 <div class="home">
+  <%= render "_home_navbar.html", conn: @conn %>
   <section class="row home-section text-center" >
     <div class="column" >
       <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.png") %>" />
 
-      <h1 class="capitalize">
+      <h1 class="capitalize text-shadow-dark">
         Democratize our Democracy
       </h1>
+    </div>
+  </section>
+  <section class="content-block">
+    <h2>First time here?</h2>
 
-      <p><strong>First time here? then</strong></p>
+    <p>
+    We create the resources needed for progressive activists with any of the skills needed to start a movement to connect with local campaings and causes they care about most.
+    </p>
 
-      <%= link "Sign Up!", to: user_path(@conn, :new), class: "large expanded alert button" %>
+    <div class="expanded button-group">
+      <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
+      <%= link "Sign up as a Campaign", to: session_path(@conn, :new), class: "large warning button" %>
+    </div>
+  </section>
 
-      <p><strong>or</strong></p>
+  <section class="content-block">
+    <h2>How this works</h2>
+    <p>
+    Blah blah blah blah blah
+    Blah blah blah blah blah
+    Blah blah blah blah blah
+    Blah blah blah blah blah
+    Blah blah blah blah blah
+    Blah blah blah blah blah
+    </p>
 
-      <%= link "Log in", to: session_path(@conn, :new), class: "large expanded secondary button" %>
+    <div class="text-center">
+      <%= link "Show more", to: user_path(@conn, :new), class: "button" %>
     </div>
   </section>
 </div>

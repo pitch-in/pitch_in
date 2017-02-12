@@ -1,6 +1,25 @@
 .home {
-  padding: 20px;
-  background: $blue;
+  nav {
+    .logo {
+      margin: 0.25rem;
+      padding: 0;
+    }
+  }
+
+  .home-section {
+    padding: 20px;
+    background: $blue;
+
+    h1 {
+      // Don't shrink on small screens.
+      font-size: 3rem;
+    }
+
+    h1, p {
+      color: $white;
+    }
+
+  }
 
   .home-logo {
     margin-top: 20px;
@@ -8,16 +27,4 @@
     width: 75%;
   }
 
-  h1 {
-    // Don't shrink on small screens.
-    font-size: 3rem;
-  }
-
-  h1, p {
-    color: $white;
-  }
-
-  .button {
-    border: 1px solid $white;
-  }
 }

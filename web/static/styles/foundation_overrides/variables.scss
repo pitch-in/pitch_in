@@ -2,12 +2,12 @@ $foundation-palette: (
   primary: $blue,
   secondary: $gray-blue,
   success: $green,
-  warning: #ffae00,
+  warning: $yellow,
   alert: $red,
 );
 
 // Global
-$body-background: $blue;
+$body-background: $off-white;
 $base-font-family:  "Open Sans", sans-serif;
 
 $header-font-family: Phosphate, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -20,12 +20,18 @@ $body-font-weight: regular;
 
 $input-font-family: $base-font-family;
 $input-color: $gray-blue;
-$input-background: $light-gray;
+$input-background: $off-white;
+$input-shadow: none;
+$input-border: 1px solid $black;
 
 $topbar-background: $blue;
 
-$input-shadow: $down-shadow-light;
-
 .button {
   box-shadow: $down-shadow-button-light;
+  font-weight: bold;
+
+  &.dark-shadow {
+    box-shadow: $down-shadow-dark;
+  }
 }
+

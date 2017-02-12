@@ -1,0 +1,16 @@
+<nav class="navbar" >
+  <div class="title-bar" data-responsive-toggle="top-nav" data-hide-for="none">
+    <%= link "Sign In", to: session_path(@conn, :new), class: "alert dark-shadow button title-bar-title logo" %>
+    <button class="menu-icon" type="button" data-toggle="top-nav"></button>
+  </div>
+
+  <div class="top-bar" id="top-nav" data-animate="fade-in fade-out">
+    <div class="top-bar-right">
+      <ul class="vertical menu">
+        <li>
+          <%= link "How this works", to: session_path(@conn, :new) %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

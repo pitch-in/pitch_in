@@ -32,11 +32,9 @@
       </div>
     <% end %>
 
-    <div class="body-background">
-      <div class="row">
-        <div class="column">
-          <%= render @view_module, @view_template, assigns %>
-        </div>
+    <div class="row">
+      <div class="column">
+        <%= render @view_module, @view_template, assigns %>
       </div>
     </div>
 
