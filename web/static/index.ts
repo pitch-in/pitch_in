@@ -7,7 +7,9 @@ import './fonts/Phosphate-Solid.ttf';
 import './favicon.ico';
 import './robots.txt';
 import './img/logo.png';
+import './img/logo_216.png';
 import './img/shovels.png';
+import './img/shovels_56.png';
 
 // Expose jquery, for Foundation.
 const $ = require('expose?$!expose?jQuery!jquery');

@@ -2,7 +2,7 @@
   <%= render "_home_navbar.html", conn: @conn %>
   <section class="row home-section text-center" >
     <div class="column" >
-      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.png") %>" />
+      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo_216.png") %>" />
 
       <h1 class="capitalize text-shadow-dark">
         Democratize our Democracy
