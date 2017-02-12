@@ -1,4 +1,7 @@
 .button {
+  box-shadow: $down-shadow-button-light;
+  font-weight: bold;
+
   &.success, &.alert {
     // Success buttons are black color for some reason.
     color: $white;
@@ -6,5 +9,30 @@
     &:hover {
       color: $white;
     }
+  }
+
+  &.dark-shadow {
+    box-shadow: $down-shadow-dark;
+  }
+
+  &.cyan {
+    background-color: $cyan;
+  }
+}
+
+select {
+  background-image: $select-arrow;
+  background-position: right -1.5rem center;
+  background-size: 2.3125rem;
+
+  // Remove arrow
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus {
+    background-image: $select-arrow;
   }
 }

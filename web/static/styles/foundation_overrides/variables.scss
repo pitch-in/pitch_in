@@ -24,18 +24,8 @@ $input-background: $off-white;
 $input-shadow: none;
 $input-border: 1px solid $black;
 
+$select-background: $input-background;
+$select-arrow: url("data:image/svg+xml;utf8,<svg xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns='http://www.w3.org/2000/svg' height='29.6pt' width='29.6pt' version='1.1' xmlns:cc='http://creativecommons.org/ns#' xmlns:dc='http://purl.org/dc/elements/1.1/' viewBox='0 0 37.000002 37.000002'> <g transform='translate(-70.928 -273.01)'> <path d='m70.928 273.01h37v37h-37z' fill='none'/> <path d='m71.428 310.01v-37' stroke='#1f2d3d' fill='none'/> <path d='m102.28 286.84-12.852 12.85-12.849-12.85z' fill='#556380'/> </g> </svg>");
+
+
 $topbar-background: $blue;
-
-.button {
-  box-shadow: $down-shadow-button-light;
-  font-weight: bold;
-
-  &.dark-shadow {
-    box-shadow: $down-shadow-dark;
-  }
-
-  &.cyan {
-    background-color: $cyan;
-  }
-}
-
