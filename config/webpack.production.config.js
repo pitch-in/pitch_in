@@ -75,6 +75,10 @@ module.exports = {
       // exclude: /node_modules/,
       loaders: ['babel-loader']
     }, {
+      test: /\.jsx?$/,
+      // exclude: /node_modules/,
+      loaders: ['babel']
+    }, {
       test: /\.json?$/,
       loader: 'json'
     }, {
