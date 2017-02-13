@@ -22,7 +22,7 @@
   </li>
 
   <li>
-    <strong>Experience:</strong>
-    <%= @ask.experience %>
+    <strong>Minimum Experience:</strong>
+    <%= @ask.years_experience %>
   </li>
 </ul>

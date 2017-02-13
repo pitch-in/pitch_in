@@ -1,0 +1,11 @@
+<section class="content-block">
+  <h2>Open Needs for <%= @campaign.name %></h2>
+
+  <hr/>
+  <%= for ask <- @asks do %>
+    <%= render "_summary.html", conn: @conn, campaign: @campaign, ask: ask %>
+    <hr/>
+  <% end %>
+
+  <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "secondary button" %>
+</section>

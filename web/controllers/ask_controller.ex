@@ -8,13 +8,18 @@ defmodule PitchIn.AskController do
   alias PitchIn.Issue
 
   use PitchIn.Auth, protect: [:show, :create, :edit, :update, :delete]
-  plug :check_campaign_staff when action in [:show, :create, :edit, :update, :delete]
+  plug :check_campaign_staff when action in [:index, :show, :create, :edit, :update, :delete]
   plug :verify_campaign_staff when action in [:create, :edit, :update, :delete]
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
 
-    render(conn, "campaign_index.html", campaign: campaign, asks: campaign.asks)
+    if conn.assigns.is_staff do
+      render(conn, "campaign_index.html", campaign: campaign, asks: campaign.asks)
+    else
+      render(conn, "campaign_activist_index.html", campaign: campaign, asks: campaign.asks)
+    end
+
   end
 
   def index(conn, %{"filter" => filter}) do

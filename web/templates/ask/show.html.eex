@@ -26,12 +26,12 @@
   </li>
 
   <li>
-    <strong>Experience:</strong>
-    <%= @ask.experience %>
+    <strong>Minimum Experience:</strong>
+    <%= @ask.years_experience %>
   </li>
 </ul>
 
-<div>
+<div class="button-group">
   <%= if @is_staff do %>
     <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "button" %>
     <%= link "Back to Asks", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary button" %>

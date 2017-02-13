@@ -12,8 +12,8 @@
         <div><%= @ask.length %></div>
         <div><strong>Profession</strong></div>
         <div><%= @ask.profession %></div>
-        <div><strong>Experience</strong></div>
-        <div><%= @ask.experience %></div>
+        <div><strong>Minimum Experience</strong></div>
+        <div><%= @ask.years_experience %></div>
       </div>
     </div>
 

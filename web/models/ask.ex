@@ -8,7 +8,7 @@ defmodule PitchIn.Ask do
     field :length, AskLengthEnum
     field :profession, :string
     field :description, :string
-    field :experience, ExperienceEnum
+    field :years_experience, :integer
 
     timestamps()
   end
@@ -18,7 +18,7 @@ defmodule PitchIn.Ask do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:role, :length, :profession, :description, :experience])
-    |> validate_required([:role, :length, :profession, :description, :experience])
+    |> cast(params, [:role, :length, :profession, :description, :years_experience])
+    |> validate_required([:role, :length, :profession, :description, :years_experience])
   end
 end

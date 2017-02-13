@@ -39,7 +39,7 @@ defmodule PitchIn.Email do
   end
 
   defp base_email(email_address) do
-    new_email
+    new_email()
     |> to(email_address)
     |> from(@pitch_in_email)
     |> put_html_layout({PitchIn.LayoutView, "email.html"})

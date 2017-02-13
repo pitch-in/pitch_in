@@ -43,7 +43,7 @@ defmodule PitchIn.CampaignController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, user) do
     campaign = get_campaign(id)
     render(conn, "show.html", campaign: campaign)
   end

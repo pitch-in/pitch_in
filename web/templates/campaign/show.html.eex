@@ -82,7 +82,7 @@
   <% end %>
 
   <li>
-    <strong>Long pitch:</strong>
+    <strong>Long pitch:</strong><br/>
     <%= @campaign.long_pitch %>
   </li>
 
@@ -103,6 +103,12 @@
   </li>
 </ul>
 
-<%= link "Edit", to: campaign_path(@conn, :edit, @campaign) %>
-<%= link "Back", to: campaign_path(@conn, :index) %>
+<div class="button-group">
+  <%= if @is_staff do %>
+    <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "warning button" %>
+    <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
+  <%= else %>
+    <%= link "View Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+  <% end %>
+</div>
 </section>
