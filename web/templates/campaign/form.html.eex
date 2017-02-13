@@ -7,19 +7,19 @@
 
   <%= render "_basic_form.html", campaign: f %>
 
-  <div class="form-group">
+  <div>
     <%= label f, :email, "Campaign Email", class: "control-label" %>
     <%= email_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :state, class: "control-label" %>
     <%= text_input f, :state, class: "form-control" %>
     <%= error_tag f, :state %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :district, class: "control-label" %>
     <p class="description">
     The legal name of the district the election is taking place in.
@@ -28,7 +28,7 @@
     <%= error_tag f, :district %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :long_pitch, class: "control-label" %>
     <%= textarea f, :long_pitch, class: "form-control" %>
     <%= error_tag f, :long_pitch %>
@@ -47,55 +47,37 @@
   <% end %>
   <hr/>
 
-  <div class="form-group">
+  <div>
     <%= label f, :website_url, class: "control-label" %>
     <%= text_input f, :website_url, class: "form-control" %>
     <%= error_tag f, :website_url %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :twitter_url, class: "control-label" %>
     <%= text_input f, :twitter_url, class: "form-control" %>
     <%= error_tag f, :twitter_url %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :facebook_url, class: "control-label" %>
     <%= text_input f, :facebook_url, class: "form-control" %>
     <%= error_tag f, :facebook_url %>
   </div>
 
-  <div class="form-group">
+  <div data-hide-on="campaign_type" data-show-case="candidate">
     <%= label f, :candidate_profession, class: "control-label" %>
     <%= text_input f, :candidate_profession, class: "form-control" %>
     <%= error_tag f, :candidate_profession %>
   </div>
 
-  <div class="form-group">
+  <div data-hide-on="campaign_type" data-show-cases='["candidate", "issue"]'>
     <%= label f, :election_date, class: "control-label" %>
     <%= date_select f, :election_date, class: "form-control" %>
     <%= error_tag f, :election_date %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :is_partisan, class: "control-label" %>
-    <%= checkbox f, :is_partisan, class: "form-control" %>
-    <%= error_tag f, :is_partisan %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :percent_dem, class: "control-label" %>
-    <%= number_input f, :percent_dem, class: "form-control" %>
-    <%= error_tag f, :percent_dem %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :current_party, class: "control-label" %>
-    <%= select f, :current_party, enum_to_options(PartyEnum), class: "form-control" %>
-    <%= error_tag f, :current_party %>
-  </div>
-
-  <div class="form-group">
+  <div>
     <%= submit "Submit", class: "button" %>
   </div>
 <% end %>

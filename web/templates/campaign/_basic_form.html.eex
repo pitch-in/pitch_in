@@ -10,19 +10,19 @@
   <%= error_tag @campaign, :type %>
 </div>
 
-<div class="form-group">
+<div data-hide-on="campaign_type" data-show-case="candidate">
   <%= label @campaign, :candidate_name, class: "control-label" %>
   <%= text_input @campaign, :candidate_name, class: "form-control" %>
   <%= error_tag @campaign, :candidate_name %>
 </div>
 
-<div class="form-group">
+<div data-hide-on="campaign_type" data-show-case="measure">
   <%= label @campaign, :measure_name, class: "control-label" %>
   <%= text_input @campaign, :measure_name, class: "form-control" %>
   <%= error_tag @campaign, :measure_name %>
 </div>
 
-<div class="form-group">
+<div data-hide-on="campaign_type" data-show-case="measure">
   <%= label @campaign, :measure_position, class: "control-label" %>
   <%= text_input @campaign, :measure_position, class: "form-control" %>
   <%= error_tag @campaign, :measure_position %>

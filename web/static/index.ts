@@ -22,7 +22,10 @@ import 'foundation-sites/js/foundation.responsiveMenu';
 import 'foundation-sites/js/foundation.responsiveToggle';
 import 'motion-ui';
 
+import components from './components/index';
+
 $(document).ready(($) => {
   $(document).foundation();
+  components($);
 });
 
