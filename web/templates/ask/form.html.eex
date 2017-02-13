@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <%= label f, :profession %>
-    <%= text_input f, :profession %>
+    <%= select f, :profession, profession_options %>
     <%= error_tag f, :profession %>
   </div>
 
@@ -32,7 +32,7 @@
   <div class="form-group">
     <%= label f, :years_experience, "Minimum Experience" %>
     <p class="input-description">
-      About how experienced would someone have to be to be able
+      About how many years of experience would someone need to have to be to be able
       to do what you're looking for? If you think a dedicated 
       beginner would be fine, you can put 0.
     </p>

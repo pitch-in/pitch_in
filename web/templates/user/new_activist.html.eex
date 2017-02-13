@@ -23,7 +23,7 @@
     <%= inputs_for f, :pro, fn i -> %>
       <div class="form-group">
         <%= label i, :profession %>
-        <%= text_input i, :profession %>
+        <%= select i, :profession, profession_options %>
         <%= error_tag i, :profession %>
       </div>
 

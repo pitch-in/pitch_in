@@ -11,7 +11,7 @@
       ], fn f -> %>
         <div>
           <%= label f, :profession %>
-          <%= text_input f, :profession %>
+          <%= select f, :profession, profession_options %>
           <%= error_tag f, :profession %>
         </div>
         <div>

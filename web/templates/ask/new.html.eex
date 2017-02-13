@@ -4,5 +4,5 @@
   <%= render "form.html", changeset: @changeset,
                           action: campaign_ask_path(@conn, :create, @campaign) %>
 
-  <%= link "Back", to: campaign_ask_path(@conn, :index, @campaign) %>
+  <%= link "Back to Asks", to: campaign_ask_path(@conn, :index, @campaign), class: "secondary button" %>
 </section>

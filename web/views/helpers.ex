@@ -57,6 +57,21 @@ defmodule PitchIn.ViewHelpers do
     )
   end
 
+  def profession_options do
+    professions = [
+      "Other",
+      "Campaign Finance",
+      "Communications",
+      "Designer",
+      "Lawyer",
+      "Organizer",
+      "Project Manager",
+      "Software Enginner"
+    ]
+
+    List.zip([professions, professions])
+  end
+
   ##############
   # Formatters #
   ##############

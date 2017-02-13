@@ -9,7 +9,7 @@
             <%= ask.role %>
           </td>
           <td>
-            <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, ask), class: "button" %>
+            <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, ask), class: "warning button" %>
           </td>
           <td>
             <%= link "View Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, ask), class: "success button" %>
