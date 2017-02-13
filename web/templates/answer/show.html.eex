@@ -7,26 +7,15 @@
 <hr/>
 
 <ul>
-  <%= if @answer.share_email do %>
-    <li>
-      <strong>Email:</strong>
-      <%= @answer.user.email %>
-    </li>
-  <% end %>
+  <li>
+    <strong>Email:</strong>
+    <%= @answer.user.email %>
+  </li>
 
-  <%= if @answer.share_phone do %>
-    <li>
-      <strong>Phone:</strong>
-      <%= @answer.user.pro.phone %>
-    </li>
-  <% end %>
-
-  <%= if @answer.share_address do %>
-    <li>
-      <strong>Location:</strong>
-      <%= @answer.user.pro.address_zip %>
-    </li>
-  <% end %>
+  <li>
+    <strong>Phone:</strong>
+    <%= @answer.user.pro.phone %>
+  </li>
 
   <%= if @answer.user.pro.linkedin_url do %>
     <li>

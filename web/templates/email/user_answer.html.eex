@@ -4,30 +4,8 @@
 </p>
 
 <p>
-  We've passed along your:
-</p>
-<ul>
-  <%= if @answer.share_email do %>
-    <li>
-      <strong>Email</strong>
-    </li>
-  <% end %>
-
-  <%= if @answer.share_phone do %>
-    <li>
-      <strong>Phone</strong>
-    </li>
-  <% end %>
-
-  <%= if @answer.share_address do %>
-    <li>
-      <strong>Location</strong>
-    </li>
-  <% end %>
-</ul>
-
-<p>
-  If the campaign is interested, they'll contact you soon!
+  We've passed along your email, phone number, and message.
+  If <%= @campaign.name %> is interested, they'll contact you soon!
 </p>
 
 <p>

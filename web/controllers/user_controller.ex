@@ -38,7 +38,7 @@ defmodule PitchIn.UserController do
 
         conn
         |> PitchIn.Auth.login(user)
-        |> put_flash(:primary, """
+        |> put_flash(:success, """
           Welcome to Pitch In! You can now create a campaign, and then start
           posting what you need to get your campaign going!
         """)
@@ -89,7 +89,7 @@ defmodule PitchIn.UserController do
     case Repo.update(changeset) do
       {:ok, user} ->
         conn
-        |> put_flash(:primary, "User updated successfully.")
+        |> put_flash(:success, "User updated successfully.")
         |> redirect(to: user_path(conn, :edit, user))
       {:error, changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
@@ -104,7 +104,7 @@ defmodule PitchIn.UserController do
     Repo.delete!(user)
 
     conn
-    |> put_flash(:primary, "User deleted successfully.")
+    |> put_flash(:success, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
 

@@ -4,9 +4,6 @@ defmodule PitchIn.Answer do
   schema "answers" do
     belongs_to :user, PitchIn.User
     belongs_to :ask, PitchIn.Ask
-    field :share_email, :boolean, default: false
-    field :share_phone, :boolean, default: false
-    field :share_address, :boolean, default: false
     field :message, :string
 
     timestamps()
@@ -17,7 +14,7 @@ defmodule PitchIn.Answer do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:share_email, :share_phone, :share_address, :message])
-    |> validate_required([:share_email, :share_phone, :share_address, :message])
+    |> cast(params, [:message])
+    |> validate_required([:message])
   end
 end

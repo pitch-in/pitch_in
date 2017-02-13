@@ -20,7 +20,7 @@ defmodule PitchIn.ProController do
     case Repo.update(changeset) do
       {:ok, pro} ->
         conn
-        |> put_flash(:primary, "Pro updated successfully.")
+        |> put_flash(:success, "Pro updated successfully.")
         |> redirect(to: pro_path(conn, :show, user))
       {:error, changeset} ->
         render(conn, "show.html", user: user, pro: pro, changeset: changeset)

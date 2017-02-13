@@ -10,23 +10,18 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <p>
+    We're glad you're interested in pitching in! 
+    Once you hit Submit, we'll pass your email and phone number along
+    to <%= @campaign.name %>. We'll keep your name private though,
+    to help campaigns make unbiased decisions. If they're interested,
+    you should hear back from the campaign soon!
+  </p>
+
+  <div>
     <%= label f, :message, class: "control-label" %>
     <%= textarea f, :message, class: "form-control" %>
     <%= error_tag f, :message %>
-  </div>
-
-  <div class="row">
-    <fieldset class="column">
-      <%= checkbox f, :share_email, class: "form-control" %>
-      <%= label f, :share_email, class: "control-label" %>
-
-      <%= checkbox f, :share_phone, class: "form-control" %>
-      <%= label f, :share_phone, class: "control-label" %>
-
-      <%= checkbox f, :share_address, class: "form-control" %>
-      <%= label f, :share_address, "Share location", class: "control-label" %>
-    </fieldset>
   </div>
 
   <div class="button-group">

@@ -35,7 +35,7 @@ defmodule PitchIn.CampaignController do
     case Repo.insert(changeset) do
       {:ok, _campaign} ->
         conn
-        |> put_flash(:primary, "Campaign created successfully.")
+        |> put_flash(:success, "Campaign created successfully.")
         |> redirect(to: campaign_path(conn, :index))
       {:error, changeset} ->
         IO.inspect changeset.errors
@@ -71,7 +71,7 @@ defmodule PitchIn.CampaignController do
     case Repo.update(changeset) do
       {:ok, campaign} ->
         conn
-        |> put_flash(:primary, "Campaign updated successfully.")
+        |> put_flash(:success, "Campaign updated successfully.")
         |> redirect(to: campaign_path(conn, :edit, campaign))
       {:error, changeset} ->
         changeset = fill_issues(changeset)
@@ -87,7 +87,7 @@ defmodule PitchIn.CampaignController do
     Repo.delete!(campaign)
 
     conn
-    |> put_flash(:primary, "Campaign deleted successfully.")
+    |> put_flash(:success, "Campaign deleted successfully.")
     |> redirect(to: campaign_path(conn, :index))
   end
 

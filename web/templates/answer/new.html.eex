@@ -7,5 +7,5 @@
                         ask: @ask,
                         action: campaign_ask_answer_path(@conn, :create, @campaign, @ask) %>
 
-<%= link "Back", to: campaign_ask_path(@conn, :show, @campaign, @ask) %>
+<%= link "Back", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "secondary button" %>
 </section>

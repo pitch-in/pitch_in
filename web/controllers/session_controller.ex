@@ -10,7 +10,7 @@ defmodule PitchIn.SessionController do
     case Auth.login_by_identity(conn, email, password, repo: Repo) do
       {:ok, conn} ->
         conn
-        |> put_flash(:primary, "Welcome back!")
+        |> put_flash(:success, "Welcome back!")
         |> redirect(to: ask_path(conn, :index))
       {:error, _reason, conn} ->
         conn

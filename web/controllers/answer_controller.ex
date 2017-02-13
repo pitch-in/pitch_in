@@ -76,7 +76,7 @@ defmodule PitchIn.AnswerController do
         |> Mailer.deliver_later
 
         conn
-        |> put_flash(:primary, "Answer created successfully.")
+        |> put_flash(:success, "Answer created successfully.")
         |> redirect(to: campaign_ask_answer_path(conn, :show, campaign, ask, answer))
       {:error, changeset} ->
         render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
@@ -126,7 +126,7 @@ defmodule PitchIn.AnswerController do
     case Repo.update(changeset) do
       {:ok, answer} ->
         conn
-        |> put_flash(:primary, "Answer updated successfully.")
+        |> put_flash(:success, "Answer updated successfully.")
         |> redirect(to: campaign_ask_answer_path(conn, :show, campaign, ask, answer))
       {:error, changeset} ->
         render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
@@ -148,16 +148,13 @@ defmodule PitchIn.AnswerController do
     Repo.delete!(answer)
 
     conn
-    |> put_flash(:primary, "Answer deleted successfully.")
+    |> put_flash(:success, "Answer deleted successfully.")
     |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
   end
 
   defp get_answer(conn, _opts) do
     id = conn.params["id"]
     answer = Repo.get!(Answer, id)
-    IO.puts("--------USER_IDS-----------")
-    IO.puts("CURRENT: #{conn.assigns.current_user.id}")
-    IO.puts("OWNER: #{answer.user_id}")
 
     conn
     |> Plug.Conn.assign(:answer, answer)

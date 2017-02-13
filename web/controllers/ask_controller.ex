@@ -84,7 +84,7 @@ defmodule PitchIn.AskController do
     case Repo.insert(changeset) do
       {:ok, ask} ->
         conn
-        |> put_flash(:primary, "Ask created successfully.")
+        |> put_flash(:success, "Ask created successfully.")
         |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
       {:error, changeset} ->
         render(conn, "new.html", campaign: campaign, changeset: changeset)
@@ -112,7 +112,7 @@ defmodule PitchIn.AskController do
     case Repo.update(changeset) do
       {:ok, ask} ->
         conn
-        |> put_flash(:primary, "Ask updated successfully.")
+        |> put_flash(:success, "Ask updated successfully.")
         |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
       {:error, changeset} ->
         render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
@@ -128,7 +128,7 @@ defmodule PitchIn.AskController do
     Repo.delete!(ask)
 
     conn
-    |> put_flash(:primary, "Ask deleted successfully.")
+    |> put_flash(:success, "Ask deleted successfully.")
     |> redirect(to: campaign_ask_path(conn, :index, campaign))
   end
 

@@ -39,6 +39,25 @@
       <strong>Candidate profession:</strong>
       <%= @campaign.candidate_profession %>
     </li>
+
+    <%= if @campaign.is_partisan do %>
+      <li>
+        <strong>
+          Partisan
+        </strong>
+      </li>
+
+      <li>
+        <strong>Current party:</strong>
+        <%= @campaign.current_party %>
+      </li>
+    <% else %>
+      <li>
+        <strong>
+          Non-Partisan
+        </strong>
+      </li>
+    <% end %>
   <% end %>
 
   <%# MEASURE %>
@@ -60,24 +79,6 @@
       <strong>Election date:</strong>
       <%= format_date @campaign.election_date %>
     </li>
-
-    <li>
-      <strong>
-        <%= if @campaign.is_partisan, do: "Partisan", else: "Non-Partisan" %>
-      </strong>
-    </li>
-
-    <%= if @campaign.is_partisan do %>
-      <li>
-        <strong>Percent dem:</strong>
-        <%= @campaign.percent_dem %>
-      </li>
-
-      <li>
-        <strong>Current party:</strong>
-        <%= @campaign.current_party %>
-      </li>
-    <% end %>
   <% end %>
 
   <li>
