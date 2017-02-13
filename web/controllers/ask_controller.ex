@@ -19,13 +19,12 @@ defmodule PitchIn.AskController do
     else
       render(conn, "campaign_activist_index.html", campaign: campaign, asks: campaign.asks)
     end
-
   end
 
   def index(conn, %{"filter" => filter}) do
     profession = like_value(filter["profession"])
     role = like_value(filter["role"])
-    state = like_value(filter["state"])
+    years_experience = to_int_or_infinity(filter["years_experience"])
     issue = filter["issue"]
 
     query =
@@ -33,8 +32,8 @@ defmodule PitchIn.AskController do
       select: a,
       join: c in Campaign, on: c.id == a.campaign_id,
       where: ilike(a.profession, ^profession),
-      where: ilike(c.state, ^state),
       where: ilike(a.role, ^role),
+      where: a.years_experience <= ^years_experience,
       where: fragment("""
         ? IN (
           SELECT campaign_id
@@ -59,7 +58,8 @@ defmodule PitchIn.AskController do
         :params,
         %{
           "filter" => %{
-            "profession" => user.pro.profession
+            "profession" => user.pro.profession,
+            "years_experience" => Timex.diff(Timex.today, user.pro.experience_starts_at, :years)
           }
         }
       )
@@ -144,4 +144,8 @@ defmodule PitchIn.AskController do
 
   defp like_value(nil), do: "%"
   defp like_value(value), do: "%#{value}%"
+
+  defp to_int_or_infinity(nil), do: 100
+  defp to_int_or_infinity(""), do: 100
+  defp to_int_or_infinity(string), do: String.to_integer(string)
 end

@@ -40,9 +40,11 @@ defmodule PitchIn.ViewHelpers do
 
   def us_date_input(form, field, opts \\ []) do
     value = input_value(form, field)
-    IO.inspect(opts)
+
     formatted_value = 
       case value do
+        nil ->
+          nil
         value when is_binary(value) -> 
           value
         value -> 

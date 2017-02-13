@@ -30,4 +30,4 @@
       <%= link "Pitch In", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "#{pitch_in_color(@ask.campaign)} button" %>
     </div>
   </div>
-</div>
+</section>

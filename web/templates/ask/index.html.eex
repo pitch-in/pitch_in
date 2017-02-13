@@ -11,13 +11,18 @@
       ], fn f -> %>
         <div>
           <%= label f, :profession %>
-          <%= select f, :profession, profession_options %>
+          <%= select f, :profession, [{"", ""}] ++ profession_options %>
           <%= error_tag f, :profession %>
         </div>
         <div>
           <%= label f, :role %>
           <%= text_input f, :role %>
           <%= error_tag f, :role %>
+        </div>
+        <div>
+          <%= label f, :years_experience %>
+          <%= number_input f, :years_experience %>
+          <%= error_tag f, :years_experience %>
         </div>
         <div>
           <%= label f, :issue %>
