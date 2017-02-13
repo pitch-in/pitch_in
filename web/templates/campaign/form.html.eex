@@ -9,6 +9,9 @@
 
   <div>
     <%= label f, :email, "Campaign Email", class: "control-label" %>
+    <p class="input-description">
+      The email address we should send answers to.
+    </p>
     <%= email_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
   </div>
@@ -21,8 +24,8 @@
 
   <div>
     <%= label f, :district, class: "control-label" %>
-    <p class="description">
-    The legal name of the district the election is taking place in.
+    <p class="input-description">
+      The legal name of the district the election is taking place in.
     </p>
     <%= text_input f, :district, class: "form-control" %>
     <%= error_tag f, :district %>
@@ -30,6 +33,10 @@
 
   <div>
     <%= label f, :long_pitch, class: "control-label" %>
+    <p class="input-description">
+      This is your chance to talk in depth about your campaign and what you want to accomplish.
+      Feel free to go into detail!
+    </p>
     <%= textarea f, :long_pitch, class: "form-control" %>
     <%= error_tag f, :long_pitch %>
   </div>
@@ -69,6 +76,21 @@
     <%= label f, :candidate_profession, class: "control-label" %>
     <%= text_input f, :candidate_profession, class: "form-control" %>
     <%= error_tag f, :candidate_profession %>
+  </div>
+
+  <div data-hide-on="campaign_type" data-show-case="candidate">
+    <div>
+      <%= label f, :is_partisan, "Is this a partisan office?" %>
+      <%= checkbox f, :is_partisan %>
+      <%= error_tag f, :is_partisan %>
+    </div>
+
+    <div data-hide-on="campaign_is_partisan" data-show-checked="true">
+      <%= label f, :current_party %>
+      <p class="input-description">Which party currently holds the office you're running for?</p>
+      <%= select f, :current_party, enum_to_options(PartyEnum) %>
+      <%= error_tag f, :current_party %>
+    </div>
   </div>
 
   <div data-hide-on="campaign_type" data-show-cases='["candidate", "issue"]'>

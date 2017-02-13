@@ -16,20 +16,23 @@ export default class HideOn {
   }
 
   private onHideElementChange = () => {
-    const value = this.controllingElement.val();
-
-    if (this.isHidden(value)) {
-      this.hideElement();
-    } else {
+    if (this.isShown()) {
       this.showElement();
+    } else {
+      this.hideElement();
     }
   };
 
-  private isHidden(value) {
-    return !(
+  private isShown() {
+    const value = this.controllingElement.val();
+    const checked: boolean = this.controllingElement.is(':checked');
+
+    return (
+      this.data.showCase === value ||
       (this.data.showCases &&
-       _.includes(this.data.showCases, value)) ||
-       this.data.showCase === value
+        _.includes(this.data.showCases, value)) ||
+      (this.data.showChecked && checked) ||
+      (this.data.showChecked === false && !checked)
     );
   }
 
