@@ -52,6 +52,12 @@ defmodule PitchIn.AskController do
 
     if user do
       user = user |> Repo.preload(:pro)
+      years_experience = 
+        if user.pro.experience_starts_at do
+          Timex.diff(Timex.today, user.pro.experience_starts_at, :years)
+        else
+          nil
+        end
 
       conn
       |> Map.put(
@@ -59,7 +65,7 @@ defmodule PitchIn.AskController do
         %{
           "filter" => %{
             "profession" => user.pro.profession,
-            "years_experience" => Timex.diff(Timex.today, user.pro.experience_starts_at, :years)
+            "years_experience" => years_experience
           }
         }
       )
