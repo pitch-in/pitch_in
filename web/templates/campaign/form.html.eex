@@ -94,8 +94,8 @@
   </div>
 
   <div data-hide-on="campaign_type" data-show-cases='["candidate", "issue"]'>
-    <%= label f, :election_date, class: "control-label" %>
-    <%= date_select f, :election_date, class: "form-control" %>
+    <%= label f, :election_date %>
+    <%= us_date_input f, :election_date %>
     <%= error_tag f, :election_date %>
   </div>
 

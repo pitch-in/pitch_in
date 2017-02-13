@@ -12,6 +12,7 @@
   ],
   "author": "Will Ockelmann-Wagner",
   "dependencies": {
+    "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
     "@types/jquery": "^2.0.40",
     "@types/lodash": "^4.14.43",
     "@types/node": "^6.0.46",

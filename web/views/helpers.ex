@@ -38,6 +38,25 @@ defmodule PitchIn.ViewHelpers do
     end
   end
 
+  def us_date_input(form, field, opts \\ []) do
+    value = input_value(form, field)
+    IO.inspect(opts)
+    formatted_value = 
+      case value do
+        value when is_binary(value) -> 
+          value
+        value -> 
+          value
+          |> Timex.format!("{D}/{M}/{YYYY}")
+      end
+
+    text_input(
+      form,
+      field,
+      Keyword.merge(opts, data_toggle: "datepicker", value: formatted_value)
+    )
+  end
+
   ##############
   # Formatters #
   ##############

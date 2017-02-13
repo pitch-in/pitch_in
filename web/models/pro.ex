@@ -9,7 +9,7 @@ defmodule PitchIn.Pro do
     field :profession, :string
     field :address_zip, :string
     field :phone, :string
-    field :experience_starts_at, Timex.Ecto.Date
+    field :experience_starts_at, PitchIn.UsDate
 
     timestamps()
   end

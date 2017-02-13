@@ -47,7 +47,7 @@
       When did you start working in your current profession?
       This helps us calculate your rough experience level.
     </p>
-    <%= date_select f, :experience_starts_at, class: "form-control" %>
+    <%= us_date_input f, :experience_starts_at, data_end_date: "today" %>
     <%= error_tag f, :experience_starts_at %>
   </div>
 

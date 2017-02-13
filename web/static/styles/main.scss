@@ -6,6 +6,9 @@
 @import 'foundation-sites/scss/foundation';
 @include foundation-everything(true);
 
+// Datepicker
+@import '@fengyuanchen/datepicker/src/datepicker';
+
 // Motion-ui. For somereason importing just motion-ui doesn't work.
 @import 'motion-ui/src/motion-ui';
 @include motion-ui-transitions;
