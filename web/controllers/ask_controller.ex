@@ -34,14 +34,25 @@ defmodule PitchIn.AskController do
       where: ilike(a.profession, ^profession),
       where: ilike(a.role, ^role),
       where: a.years_experience <= ^years_experience,
-      where: fragment("""
-        ? IN (
-          SELECT campaign_id
-          FROM issues
-          WHERE issue ILIKE ?
-        )
-      """, c.id, ^like_value(issue)),
+      where: is_nil(c.archived_reason),
+      where: is_nil(a.archived_reason),
       preload: :campaign
+
+    # Handle issues
+    query = 
+      if filter["issue"] != "" do
+        # Find campaigns with matching issues
+        from [a, c] in query,
+        where: fragment("""
+          ? IN (
+            SELECT DISTINCT campaign_id
+            FROM issues
+            WHERE issue ILIKE ?
+          )
+        """, c.id, ^like_value(issue))
+      else
+        query
+      end
 
     asks = Repo.all(query)
     render(conn, "index.html", asks: asks)
