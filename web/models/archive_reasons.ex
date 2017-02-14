@@ -9,8 +9,8 @@ defmodule PitchIn.ArchiveReasons do
     List.zip([list, list])
   end
 
-  def archived?(%{archive_reason: nil}), do: false
-  def archived?(%{archive_reason: _}), do: true
+  def archived?(%{archived_reason: nil}), do: false
+  def archived?(%{archived_reason: _}), do: true
 
   def campaign do
     [

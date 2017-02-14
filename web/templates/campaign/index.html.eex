@@ -1,23 +1,17 @@
 <section class="content-block">
 <h2>Manage Campaigns</h2>
 
-<table class="table">
-  <tbody>
-    <%= for campaign <- @campaigns do %>
-      <tr>
-        <td>
-          <%= campaign.name %>
-        </td>
-        <td>
-          <%= link "Manage", to: campaign_path(@conn, :edit, campaign), class: "button" %>
-        </td>
-        <td>
-          <%= link "Delete", to: campaign_path(@conn, :delete, campaign), method: :delete, data: [confirm: "Are you sure?"], class: "alert button" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h4>Active Campaigns</h4>
+<hr/>
+<%= for campaign <- Enum.filter(@campaigns, &(!PitchIn.ArchiveReasons.archived?(&1))) do %>
+  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+<% end %>
+
+<h4>Archived Campaigns</h4>
+<hr/>
+<%= for campaign <- Enum.filter(@campaigns, &(PitchIn.ArchiveReasons.archived?(&1))) do %>
+  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+<% end %>
 
 <%= link "New campaign", to: campaign_path(@conn, :new), class: "warning button" %>
 </section>
