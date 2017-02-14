@@ -1,5 +1,5 @@
 <section class="content-block">
-  <h2>Open Asks for <%= @campaign.name %></h2>
+  <h2>Open Needs for <%= @campaign.name %></h2>
 
   <table class="table">
     <tbody>

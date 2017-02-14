@@ -2,7 +2,7 @@
 <h2>Listing answers</h2>
 <h4>
 Campaign: <%= @campaign.name %>
-Ask: <%= @ask.role %>
+Need: <%= @ask.role %>
 </h4>
 
 <table class="table">

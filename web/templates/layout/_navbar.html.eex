@@ -17,7 +17,7 @@
           </a>
         </li>
         <li>
-          <%= link "Search Asks", to: ask_path(@conn, :index) %>
+          <%= link "Search Needs", to: ask_path(@conn, :index) %>
         </li>
         <li>
           <%= link "New Campaign", to: campaign_path(@conn, :new) %>
