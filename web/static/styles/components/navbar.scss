@@ -32,9 +32,12 @@
     }
   }
 
-  .logo {
+  // li a to win specificity war.
+  .logo, li a.logo {
     align-items: center;
+  }
 
+  .logo {
     .name {
       margin: 0 0 0 10px;
       color: $white;
@@ -45,8 +48,9 @@
     }
     
     img {
-      height: 40px;
-      width: 40px;
+      $logo-height: 56px;
+      height: $logo-height;
+      width: $logo-height;
       margin: -5px 0;
     }
   }
