@@ -1,0 +1,9 @@
+<%= if @campaign.archived_reason do %>
+  <%= form_for @conn, campaign_path(@conn, :update, @campaign), [as: :campaign, method: "put"], fn f -> %>
+    <input name="archive" value="true" class="hide" />
+    <%= text_input f, :archived_reason, class: "hide", value: "" %>
+
+
+    <%= submit "Unarchive", class: "warning button" %>
+  <% end %>
+<% end %>

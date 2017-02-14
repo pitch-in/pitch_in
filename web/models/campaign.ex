@@ -22,6 +22,7 @@ defmodule PitchIn.Campaign do
     field :election_date, PitchIn.UsDate
     field :is_partisan, :boolean, default: false
     field :current_party, PartyEnum
+    field :archived_reason, :string
 
     timestamps()
   end
@@ -34,5 +35,10 @@ defmodule PitchIn.Campaign do
     |> cast(params, [:name, :email, :type, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :current_party])
     |> cast_assoc(:issues)
     |> validate_required([:name, :email, :type, :short_pitch])
+  end
+
+  def archive_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:archived_reason])
   end
 end

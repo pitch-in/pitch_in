@@ -48,6 +48,13 @@ defmodule PitchIn.CampaignController do
     render(conn, "show.html", campaign: campaign)
   end
 
+  def edit(conn, %{"id" => id, "archive" => "true"}, user) do
+    campaign = get_campaign(id, user)
+    changeset = Campaign.archive_changeset(campaign)
+
+    render(conn, "edit_archived.html", campaign: campaign, changeset: changeset)
+  end
+
   def edit(conn, %{"id" => id}, user) do
     campaign = get_campaign(id, user)
 
@@ -57,6 +64,28 @@ defmodule PitchIn.CampaignController do
       |> fill_issues
 
     render(conn, "edit.html", campaign: campaign, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "campaign" => campaign_params, "archive" => "true"}, user) do
+    campaign = get_campaign(id, user)
+    IO.inspect(campaign_params)
+
+    changeset = 
+      campaign
+      |> Campaign.archive_changeset(campaign_params)
+
+    case Repo.update(changeset) do
+      {:ok, %{archived_reason: nil} = campaign} ->
+        conn
+        |> put_flash(:success, "Campaign successfully unarchived!")
+        |> redirect(to: campaign_path(conn, :edit, campaign))
+      {:ok, %{archived_reason: _} = campaign} ->
+        conn
+        |> put_flash(:warning, "Campaign successfully archived.")
+        |> redirect(to: campaign_path(conn, :show, campaign))
+      {:error, changeset} ->
+        render(conn, "edit_archived.html", campaign: campaign, changeset: changeset)
+    end
   end
 
   def update(conn, %{"id" => id, "campaign" => campaign_params}, user) do
@@ -79,17 +108,6 @@ defmodule PitchIn.CampaignController do
     end
   end
 
-  def delete(conn, %{"id" => id}, user) do
-    campaign = get_campaign(id, user)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(campaign)
-
-    conn
-    |> put_flash(:success, "Campaign deleted successfully.")
-    |> redirect(to: campaign_path(conn, :index))
-  end
 
   defp fill_issues(changeset) do
     campaign = Ecto.Changeset.apply_changes(changeset)
