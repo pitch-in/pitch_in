@@ -7,9 +7,9 @@ defmodule PitchIn.AskController do
   alias PitchIn.Campaign
   alias PitchIn.Issue
 
-  use PitchIn.Auth, protect: [:show, :create, :edit, :update, :delete]
-  plug :check_campaign_staff when action in [:index, :show, :create, :edit, :update, :delete]
-  plug :verify_campaign_staff when action in [:create, :edit, :update, :delete]
+  use PitchIn.Auth, protect: [:show, :create, :edit, :update]
+  plug :check_campaign_staff when action in [:index, :show, :create, :edit, :update]
+  plug :verify_campaign_staff when action in [:create, :edit, :update]
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
@@ -119,11 +119,38 @@ defmodule PitchIn.AskController do
     render(conn, "show.html", campaign: campaign, ask: ask)
   end
 
+  def edit(conn, %{"campaign_id" => campaign_id, "id" => id, "archive" => "true"}) do
+    campaign = get_campaign(campaign_id)
+    ask = Repo.get!(Ask, id)
+
+    changeset = Ask.archive_changeset(ask)
+    render(conn, "edit_archived.html", campaign: campaign, ask: ask, changeset: changeset)
+  end
+
   def edit(conn, %{"campaign_id" => campaign_id, "id" => id}) do
     campaign = get_campaign(campaign_id)
     ask = Repo.get!(Ask, id)
     changeset = Ask.changeset(ask)
     render(conn, "edit.html", campaign: campaign, ask: ask, changeset: changeset)
+  end
+
+  def update(conn, %{"campaign_id" => campaign_id, "id" => id, "ask" => ask_params, "archive" => "true"}) do
+    campaign = get_campaign(campaign_id)
+    ask = Repo.get!(Ask, id)
+    changeset = Ask.archive_changeset(ask, ask_params)
+
+    case Repo.update(changeset) do
+      {:ok, %{archived_reason: nil} = ask} ->
+        conn
+        |> put_flash(:success, "Need successfully unarchived!")
+        |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
+      {:ok, %{archived_reason: _} = ask} ->
+        conn
+        |> put_flash(:warning, "Need successfully archived.")
+        |> redirect(to: campaign_ask_path(conn, :show, campaign, ask))
+      {:error, changeset} ->
+        render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
+    end
   end
 
   def update(conn, %{"campaign_id" => campaign_id, "id" => id, "ask" => ask_params}) do
@@ -139,19 +166,6 @@ defmodule PitchIn.AskController do
       {:error, changeset} ->
         render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
     end
-  end
-
-  def delete(conn, %{"campaign_id" => campaign_id, "id" => id}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(ask)
-
-    conn
-    |> put_flash(:success, "Ask deleted successfully.")
-    |> redirect(to: campaign_ask_path(conn, :index, campaign))
   end
 
   defp get_campaign(id) do

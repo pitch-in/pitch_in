@@ -9,6 +9,7 @@ defmodule PitchIn.Ask do
     field :profession, :string
     field :description, :string
     field :years_experience, :integer
+    field :archived_reason, :string
 
     timestamps()
   end
@@ -20,5 +21,10 @@ defmodule PitchIn.Ask do
     struct
     |> cast(params, [:role, :length, :profession, :description, :years_experience])
     |> validate_required([:role, :length, :profession, :description, :years_experience])
+  end
+
+  def archive_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:archived_reason])
   end
 end

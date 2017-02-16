@@ -1,0 +1,27 @@
+<section class="content-block">
+  <h2>Archive <%= @campaign.name %>: <%= @ask.role %></h2>
+
+  <%= form_for @changeset, campaign_ask_path(@conn, :update, @campaign, @ask), fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <input name="archive" value="true" class="hide" />
+
+    <div>
+      <%= label f, :archived_reason %>
+      <%= select f, :archived_reason, PitchIn.ArchiveReasons.select_options(:need) %>
+      <%= error_tag f, :archived %>
+    </div>
+
+    <%= submit "Archive", class: "alert button" %>
+  <% end %>
+
+  <%= unarchive_button(@conn, @campaign, @ask) %>
+    
+  <div class="button-group">
+    <%= link "Back to Need", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "secondary button" %>
+  </div>
+</section>

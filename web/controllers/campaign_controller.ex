@@ -68,11 +68,7 @@ defmodule PitchIn.CampaignController do
 
   def update(conn, %{"id" => id, "campaign" => campaign_params, "archive" => "true"}, user) do
     campaign = get_campaign(id, user)
-    IO.inspect(campaign_params)
-
-    changeset = 
-      campaign
-      |> Campaign.archive_changeset(campaign_params)
+    changeset = campaign |> Campaign.archive_changeset(campaign_params)
 
     case Repo.update(changeset) do
       {:ok, %{archived_reason: nil} = campaign} ->

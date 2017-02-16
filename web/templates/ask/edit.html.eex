@@ -4,5 +4,11 @@
   <%= render "form.html", changeset: @changeset,
                           action: campaign_ask_path(@conn, :update, @campaign, @ask) %>
 
+  <div class="button-group">
+    <%= link "Show", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "warning button" %>
+    <%= archive_button(@conn, @campaign, @ask) %>
+    <%= unarchive_button(@conn, @campaign, @ask) %>
+  </div>
+
   <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "secondary button" %>
 </section>

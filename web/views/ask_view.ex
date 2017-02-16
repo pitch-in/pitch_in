@@ -15,6 +15,20 @@ defmodule PitchIn.AskView do
     campaign_color(campaign, 1)
   end
 
+  def unarchive_button(conn, campaign, ask) do
+    render("_unarchive.html", conn: conn, campaign: campaign, ask: ask)
+  end
+
+  def archive_button(conn, campaign, ask) do
+    if !ask.archived_reason do
+      link(
+        "Archive",
+        to: campaign_ask_path(conn, :edit, campaign, ask, archive: true),
+        class: "alert button"
+      )
+    end
+  end
+
   defp name_to_number(name) do
     name
     |> to_charlist
