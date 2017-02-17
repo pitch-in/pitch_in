@@ -25,6 +25,9 @@
         <li>
           <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
         </li>
+        <li>
+          <%= link "Contact Us", to: contact_us_path(@conn, :index) %>
+        </li>
       </ul>
     </div>
     <div class="top-bar-right">

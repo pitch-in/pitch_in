@@ -39,5 +39,7 @@
         <%= link "Show more", to: user_path(@conn, :new), class: "button" %>
       </div>
     </section>
+
+    <%= render PitchIn.ContactUsView, "index.html", conn: @conn, changeset: PitchIn.ContactUs.changeset(%PitchIn.ContactUs{}) %>
   </div>
 </div>

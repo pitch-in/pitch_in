@@ -6,7 +6,7 @@
     to help!
   </p>
 
-  <%= form_for @changeset, contact_us_path(@conn, :create), fn f -> %>
+  <%= form_for @changeset, contact_us_path(@conn, :create), [as: :contact_us], fn f -> %>
     <%= if @changeset.action do %>
       <div class="alert alert-danger">
         <p>Oops, something went wrong! Please check the errors below.</p>

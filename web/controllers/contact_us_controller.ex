@@ -8,7 +8,7 @@ defmodule PitchIn.ContactUsController do
 
   def index(conn, _, user) do
     changeset = ContactUs.changeset(%ContactUs{})
-    render(conn, "index.html", changeset: changeset)
+    render(conn, "index.html", foo: "BAR", changeset: changeset)
   end
 
   def create(conn, %{"contact_us" => message_params}, user) do
