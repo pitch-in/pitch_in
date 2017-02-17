@@ -31,6 +31,16 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
+  def contact_us_email(conn, user, %PitchIn.ContactUs{subject: user_subject, body: user_body}) do
+    email = Application.get_env(:pitch_in, PitchIn.Email)[:contact_us_email]
+      
+    new_email()
+    |> to(email)
+    |> from(user.email)
+    |> subject("PITCH IN CONTACT US: #{user_subject}")
+    |> text_body("MESSAGE FROM #{user.name}:\n #{user_body}")
+  end
+
   def test_email(email_address, conn) do
     email_address
     |> base_email
