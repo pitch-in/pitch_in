@@ -1,7 +1,7 @@
 <section class="ask-search-summary content-block">
   <h3 class="flex-left flex-spacing">
     <span>
-    <%= @ask.campaign.name %>
+      <%= @ask.campaign.name %>
     </span>
     <%= if !@ask.campaign.is_verified do %>
       <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />

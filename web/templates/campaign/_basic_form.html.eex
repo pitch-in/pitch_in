@@ -1,46 +1,46 @@
 <div class="form-group">
-  <%= label @campaign, :name, "Campaign Name", class: "control-label" %>
+  <%= label @campaign, :name, "Campaign Name" %>
   <p class="input-description">
     This is how you want us to refer to your campaign. It should include the
     candidate's name and office, or the measure's name and your position.
     You could also include a small slogan.
   </p>
-  <%= text_input @campaign, :name, class: "form-control" %>
+  <%= text_input @campaign, :name %>
   <%= error_tag @campaign, :name %>
 </div>
 
 <div class="form-group">
-  <%= label @campaign, :type, class: "control-label" %>
-  <%= select @campaign, :type, enum_to_options(CampaignTypeEnum), class: "form-control" %>
+  <%= label @campaign, :type %>
+  <%= select @campaign, :type, enum_to_options(CampaignTypeEnum) %>
   <%= error_tag @campaign, :type %>
 </div>
 
 <div data-hide-on="campaign_type" data-show-case="candidate">
-  <%= label @campaign, :candidate_name, class: "control-label" %>
-  <%= text_input @campaign, :candidate_name, class: "form-control" %>
+  <%= label @campaign, :candidate_name %>
+  <%= text_input @campaign, :candidate_name %>
   <%= error_tag @campaign, :candidate_name %>
 </div>
 
 <div data-hide-on="campaign_type" data-show-case="measure">
-  <%= label @campaign, :measure_name, class: "control-label" %>
-  <%= text_input @campaign, :measure_name, class: "form-control" %>
+  <%= label @campaign, :measure_name %>
+  <%= text_input @campaign, :measure_name %>
   <%= error_tag @campaign, :measure_name %>
 </div>
 
 <div data-hide-on="campaign_type" data-show-case="measure">
-  <%= label @campaign, :measure_position, class: "control-label" %>
-  <%= text_input @campaign, :measure_position, class: "form-control" %>
+  <%= label @campaign, :measure_position %>
+  <%= text_input @campaign, :measure_position %>
   <%= error_tag @campaign, :measure_position %>
 </div>
 
 <div class="form-group">
-  <%= label @campaign, :short_pitch, class: "control-label" %>
+  <%= label @campaign, :short_pitch %>
     <p class="input-description">
       This should be a short pitch about why activists should want to
       help your campaign. It should be about the length of a tweet -
       140 characters. Your short pitch is displayed on the Need search page,
       so it's your first chance to sell cause.
     </p>
-  <%= text_input @campaign, :short_pitch, class: "form-control" %>
+  <%= text_input @campaign, :short_pitch, maxlength: "140" %>
   <%= error_tag @campaign, :short_pitch %>
 </div>

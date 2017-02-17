@@ -22,6 +22,23 @@
     <%= error_tag f, :state %>
   </div>
 
+  <div data-hide-on="campaign_type" data-show-cases='["candidate", "measure"]'>
+    <%= label f, :file_number %>
+    <p class="input-description">
+      If you provide us with a state and valid file number, we will attempt to 
+      look up the campaign and the phone number on file. We will then call the number
+      to verify that campaign is in fact running this Pitch In campaign<span data-hide-on="campaign_type" data-show-case="measure">.</span>
+      <span data-hide-on="campaign_type" data-show-case="candidate">
+         and is a registered Democrat.
+      </span>
+      <br/>
+      If we can verify the campaign, your campaign name will appear with a green "verified" checkmark
+      on the search page.
+    </p>
+    <%= text_input f, :file_number %>
+    <%= error_tag f, :file_number %>
+  </div>
+
   <div>
     <%= label f, :district, class: "control-label" %>
     <p class="input-description">
@@ -93,7 +110,7 @@
     </div>
   </div>
 
-  <div data-hide-on="campaign_type" data-show-cases='["candidate", "issue"]'>
+  <div data-hide-on="campaign_type" data-show-cases='["candidate", "measure"]'>
     <%= label f, :election_date %>
     <%= us_date_input f, :election_date %>
     <%= error_tag f, :election_date %>

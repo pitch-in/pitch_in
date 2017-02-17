@@ -8,6 +8,7 @@ defmodule PitchIn.Campaign do
     field :name, :string
     field :email, :string
     field :type, CampaignTypeEnum
+    field :file_number, :string
     field :state, :string
     field :district, :string
     field :candidate_name, :string
@@ -33,7 +34,7 @@ defmodule PitchIn.Campaign do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :type, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :current_party])
+    |> cast(params, [:name, :email, :type, :file_number, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :current_party])
     |> cast_assoc(:issues)
     |> validate_required([:name, :email, :type, :short_pitch])
   end
