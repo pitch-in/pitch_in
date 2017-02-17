@@ -3,7 +3,7 @@
     <span>
       <%= @ask.campaign.name %>
     </span>
-    <%= if !@ask.campaign.is_verified do %>
+    <%= if @ask.campaign.is_verified do %>
       <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
     <% end %>
   </h3>
