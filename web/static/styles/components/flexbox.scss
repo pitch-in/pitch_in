@@ -1,6 +1,76 @@
-.flex-row {
+@mixin flex($direction) {
   display: flex;
-  flex-direction: row;
+  flex-direction: $direction;
   justify-content: space-between;
   align-items: center;
 }
+
+@mixin row-flex-spacing {
+  &.flex-spacing > * {
+    margin-left: 5px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+@mixin column-flex-spacing {
+  &.flex-spacing > * {
+    margin-top: 5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.flex-row {
+  @include flex(row);
+  @include row-flex-spacing();
+}
+
+.flex-column {
+  @include flex(column);
+  @include column-flex-spacing();
+}
+
+.flex-left {
+  @include flex(row);
+  @include row-flex-spacing();
+  justify-content: flex-start;
+
+}
+
+.flex-right {
+  @include flex(row);
+  @include row-flex-spacing();
+  justify-content: flex-end;
+}
+
+.flex-top {
+  @include flex(column);
+  @include column-flex-spacing();
+  justify-content: flex-start;
+}
+
+.flex-bottom {
+  @include flex(column);
+  @include column-flex-spacing();
+  justify-content: flex-end;
+}
+
+.flex-center {
+  @include flex(row);
+  @include column-flex-spacing();
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+

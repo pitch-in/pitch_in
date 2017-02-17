@@ -23,6 +23,7 @@ defmodule PitchIn.Campaign do
     field :is_partisan, :boolean, default: false
     field :current_party, PartyEnum
     field :archived_reason, :string
+    field :is_verified, :boolean
 
     timestamps()
   end

@@ -1,0 +1,6 @@
+.fi {
+  &.success { color: $green; }
+  &.alert { color: $red; }
+  &.primary { color: $blue; }
+  &.secondary { color: $gray; }
+}

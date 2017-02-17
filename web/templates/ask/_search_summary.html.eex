@@ -1,5 +1,12 @@
 <section class="ask-search-summary content-block">
-  <h3><%= @ask.campaign.name %></h3>
+  <h3 class="flex-left flex-spacing">
+    <span>
+    <%= @ask.campaign.name %>
+    </span>
+    <%= if !@ask.campaign.is_verified do %>
+      <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
+    <% end %>
+  </h3>
 
   <div class="column row">
     <div class="search-summary-details text-center">

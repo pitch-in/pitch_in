@@ -11,6 +11,8 @@
     <title>PitchIn!</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+
     <%= if Mix.env != :dev do %>
       <link href="<%= static_path(@conn, "/main.min.css") %>" rel="stylesheet" type="text/css" />
     <% end %>
