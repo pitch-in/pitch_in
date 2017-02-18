@@ -2,6 +2,7 @@ defmodule PitchIn.Email do
   use Bamboo.Phoenix, view: PitchIn.EmailView
 
   @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
+  @contact_us_email Application.get_env(:pitch_in, PitchIn.Email)[:contact_us_email]
 
   def staff_welcome_email(email_address, conn, user, campaign) do
     email_address
@@ -31,14 +32,17 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
-  def contact_us_email(conn, user, %PitchIn.ContactUs{subject: user_subject, body: user_body}) do
-    email = Application.get_env(:pitch_in, PitchIn.Email)[:contact_us_email]
-      
+  def contact_us_email(conn, %PitchIn.ContactUs{
+    subject: user_subject,
+    body: user_body,
+    email: from_email,
+    name: from_name
+  }) do
     new_email()
-    |> to(email)
-    |> from(user.email)
+    |> to(@contact_us_email)
+    |> from({from_name, from_email})
     |> subject("PITCH IN CONTACT US: #{user_subject}")
-    |> text_body("MESSAGE FROM #{user.name}:\n #{user_body}")
+    |> text_body(user_body)
   end
 
   def test_email(email_address, conn) do
@@ -51,7 +55,7 @@ defmodule PitchIn.Email do
   defp base_email(email_address) do
     new_email()
     |> to(email_address)
-    |> from(@pitch_in_email)
+    |> from({"Pitch In", @pitch_in_email})
     |> put_html_layout({PitchIn.LayoutView, "email.html"})
   end
 end

@@ -4,6 +4,9 @@ defmodule PitchIn.ContactUs do
   schema "contact_us" do
     field :subject, :string
     field :body, :string
+    field :email, :string
+    field :name, :string
+    field :from_page, :string
   end
 
   @doc """
@@ -11,7 +14,7 @@ defmodule PitchIn.ContactUs do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:subject, :body])
-    |> validate_required([:subject, :body])
+    |> cast(params, [:subject, :body, :email, :name, :from_page])
+    |> validate_required([:subject, :body, :name, :email])
   end
 end
