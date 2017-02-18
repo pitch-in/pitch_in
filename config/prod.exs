@@ -46,7 +46,7 @@ rescue
 
     config :pitch_in, PitchIn.Email,
       test_email: System.get_env("TEST_EMAIL"),
-      from_email: "pitch_in@pitch_in.com",
+      from_email: System.get_env("FROM_EMAIL"),
       contact_us_email: System.get_env("CONTACT_US_EMAIL")
 end
 
