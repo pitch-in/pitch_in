@@ -1,5 +1,11 @@
 .button {
   box-shadow: $down-shadow-button-light;
+  padding: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
 
   &.success, &.alert {

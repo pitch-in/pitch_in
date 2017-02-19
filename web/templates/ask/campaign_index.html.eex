@@ -1,13 +1,13 @@
 <section class="content-block">
   <h2>Needs for <%= @campaign.name %></h2>
 
-  <h4>Open Needs</h4>
+  <h3>Open Needs</h3>
   <hr/>
   <%= for ask <- Enum.filter(@asks, &(!PitchIn.ArchiveReasons.archived?(&1))) do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
   <% end %>
 
-  <h4>Archived Needs</h4>
+  <h3>Archived Needs</h3>
   <hr/>
   <%= for ask <- Enum.filter(@asks, &(PitchIn.ArchiveReasons.archived?(&1))) do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>

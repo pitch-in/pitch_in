@@ -1,13 +1,13 @@
 <section class="content-block">
 <h2>Manage Campaigns</h2>
 
-<h4>Active Campaigns</h4>
+<h3>Active Campaigns</h3>
 <hr/>
 <%= for campaign <- Enum.filter(@campaigns, &(!PitchIn.ArchiveReasons.archived?(&1))) do %>
   <%= render "_index_item.html", conn: @conn, campaign: campaign %>
 <% end %>
 
-<h4>Archived Campaigns</h4>
+<h3>Archived Campaigns</h3>
 <hr/>
 <%= for campaign <- Enum.filter(@campaigns, &(PitchIn.ArchiveReasons.archived?(&1))) do %>
   <%= render "_index_item.html", conn: @conn, campaign: campaign %>

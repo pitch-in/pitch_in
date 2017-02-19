@@ -2,18 +2,18 @@
   <div class="title-bar" data-responsive-toggle="top-nav" data-hide-for="large">
     <a class="title-bar-title logo" href="/">
       <img src="<%= webpack_path(@conn, "/img/shovels_56.png") %>" />
-      <h5 class="name">Pitch In</h5>
+      <h3 class="name">Pitch In</h3>
     </a>
     <button class="menu-icon" type="button" data-toggle="top-nav"></button>
   </div>
 
-  <div class="top-bar" id="top-nav" data-animate="fade-in fade-out">
+  <div class="top-bar" id="top-nav">
     <div class="top-bar-left">
       <ul class="vertical medium-horizontal menu">
         <li class="show-for-large">
           <a class="logo" href="/">
             <img src="<%= webpack_path(@conn, "/img/shovels_56.png") %>" />
-            <h5 class="name">Pitch In</h5>
+            <h3 class="name">Pitch In</h3>
           </a>
         </li>
         <li>

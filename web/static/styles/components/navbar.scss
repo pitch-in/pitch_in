@@ -1,4 +1,7 @@
 .navbar {
+  $link-color: $white;
+  $hover-color: darken($link-color, 20%);
+
   .no-js {
     @include breakpoint(small only) {
       .top-bar {
@@ -9,6 +12,16 @@
     @include breakpoint(medium) {
       .title-bar {
         display: none;
+      }
+    }
+  }
+
+  .top-bar {
+    &, & ul {
+      background: $light-blue;
+
+      @include breakpoint(large) {
+        background: $blue;
       }
     }
   }
@@ -25,10 +38,14 @@
     }
 
     // Update menu-icon hover color.
-    // TOOD: Is there a variable for this?
-    .menu-icon:hover::after {
-      background: $light-gray;
-      box-shadow: 0 7px 0 $light-gray, 0 14px 0 $light-gray;
+    // TODO: Is there a variable for this?
+    .menu-icon::after {
+      height: 0.25rem;
+
+      &:hover {
+        background: $hover-color;
+        box-shadow: 0 7px 0 $hover-color, 0 14px 0 $hover-color;
+      }
     }
   }
 
@@ -40,10 +57,10 @@
   .logo {
     .name {
       margin: 0 0 0 10px;
-      color: $white;
+      color: $link-color;
 
       &:hover, &:active {
-        color: $light-gray;
+        color: $hover-color;
       }
     }
     
@@ -56,10 +73,10 @@
   }
 
   a {
-    color: $white;
+    color: $link-color;
 
     &:hover, &:active {
-      color: $light-gray;
+      color: $hover-color;
     }
   }
 

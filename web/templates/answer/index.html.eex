@@ -1,9 +1,9 @@
 <section class="content-block">
 <h2>Listing answers</h2>
-<h4>
+<h3>
 Campaign: <%= @campaign.name %>
 Need: <%= @ask.role %>
-</h4>
+</h3>
 
 <table class="table">
   <thead>
