@@ -5,6 +5,7 @@ defmodule PitchIn.User do
     many_to_many :campaigns, PitchIn.Campaign, join_through: "campaign_staff"
     has_one :pro, PitchIn.Pro
     has_many :answers, PitchIn.Answer
+    has_many :search_alerts, PitchIn.SearchAlert
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string

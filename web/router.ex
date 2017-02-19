@@ -24,6 +24,7 @@ defmodule PitchIn.Router do
       end
     end
     resources "/users", UserController
+    resources "/search_alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
     resources "/contact_us", ContactUsController, only: [:index, :create]

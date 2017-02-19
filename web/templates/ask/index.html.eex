@@ -29,7 +29,24 @@
           <%= text_input f, :issue %>
           <%= error_tag f, :issue %>
         </div>
-        <%= submit "Search", class: "expanded button" %>
+
+        <%= if @show_alert_button do %>
+          <p class="input-description text-center">
+            Create an alert, and we'll email you when campaigns 
+            tell us they have needs that match this search!
+            <br/>
+            Don't worry, we won't send you more than one email a day,
+            and we'll never give a campaign your contact information
+            without your permission.
+          </p>
+        <% end %>
+
+        <div class="expanded button-group">
+          <%= submit "Search", class: "button" %>
+          <%= if @show_alert_button do %>
+            <%= submit "Create Alert", class: "warning button", value: "create_alert", name: "filter[create_alert]" %>
+          <%= end %>
+        </div>
       <% end %>
     </section>
   </div>

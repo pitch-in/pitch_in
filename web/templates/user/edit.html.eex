@@ -5,5 +5,18 @@
                         action: user_path(@conn, :update, @user),
                         pro: true %>
 
+<%= if length(@user.search_alerts) > 0 do %>
+  <h3>Remove Need Alerts</h3>
+  <%= for alert <- @user.search_alerts do %>
+    <div class="flex-row">
+      <%= alert.profession %>
+      <%= alert.role %>
+      <%= alert.years_experience %>
+      <%= alert.issue %>
+      <%= link "Remove Alert", to: search_alert_path(@conn, :delete, alert), method: :delete, class: "alert button" %>
+    </div>
+  <% end %>
+<% end %>
+
 <%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
 </section>

@@ -6,8 +6,8 @@ defmodule PitchIn.UserController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
-  use PitchIn.Auth, protect: [:show, :edit, :update, :delete]
-  plug :verify_user when action in [:show, :edit, :update, :delete]
+  use PitchIn.Auth, protect: [:show, :edit, :update]
+  plug :verify_user when action in [:show, :edit, :update]
 
   def new(conn, %{"staff" => _}) do
     changeset = User.changeset(%User{campaigns: [%Campaign{}]})
@@ -52,7 +52,6 @@ defmodule PitchIn.UserController do
     changeset = 
       %User{}
       |> User.activist_registration_changeset(user_params)
-      |> IO.inspect
 
     case Repo.insert(changeset) do
       {:ok, user} ->
@@ -72,18 +71,25 @@ defmodule PitchIn.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = get_pro_user(id)
+    user = 
+      get_pro_user(id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = get_pro_user(id)
+    user =
+      get_pro_user(id)
+      |> Repo.preload(:search_alerts)
+
     changeset = User.changeset(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = get_pro_user(id)
+    user =
+      get_pro_user(id)
+      |> Repo.preload(:search_alerts)
+
     changeset = User.changeset(user, user_params)
 
     case Repo.update(changeset) do
@@ -94,18 +100,6 @@ defmodule PitchIn.UserController do
       {:error, changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    user = get_pro_user(id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(user)
-
-    conn
-    |> put_flash(:success, "User deleted successfully.")
-    |> redirect(to: user_path(conn, :index))
   end
 
   defp get_pro_user(id) do

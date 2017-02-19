@@ -55,7 +55,19 @@ defmodule PitchIn.AskController do
       end
 
     asks = Repo.all(query)
-    render(conn, "index.html", asks: asks)
+
+    if filter["create_alert"] do
+      user = conn.assigns.current_user
+
+      alert_changeset = 
+        user
+        |> build_assoc(:search_alerts)
+        |> PitchIn.SearchAlert.changeset(filter)
+
+      Repo.insert(alert_changeset)
+    end
+
+    render(conn, "index.html", asks: asks, show_alert_button: !empty_filter?(filter))
   end
 
   def index(conn, _params) do
@@ -83,7 +95,7 @@ defmodule PitchIn.AskController do
     else
       conn
     end
-    |> render("index.html", asks: nil)
+    |> render("index.html", asks: nil, show_alert_button: false)
   end
 
   def new(conn, %{"campaign_id" => campaign_id}) do
@@ -166,6 +178,17 @@ defmodule PitchIn.AskController do
       {:error, changeset} ->
         render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
     end
+  end
+
+  defp empty_filter?(filter) do
+  IO.puts("====EMPTY FILTERS===")
+    all_filters = 
+      filter
+      |> Map.values
+      |> Enum.reduce(&(&1 <> &2))
+      |> IO.inspect
+
+    all_filters == "" 
   end
 
   defp get_campaign(id) do
