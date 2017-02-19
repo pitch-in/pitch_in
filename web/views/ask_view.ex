@@ -19,13 +19,16 @@ defmodule PitchIn.AskView do
     render("_unarchive.html", conn: conn, campaign: campaign, ask: ask)
   end
 
-  def archive_button(conn, campaign, ask) do
-    if !ask.archived_reason do
-      link(
-        "Archive",
+  def archive_button(conn, campaign, ask, opts \\ []) do
+    opts =
+      Keyword.merge([
         to: campaign_ask_path(conn, :edit, campaign, ask, archive: true),
-        class: "alert button"
+        class: "alert button"],
+        opts 
       )
+    
+    if !ask.archived_reason do
+      link("Archive", opts)
     end
   end
 

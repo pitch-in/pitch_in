@@ -4,13 +4,13 @@
 <%= render "form.html", changeset: @changeset,
                         action: campaign_path(@conn, :update, @campaign) %>
 
-<div class="button-group">
-  <%= archive_button(@conn, @campaign) %>
+<div class="expanded button-group">
+  <%= archive_button(@conn, @campaign, class: "alert button") %>
   <%= unarchive_button(@conn, @campaign) %>
 </div>
 
-<div class="button-group">
+<div class="expanded button-group">
   <%= link "Mange Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "button" %>
-  <%= link "Back", to: campaign_path(@conn, :index), class: "secondary button" %>
+  <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>

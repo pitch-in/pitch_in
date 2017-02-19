@@ -13,13 +13,16 @@ defmodule PitchIn.CampaignView do
     render("_unarchive.html", conn: conn, campaign: campaign)
   end
 
-  def archive_button(conn, campaign) do
-    if !campaign.archived_reason do
-      link(
-        "Archive",
+  def archive_button(conn, campaign, opts \\ []) do
+    opts =
+      Keyword.merge([
         to: campaign_path(conn, :edit, campaign, archive: true),
-        class: "alert button"
+        class: "alert button"],
+        opts
       )
+
+    if !campaign.archived_reason do
+      link("Archive", opts)
     end
   end
 end
