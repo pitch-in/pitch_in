@@ -1,17 +1,10 @@
 .home {
-  nav {
-    .logo {
-      margin: 0.25rem;
-      padding: 0;
-    }
-  }
-
   .home-section {
     padding: 20px;
     background: $blue;
 
     h1 {
-      // Don't shrink on small screens.
+      // Special bigger size text.
       font-size: 3rem;
     }
 

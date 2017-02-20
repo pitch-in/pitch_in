@@ -1,28 +1,55 @@
 <nav class="navbar" >
-  <div class="title-bar" data-responsive-toggle="top-nav" data-hide-for="large">
-    <a class="title-bar-title logo" href="/">
-      <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
-      <h3 class="name">Pitch In</h3>
-    </a>
-    <button class="menu-icon" type="button" data-toggle="top-nav"></button>
-  </div>
-
-  <div class="top-bar" id="top-nav">
+  <div class="top-bar title" data-responsive-toggle="top-nav" data-hide-for="none">
     <div class="top-bar-left">
-      <ul class="vertical medium-horizontal menu">
-        <li class="show-for-large">
+      <ul class="horizontal menu">
+        <li>
           <a class="logo" href="/">
             <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
             <h3 class="name">Pitch In</h3>
           </a>
         </li>
-        <li>
+        <li class="show-for-large">
+          <%= link "Search Needs", to: ask_path(@conn, :index) %>
+        </li>
+        <li class="show-for-large">
+          <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
+        </li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="vertical medium-horizontal menu">
+        <%= if @current_user do %>
+          <li class="show-for-large">
+            <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
+          </li>
+          <li class="show-for-large">
+            <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>
+          </li>
+        <% else %>
+          <li class="show-for-large">
+            <%= link "Log In", to: session_path(@conn, :new) %>
+          </li>
+          <li class="show-for-large">
+            <%= link "Sign Up", to: user_path(@conn, :new) %>
+          </li>
+        <% end %>
+        <li class="flex-center">
+          <button class="menu-icon" type="button" data-toggle="top-nav"></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="top-bar" id="top-nav">
+    <div class="top-bar-left">
+      <ul class="vertical medium-horizontal menu">
+        <li class="hide-for-large">
           <%= link "Search Needs", to: ask_path(@conn, :index) %>
         </li>
         <li>
           <%= link "New Campaign", to: campaign_path(@conn, :new) %>
         </li>
-        <li>
+        <li class="hide-for-large">
           <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
         </li>
         <li>
@@ -30,7 +57,7 @@
         </li>
       </ul>
     </div>
-    <div class="top-bar-right">
+    <div class="top-bar-right hide-for-large">
       <ul class="vertical medium-horizontal menu">
         <%= if @current_user do %>
           <li>

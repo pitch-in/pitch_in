@@ -13,7 +13,7 @@
   <%= render PitchIn.LayoutView, "_flash.html", conn: @conn %>
 
   <div class="row column">
-    <section class="content-block">
+    <section class="content-block" id="first-time-here">
       <h2>First time here?</h2>
 
       <p>
@@ -26,7 +26,7 @@
       </div>
     </section>
 
-    <section class="content-block">
+    <section class="content-block" id="how-this-works">
       <h2>How this works</h2>
       <p>
         You’ve already taken the first step: Choosing to translate your values into action. Let us help you take it from here.
@@ -35,7 +35,7 @@
         There are opportunities in every community to speak out and organize for positive change. Our mission is to utilize your passion and talents to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need of your unique profile of values and experience.
       </p>
     </section>
-    <section class="content-block">
+    <section class="content-block" id="verification-process">
       <h2>
         Verification Process
       </h2>
@@ -53,7 +53,7 @@ Activists of America:
       </p>
     </section>
 
-    <section class="content-block">
+    <section class="content-block" id="contact-us">
       <h2>Contact Us</h2>
       <p>
         We have a lot of work to do, so help us better serve your activism! 

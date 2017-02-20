@@ -2,51 +2,42 @@
   $link-color: $white;
   $hover-color: darken($link-color, 20%);
 
+  // Don't show top bar, until js takes over to hide it.
   .no-js {
-    @include breakpoint(small only) {
-      .top-bar {
-        display: none;
-      }
-    }
-
-    @include breakpoint(medium) {
-      .title-bar {
-        display: none;
-      }
+    .top-bar {
+      display: none;
     }
   }
 
   .top-bar {
     &, & ul {
       background: $light-blue;
+    }
 
-      @include breakpoint(large) {
+    // Higher title bar.
+    &.title {
+      // Keep left/right spacing working at small sizes.
+      flex-wrap: nowrap;
+
+      .top-bar-left {
+        flex: 1 1 auto;
+      }
+      .top-bar-right {
+        flex: 0 1 auto;
+      }
+
+      &, & ul {
         background: $blue;
       }
     }
   }
 
-  .logo {
-    padding: 0;
+  // Update menu-icon hover color.
+  // TODO: Is there a variable for this?
+  .menu-icon {
+    height: 18px;
 
-    a {
-      margin: 0;
-    }
-  }
-
-  .title-bar {
-    background: $blue;
-
-    .logo {
-      // Copy styles from the top-bar logo.
-      justify-content: flex-start;
-      display: flex;
-      line-height: 1;
-    }
-
-    // Update menu-icon hover color.
-    // TODO: Is there a variable for this?
-    .menu-icon::after {
+    &::after {
       height: 0.25rem;
 
       &:hover {
@@ -62,7 +53,14 @@
   }
 
   .logo {
+    // Don't take up extra space.
+    padding: 0;
+    a {
+      margin: 0;
+    }
+
     .name {
+      // Space between logo and name.
       margin: 0 0 0 10px;
       color: $link-color;
 
