@@ -116,7 +116,7 @@
     <%= error_tag f, :election_date %>
   </div>
 
-  <div>
-    <%= submit "Submit", class: "expanded button" %>
+  <div class="expanded button-group">
+    <%= submit "Submit", class: "success button" %>
   </div>
 <% end %>

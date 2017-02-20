@@ -41,6 +41,6 @@
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "expanded button" %>
+    <%= submit "Submit", class: "expanded success button" %>
   </div>
 <% end %>
