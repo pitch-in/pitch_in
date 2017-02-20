@@ -9,10 +9,15 @@
   </p>
 
   <div class="expanded stacked-for-small button-group standard-margin-bottom">
+  <%= if @is_staff do %>
     <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "warning button" %>
     <%= link "View Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "success button" %>
     <%= archive_button(@conn, @campaign, @ask) %>
     <%= unarchive_button(@conn, @campaign, @ask) %>
+  <% else %>
+    <%= link "Show", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "warning button" %>
+    <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @campaign, @ask), class: "success button" %>
+  <% end %>
   </div>
 </section>
 

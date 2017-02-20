@@ -21,5 +21,5 @@
 <% end %>
 
 <section class="expanded content-block">
-  <%= link "New campaign", to: campaign_path(@conn, :new), class: "warning button" %>
+  <%= link "New campaign", to: campaign_path(@conn, :new), class: "primary button" %>
 </section>

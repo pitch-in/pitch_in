@@ -7,7 +7,7 @@
 
 <%= if @active_asks != [] do %>
   <%= for ask <- @active_asks do %>
-    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
+    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
   <% end %>
 <% end %>
 
@@ -16,10 +16,16 @@
     <h2>Archived Needs</h2>
   </section>
   <%= for ask <- @archived_asks do %>
-    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
+    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
   <% end %>
 <% end %>
 
 <section class="list-header content-block">
-  <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
+  <div class="expanded button-group">
+  <%= if @is_staff do %>
+    <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
+  <% end %>
+
+  <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
+  </div>
 </section>

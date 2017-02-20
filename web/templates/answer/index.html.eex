@@ -1,30 +1,29 @@
-<section class="content-block">
-<h2>Listing answers</h2>
-<h3>
-  Campaign: <%= @campaign.name %><br/>
-  Need: <%= @ask.role %>
-</h3>
+<section class="list-header content-block">
+  <h1>
+    Answers
+  </h1>
+  <h2>
+    Campaign: <%= @campaign.name %><br/>
+    Need: <%= @ask.role %>
+  </h2>
+</section>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Profession</th>
-      <th>Show</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for answer <- @answers do %>
-    <tr>
-      <td><%= answer.user.name %></td>
-      <td><%= answer.user.pro.profession %></td>
-      <td>
-        <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, answer), class: "button" %>
-      </td>
-    </tr>
+  <section class="content-block">
+    <h3>
+      <%= answer.user.pro.profession %>
+    </h3>
+
+    <p>
+      <%= answer.message %>
+    </p>
+
+    <div class="expanded button-group">
+      <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, answer), class: "success button" %>
+    </div>
+  </section>
 <% end %>
-  </tbody>
-</table>
+
+<section class="list-header content-block">
+  <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
 </section>
