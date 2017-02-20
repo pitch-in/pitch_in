@@ -34,9 +34,9 @@
   </li>
 </ul>
 
-<div class="button-group">
+<div class="expanded button-group">
   <%= if @is_staff do %>
-    <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "button" %>
+    <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "warning button" %>
     <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary button" %>
   <%= else %>
     <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "success button" %>

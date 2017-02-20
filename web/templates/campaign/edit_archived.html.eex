@@ -16,12 +16,12 @@
       <%= error_tag f, :archived %>
     </div>
 
-    <%= submit "Archive", class: "alert button" %>
+    <%= submit "Archive", class: "expanded alert button" %>
   <% end %>
 
-  <%= unarchive_button(@conn, @campaign) %>
     
-  <div class="button-group">
+  <div class="expanded button-group">
+    <%= unarchive_button(@conn, @campaign) %>
     <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "secondary button" %>
   </div>
 </section>

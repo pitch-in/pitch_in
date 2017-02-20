@@ -51,7 +51,7 @@
 
 </ul>
 
-<div class="button-group">
+<div class="expanded button-group">
   <%= if @is_owner do %>
     <%= link "Edit", to: campaign_ask_answer_path(@conn, :edit, @campaign, @ask, @answer), class: "button" %>
   <% end %>

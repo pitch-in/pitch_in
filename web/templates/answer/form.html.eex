@@ -24,7 +24,7 @@
     <%= error_tag f, :message %>
   </div>
 
-  <div class="button-group">
+  <div class="expanded button-group">
     <%= submit "Submit", class: "button" %>
   </div>
 <% end %>
