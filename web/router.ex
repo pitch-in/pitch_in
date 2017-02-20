@@ -6,6 +6,7 @@ defmodule PitchIn.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
+    plug :put_csrf_token_in_header
     plug :put_secure_browser_headers
     plug PitchIn.Auth, repo: PitchIn.Repo
   end
@@ -35,4 +36,11 @@ defmodule PitchIn.Router do
   # scope "/api", PitchIn do
   #   pipe_through :api
   # end
+  #
+  def put_csrf_token_in_header(conn, _) do
+    token = Phoenix.Controller.get_csrf_token
+
+    conn
+    |> Plug.Conn.put_resp_header("X-Csrf-Token", token)
+  end
 end
