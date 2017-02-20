@@ -1,11 +1,17 @@
-<div class="flex-row">
-  <div>
+<section class="content-block">
+  <h3>
     <%= @ask.role %>
-  </div>
-  <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "warning button" %>
-  <%= link "View Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "success button" %>
+  </h3>
 
-  <%= archive_button(@conn, @campaign, @ask) %>
-  <%= unarchive_button(@conn, @campaign, @ask) %>
-</div>
-<hr/>
+  <p>
+    <%= @ask.description %>
+  </p>
+
+  <div class="expanded stacked-for-small button-group standard-margin-bottom">
+    <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "warning button" %>
+    <%= link "View Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "success button" %>
+    <%= archive_button(@conn, @campaign, @ask) %>
+    <%= unarchive_button(@conn, @campaign, @ask) %>
+  </div>
+</section>
+

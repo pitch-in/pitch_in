@@ -10,9 +10,21 @@
     margin-top: 1rem;
   }
 
-  &.expanded {
-    margin: 0 0 1rem 0;
+  @mixin expanded {
+    margin: 0 -1rem 1rem -1rem;
     padding: 1rem;
+    width: calc(100% + 2rem);
+  }
+
+  &.expanded {
+    @include expanded();
+  }
+
+  &.list-header {
+    @include expanded();
+    & > * {
+      margin: 0;
+    }
   }
 }
 

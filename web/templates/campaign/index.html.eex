@@ -1,17 +1,25 @@
-<section class="content-block">
-<h2>Manage Campaigns</h2>
+<section class="expanded content-block">
+  <h2>Your Campaigns</h2>
+</section>
 
-<h3>Active Campaigns</h3>
-<hr/>
-<%= for campaign <- Enum.filter(@campaigns, &(!PitchIn.ArchiveReasons.archived?(&1))) do %>
-  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+<%= if @active_campaigns == [] do %>
+  <h3>No Active Campaigns</h3>
+<% else %>
+  <h3>Active Campaigns</h3>
+  <hr/>
+  <%= for campaign <- @active_campaigns do %>
+    <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+  <% end %>
 <% end %>
 
-<h3>Archived Campaigns</h3>
-<hr/>
-<%= for campaign <- Enum.filter(@campaigns, &(PitchIn.ArchiveReasons.archived?(&1))) do %>
-  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+<%= if @archived_campaigns != [] do %>
+  <h3>Archived Campaigns</h3>
+  <hr/>
+  <%= for campaign <- @archived_campaigns do %>
+    <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+  <% end %>
 <% end %>
 
-<%= link "New campaign", to: campaign_path(@conn, :new), class: "warning button" %>
+<section class="expanded content-block">
+  <%= link "New campaign", to: campaign_path(@conn, :new), class: "warning button" %>
 </section>

@@ -1,17 +1,26 @@
-<section class="content-block">
-  <h2>Needs for <%= @campaign.name %></h2>
+<section class="list-header content-block">
+  <h1>
+    <%= @campaign.name %><br/>
+    <%= if @active_asks != [], do: "Needs", else: "No Open Needs" %>
+  </h1>
+</section>
 
+<%= if @active_asks != [] do %>
   <h3>Open Needs</h3>
-  <hr/>
-  <%= for ask <- Enum.filter(@asks, &(!PitchIn.ArchiveReasons.archived?(&1))) do %>
+  <%= for ask <- @active_asks do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
   <% end %>
+<% end %>
 
-  <h3>Archived Needs</h3>
-  <hr/>
-  <%= for ask <- Enum.filter(@asks, &(PitchIn.ArchiveReasons.archived?(&1))) do %>
+<%= if @archived_asks != [] do %>
+  <section class="list-header content-block">
+    <h3>Archived Needs</h3>
+  </section>
+  <%= for ask <- @archived_asks do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
   <% end %>
+<% end %>
 
+<section class="list-header content-block">
   <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
 </section>

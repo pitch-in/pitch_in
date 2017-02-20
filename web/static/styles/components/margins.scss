@@ -1,0 +1,6 @@
+$directions: (left, right, top, bottom);
+@each $direction in $directions {
+  .standard-margin-#{$direction} {
+    margin-#{$direction}: $global-margin;
+  }
+}

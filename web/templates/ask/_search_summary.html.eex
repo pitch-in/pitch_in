@@ -1,12 +1,5 @@
 <section class="ask-search-summary content-block">
-  <h3 class="flex-left flex-spacing">
-    <span>
-      <%= @ask.campaign.name %>
-    </span>
-    <%= if @ask.campaign.is_verified do %>
-      <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
-    <% end %>
-  </h3>
+  <%= render PitchIn.CampaignView, "_name.html", conn: @conn, campaign: @ask.campaign %>
 
   <div class="column row">
     <div class="search-summary-details text-center">

@@ -1,11 +1,15 @@
-<div class="flex-row">
-  <div>
-    <%= @campaign.name %>
-  </div>
-  <%= link "Manage", to: campaign_path(@conn, :edit, @campaign), class: "button" %>
-  <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+<section class="content-block">
+  <%= render "_name.html", conn: @conn, campaign: @campaign %>
 
-  <%= archive_button(@conn, @campaign) %>
-  <%= unarchive_button(@conn, @campaign) %>
-</div>
-<hr/>
+  <p>
+    <%= @campaign.short_pitch %>
+  </p>
+
+  <div class="expanded stacked-for-small button-group">
+    <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "warning button" %>
+    <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+    <%= archive_button(@conn, @campaign) %>
+    <%= unarchive_button(@conn, @campaign) %>
+  </div>
+</section>
+

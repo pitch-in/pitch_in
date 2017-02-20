@@ -14,10 +14,13 @@ defmodule PitchIn.AskController do
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
 
+    active_asks = Enum.filter(campaign.asks, &(!PitchIn.ArchiveReasons.archived?(&1)))
+    archived_asks = Enum.filter(campaign.asks, &(PitchIn.ArchiveReasons.archived?(&1)))
+
     if conn.assigns.is_staff do
-      render(conn, "campaign_index.html", campaign: campaign, asks: campaign.asks)
+      render(conn, "campaign_index.html", campaign: campaign, active_asks: active_asks, archived_asks: archived_asks)
     else
-      render(conn, "campaign_activist_index.html", campaign: campaign, asks: campaign.asks)
+      render(conn, "campaign_activist_index.html", campaign: campaign, active_asks: active_asks, archived_asks: [])
     end
   end
 

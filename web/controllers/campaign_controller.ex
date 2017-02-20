@@ -12,7 +12,11 @@ defmodule PitchIn.CampaignController do
 
   def index(conn, _params, user) do
     user = user |> Repo.preload(:campaigns)
-    render(conn, "index.html", campaigns: user.campaigns)
+
+    active_campaigns = Enum.filter(user.campaigns, &(!PitchIn.ArchiveReasons.archived?(&1)))
+    archived_campaigns = Enum.filter(user.campaigns, &(PitchIn.ArchiveReasons.archived?(&1)))
+
+    render(conn, "index.html", active_campaigns: active_campaigns, archived_campaigns: archived_campaigns)
   end
 
   def new(conn, _params, _user) do
