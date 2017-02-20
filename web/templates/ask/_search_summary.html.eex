@@ -25,7 +25,9 @@
     </div>
 
     <div class="column">
-      <div><strong>Description</strong></div>
+      <div><strong>Campaign Description</strong></div>
+      <div><%= @ask.campaign.short_pitch %></div>
+      <div><strong>Need Description</strong></div>
       <div><%= @ask.description %></div>
     </div>
   </div>
