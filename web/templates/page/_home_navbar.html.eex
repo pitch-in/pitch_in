@@ -6,7 +6,7 @@
     <button class="menu-icon" type="button" data-toggle="top-nav"></button>
   </div>
 
-  <div class="top-bar" id="top-nav">
+  <div class="top-bar submenu" id="top-nav">
     <div class="top-bar-right">
       <ul class="vertical medium-horizontal menu">
         <li>

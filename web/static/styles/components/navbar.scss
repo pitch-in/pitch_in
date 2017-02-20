@@ -1,10 +1,25 @@
+$navbar-height: rem-calc(58px);
+
+body::before {
+  content: " ";
+  height: $navbar-height;
+  width: 100%;
+  display: block;
+}
+
 .navbar {
   $link-color: $white;
   $hover-color: darken($link-color, 20%);
+  height: $navbar-height;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   // Don't show top bar, until js takes over to hide it.
   .no-js {
-    .top-bar {
+    .top-bar.submenu {
       display: none;
     }
   }

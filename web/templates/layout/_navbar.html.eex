@@ -8,12 +8,15 @@
             <h3 class="name">Pitch In</h3>
           </a>
         </li>
+
+        <%= if @current_user do %>
         <li class="show-for-large">
           <%= link "Search Needs", to: ask_path(@conn, :index) %>
         </li>
         <li class="show-for-large">
           <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
         </li>
+        <% end %>
       </ul>
     </div>
     <div class="top-bar-right">
@@ -40,9 +43,10 @@
     </div>
   </div>
 
-  <div class="top-bar" id="top-nav">
+  <div class="top-bar submenu" id="top-nav">
     <div class="top-bar-left">
-      <ul class="vertical medium-horizontal menu">
+      <%= if @current_user do %>
+      <ul class="vertical large-horizontal menu">
         <li class="hide-for-large">
           <%= link "Search Needs", to: ask_path(@conn, :index) %>
         </li>
@@ -56,21 +60,25 @@
           <%= link "Contact Us", to: contact_us_path(@conn, :index) %>
         </li>
       </ul>
+      <% end %>
     </div>
-    <div class="top-bar-right hide-for-large">
-      <ul class="vertical medium-horizontal menu">
+    <div class="top-bar-right">
+      <ul class="vertical large-horizontal menu">
         <%= if @current_user do %>
-          <li>
+          <li class="hide-for-large">
             <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
           </li>
           <li>
+            <%= link "Settings", to: user_path(@conn, :show, @current_user) %>
+          </li>
+          <li class="hide-for-large">
             <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>
           </li>
         <% else %>
-          <li>
+          <li class="hide-for-large">
             <%= link "Log In", to: session_path(@conn, :new) %>
           </li>
-          <li>
+          <li class="hide-for-large">
             <%= link "Sign Up", to: user_path(@conn, :new) %>
           </li>
         <% end %>
