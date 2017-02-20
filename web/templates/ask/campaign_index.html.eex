@@ -13,5 +13,5 @@
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
   <% end %>
 
-  <%= link "New ask", to: campaign_ask_path(@conn, :new, @campaign), class: "button" %>
+  <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
 </section>

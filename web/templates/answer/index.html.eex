@@ -1,8 +1,8 @@
 <section class="content-block">
 <h2>Listing answers</h2>
 <h3>
-Campaign: <%= @campaign.name %>
-Need: <%= @ask.role %>
+  Campaign: <%= @campaign.name %><br/>
+  Need: <%= @ask.role %>
 </h3>
 
 <table class="table">
