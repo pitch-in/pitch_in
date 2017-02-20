@@ -67,7 +67,7 @@ module.exports = {
         test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff'
       }, {
-        test: /\.(png|jpg)(\?[a-z0-9#=&.]+)?$/,
+        test: /\.(png|jpg|svg)(\?[a-z0-9#=&.]+)?$/,
         // loader: 'url?limit=10000&name=img-[hash:6].[ext]'
         loader: 'file?name=[path][name].[ext]&context=web/static'
       }, {
@@ -77,7 +77,7 @@ module.exports = {
         test: /robots\.txt$/,
         loader: 'file?name=robots.txt&context=web/static'
       }, {
-        test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
+        test: /\.(ttf|eot)(\?[a-z0-9#=&.]+)?$/,
         loader: 'file'
       }
     ]

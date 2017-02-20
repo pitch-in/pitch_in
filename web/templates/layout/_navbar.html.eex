@@ -1,7 +1,7 @@
 <nav class="navbar" >
   <div class="title-bar" data-responsive-toggle="top-nav" data-hide-for="large">
     <a class="title-bar-title logo" href="/">
-      <img src="<%= webpack_path(@conn, "/img/shovels_56.png") %>" />
+      <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
       <h3 class="name">Pitch In</h3>
     </a>
     <button class="menu-icon" type="button" data-toggle="top-nav"></button>
@@ -12,7 +12,7 @@
       <ul class="vertical medium-horizontal menu">
         <li class="show-for-large">
           <a class="logo" href="/">
-            <img src="<%= webpack_path(@conn, "/img/shovels_56.png") %>" />
+            <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
             <h3 class="name">Pitch In</h3>
           </a>
         </li>

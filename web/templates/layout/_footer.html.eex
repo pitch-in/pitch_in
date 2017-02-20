@@ -1,5 +1,5 @@
 <footer>
   <div class="floating-footer">
-    <img src="<%= webpack_path(@conn, "/img/shovels_56.png") %>" class="logo" />
+    <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" class="logo" />
   </div>
 </footer>

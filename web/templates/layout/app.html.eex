@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Pitch in!">
-    <meta name="author" content="Will Ockelmann-Wagner">
+    <meta name="description" content="We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about.">
+    <meta name="keywords" content="progressive,politics,activism">
+    <meta name="author" content="Pitch In">
     <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(@conn, "/favicon.ico") %>" />
 
-    <title>PitchIn!</title>
+    <title>Pitch In</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
@@ -24,15 +25,7 @@
   <% else %>
     <%= render "_navbar.html", conn: @conn, current_user: @current_user %>
 
-    <%= for {code, message} <- get_flash(@conn) do %>
-      <div class="callout <%= code %>" data-closable>
-        <p><%= message %></p>
-
-        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
+    <%= render "_flash.html", conn: @conn %>
 
     <div class="column row">
       <%= render @view_module, @view_template, assigns %>

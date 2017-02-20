@@ -2,7 +2,7 @@
   <%= render "_home_navbar.html", conn: @conn %>
   <section class="home-section text-center" >
     <div class="column" >
-      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo_216.png") %>" />
+      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.svg") %>" />
 
       <h1 class="capitalize text-shadow-dark">
         Democratize our Democracy
@@ -10,12 +10,14 @@
     </div>
   </section>
 
+  <%= render PitchIn.LayoutView, "_flash.html", conn: @conn %>
+
   <div class="row column">
     <section class="content-block">
       <h2>First time here?</h2>
 
       <p>
-      We create the resources needed for progressive activists with any of the skills needed to start a movement to connect with local campaings and causes they care about most.
+        Thanks for pitching in! We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about. 
       </p>
 
       <div class="expanded button-group">
@@ -27,21 +29,35 @@
     <section class="content-block">
       <h2>How this works</h2>
       <p>
-      Blah blah blah blah blah
-      Blah blah blah blah blah
-      Blah blah blah blah blah
-      Blah blah blah blah blah
-      Blah blah blah blah blah
-      Blah blah blah blah blah
+        You’ve already taken the first step: Choosing to translate your values into action. Let us help you take it from here.
       </p>
-
-      <div class="text-center">
-        <%= link "Show more", to: user_path(@conn, :new), class: "button" %>
-      </div>
+      <p>
+        There are opportunities in every community to speak out and organize for positive change. Our mission is to utilize your passion and talents to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need of your unique profile of values and experience.
+      </p>
+    </section>
+    <section class="content-block">
+      <h2>
+        Verification Process
+      </h2>
+      <h3>
+Activists of America:
+      </h3>
+      <p>
+        When you sign up to pitch in, our goal is to connect you with a team whose needs you can help fill to make a progressive campaign a huge success. To ensure that we are making productive connections that correctly match skills and experience level, we ask that you provide your resume when donating your time to fill the more technical campaign needs. 
+      </p>
+      <h3>
+        Progressive Campaigns of America:
+      </h3>
+      <p>
+        Pitch In connects your movement with the inner activist in every American. You have the vision, the grit and the drive -- now you need the people power to get it done. We connect your campaign with budding activists of various skill levels willing to volunteer their time to make your campaign a success. They are the good samaritans translating their professional expertise into a world changing pastime. When you sign up with Pitch In, we will contact you to verify your campaign to ensure the best experience for our activists.
+      </p>
     </section>
 
     <section class="content-block">
       <h2>Contact Us</h2>
+      <p>
+        We have a lot of work to do, so help us better serve your activism! 
+      </p>
       <%= render(
         PitchIn.ContactUsView,
         "form.html",
