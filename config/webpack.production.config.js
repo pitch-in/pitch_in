@@ -75,10 +75,6 @@ module.exports = {
       // exclude: /node_modules/,
       loaders: ['babel-loader']
     }, {
-      test: /\.jsx?$/,
-      // exclude: /node_modules/,
-      loaders: ['babel']
-    }, {
       test: /\.json?$/,
       loader: 'json'
     }, {
@@ -101,7 +97,7 @@ module.exports = {
       test: /robots\.txt$/,
       loader: 'file?name=robots.txt&context=web/static'
     }, {
-      test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
+      test: /\.(ttf|eot)(\?[a-z0-9#=&.]+)?$/,
       loader: 'file'
     }]
   },
