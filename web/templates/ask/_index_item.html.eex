@@ -1,9 +1,10 @@
 <section class="content-block">
-  <h3>
+  <h2>
     <%= @ask.role %>
-  </h3>
+  </h2>
 
   <p>
+    <strong>Description</strong><br/>
     <%= @ask.description %>
   </p>
 

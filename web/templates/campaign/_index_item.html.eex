@@ -5,7 +5,7 @@
     <%= @campaign.short_pitch %>
   </p>
 
-  <div class="expanded stacked-for-small button-group">
+  <div class="expanded stacked-for-small button-group standard-margin-bottom">
     <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "warning button" %>
     <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
     <%= archive_button(@conn, @campaign) %>

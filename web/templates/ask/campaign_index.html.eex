@@ -6,7 +6,6 @@
 </section>
 
 <%= if @active_asks != [] do %>
-  <h3>Open Needs</h3>
   <%= for ask <- @active_asks do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
   <% end %>
@@ -14,7 +13,7 @@
 
 <%= if @archived_asks != [] do %>
   <section class="list-header content-block">
-    <h3>Archived Needs</h3>
+    <h2>Archived Needs</h2>
   </section>
   <%= for ask <- @archived_asks do %>
     <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask %>
