@@ -15,7 +15,7 @@ import './robots.txt';
 import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';
-import './loaderio-5c03e76471bc81be95a31e8c9013e53c';
+import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
 // Import foundation stuff.
 import 'foundation-sites/js/foundation.core';
