@@ -64,12 +64,12 @@ defmodule PitchIn.ViewHelpers do
       "Other",
       "Campaign Finance",
       "Communications",
-      "Data Scientist",
-      "Designer",
+      "Data Manager",
+      "Designer/Artist",
       "Lawyer",
       "Organizer",
       "Project Manager",
-      "Software Engineer"
+      "Web Developer"
     ]
 
     List.zip([professions, professions])
