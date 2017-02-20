@@ -181,12 +181,10 @@ defmodule PitchIn.AskController do
   end
 
   defp empty_filter?(filter) do
-  IO.puts("====EMPTY FILTERS===")
     all_filters = 
       filter
       |> Map.values
       |> Enum.reduce(&(&1 <> &2))
-      |> IO.inspect
 
     all_filters == "" 
   end

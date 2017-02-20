@@ -29,7 +29,6 @@ defmodule PitchIn.UserController do
     changeset = 
       %User{}
       |> User.staff_registration_changeset(user_params)
-      |> IO.inspect
 
     case Repo.insert(changeset) do
       {:ok, %User{campaigns: [campaign]} = user} ->

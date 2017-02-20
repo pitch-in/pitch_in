@@ -38,7 +38,6 @@ defmodule PitchIn.CampaignController do
         |> put_flash(:success, "Campaign created successfully.")
         |> redirect(to: campaign_path(conn, :index))
       {:error, changeset} ->
-        IO.inspect changeset.errors
         render(conn, "new.html", changeset: changeset)
     end
   end
