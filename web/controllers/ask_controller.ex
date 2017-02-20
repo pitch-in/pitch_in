@@ -5,7 +5,6 @@ defmodule PitchIn.AskController do
 
   alias PitchIn.Ask
   alias PitchIn.Campaign
-  alias PitchIn.Issue
 
   use PitchIn.Auth, protect: [:show, :create, :edit, :update]
   plug :check_campaign_staff when action in [:index, :show, :create, :edit, :update]
@@ -52,7 +51,10 @@ defmodule PitchIn.AskController do
             FROM issues
             WHERE issue ILIKE ?
           )
-        """, c.id, ^like_value(issue))
+          OR ? ILIKE ?
+        """,
+        c.id, ^like_value(issue),
+        c.short_pitch, ^like_value(issue))
       else
         query
       end
