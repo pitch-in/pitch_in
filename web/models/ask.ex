@@ -1,5 +1,6 @@
 defmodule PitchIn.Ask do
   use PitchIn.Web, :model
+  use PitchIn.NextSteps
 
   schema "asks" do
     belongs_to :campaign, PitchIn.Campaign
@@ -12,6 +13,13 @@ defmodule PitchIn.Ask do
     field :archived_reason, :string
 
     timestamps()
+  end
+
+  next_step_list do
+    step :another_need
+    step :update_campaign
+    step :view_need
+    step :edit_need
   end
 
   @doc """

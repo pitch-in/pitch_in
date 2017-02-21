@@ -123,65 +123,65 @@ defmodule PitchIn.AskController do
     case Repo.insert(changeset) do
       {:ok, ask} ->
         conn
-        |> put_flash(:success, "Need created successfully.")
-        |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
+        |> redirect(to: campaign_ask_path(conn, :interstitial, campaign, ask))
       {:error, changeset} ->
         render(conn, "new.html", campaign: campaign, changeset: changeset)
     end
   end
 
+  def interstitial(conn, %{"campaign_id" => campaign_id, "id" => id}) do
+    ask = get_ask(campaign_id, id)
+    render(conn, "interstitial.html", ask: ask)
+  end
+
   def show(conn, %{"campaign_id" => campaign_id, "id" => id}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
-    render(conn, "show.html", campaign: campaign, ask: ask)
+    ask = get_ask(campaign_id, id)
+    render(conn, "show.html", campaign: ask.campaign, ask: ask)
   end
 
   def edit(conn, %{"campaign_id" => campaign_id, "id" => id, "archive" => "true"}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
+    ask = get_ask(campaign_id, id)
 
     changeset = Ask.archive_changeset(ask)
-    render(conn, "edit_archived.html", campaign: campaign, ask: ask, changeset: changeset)
+    render(conn, "edit_archived.html", campaign: ask.campaign, ask: ask, changeset: changeset)
   end
 
   def edit(conn, %{"campaign_id" => campaign_id, "id" => id}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
+    ask = get_ask(campaign_id, id)
+
     changeset = Ask.changeset(ask)
-    render(conn, "edit.html", campaign: campaign, ask: ask, changeset: changeset)
+    render(conn, "edit.html", campaign: ask.campaign, ask: ask, changeset: changeset)
   end
 
   def update(conn, %{"campaign_id" => campaign_id, "id" => id, "ask" => ask_params, "archive" => "true"}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
+    ask = get_ask(campaign_id, id)
     changeset = Ask.archive_changeset(ask, ask_params)
 
     case Repo.update(changeset) do
       {:ok, %{archived_reason: nil} = ask} ->
         conn
         |> put_flash(:success, "Need successfully unarchived!")
-        |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
+        |> redirect(to: campaign_ask_path(conn, :edit, ask.campaign, ask))
       {:ok, %{archived_reason: _} = ask} ->
         conn
         |> put_flash(:warning, "Need successfully archived.")
-        |> redirect(to: campaign_ask_path(conn, :show, campaign, ask))
+        |> redirect(to: campaign_ask_path(conn, :show, ask.campaign, ask))
       {:error, changeset} ->
-        render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
+        render(conn, "edit.html", ask: ask, campaign: ask.campaign, changeset: changeset)
     end
   end
 
   def update(conn, %{"campaign_id" => campaign_id, "id" => id, "ask" => ask_params}) do
-    campaign = get_campaign(campaign_id)
-    ask = Repo.get!(Ask, id)
+    ask = get_ask(campaign_id, id)
     changeset = Ask.changeset(ask, ask_params)
 
     case Repo.update(changeset) do
       {:ok, ask} ->
         conn
         |> put_flash(:success, "Need updated successfully.")
-        |> redirect(to: campaign_ask_path(conn, :edit, campaign, ask))
+        |> redirect(to: campaign_ask_path(conn, :edit, ask.campaign, ask))
       {:error, changeset} ->
-        render(conn, "edit.html", ask: ask, campaign: campaign, changeset: changeset)
+        render(conn, "edit.html", ask: ask, campaign: ask.campaign, changeset: changeset)
     end
   end
 
@@ -192,6 +192,15 @@ defmodule PitchIn.AskController do
       |> Enum.reduce(&(&1 <> &2))
 
     all_filters == "" 
+  end
+
+  defp get_ask(campaign_id, id) do
+    Repo.one(
+      from a in Ask,
+      where: a.id == ^id,
+      where: a.campaign_id == ^campaign_id,
+      preload: :campaign
+    )
   end
 
   defp get_campaign(id) do

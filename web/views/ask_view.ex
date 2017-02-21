@@ -2,6 +2,7 @@ require IEx
 
 defmodule PitchIn.AskView do
   use PitchIn.Web, :view
+  use PitchIn.NextStepView
 
   @colors List.to_tuple(~w(alert success cyan warning))
 
