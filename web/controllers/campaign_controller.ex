@@ -44,7 +44,6 @@ defmodule PitchIn.CampaignController do
     case Repo.insert(changeset) do
       {:ok, campaign} ->
         conn
-        |> put_flash(:success, "Campaign created successfully.")
         |> redirect(to: campaign_path(conn, :interstitial, campaign))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)

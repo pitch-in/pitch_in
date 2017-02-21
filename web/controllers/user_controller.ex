@@ -1,4 +1,5 @@
 defmodule PitchIn.UserController do
+  use PitchIn.NextSteps
   use PitchIn.Web, :controller
   alias PitchIn.User
   alias PitchIn.Pro
@@ -20,6 +21,11 @@ defmodule PitchIn.UserController do
       |> User.changeset
       |> Ecto.Changeset.put_assoc(:pro, %Pro{})
     render(conn, "new_activist.html", changeset: changeset)
+  end
+
+  def interstitial(conn, %{"id" => id}) do
+    user = Repo.get(User, id)
+    render(conn, "activist_interstitial.html", user: user)
   end
 
   def create(conn, %{"user" => user_params, "staff" => _}) do
@@ -59,11 +65,7 @@ defmodule PitchIn.UserController do
 
         conn
         |> PitchIn.Auth.login(user)
-        |> put_flash(:success, """
-          Welcome to Pitch In! Feel free to check out what help campaigns are looking
-          for, or finish filling out your profile!
-        """)
-        |> redirect(to: ask_path(conn, :index))
+        |> redirect(to: user_path(conn, :interstitial, user))
       {:error, changeset} ->
         render(conn, "new_activist.html", changeset: changeset)
     end

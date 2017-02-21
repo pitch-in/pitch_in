@@ -21,10 +21,13 @@ defmodule PitchIn.Router do
     get "/", AskController, :index
     get "/campaigns/:id/interstitial", CampaignController, :interstitial
     resources "/campaigns", CampaignController do
+      get "/asks/:id/interstitial", AskController, :interstitial
       resources "/asks", AskController do
+        get "/answers/:id/interstitial", AnswerController, :interstitial
         resources "/answers", AnswerController
       end
     end
+    get "/users/:id/interstitial", UserController, :interstitial
     resources "/users", UserController
     resources "/search_alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]

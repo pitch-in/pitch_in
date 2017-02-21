@@ -1,5 +1,6 @@
 defmodule PitchIn.User do
   use PitchIn.Web, :model
+  use PitchIn.NextSteps
 
   schema "users" do
     many_to_many :campaigns, PitchIn.Campaign, join_through: "campaign_staff"
@@ -15,6 +16,11 @@ defmodule PitchIn.User do
     field :password_hash, :string
 
     timestamps()
+  end
+
+  next_step_list do
+    step :search
+    step :profile
   end
 
   @doc """
