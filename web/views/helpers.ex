@@ -49,7 +49,7 @@ defmodule PitchIn.ViewHelpers do
           value
         value -> 
           value
-          |> Timex.format!("{D}/{M}/{YYYY}")
+          |> Timex.format!("{M}/{D}/{YYYY}")
       end
 
     text_input(

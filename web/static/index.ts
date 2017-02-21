@@ -28,7 +28,6 @@ import 'motion-ui';
 
 // Datepicker
 import '@fengyuanchen/datepicker';
-console.log($.fn.datepicker);
 $('[data-toggle="datepicker"]').datepicker({
   format: 'm/d/yyyy'
 });
