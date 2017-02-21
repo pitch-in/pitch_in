@@ -37,5 +37,6 @@ import components from './components/index';
 $(document).ready(($) => {
   $(document).foundation();
   components($);
+  $('body').removeClass('no-js');
 });
 
