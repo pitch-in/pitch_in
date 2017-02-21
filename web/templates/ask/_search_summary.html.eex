@@ -1,5 +1,8 @@
 <section class="ask-search-summary content-block">
-  <%= render PitchIn.CampaignView, "_name.html", conn: @conn, campaign: @ask.campaign %>
+  <h3 class="flex-left">
+    <%= @ask.role %>:&nbsp
+    <%= render PitchIn.CampaignView, "_name.html", conn: @conn, campaign: @ask.campaign %>
+  </h3>
 
   <div class="column row">
     <div class="search-summary-details text-center">

@@ -10,13 +10,20 @@
     </div>
   <% end %>
 
-  <p>
+  <%= if @page == :edit do %>
+    <p>
+    We're glad you're interested in pitching in! If you want to update your message
+    to the campaign, feel free to do that here.
+    </p>
+  <% else %>
+    <p>
     We're glad you're interested in pitching in! 
     Once you hit Submit, we'll pass your email and phone number along
     to <%= @campaign.name %>. We'll keep your name private though,
     to help campaigns make unbiased decisions. If they're interested,
     you should hear back from the campaign soon!
-  </p>
+    </p>
+  <% end %>
 
   <div>
     <%= label f, :message, class: "control-label" %>

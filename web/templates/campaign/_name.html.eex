@@ -1,8 +1,8 @@
-<h3 class="flex-left flex-spacing">
+<div class="flex-left flex-spacing">
   <span>
     <%= @campaign.name %>
   </span>
   <%= if @campaign.is_verified do %>
     <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
   <% end %>
-</h3>
+</div>

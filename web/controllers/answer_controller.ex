@@ -10,11 +10,15 @@ defmodule PitchIn.AnswerController do
   use PitchIn.Auth, protect: :all
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
-  plug :get_answer when action in [:show, :edit, :update, :delete]
+  plug :get_answer when action in [:show, :interstitial, :edit, :update, :delete]
 
   def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id) |> Repo.preload(answers: [user: :pro])
+    ask = 
+      Repo.get(Ask, ask_id)
+      |> Repo.preload(answers: [user: :pro])
+      |> Repo.preload(:campaign)
+    campaign = ask.campaign
+
     answers = ask.answers
 
     if ask.campaign_id == campaign.id do
@@ -27,8 +31,8 @@ defmodule PitchIn.AnswerController do
   end
 
   def new(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
+    ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
+    campaign = ask.campaign
 
     changeset =
       ask
@@ -44,8 +48,8 @@ defmodule PitchIn.AnswerController do
       "ask_id" => ask_id,
       "answer" => answer_params
     }) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
+    ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
+    campaign = ask.campaign
     
     changeset =
       ask
@@ -83,15 +87,28 @@ defmodule PitchIn.AnswerController do
     end
   end
 
+  def interstitial(conn,
+    %{
+      "campaign_id" => campaign_id,
+      "ask_id" => ask_id,
+      "id" => id
+    }) do
+    answer = conn.assigns.answer
+    ask = answer.ask
+    campaign = ask.campaign
+
+    render(conn, "interstitial.html", campaign: campaign, ask: ask, answer: answer)
+  end
+
   def show(conn,
     %{
       "campaign_id" => campaign_id,
       "ask_id" => ask_id,
       "id" => id
     }) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
-    answer = conn.assigns.answer |> Repo.preload([user: :pro])
+    answer = conn.assigns.answer
+    ask = answer.ask
+    campaign = ask.campaign
 
     render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
   end
@@ -102,9 +119,9 @@ defmodule PitchIn.AnswerController do
       "ask_id" => ask_id,
       "id" => id
     }) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
     answer = conn.assigns.answer
+    ask = answer.ask
+    campaign = ask.campaign
 
     changeset = Answer.changeset(answer)
     render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
@@ -117,9 +134,9 @@ defmodule PitchIn.AnswerController do
       "id" => id,
       "answer" => answer_params
     }) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
     answer = conn.assigns.answer
+    ask = answer.ask
+    campaign = ask.campaign
 
     changeset = Answer.changeset(answer, answer_params)
 
@@ -133,28 +150,15 @@ defmodule PitchIn.AnswerController do
     end
   end
 
-  def delete(conn,
-    %{
-      "campaign_id" => campaign_id,
-      "ask_id" => ask_id,
-      "id" => id
-    }) do
-    campaign = Repo.get(Campaign, campaign_id)
-    ask = Repo.get(Ask, ask_id)
-    answer = conn.assigns.answer
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(answer)
-
-    conn
-    |> put_flash(:success, "Answer deleted successfully.")
-    |> redirect(to: campaign_ask_answer_path(conn, :index, campaign, ask))
-  end
-
   defp get_answer(conn, _opts) do
     id = conn.params["id"]
-    answer = Repo.get!(Answer, id)
+
+    answer = Repo.one(
+      from a in Answer,
+      where: a.id == ^id,
+      preload: [ask: :campaign],
+      preload: [user: :pro]
+    )
 
     conn
     |> Plug.Conn.assign(:answer, answer)

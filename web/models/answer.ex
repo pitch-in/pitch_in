@@ -1,5 +1,6 @@
 defmodule PitchIn.Answer do
   use PitchIn.Web, :model
+  use PitchIn.NextSteps
 
   schema "answers" do
     belongs_to :user, PitchIn.User
@@ -7,6 +8,12 @@ defmodule PitchIn.Answer do
     field :message, :string
 
     timestamps()
+  end
+
+  next_step_list do
+    step :search
+    step :campaign_needs
+    step :edit_answer
   end
 
   @doc """
