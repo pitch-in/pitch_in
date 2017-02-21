@@ -1,5 +1,6 @@
 defmodule PitchIn.Campaign do
   use PitchIn.Web, :model
+  use PitchIn.NextSteps
 
   schema "campaigns" do
     many_to_many :users, PitchIn.User, join_through: "campaign_staff"
@@ -29,6 +30,18 @@ defmodule PitchIn.Campaign do
     timestamps()
   end
 
+  next_step_list do
+    step :first_need
+    step :file_number, :show_file_number_step
+    step :edit_campaign
+  end
+
+  def show_file_number_step(campaign) do
+    (campaign.type == :candidate || 
+      campaign.type == :measure) &&
+      !(campaign.file_number && campaign.state)
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
@@ -44,3 +57,4 @@ defmodule PitchIn.Campaign do
     |> cast(params, [:archived_reason])
   end
 end
+ 

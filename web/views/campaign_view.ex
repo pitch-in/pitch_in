@@ -3,6 +3,7 @@ defmodule PitchIn.CampaignView do
 
   alias PitchIn.Campaign
   alias PitchIn.Issue
+  use PitchIn.NextStepView
 
   def candidate?(campaign), do: campaign.type == :candidate
   def measure?(campaign), do: campaign.type == :measure

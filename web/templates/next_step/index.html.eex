@@ -1,0 +1,11 @@
+<section class="content-block text-center">
+  <h2>Thanks for <%= @thanks %></h2>
+
+  <h3>
+    Here's what's next:
+  </h3>
+
+  <%= for step <- @model.next_steps(@struct) do %>
+    <%= @block.(step.name) %>
+  <% end %>
+</section>

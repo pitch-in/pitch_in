@@ -27,6 +27,11 @@ defmodule PitchIn.CampaignController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def interstitial(conn, %{"id" => id}, _user) do
+    campaign = Repo.get(Campaign, id)
+    render(conn, "interstitial.html", campaign: campaign)
+  end
+
   def create(conn, %{"campaign" => campaign_params}, user) do
     campaign_params = 
       campaign_params
@@ -37,10 +42,10 @@ defmodule PitchIn.CampaignController do
       |> Ecto.Changeset.put_assoc(:users, [user])
 
     case Repo.insert(changeset) do
-      {:ok, _campaign} ->
+      {:ok, campaign} ->
         conn
         |> put_flash(:success, "Campaign created successfully.")
-        |> redirect(to: campaign_path(conn, :index))
+        |> redirect(to: campaign_path(conn, :interstitial, campaign))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
