@@ -1,14 +1,16 @@
 import * as _ from 'lodash'; 
 import $ = require('jquery');
 
-export default class HideOn {
+import BaseComponent from './BaseComponent';
+
+export default class HideOn extends BaseComponent {
   private controllingElement: JQuery;
-  private data: any;
 
   constructor(
-    private element
+    public element
   ) {
-    this.data = element.data();
+    super(element);
+
     this.controllingElement = $(`#${this.data.hideOn}`);
 
     this.controllingElement.change(this.onHideElementChange);

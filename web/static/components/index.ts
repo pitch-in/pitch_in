@@ -1,9 +1,11 @@
 import * as _ from 'lodash';
 
 import HideOn from './HideOn';
+import ShortDescription from './ShortDescription';
 
 const components = [
-  HideOn
+  HideOn,
+  ShortDescription
 ];
 
 export default function ($: JQueryStatic) {
