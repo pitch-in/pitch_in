@@ -1,0 +1,6 @@
+<td>
+  <strong class="hide-for-large">
+    <%= humanize(@key) %>
+  </strong>
+  <%= Map.get(@alert, @key) %>
+</td>

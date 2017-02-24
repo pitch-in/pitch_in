@@ -4,19 +4,31 @@
 <%= render "form.html", changeset: @changeset, conn: @conn,
                         action: user_path(@conn, :update, @user),
                         pro: true %>
+<%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
 
 <%= if length(@user.search_alerts) > 0 do %>
   <h3>Remove Need Alerts</h3>
-  <%= for alert <- @user.search_alerts do %>
-    <div class="flex-row">
-      <%= alert.profession %>
-      <%= alert.role %>
-      <%= alert.years_experience %>
-      <%= alert.issue %>
-      <%= link "Remove Alert", to: search_alert_path(@conn, :delete, alert), method: :delete, class: "alert button" %>
-    </div>
-  <% end %>
+    <table class="stack">
+      <thead>
+        <tr>
+          <th>Profession</th>
+          <th>Role</th>
+          <th>Years Experience</th>
+          <th>Issue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for alert <- @user.search_alerts do %>
+          <tr>
+            <%= render "_remove_alert_cell.html", key: :profession, alert: alert %>
+            <%= render "_remove_alert_cell.html", key: :role, alert: alert %>
+            <%= render "_remove_alert_cell.html", key: :years_experience, alert: alert %>
+            <%= render "_remove_alert_cell.html", key: :issue, alert: alert %>
+            <td><%= link "Remove Alert", to: search_alert_path(@conn, :delete, alert), method: :delete, class: "alert button" %>
+          </div>
+        <% end %>
+      </tbody>
+    </table>
 <% end %>
 
-<%= link "Edit Profile", to: pro_path(@conn, :show, @changeset.data), class: "warning button" %>
 </section>
