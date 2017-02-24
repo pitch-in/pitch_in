@@ -34,7 +34,7 @@ defmodule PitchIn.ViewHelpers do
     if Mix.env == :dev do
       "http://localhost:4001#{path}"
     else
-      static_path(conn, path)
+      base_url(conn, static_path(conn, path))
     end
   end
 
@@ -91,6 +91,14 @@ defmodule PitchIn.ViewHelpers do
   def format_url(""), do: ""
   def format_url(url) do
     link(url, to: url)
+  end
+
+  def base_url(conn, path \\ "") do
+    scheme = "#{conn.scheme}://"
+
+    url = "#{scheme}#{conn.host}"
+    url = if Mix.env != :prod, do: url <> "#{conn.port}", else: url
+    url <> path
   end
 
   ##############

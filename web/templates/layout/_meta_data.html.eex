@@ -3,7 +3,7 @@
 <meta property="og:description" content="<%= @data.description %>">
 <meta property="og:image" content="<%= webpack_path(@conn, @data.image) %>">
 <meta property="og:type" content="<%= @data.type %>">
-<meta property="og:url" content="<%= PitchIn.Router.Helpers.url(@conn) <> @conn.request_path %>">
+<meta property="og:url" content="<%= base_url @conn, @conn.request_path %>">
 
 <title>
   Pitch In
