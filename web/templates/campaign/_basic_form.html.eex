@@ -10,7 +10,11 @@
 </div>
 
 <div class="form-group">
-  <%= label @campaign, :type %>
+  <%= label @campaign, :type, "Campaign Type" %>
+  <p class="input-description">
+    Are you running a campaign for a candidate or a measure/proposition?
+    Or are you looking for help with an issue/organization?
+  </p>
   <%= select @campaign, :type, enum_to_options(CampaignTypeEnum) %>
   <%= error_tag @campaign, :type %>
 </div>

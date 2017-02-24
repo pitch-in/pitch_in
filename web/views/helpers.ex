@@ -92,4 +92,15 @@ defmodule PitchIn.ViewHelpers do
   def format_url(url) do
     link(url, to: url)
   end
+
+  ##############
+  # Components #
+  ##############
+  def optional_label(form, field, text \\ nil) do
+    optional_tag = content_tag(:span, " (optional)", class: "input-description")
+
+    label(form, field) do
+      [text || humanize(field), optional_tag]
+    end
+  end
 end

@@ -8,22 +8,25 @@
   <%= render "_basic_form.html", campaign: f %>
 
   <div>
-    <%= label f, :email, "Campaign Email", class: "control-label" %>
+    <%= label f, :email, "Campaign Email" %>
     <p class="input-description">
       The email address we should send answers to.
     </p>
-    <%= email_input f, :email, class: "form-control" %>
+    <%= email_input f, :email %>
     <%= error_tag f, :email %>
   </div>
 
   <div>
-    <%= label f, :state, class: "control-label" %>
-    <%= text_input f, :state, class: "form-control" %>
+    <%= label f, :state %>
+    <p class="input-description">
+      What state is your campaign taking place in?
+    </p>
+    <%= text_input f, :state %>
     <%= error_tag f, :state %>
   </div>
 
   <div data-hide-on="campaign_type" data-show-cases='["candidate", "measure"]'>
-    <%= label f, :file_number %>
+    <%= optional_label f, :file_number %>
     <p class="input-description">
       If you provide us with a state and valid file number, we will attempt to 
       look up the campaign and the phone number on file. We will then call the number
@@ -40,64 +43,64 @@
   </div>
 
   <div>
-    <%= label f, :district, class: "control-label" %>
+    <%= label f, :district %>
     <p class="input-description">
       The legal name of the district the election is taking place in.
     </p>
-    <%= text_input f, :district, class: "form-control" %>
+    <%= text_input f, :district %>
     <%= error_tag f, :district %>
   </div>
 
   <div>
-    <%= label f, :long_pitch, class: "control-label" %>
+    <%= label f, :long_pitch %>
     <p class="input-description">
       This is your chance to talk in depth about your campaign and what you want to accomplish.
       Feel free to go into detail!
     </p>
-    <%= textarea f, :long_pitch, class: "form-control" %>
+    <%= textarea f, :long_pitch %>
     <%= error_tag f, :long_pitch %>
   </div>
 
   <hr/>
-  <label>Top 5 Issues</label>
-  <p>
+  <%= optional_label f, :long_pitch, "Top 5 Issues" %>
+  <p class="input-description">
     Tag your campaign with up to five issues that are particularly
     important to you. We won't publicly display them, but we will
     use this information to help interested volunteers find you.
   </p>
   <%= inputs_for f, :issues, fn fi -> %>
-    <%= text_input fi, :issue, class: "form-control" %>
+    <%= text_input fi, :issue %>
     <%= error_tag fi, :issue %>
   <% end %>
   <hr/>
 
   <div>
-    <%= label f, :website_url, class: "control-label" %>
-    <%= text_input f, :website_url, class: "form-control" %>
+    <%= optional_label f, :website_url %>
+    <%= text_input f, :website_url %>
     <%= error_tag f, :website_url %>
   </div>
 
   <div>
-    <%= label f, :twitter_url, class: "control-label" %>
-    <%= text_input f, :twitter_url, class: "form-control" %>
+    <%= optional_label f, :twitter_url %>
+    <%= text_input f, :twitter_url %>
     <%= error_tag f, :twitter_url %>
   </div>
 
   <div>
-    <%= label f, :facebook_url, class: "control-label" %>
-    <%= text_input f, :facebook_url, class: "form-control" %>
+    <%= optional_label f, :facebook_url %>
+    <%= text_input f, :facebook_url %>
     <%= error_tag f, :facebook_url %>
   </div>
 
   <div data-hide-on="campaign_type" data-show-case="candidate">
-    <%= label f, :candidate_profession, class: "control-label" %>
-    <%= text_input f, :candidate_profession, class: "form-control" %>
+    <%= label f, :candidate_profession %>
+    <%= text_input f, :candidate_profession %>
     <%= error_tag f, :candidate_profession %>
   </div>
 
   <div data-hide-on="campaign_type" data-show-case="candidate">
     <div>
-      <%= label f, :is_partisan, "Is this a partisan office?" %>
+      <%= label f, :is_partisan, "Is this an election for a partisan office?" %>
       <%= checkbox f, :is_partisan %>
       <%= error_tag f, :is_partisan %>
     </div>

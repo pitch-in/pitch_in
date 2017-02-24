@@ -49,7 +49,7 @@ export default class ShortDescription extends BaseComponent {
   }
 
   private get currentStarterForInput() {
-    return this.currentStarter.replace('...', ' ')
+    return this.currentStarter.replace('...', ' ');
   }
 
 
