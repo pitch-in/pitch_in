@@ -61,16 +61,23 @@ defmodule PitchIn.AskController do
 
     asks = Repo.all(query)
 
-    if filter["create_alert"] do
-      user = conn.assigns.current_user
+    conn = 
+      if filter["create_alert"] do
+        user = conn.assigns.current_user
 
-      alert_changeset = 
-        user
-        |> build_assoc(:search_alerts)
-        |> PitchIn.SearchAlert.changeset(filter)
+        alert_changeset = 
+          user
+          |> build_assoc(:search_alerts)
+          |> PitchIn.SearchAlert.changeset(filter)
 
-      Repo.insert(alert_changeset)
-    end
+        # Note this may fail, and that's fine.
+        Repo.insert(alert_changeset)
+
+        conn
+        |> put_flash(:success, "Alert successfully created! You can turn it off at any time under settings.")
+      else
+        conn
+      end
 
     render(conn, "index.html", asks: asks, show_alert_button: !empty_filter?(filter))
   end

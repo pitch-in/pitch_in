@@ -18,5 +18,6 @@ defmodule PitchIn.SearchAlert do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:profession, :role, :years_experience, :issue])
+    |> unique_constraint(:unique_alerts, name: :unique_alerts)
   end
 end
