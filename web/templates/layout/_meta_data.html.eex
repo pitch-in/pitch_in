@@ -1,0 +1,11 @@
+<meta name="description" content="<%= @data.description %>">
+<meta property="og:title" content="<%= @data.title %>">
+<meta property="og:description" content="<%= @data.description %>">
+<meta property="og:image" content="<%= webpack_path(@conn, @data.image) %>">
+<meta property="og:type" content="<%= @data.type %>">
+<meta property="og:url" content="<%= PitchIn.Router.Helpers.url(@conn) <> @conn.request_path %>">
+
+<title>
+  Pitch In
+  <%= if @data.title, do: "| #{@data.title}" %>
+</title>

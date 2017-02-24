@@ -6,6 +6,15 @@ defmodule PitchIn.AskView do
 
   @colors List.to_tuple(~w(alert success cyan warning))
 
+  def page_data("index.html", assigns) do
+    if assigns.current_user do
+      %{
+        title: "Search Needs",
+        description: "Search for ways to best help progressive campaigns around the country.",
+       }
+    end
+  end
+
   def campaign_logo(campaign) do
     color = campaign_color(campaign)
 
