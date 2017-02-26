@@ -16,7 +16,11 @@ body::before {
 .navbar {
   $link-color: $white;
   $hover-color: darken($link-color, 20%);
+  $hover-background: $blue;
+  $hover-background-desktop: $light-blue;
+
   height: $navbar-height;
+  z-index: 1;
 
   position: fixed;
   top: 0;
@@ -52,6 +56,7 @@ body::before {
   // TODO: Is there a variable for this?
   .menu-icon {
     height: 18px;
+    margin-left: 16px;
 
     &::after {
       height: 0.25rem;
@@ -70,21 +75,26 @@ body::before {
 
   .logo {
     // Don't take up extra space.
-    padding: 0;
-    a {
-      margin: 0;
-    }
+    padding: 0 16px 0 0;
 
     .name {
       // Space between logo and name.
-      margin: 0 0 0 10px;
+      margin: 0 0 0 8px;
       color: $link-color;
+    }
 
-      &:hover, &:active {
+    &:hover, &:active {
+      background: transparent;
+      .name {
         color: $hover-color;
       }
     }
-    
+
+    a {
+      // No margins for child links.
+      margin: 0;
+    }
+
     img {
       $logo-height: 56px;
       height: $logo-height;
@@ -97,7 +107,11 @@ body::before {
     color: $link-color;
 
     &:hover, &:active {
-      color: $hover-color;
+      background: $hover-background;
+
+      @include breakpoint(large) {
+        background: $hover-background-desktop;
+      }
     }
   }
 
@@ -107,5 +121,15 @@ body::before {
     flex-flow: row nowrap;
     padding: 0.7rem 1rem;
     line-height: 1;
+  }
+
+  &.home-navbar {
+    a {
+      &:hover, &:active {
+        @include breakpoint(large) {
+          background: $hover-background;
+        }
+      }
+    }
   }
 }

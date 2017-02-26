@@ -1,4 +1,4 @@
-<nav class="navbar" >
+<nav class="navbar home-navbar" >
   <div class="top-bar title" data-responsive-toggle="top-nav" data-hide-for="none">
     <div class="title-bar-title logo">
       <%= link "Sign In", to: session_path(@conn, :new), class: "alert dark-shadow button " %>
@@ -7,24 +7,22 @@
   </div>
 
   <div class="top-bar submenu" id="top-nav">
-    <div class="top-bar-right">
-      <ul class="vertical medium-horizontal menu">
-        <li>
-          <%= link "First Time Here?", to: "#first-time-here" %>
-        </li>
-        <li>
-          <%= link "How This Works", to: "#how-this-works" %>
-        </li>
-        <li>
-          <%= link "Verification Process", to: "#verification-process" %>
-        </li>
-        <li>
-          <%= link "Contact Us", to: "#contact-us" %>
-        </li>
-        <li>
-          <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
-        </li>
-      </ul>
-    </div>
+    <ul class="vertical large-horizontal menu">
+      <li>
+        <%= link "First Time Here?", to: "#first-time-here" %>
+      </li>
+      <li>
+        <%= link "How This Works", to: "#how-this-works" %>
+      </li>
+      <li>
+        <%= link "Verification Process", to: "#verification-process" %>
+      </li>
+      <li>
+        <%= link "Contact Us", to: "#contact-us" %>
+      </li>
+      <li>
+        <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
+      </li>
+    </ul>
   </div>
 </nav>
