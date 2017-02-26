@@ -21,6 +21,9 @@
         <li>
           <%= link "Contact Us", to: "#contact-us" %>
         </li>
+        <li>
+          <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
+        </li>
       </ul>
     </div>
   </div>

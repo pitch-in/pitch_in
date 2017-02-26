@@ -10,17 +10,20 @@
         </li>
 
         <%= if @current_user do %>
-        <li class="show-for-large">
-          <%= link "Search Needs", to: ask_path(@conn, :index) %>
-        </li>
-        <li class="show-for-large">
-          <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
-        </li>
+          <li class="show-for-large">
+            <%= link "Search Needs", to: ask_path(@conn, :index) %>
+          </li>
+          <li class="show-for-large">
+            <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
+          </li>
         <% end %>
       </ul>
     </div>
     <div class="top-bar-right">
       <ul class="vertical medium-horizontal menu">
+        <li class="show-for-large">
+          <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
+        </li>
         <%= if @current_user do %>
           <li class="show-for-large">
             <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
@@ -45,25 +48,28 @@
 
   <div class="top-bar submenu" id="top-nav">
     <div class="top-bar-left">
-      <%= if @current_user do %>
       <ul class="vertical large-horizontal menu">
-        <li class="hide-for-large">
-          <%= link "Search Needs", to: ask_path(@conn, :index) %>
-        </li>
-        <li>
-          <%= link "New Campaign", to: campaign_path(@conn, :new) %>
-        </li>
-        <li class="hide-for-large">
-          <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
-        </li>
+        <%= if @current_user do %>
+          <li class="hide-for-large">
+            <%= link "Search Needs", to: ask_path(@conn, :index) %>
+          </li>
+          <li>
+            <%= link "New Campaign", to: campaign_path(@conn, :new) %>
+          </li>
+          <li class="hide-for-large">
+            <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
+          </li>
+        <% end %>
         <li>
           <%= link "Contact Us", to: contact_us_path(@conn, :index) %>
         </li>
       </ul>
-      <% end %>
     </div>
     <div class="top-bar-right">
       <ul class="vertical large-horizontal menu">
+        <li class="hide-for-large">
+          <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
+        </li>
         <%= if @current_user do %>
           <li class="hide-for-large">
             <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
