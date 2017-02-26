@@ -1,5 +1,9 @@
 defmodule PitchIn.Router do
   use PitchIn.Web, :router
+  
+  pipeline :static do
+    plug :accepts, ["html"]
+  end
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -33,8 +37,13 @@ defmodule PitchIn.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
     resources "/contact_us", ContactUsController, only: [:index, :create]
+  end
 
-    get "/robots.txt", RobotsController, :show
+  scope "/", PitchIn do
+    pipe_through :static
+
+    get "/robots.txt", StaticKeyController, :robots
+    get "/.well-known/acme-challenge/:cert_id", StaticKeyController, :cert
   end
 
   # Other scopes may use custom stacks.

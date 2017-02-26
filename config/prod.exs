@@ -17,9 +17,8 @@ config :pitch_in, PitchIn.Endpoint,
 
 config :pitch_in, PitchIn.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  # TODO: https
-  url: [scheme: "http", host: "pitch-in.us", port: 443]
-  # force_ssl: [rewrite_on: [:x_forwarded_proto]]
+  url: [scheme: "https", host: System.get_env("HOST_URL"), port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Configure your database
 config :pitch_in, PitchIn.Repo,
@@ -41,6 +40,8 @@ config :pitch_in, PitchIn.Email,
   test_email: System.get_env("TEST_EMAIL"),
   from_email: System.get_env("FROM_EMAIL"),
   contact_us_email: System.get_env("CONTACT_US_EMAIL")
+
+config :pitch_in, :cert, System.get_env("CERT_KEY") || "cert_test.success"
 
 config :pitch_in, :server_env, System.get_env("SERVER_ENV")
 

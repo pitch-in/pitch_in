@@ -50,6 +50,8 @@ config :pitch_in, PitchIn.Mailer,
 
 config :pitch_in, :server_env, :local
 
+config :pitch_in, :cert, "success"
+
 try do
   # Use dev.secret if it exists.
   import_config "dev.secret.exs"
