@@ -6,6 +6,10 @@ defmodule PitchIn.Router do
   end
 
   pipeline :browser do
+    if Application.get_env(:pitch_in, :server_env) == "staging" do
+      plug BasicAuth, use_config: {:pitch_in, :staging_auth}
+    end
+
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash

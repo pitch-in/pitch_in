@@ -48,6 +48,7 @@ defmodule PitchIn.Mixfile do
      {:ecto_enum, "~> 1.0"},
      {:comeonin, "~> 3.0.0"},
      {:bamboo, "~> 0.8"},
+     {:basic_auth, "~> 2.0"},
 
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},

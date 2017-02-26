@@ -41,6 +41,11 @@ config :pitch_in, PitchIn.Email,
   from_email: System.get_env("FROM_EMAIL"),
   contact_us_email: System.get_env("CONTACT_US_EMAIL")
 
+config :pitch_in, :staging_auth,
+  username: System.get_env("STAGING_AUTH_USERNAME") || "username",
+  password: System.get_env("STAGING_AUTH_PASSWORD") || "password",
+  realm: "Staging"
+
 config :pitch_in, :cert, System.get_env("CERT_KEY") || "cert_test.success"
 
 config :pitch_in, :server_env, System.get_env("SERVER_ENV")
