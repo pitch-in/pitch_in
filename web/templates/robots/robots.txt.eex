@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /campaigns
+Disallow: /pros
+Disallow: /users/*/edit

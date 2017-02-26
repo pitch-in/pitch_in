@@ -48,6 +48,8 @@ config :pitch_in, PitchIn.Mailer,
   ssl: false, # can be `true`
   retries: 1
 
+config :pitch_in, :server_env, :local
+
 try do
   # Use dev.secret if it exists.
   import_config "dev.secret.exs"

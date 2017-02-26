@@ -15,40 +15,34 @@ config :pitch_in, PitchIn.Endpoint,
   http: [port: {:system, "PORT"}],
   cache_static_manifest: "priv/static/manifest.json"
 
-try do
-  # Use prod.secret if it exists.
-  import_config "prod.secret.exs"
-rescue
-  e in Mix.Config.LoadError ->
-    # Otherwise use heroku-style env vars.
+config :pitch_in, PitchIn.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  # TODO: https
+  url: [scheme: "http", host: "pitch-in.us", port: 443]
+  # force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
-    config :pitch_in, PitchIn.Endpoint,
-      secret_key_base: System.get_env("SECRET_KEY_BASE"),
-      # TODO: https
-      url: [scheme: "http", host: "pitch-in.us", port: 443]
-      # force_ssl: [rewrite_on: [:x_forwarded_proto]]
+# Configure your database
+config :pitch_in, PitchIn.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
-    # Configure your database
-    config :pitch_in, PitchIn.Repo,
-      adapter: Ecto.Adapters.Postgres,
-      url: System.get_env("DATABASE_URL"),
-      pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-      ssl: true
+config :pitch_in, PitchIn.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY"),
+  server: "smtp.domain",
+  port: 1025,
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
 
-    config :pitch_in, PitchIn.Mailer,
-      adapter: Bamboo.SendgridAdapter,
-      api_key: System.get_env("SENDGRID_API_KEY"),
-      server: "smtp.domain",
-      port: 1025,
-      tls: :if_available, # can be `:always` or `:never`
-      ssl: false, # can be `true`
-      retries: 1
+config :pitch_in, PitchIn.Email,
+  test_email: System.get_env("TEST_EMAIL"),
+  from_email: System.get_env("FROM_EMAIL"),
+  contact_us_email: System.get_env("CONTACT_US_EMAIL")
 
-    config :pitch_in, PitchIn.Email,
-      test_email: System.get_env("TEST_EMAIL"),
-      from_email: System.get_env("FROM_EMAIL"),
-      contact_us_email: System.get_env("CONTACT_US_EMAIL")
-end
+config :pitch_in, :server_env, System.get_env("SERVER_ENV")
 
 # Do not print debug messages in production
 config :logger, level: :info

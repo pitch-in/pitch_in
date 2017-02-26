@@ -33,7 +33,8 @@ defmodule PitchIn.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
     resources "/contact_us", ContactUsController, only: [:index, :create]
-    get "/email_test", EmailTestController, :test
+
+    get "/robots.txt", RobotsController, :show
   end
 
   # Other scopes may use custom stacks.
