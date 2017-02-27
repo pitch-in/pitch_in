@@ -23,7 +23,13 @@
   &.list-header {
     @include expanded();
     & > * {
+      // Cancel out any child margins, so they are centered.
       margin: 0;
+
+      // Also handle interior buttons.
+      &.button-group > .button {
+        margin-bottom: 0;
+      }
     }
   }
 }
