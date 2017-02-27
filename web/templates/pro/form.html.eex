@@ -5,44 +5,44 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :linkedin_url, class: "control-label" %>
-    <%= text_input f, :linkedin_url, class: "form-control" %>
+  <div>
+    <%= label f, :linkedin_url %>
+    <%= text_input f, :linkedin_url %>
     <%= error_tag f, :linkedin_url %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :github_handle, class: "control-label" %>
-    <%= text_input f, :github_handle, class: "form-control" %>
+  <div>
+    <%= label f, :github_handle %>
+    <%= text_input f, :github_handle %>
     <%= error_tag f, :github_handle %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :twitter_handle, class: "control-label" %>
-    <%= text_input f, :twitter_handle, class: "form-control" %>
+  <div>
+    <%= label f, :twitter_handle %>
+    <%= text_input f, :twitter_handle %>
     <%= error_tag f, :twitter_handle %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :profession, class: "control-label" %>
+  <div>
+    <%= label f, :profession %>
     <%= select f, :profession, profession_options %>
     <%= error_tag f, :profession %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :address_zip, class: "control-label" %>
-    <%= text_input f, :address_zip, class: "form-control" %>
+  <div>
+    <%= label f, :address_zip %>
+    <%= text_input f, :address_zip, autocomplete: "postal-code" %>
     <%= error_tag f, :address_zip %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :phone, class: "control-label" %>
-    <%= text_input f, :phone, class: "form-control" %>
+  <div>
+    <%= label f, :phone %>
+    <%= text_input f, :phone, autocomplete: "tel" %>
     <%= error_tag f, :phone %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :experience_starts_at, class: "control-label" %>
+  <div>
+    <%= label f, :experience_starts_at %>
     <p class="description">
       When did you start working in your current profession?
       This helps us calculate your rough experience level.

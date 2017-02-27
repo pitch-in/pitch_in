@@ -10,13 +10,13 @@
 
     <div class="form-group">
       <%= label f, :name %>
-      <%= text_input f, :name %>
+      <%= text_input f, :name, autocomplete: "name" %>
       <%= error_tag f, :name %>
     </div>
 
     <div class="form-group">
       <%= label f, :email %>
-      <%= email_input f, :email %>
+      <%= email_input f, :email, autocomplete: "email" %>
       <%= error_tag f, :email %>
     </div>
 
@@ -29,13 +29,13 @@
 
       <div class="form-group">
         <%= label i, :address_zip %>
-        <%= text_input i, :address_zip %>
+        <%= text_input i, :address_zip, autocomplete: "postal-code" %>
         <%= error_tag i, :address_zip %>
       </div>
 
       <div class="form-group">
         <%= label i, :phone %>
-        <%= text_input i, :phone %>
+        <%= text_input i, :phone, type: "tel", autocomplete: "tel" %>
         <%= error_tag i, :phone %>
       </div>
 
@@ -52,13 +52,13 @@
 
     <div class="form-group">
       <%= label f, :password %>
-      <%= password_input f, :password %>
+      <%= password_input f, :password, autocomplete: "new-password" %>
       <%= error_tag f, :password %>
     </div>
 
     <div class="form-group">
       <%= label f, :password_confirmation, "Confirm Password" %>
-      <%= password_input f, :password_confirmation %>
+      <%= password_input f, :password_confirmation, autocomplete: "new-password" %>
       <%= error_tag f, :password_confirmation %>
     </div>
 
