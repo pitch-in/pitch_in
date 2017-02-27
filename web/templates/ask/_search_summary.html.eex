@@ -16,7 +16,10 @@
         <div><strong>Profession</strong></div>
         <div><%= @ask.profession %></div>
         <div><strong>Minimum Experience</strong></div>
-        <div><%= @ask.years_experience %></div>
+        <div>
+          <%= @ask.years_experience %>
+          <%= if @ask.years_experience == 1, do: "year", else: "years" %>
+        </div>
       </div>
     </div>
 
