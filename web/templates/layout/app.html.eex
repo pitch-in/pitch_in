@@ -7,9 +7,6 @@
     <meta name="keywords" content="progressive,politics,activism">
     <meta name="author" content="Pitch In">
     <%= meta_data(@conn) %>
-    <%= if Application.get_env(:pitch_in, :server_env) == "prod" do %>
-      <meta name="google-site-verification" content="9B_MoSI3uVCxDvkHFElomklINPaogFjoPthXlL9zWvY" />
-    <% end %>
 
     <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(@conn, "/favicon.ico") %>" />
 

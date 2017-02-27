@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
-    <p>Hello!</p>
     <%= render @view_module, @view_template, assigns %>
-    <p>- The pitch_in team.</p>
+    <p>- The Pitch In team.</p>
   </body>
 </html>

@@ -4,7 +4,7 @@
 </p>
 
 <p>
-  We've passed along your email, phone number, and message.
+  We've passed along your contact information and profile.
   If <%= @campaign.name %> is interested, they'll contact you soon!
 </p>
 

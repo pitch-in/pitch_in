@@ -1,5 +1,5 @@
 <p>
-  You've received a new volunteer request for
+  You've received a new volunteer request for the
   <strong><%= @campaign.name %></strong> <%= @ask.role %> role!
 </p>
 
@@ -8,7 +8,7 @@
 </p>
 <ul>
   <li>
-    <strong>Volunteer:</strong>
+    <strong>Name:</strong>
     <%= @answer.user.name %>
   </li>
 

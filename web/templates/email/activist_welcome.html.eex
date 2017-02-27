@@ -1,5 +1,5 @@
 <p>
-  Hey <%= @user.name %>, welcome to pitch_in!
+  Hey <%= @user.name %>, welcome to Pitch In!
 </p>
 <p>
   We're glad you want to be part of the solution, and look forward

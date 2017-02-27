@@ -10,7 +10,7 @@
 </div>
 
 <div class="expanded button-group">
-  <%= link "Mange Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "button" %>
+  <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "button" %>
   <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>
