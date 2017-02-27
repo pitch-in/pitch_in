@@ -6,10 +6,7 @@ defmodule PitchIn.Router do
   end
 
   pipeline :browser do
-    if Application.get_env(:pitch_in, :server_env) == "staging" do
-      plug BasicAuth, use_config: {:pitch_in, :staging_auth}
-    end
-
+    plug PitchIn.StagingAuth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
@@ -61,4 +58,5 @@ defmodule PitchIn.Router do
     conn
     |> Plug.Conn.put_resp_header("X-Csrf-Token", token)
   end
+
 end

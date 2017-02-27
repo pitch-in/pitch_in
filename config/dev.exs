@@ -50,6 +50,11 @@ config :pitch_in, PitchIn.Mailer,
 
 config :pitch_in, :server_env, :local
 
+config :pitch_in, :staging_auth,
+  username: "username",
+  password: "password",
+  realm: "Staging"
+
 config :pitch_in, :cert, "success"
 
 try do
