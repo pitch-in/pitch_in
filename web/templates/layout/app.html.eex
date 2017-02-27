@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width">
     <meta name="keywords" content="progressive,politics,activism">
     <meta name="author" content="Pitch In">
-    <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(@conn, "/favicon.ico") %>" />
-
     <%= meta_data(@conn) %>
+    <%= if Application.get_env(:pitch_in, :server_env) == "prod" do %>
+      <meta name="google-site-verification" content="9B_MoSI3uVCxDvkHFElomklINPaogFjoPthXlL9zWvY" />
+    <% end %>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(@conn, "/favicon.ico") %>" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
