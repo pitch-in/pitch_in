@@ -70,6 +70,9 @@
         <li class="hide-for-large">
           <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
         </li>
+        <li>
+          <%= link "Privacy Policy", to: html_path(@conn, :privacy_policy) %>
+        </li>
         <%= if @current_user do %>
           <li class="hide-for-large">
             <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>

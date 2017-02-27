@@ -21,6 +21,9 @@
         <%= link "Contact Us", to: "#contact-us" %>
       </li>
       <li>
+        <%= link "Privacy Policy", to: html_path(@conn, :privacy_policy) %>
+      </li>
+      <li>
         <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
       </li>
     </ul>

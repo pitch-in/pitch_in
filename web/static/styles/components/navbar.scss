@@ -16,8 +16,6 @@ body::before {
 .navbar {
   $link-color: $white;
   $hover-color: darken($link-color, 20%);
-  $hover-background: $blue;
-  $hover-background-desktop: $light-blue;
 
   height: $navbar-height;
   z-index: 1;
@@ -103,18 +101,6 @@ body::before {
     }
   }
 
-  a {
-    color: $link-color;
-
-    &:hover, &:active {
-      background: $hover-background;
-
-      @include breakpoint(large) {
-        background: $hover-background-desktop;
-      }
-    }
-  }
-
   // Port over styles for links into forms for DELETE links.
   .menu > li > form a {
     display: flex;
@@ -123,13 +109,17 @@ body::before {
     line-height: 1;
   }
 
-  &.home-navbar {
-    a {
-      &:hover, &:active {
-        @include breakpoint(large) {
-          background: $hover-background;
-        }
-      }
+  a {
+    color: $link-color;
+
+    &:hover, &:active {
+      background: $light-blue;
+    }
+  }
+
+  .submenu a {
+    &:hover, &:active {
+      background: $blue;
     }
   }
 }
