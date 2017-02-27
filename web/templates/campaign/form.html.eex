@@ -29,10 +29,11 @@
     <%= optional_label f, :file_number %>
     <p class="input-description">
       If you provide us with a state and valid file number, we will attempt to 
-      look up the campaign and the phone number on file. We will then call the number
-      to verify that campaign is in fact running this Pitch In campaign<span data-hide-on="campaign_type" data-show-case="measure">.</span>
+      look up your campaign's phone number. We will then call the number
+      to verify campaign has authorized this
+      Pitch In profile<span data-hide-on="campaign_type" data-show-case="measure">.</span>
       <span data-hide-on="campaign_type" data-show-case="candidate">
-         and is a registered Democrat.
+         and that the candidate is a registered Democrat.
       </span>
       <br/>
       If we can verify the campaign, your campaign name will appear with a green "verified" checkmark
@@ -93,7 +94,10 @@
   </div>
 
   <div data-hide-on="campaign_type" data-show-case="candidate">
-    <%= label f, :candidate_profession %>
+    <%= optional_label f, :candidate_profession %>
+    <p class="input-description">
+      The candidate's current profession, as it will be listed on the ballot.
+    </p>
     <%= text_input f, :candidate_profession %>
     <%= error_tag f, :candidate_profession %>
   </div>
