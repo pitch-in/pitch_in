@@ -82,10 +82,10 @@ defmodule PitchIn.AskController do
     render(conn, "index.html", asks: asks, show_alert_button: !empty_filter?(filter))
   end
 
-  def index(conn, _params) do
+  def index(conn, params) do
     user = conn.assigns.current_user
 
-    if user do
+    if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
       years_experience = 
         if user.pro.experience_starts_at do

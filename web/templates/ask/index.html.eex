@@ -42,6 +42,7 @@
 
       <div class="expanded button-group">
         <%= submit "Search", class: "button" %>
+        <%= link "Clear", to: ask_path(@conn, :index, clear: true), class: "alert button" %>
         <%= if @show_alert_button do %>
           <%= submit "Create Alert", class: "warning button", value: "create_alert", name: "filter[create_alert]" %>
         <%= end %>
@@ -52,7 +53,9 @@
   <%= case @asks do %>
     <% nil -> %>
     <% [] -> %>
-      <h3>Sorry, no results found. Try widening your search?</h3>
+      <div class="list-header content-block">
+        <h3>Sorry, no results found. Try widening your search?</h3>
+      </div>
     <% _ -> %>
       <%= for ask <- @asks do %>
         <%= render "_search_summary.html", conn: @conn, ask: ask %>
