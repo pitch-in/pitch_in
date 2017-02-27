@@ -26,12 +26,6 @@ import 'foundation-sites/js/foundation.responsiveMenu';
 import 'foundation-sites/js/foundation.responsiveToggle';
 import 'motion-ui';
 
-// Datepicker
-import '@fengyuanchen/datepicker';
-$('[data-toggle="datepicker"]').datepicker({
-  format: 'm/d/yyyy'
-});
-
 import components from './components/index';
 
 $(document).ready(($) => {
