@@ -7,6 +7,24 @@
 
   <%= render "_basic_form.html", campaign: f %>
 
+  <div data-hide-on="campaign_type" data-show-case="candidate">
+    <%= label f, :candidate_name %>
+    <%= text_input f, :candidate_name %>
+    <%= error_tag f, :candidate_name %>
+  </div>
+
+  <div data-hide-on="campaign_type" data-show-case="measure">
+    <%= label f, :measure_name %>
+    <%= text_input f, :measure_name %>
+    <%= error_tag f, :measure_name %>
+  </div>
+
+  <div data-hide-on="campaign_type" data-show-case="measure">
+    <%= label f, :measure_position %>
+    <%= text_input f, :measure_position %>
+    <%= error_tag f, :measure_position %>
+  </div>
+
   <div>
     <%= label f, :email, "Campaign Email" %>
     <p class="input-description">

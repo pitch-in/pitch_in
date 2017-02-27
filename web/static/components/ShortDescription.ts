@@ -17,7 +17,7 @@ export default class ShortDescription extends BaseComponent {
   ) {
     super(element);
 
-    this.$campaignType = element.parents('form').find('[name="campaign[type]"]');
+    this.$campaignType = element.parents('form').find(`#${this.data.shortDescription}`);
 
     this.updateStarter();
     this.$campaignType.change(() => this.updateStarter());
