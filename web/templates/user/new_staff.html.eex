@@ -29,11 +29,13 @@
     <div class="form-group">
       <%= label f, :password %>
       <%= password_input f, :password %>
+      <%= error_tag f, :password %>
     </div>
 
     <div class="form-group">
       <%= label f, :password_confirmation, "Confirm Password" %>
       <%= password_input f, :password_confirmation %>
+      <%= error_tag f, :password_confirmation %>
     </div>
 
     <div class="form-group">
