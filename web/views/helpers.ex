@@ -105,7 +105,15 @@ defmodule PitchIn.ViewHelpers do
   # Components #
   ##############
   def optional_label(form, field, text \\ nil) do
-    optional_tag = content_tag(:span, " (optional)", class: "input-description")
+    note_label(form, field, "optional", text)
+  end
+  
+  def required_label(form, field, text \\ nil) do
+    note_label(form, field, "required", text)
+  end
+
+  def note_label(form, field, note, text \\ nil) do
+    optional_tag = content_tag(:span, " (#{note})", class: "input-description")
 
     label(form, field) do
       [text || humanize(field), optional_tag]
