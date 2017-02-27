@@ -26,6 +26,7 @@ defmodule PitchIn.Campaign do
     field :current_party, PartyEnum
     field :archived_reason, :string
     field :is_verified, :boolean
+    field :shown_whats_next, :boolean
 
     timestamps()
   end
@@ -47,7 +48,7 @@ defmodule PitchIn.Campaign do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :type, :file_number, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :current_party])
+    |> cast(params, [:name, :email, :type, :file_number, :state, :district, :candidate_name, :measure_name, :measure_position, :short_pitch, :long_pitch, :website_url, :twitter_url, :facebook_url, :candidate_profession, :election_date, :is_partisan, :current_party, :shown_whats_next])
     |> cast_assoc(:issues)
     |> validate_required([:name, :email, :type, :short_pitch])
   end

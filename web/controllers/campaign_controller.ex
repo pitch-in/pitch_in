@@ -98,13 +98,23 @@ defmodule PitchIn.CampaignController do
       campaign_params
       |> Map.update("issues", [], &clean_up_issues/1)
 
-    changeset = Campaign.changeset(campaign, campaign_params)
+    show_whats_next = !campaign.shown_whats_next
+
+    changeset = 
+      campaign
+      |> Campaign.changeset(campaign_params)
+      |> Ecto.Changeset.put_change(:shown_whats_next, true)
 
     case Repo.update(changeset) do
       {:ok, campaign} ->
-        conn
-        |> put_flash(:success, "Campaign updated successfully.")
-        |> redirect(to: campaign_path(conn, :edit, campaign))
+        if show_whats_next do
+          conn
+          |> redirect(to: campaign_path(conn, :interstitial, campaign))
+        else
+          conn
+          |> put_flash(:success, "Campaign updated successfully.")
+          |> redirect(to: campaign_path(conn, :edit, campaign))
+        end
       {:error, changeset} ->
         changeset = fill_issues(changeset)
         render(conn, "edit.html", campaign: campaign, changeset: changeset)

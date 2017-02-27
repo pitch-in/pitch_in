@@ -30,7 +30,10 @@ defmodule PitchIn.UserController do
 
   def create(conn, %{"user" => user_params, "staff" => _}) do
     # Use staff email for campaign as a default.
-    user_params = put_in(user_params, ["campaigns", "0", "email"], user_params["email"])
+    user_params = 
+      user_params
+      |> put_in(["campaigns", "0", "email"], user_params["email"])
+      |> put_in(["campaigns", "0", "shown_whats_next"], "false")
 
     changeset = 
       %User{}
