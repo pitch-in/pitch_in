@@ -17,6 +17,18 @@
     <%= @answer.user.pro.phone %>
   </li>
 
+  <li>
+    <strong>Profession:</strong>
+    <%= @answer.user.pro.profession %>
+  </li>
+
+  <li>
+    <strong>Years of Experience:</strong>
+    <%= if @answer.user.pro.experience_starts_at do %>
+      <%= Timex.diff(Timex.today, @answer.user.pro.experience_starts_at, :years) %>
+    <% end %>
+  </li>
+
   <%= if @answer.user.pro.linkedin_url do %>
     <li>
       <strong>LinkedIn:</strong>
@@ -48,7 +60,6 @@
     <strong>Message:</strong>
     <%= @answer.message %>
   </li>
-
 </ul>
 
 <div class="expanded button-group">
