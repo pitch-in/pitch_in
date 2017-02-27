@@ -29,7 +29,7 @@ defmodule PitchIn.Router do
       get "/asks/:id/interstitial", AskController, :interstitial
       resources "/asks", AskController do
         get "/answers/:id/interstitial", AnswerController, :interstitial
-        resources "/answers", AnswerController
+        resources "/answers", AnswerController, only: [:index, :show, :create]
       end
     end
     get "/users/:id/interstitial", UserController, :interstitial

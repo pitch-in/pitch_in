@@ -10,7 +10,7 @@ defmodule PitchIn.AnswerController do
   use PitchIn.Auth, protect: :all
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
-  plug :get_answer when action in [:show, :interstitial, :edit, :update, :delete]
+  plug :get_answer when action in [:show, :interstitial, :edit, :update]
 
   def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
     ask = 
@@ -80,8 +80,7 @@ defmodule PitchIn.AnswerController do
         |> Mailer.deliver_later
 
         conn
-        |> put_flash(:success, "Answer created successfully.")
-        |> redirect(to: campaign_ask_answer_path(conn, :show, campaign, ask, answer))
+        |> redirect(to: campaign_ask_answer_path(conn, :interstitial, campaign, ask, answer))
       {:error, changeset} ->
         render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
     end

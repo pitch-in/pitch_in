@@ -13,7 +13,6 @@ defmodule PitchIn.Answer do
   next_step_list do
     step :search
     step :campaign_needs
-    step :edit_answer
   end
 
   @doc """

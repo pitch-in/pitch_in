@@ -10,10 +10,5 @@
         Want to see how else you can help out <%= @campaign.name %>? Take
         a look at their other open needs!
       <% end %>
-    <% :edit_answer -> %>
-      <%= next_step "Edit answer", to: campaign_ask_answer_path(@conn, :edit, @ask.campaign, @ask, @answer), color: "secondary" do %>
-        Did you just forget something?
-        You can go back and update your answer.
-      <% end %>
   <% end %>
 <% end %>
