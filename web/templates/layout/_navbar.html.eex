@@ -78,7 +78,7 @@
             <%= link "Profile", to: pro_path(@conn, :show, @current_user) %>
           </li>
           <li>
-            <%= link "Settings", to: user_path(@conn, :show, @current_user) %>
+            <%= link "Settings", to: user_path(@conn, :edit, @current_user) %>
           </li>
           <li class="hide-for-large">
             <%= link "Log Out", to: session_path(@conn, :delete, @current_user), method: :delete %>
