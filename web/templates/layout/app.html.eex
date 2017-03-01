@@ -31,7 +31,7 @@
     </div>
   <% end %>
 
-  <%= render "_footer.html", conn: @conn, current_user: @current_user %>
+  <%= render "_footer.html", conn: @conn %>
 
   <%= if Application.get_env(:pitch_in, :server_env) == "prod" do %>
     <script>
