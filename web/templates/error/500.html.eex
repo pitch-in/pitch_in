@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="progressive,politics,activism">
+    <meta name="author" content="Pitch In">
+    <title>Pitch In | Server Error</title>
+
+    <%= render "_error_styles.html" %>
+  </head>
+
+  <body>
+    <h1>Oops! Something went wrong!</h1>
+    <p>
+      Try hitting your browser's back button, or refreshing the page.</p>
+  </body>
+</html>

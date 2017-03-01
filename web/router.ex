@@ -34,11 +34,12 @@ defmodule PitchIn.Router do
     end
     get "/users/:id/interstitial", UserController, :interstitial
     resources "/users", UserController
-    resources "/search_alerts", SearchAlertController, only: [:delete]
+    resources "/search-alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
-    resources "/contact_us", ContactUsController, only: [:index, :create]
-    get "/privacy_policy", HtmlController, :privacy_policy
+    resources "/contact-us", ContactUsController, only: [:index, :create]
+    get "/privacy-policy", HtmlController, :privacy_policy
+    get "/about-us", HtmlController, :about_us
   end
 
   scope "/", PitchIn do

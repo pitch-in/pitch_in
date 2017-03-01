@@ -4,4 +4,8 @@ defmodule PitchIn.HtmlController do
   def privacy_policy(conn, _) do
     render(conn, "privacy_policy.html")
   end
+
+  def about_us(conn, _) do
+    render(conn, "about_us.html")
+  end
 end

@@ -15,6 +15,9 @@
         <%= link "How This Works", to: "#how-this-works" %>
       </li>
       <li>
+        <%= link "About Us", to: "#about-us" %>
+      </li>
+      <li>
         <%= link "Verification Process", to: "#verification-process" %>
       </li>
       <li>
