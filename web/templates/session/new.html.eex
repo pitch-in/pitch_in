@@ -3,7 +3,7 @@
 
   <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
     <%= label f, :email %>
-    <%= text_input f, :email, autocomplete: "email" %>
+    <%= email_input f, :email, autocomplete: "email" %>
 
     <%= label f, :password %>
     <%= password_input f, :password, autocomplete: "current-password" %>
