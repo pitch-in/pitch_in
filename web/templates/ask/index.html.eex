@@ -54,7 +54,12 @@
     <% nil -> %>
     <% [] -> %>
       <div class="list-header content-block">
-        <h3>Sorry, no results found. Try widening your search?</h3>
+        <h3>
+          Sorry, no results found.
+        </h3>
+        <p>
+          Make sure to set an alert, and check back in later, more campaigns will be looking for help soon!
+        </p>
       </div>
     <% _ -> %>
       <%= for ask <- @asks do %>
