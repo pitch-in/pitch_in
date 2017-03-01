@@ -40,10 +40,9 @@
       </div>
 
       <div class="form-group">
-        <%= label i, :experience_starts_at %>
-        <p class="description">
-          When did you start working in your current profession?
-          This helps us calculate your rough experience level.
+        <%= label i, :experience_starts_at, "When did you start working in your current profession?" %>
+        <p class="input-description">
+          This helps us calculate your experience level.
         </p>
         <%= us_date_input i, :experience_starts_at, data_end_date: "today" %>
         <%= error_tag i, :experience_starts_at %>

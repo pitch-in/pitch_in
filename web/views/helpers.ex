@@ -62,11 +62,15 @@ defmodule PitchIn.ViewHelpers do
   def profession_options do
     professions = [
       "Other",
+      "Accounting",
+      "Advertising",
       "Campaign Finance",
       "Communications",
       "Data Manager",
       "Designer/Artist",
+      "Fundraiser",
       "Lawyer",
+      "Marketing",
       "Organizer",
       "Project Manager",
       "Web Developer"

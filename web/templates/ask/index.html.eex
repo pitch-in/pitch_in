@@ -9,22 +9,22 @@
       as: :filter, method: :get, csrf_token: false, enforce_utf8: false
     ], fn f -> %>
       <div>
-        <%= label f, :profession %>
+        <%= label f, :profession, "Indicate your profession" %>
         <%= select f, :profession, [{"", ""}] ++ profession_options %>
         <%= error_tag f, :profession %>
       </div>
       <div>
-        <%= label f, :role %>
+        <%= label f, :role, "What sort of role are you looking for?" %>
         <%= text_input f, :role %>
         <%= error_tag f, :role %>
       </div>
       <div>
-        <%= label f, :years_experience %>
+        <%= label f, :years_experience, "Relevant years experience" %>
         <%= number_input f, :years_experience %>
         <%= error_tag f, :years_experience %>
       </div>
       <div>
-        <%= label f, :issue %>
+        <%= label f, :issue, "Keyword (ex: women, clean water, education)" %>
         <%= text_input f, :issue %>
         <%= error_tag f, :issue %>
       </div>
