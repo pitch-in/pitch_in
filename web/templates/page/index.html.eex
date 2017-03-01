@@ -17,7 +17,7 @@
       <h2>First time here?</h2>
 
       <p>
-        Thanks for pitching in! We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about. 
+        We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about.
       </p>
 
       <div class="expanded button-group">
@@ -29,27 +29,40 @@
     <section class="content-block" id="how-this-works">
       <h2>How this works</h2>
       <p>
-        You’ve already taken the first step: Choosing to translate your values into action. Let us help you take it from here.
-      </p>
-      <p>
-        There are opportunities in every community to speak out and organize for positive change. Our mission is to utilize your passion and talents to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need of your unique profile of values and experience.
+        You’ve already taken the first step by coming here. Our mission is to utilize your passion and talents to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need of your unique profile of values and experience.
       </p>
     </section>
+
     <section class="content-block" id="verification-process">
       <h2>
-        Verification Process
+        Campaign Verification Process
       </h2>
-      <h3>
-Activists of America:
-      </h3>
-      <p>
-        When you sign up to pitch in, our goal is to connect you with a team whose needs you can help fill to make a progressive campaign a huge success. To ensure that we are making productive connections that correctly match skills and experience level, we ask that you provide links to your professional profiles when donating your time to fill the more technical campaign needs. 
-      </p>
-      <h3>
-        Progressive Campaigns of America:
-      </h3>
       <p>
         Pitch In connects your movement with the inner activist in every American. You have the vision, the grit and the drive -- now you need the people power to get it done. We connect your campaign with budding activists of various skill levels willing to volunteer their time to make your campaign a success. They are the good samaritans translating their professional expertise into a world changing pastime. When you sign up with Pitch In, we will contact you to verify your campaign to ensure the best experience for our activists.
+      </p>
+    </section>
+
+    <section class="content-block" id="about-us">
+      <h2>
+        By Activists, For Activists
+      </h2>
+      <p>
+        We are a group of friends, progressive organizers and start-up techies passionate about making activism accessible for everyone.
+      </p>
+
+      <h3>Christopher Garretty</h3>
+      <p>
+      A native of Redondo Beach, CA, Chris worked in San Francisco politics for several years, successfully managing citywide organizing efforts in the heavily contested “No on E: Stop Regressive Beverage Taxes” campaign before joining Hillary Clinton’s presidential bid in New Hampshire, Maine and Wisconsin.
+      </p>
+
+      <h3>Will Ockelman-Wagner</h3>
+      <p>
+      Also born in Redondo Beach, Will served on the board of the San Francisco Young Democrats and managed the web presence of a San Francisco school board candidate. He now lives in Los Angeles where he works as a software engineer at a consulting company. A veteran of tech start ups, Will’s seasoned portfolio of work includes an Amazon Echo app that solely produced facts about sloths.
+      </p>
+
+      <h3>Laura O’Neill</h3>
+      <p>
+      A born and raised progressive organizer and Granite Stater, Laura moved to Washington, D.C. to work for U.S. Senator Jeanne Shaheen before joining Secretary Hillary Clinton’s campaign in 2015. After two years of criss-crossing America in New Hampshire, Maine and Wisconsin, Laura returns to the Live Free or Die state to work for Democrats in the New Hampshire legislature.
       </p>
     </section>
 
