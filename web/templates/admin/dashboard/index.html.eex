@@ -1,0 +1,35 @@
+<div class="header-line content-block">
+  <h2>Admin Dashboard</h2>
+</div>
+
+<div class="content-block">
+  <h3>Totals</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Users</th>
+        <th>Campaigns</th>
+        <th>Asks</th>
+        <th>Answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Total</th>
+        <td><%= @users_count %></td>
+        <td><%= @campaigns_count %></td>
+        <td><%= @asks_count %></td>
+        <td><%= @answers_count %></td>
+      </tr>
+      <tr>
+        <th>Last 24 Hours</th>
+        <td><%= @new_users_count %></td>
+        <td><%= @new_campaigns_count %></td>
+        <td><%= @new_asks_count %></td>
+        <td><%= @new_answers_count %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,6 @@
 defmodule PitchIn.Router do
   use PitchIn.Web, :router
+  import PitchIn.Auth, only: [verify_admin: 2]
   
   pipeline :static do
     plug :accepts, ["html"]
@@ -14,6 +15,10 @@ defmodule PitchIn.Router do
     plug :put_csrf_token_in_header
     plug :put_secure_browser_headers
     plug PitchIn.Auth, repo: PitchIn.Repo
+  end
+
+  pipeline :admin do
+    plug :verify_admin
   end
 
   pipeline :api do
@@ -47,6 +52,11 @@ defmodule PitchIn.Router do
 
     get "/robots.txt", StaticKeyController, :robots
     get "/.well-known/acme-challenge/:cert_id", StaticKeyController, :cert
+  end
+
+  scope "/admin", PitchIn.Admin do
+    pipe_through [:browser, :admin]
+    get "/dashboard", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.

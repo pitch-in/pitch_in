@@ -148,7 +148,20 @@ defmodule PitchIn.Auth do
       conn
       |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
       |> put_status(404)
-      # |> render(PitchIn.ErrorView, "404.html")
+      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
+      |> Phoenix.Controller.halt
+    end
+  end
+
+  def verify_admin(conn, _opts) do
+    user = conn.assigns.current_user
+    if user && user.is_admin do
+      conn
+    else
+      conn
+      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
+      |> put_status(404)
+      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
       |> halt
     end
   end
