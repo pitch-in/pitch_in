@@ -1,5 +1,7 @@
 defmodule PitchIn.Router do
   use PitchIn.Web, :router
+  use Plug.ErrorHandler
+  use Sentry.Plug
   import PitchIn.Auth, only: [verify_admin: 2]
   
   pipeline :static do
