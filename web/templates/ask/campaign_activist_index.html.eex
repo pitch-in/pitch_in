@@ -2,7 +2,7 @@
   <h2>Open Needs for <%= @campaign.name %></h2>
 
   <hr/>
-  <%= for ask <- @asks do %>
+  <%= for ask <- @active_asks do %>
     <%= render "_summary.html", conn: @conn, campaign: @campaign, ask: ask %>
     <hr/>
   <% end %>
