@@ -14,11 +14,6 @@
         <%= error_tag f, :profession %>
       </div>
       <div>
-        <%= label f, :role, "What sort of role are you looking for?" %>
-        <%= text_input f, :role %>
-        <%= error_tag f, :role %>
-      </div>
-      <div>
         <%= label f, :years_experience, "Relevant years experience" %>
         <%= number_input f, :years_experience, step: "any", min: 0 %>
         <%= error_tag f, :years_experience %>

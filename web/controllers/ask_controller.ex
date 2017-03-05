@@ -25,7 +25,6 @@ defmodule PitchIn.AskController do
 
   def index(conn, %{"filter" => filter}) do
     profession = like_value(filter["profession"])
-    role = like_value(filter["role"])
     years_experience = to_int_or_infinity(filter["years_experience"])
     issue = filter["issue"]
 
@@ -34,7 +33,6 @@ defmodule PitchIn.AskController do
       select: a,
       join: c in Campaign, on: c.id == a.campaign_id,
       where: ilike(a.profession, ^profession),
-      where: ilike(a.role, ^role),
       where: a.years_experience <= ^years_experience,
       where: is_nil(c.archived_reason),
       where: is_nil(a.archived_reason),
