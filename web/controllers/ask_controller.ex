@@ -220,5 +220,10 @@ defmodule PitchIn.AskController do
 
   defp to_int_or_infinity(nil), do: 100
   defp to_int_or_infinity(""), do: 100
-  defp to_int_or_infinity(string), do: String.to_integer(string)
+  defp to_int_or_infinity(string) do
+    case Float.parse("0" <> string) do
+      {float, ""} -> round(float)
+      _ -> 100
+    end
+  end
 end

@@ -20,7 +20,7 @@
       </div>
       <div>
         <%= label f, :years_experience, "Relevant years experience" %>
-        <%= number_input f, :years_experience %>
+        <%= number_input f, :years_experience, step: "any", min: 0 %>
         <%= error_tag f, :years_experience %>
       </div>
       <div>
