@@ -87,14 +87,14 @@ module.exports = {
       test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/,
       loader: 'url?limit=10000&mimetype=application/font-woff'
     }, {
-      test: /\.(png|jpg|svg)(\?[a-z0-9#=&.]+)?$/,
-      // loader: 'url?limit=10000&name=img-[hash:6].[ext]'
-      loader: 'file?name=[path][name].[ext]&context=web/static'
-    }, {
       test: /favicon\.ico$/,
       loader: 'file?name=[name].[ext]&context=web/static'
     }, {
       test: /\.txt$/,
+      loader: 'file?name=[path][name].[ext]&context=web/static'
+    }, {
+      test: /\.(png|jpg|svg)(\?[a-z0-9#=&.]+)?$/,
+      // loader: 'url?limit=10000&name=img-[hash:6].[ext]'
       loader: 'file?name=[path][name].[ext]&context=web/static'
     }, {
       test: /\.(ttf|eot)(\?[a-z0-9#=&.]+)?$/,

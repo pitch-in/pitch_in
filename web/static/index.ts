@@ -15,6 +15,7 @@ import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';
 import './img/logo_blue.png';
+import './apple-touch-icon.png';
 import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
 // Import foundation stuff.
