@@ -47,6 +47,7 @@ defmodule PitchIn.Router do
     resources "/contact-us", ContactUsController, only: [:index, :create]
     get "/privacy-policy", HtmlController, :privacy_policy
     get "/about-us", HtmlController, :about_us
+    get "/donate-thanks", HtmlController, :donate_thanks
   end
 
   scope "/", PitchIn do

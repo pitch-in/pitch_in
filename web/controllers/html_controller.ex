@@ -8,4 +8,8 @@ defmodule PitchIn.HtmlController do
   def about_us(conn, _) do
     render(conn, "about_us.html")
   end
+
+  def donate_thanks(conn, _) do
+    render(conn, "donate_thanks.html")
+  end
 end
