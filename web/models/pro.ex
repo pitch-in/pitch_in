@@ -10,6 +10,7 @@ defmodule PitchIn.Pro do
     field :address_zip, :string
     field :phone, :string
     field :experience_starts_at, PitchIn.UsDate
+    field :issues, :string
 
     timestamps()
   end
@@ -27,7 +28,8 @@ defmodule PitchIn.Pro do
       :profession,
       :address_zip,
       :phone,
-      :experience_starts_at
+      :experience_starts_at,
+      :issues
     ])
     |> validate_required([:phone])
     |> unique_constraint(:user_id)
