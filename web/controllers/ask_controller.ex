@@ -24,40 +24,7 @@ defmodule PitchIn.AskController do
   end
 
   def index(conn, %{"filter" => filter}) do
-    profession = like_value(filter["profession"])
-    years_experience = to_int_or_infinity(filter["years_experience"])
-    issue = filter["issue"]
-
-    query =
-      from a in Ask,
-      select: a,
-      join: c in Campaign, on: c.id == a.campaign_id,
-      where: ilike(a.profession, ^profession),
-      where: a.years_experience <= ^years_experience,
-      where: is_nil(c.archived_reason),
-      where: is_nil(a.archived_reason),
-      preload: :campaign
-
-    # Handle issues
-    query = 
-      if filter["issue"] != "" do
-        # Find campaigns with matching issues
-        from [a, c] in query,
-        where: fragment("""
-          ? IN (
-            SELECT DISTINCT campaign_id
-            FROM issues
-            WHERE issue ILIKE ?
-          )
-          OR ? ILIKE ?
-        """,
-        c.id, ^like_value(issue),
-        c.short_pitch, ^like_value(issue))
-      else
-        query
-      end
-
-    asks = Repo.all(query)
+    asks = search_asks(filter)
 
     conn = 
       if filter["create_alert"] do
@@ -82,6 +49,7 @@ defmodule PitchIn.AskController do
 
   def index(conn, params) do
     user = conn.assigns.current_user
+    asks = search_asks(%{})
 
     if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
@@ -105,7 +73,7 @@ defmodule PitchIn.AskController do
     else
       conn
     end
-    |> render("index.html", asks: nil, show_alert_button: false)
+    |> render("index.html", asks: asks, show_alert_button: false)
   end
 
   def new(conn, %{"campaign_id" => campaign_id}) do
@@ -218,10 +186,48 @@ defmodule PitchIn.AskController do
 
   defp to_int_or_infinity(nil), do: 100
   defp to_int_or_infinity(""), do: 100
+  defp to_int_or_infinity(int) when is_integer(int), do: int
   defp to_int_or_infinity(string) do
     case Float.parse("0" <> string) do
       {float, ""} -> round(float)
       _ -> 100
     end
+  end
+
+  defp search_asks(filter) do
+    profession = like_value(filter["profession"])
+    years_experience = to_int_or_infinity(filter["years_experience"])
+    issue = filter["issue"]
+
+    query =
+      from a in Ask,
+      select: a,
+      join: c in Campaign, on: c.id == a.campaign_id,
+      where: ilike(a.profession, ^profession),
+      where: a.years_experience <= ^years_experience,
+      where: is_nil(c.archived_reason),
+      where: is_nil(a.archived_reason),
+      preload: :campaign
+
+    # Handle issues
+    query = 
+      if filter["issue"] != "" do
+        # Find campaigns with matching issues
+        from [a, c] in query,
+        where: fragment("""
+          ? IN (
+            SELECT DISTINCT campaign_id
+            FROM issues
+            WHERE issue ILIKE ?
+          )
+          OR ? ILIKE ?
+        """,
+        c.id, ^like_value(issue),
+        c.short_pitch, ^like_value(issue))
+      else
+        query
+      end
+
+    Repo.all(query)
   end
 end
