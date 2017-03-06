@@ -5,17 +5,23 @@ defmodule PitchIn.Admin.DashboardController do
   alias PitchIn.Campaign
   alias PitchIn.Ask
   alias PitchIn.Answer
+  alias PitchIn.NeedSearch
+  alias PitchIn.SearchAlert
 
   def index(conn, _) do
     users_count = user_query |> full_count
     campaigns_count = full_count(Campaign)
     asks_count = full_count(Ask)
     answers_count = full_count(Answer)
+    searches_count = full_count(NeedSearch)
+    alerts_count = full_count(SearchAlert)
 
     new_users_count = user_query |> new_count
     new_campaigns_count = new_count(Campaign)
     new_asks_count = new_count(Ask)
     new_answers_count = new_count(Answer)
+    new_searches_count = new_count(NeedSearch)
+    new_alerts_count = new_count(SearchAlert)
 
     render(
       conn,
@@ -24,10 +30,15 @@ defmodule PitchIn.Admin.DashboardController do
       campaigns_count: campaigns_count,
       asks_count: asks_count,
       answers_count: answers_count,
+      searches_count: searches_count,
+      alerts_count: alerts_count,
+
       new_users_count: new_users_count,
       new_campaigns_count: new_campaigns_count,
       new_asks_count: new_asks_count,
       new_answers_count: new_answers_count,
+      new_searches_count: new_searches_count,
+      new_alerts_count: new_alerts_count
     )
   end
 
