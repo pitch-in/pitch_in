@@ -2,7 +2,8 @@
   <section class="expanded content-block">
     <h2>Search Needs</h2>
     <p>
-      Start a search to find how you can pitch in!
+      Campaigns across the country are looking for help! You can take a look at all the open needs below,
+      or filter the results by profression or minimum experience.
     </p>
 
     <%= form_for @conn, ask_path(@conn, :index), [
