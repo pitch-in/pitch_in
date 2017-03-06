@@ -1,0 +1,6 @@
+<td>
+  <span>
+    <%= link @text, to: @to %>
+  </span>
+</td>
+

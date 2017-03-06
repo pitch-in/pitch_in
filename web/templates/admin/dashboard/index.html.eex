@@ -1,5 +1,7 @@
-<div class="header-line content-block">
+<div class="content-block">
   <h2>Admin Dashboard</h2>
+
+  <%= link "View All Campaigns", to: admin_campaign_path(@conn, :index) %>
 </div>
 
 <div class="content-block">

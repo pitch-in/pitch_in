@@ -82,10 +82,14 @@ defmodule PitchIn.ViewHelpers do
   ##############
   # Formatters #
   ##############
+  def format_date(nil), do: ""
+  def format_date(""), do: ""
   def format_date(date) do
     Timex.format!(date, "%m/%d/%Y", :strftime)
   end
 
+  def format_phone(nil), do: ""
+  def format_phone(""), do: ""
   def format_phone(phone) do
     [_ | parts] = Regex.run(~r/(\d\d\d)(\d\d\d)(\d\d\d\d)/, phone)
     Enum.join(parts, "-")
