@@ -8,8 +8,8 @@
 <%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
 <hr/>
 
+<h3>Your Answer</h3>
 <div>
-  <h3>Your Answer</h3>
   <%= @answer.message %>
 </div>
 <br/>

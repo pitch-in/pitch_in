@@ -1,6 +1,14 @@
 <section class="content-block">
-<h2>New answer</h2>
+<h2>
+  Answer to <%= @ask.role %> for <%= @campaign.name %>
+</h2>
 
+<%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
+<hr/>
+<%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
+<hr/>
+
+<h3>Your Answer</h3>
 <%= render "form.html", changeset: @changeset,
                         conn: @conn,
                         campaign: @campaign,
@@ -9,6 +17,7 @@
                         action: campaign_ask_answer_path(@conn, :create, @campaign, @ask) %>
 
 <div class="expanded button-group">
-  <%= link "Back to Need", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "secondary button" %>
+  <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "warning button" %>
+  <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>

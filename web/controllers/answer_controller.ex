@@ -10,7 +10,7 @@ defmodule PitchIn.AnswerController do
   use PitchIn.Auth, protect: :all
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
-  plug :get_answer when action in [:show, :interstitial, :edit, :update]
+  plug :get_answer when action in [:show, :interstitial, :update]
 
   def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
     ask = 
@@ -113,43 +113,6 @@ defmodule PitchIn.AnswerController do
       render(conn, "show_to_activist.html", campaign: campaign, ask: ask, answer: answer)
     else
       render(conn, "show_to_campaign.html", campaign: campaign, ask: ask, answer: answer)
-    end
-  end
-
-  def edit(conn,
-    %{
-      "campaign_id" => campaign_id,
-      "ask_id" => ask_id,
-      "id" => id
-    }) do
-    answer = conn.assigns.answer
-    ask = answer.ask
-    campaign = ask.campaign
-
-    changeset = Answer.changeset(answer)
-    render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
-  end
-
-  def update(conn,
-    %{
-      "campaign_id" => campaign_id,
-      "ask_id" => ask_id,
-      "id" => id,
-      "answer" => answer_params
-    }) do
-    answer = conn.assigns.answer
-    ask = answer.ask
-    campaign = ask.campaign
-
-    changeset = Answer.changeset(answer, answer_params)
-
-    case Repo.update(changeset) do
-      {:ok, answer} ->
-        conn
-        |> put_flash(:success, "Answer updated successfully.")
-        |> redirect(to: campaign_ask_answer_path(conn, :show, campaign, ask, answer))
-      {:error, changeset} ->
-        render(conn, "edit.html", campaign: campaign, ask: ask, answer: answer, changeset: changeset)
     end
   end
 
