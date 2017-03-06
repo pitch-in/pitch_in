@@ -6,6 +6,58 @@
   <% end %>
 
   <div>
+    <%= label f, :intro, "Introduce Yourself" %>
+    <p class="input-description">
+    Tell us a little about yourself, and what you're passionate about!
+    </p>
+    <%= textarea f, :intro %>
+    <%= error_tag f, :intro %>
+  </div>
+
+  <div>
+    <%= label f, :issues %>
+    <p class="input-description">
+      What issues are important to you? You can put in a comma-seperated list.
+    </p>
+    <%= text_input f, :issues %>
+    <%= error_tag f, :issues %>
+  </div>
+
+  <div>
+    <%= label f, :profession %>
+    <%= select f, :profession, profession_options %>
+    <%= error_tag f, :profession %>
+  </div>
+
+  <div>
+    <%= label f, :phone %>
+    <%= text_input f, :phone, autocomplete: "tel" %>
+    <%= error_tag f, :phone %>
+  </div>
+
+  <div>
+    <%= label f, :address_zip %>
+    <%= text_input f, :address_zip, autocomplete: "postal-code" %>
+    <%= error_tag f, :address_zip %>
+  </div>
+
+  <div>
+    <%= label f, :experience_starts_at %>
+    <p class="description">
+      When did you start working in your current profession?
+      This helps us calculate your experience level.
+    </p>
+    <%= us_date_input f, :experience_starts_at, data_end_date: "today" %>
+    <%= error_tag f, :experience_starts_at %>
+  </div>
+
+  <div>
+    <%= label f, :has_campaign_experience, "Have you worked or volunteered for a campaign before?" %>
+    <%= checkbox f, :has_campaign_experience %>
+    <%= error_tag f, :has_campaign_experience %>
+  </div>
+
+  <div>
     <%= label f, :linkedin_url %>
     <%= text_input f, :linkedin_url %>
     <%= error_tag f, :linkedin_url %>
@@ -21,34 +73,6 @@
     <%= label f, :twitter_handle %>
     <%= text_input f, :twitter_handle %>
     <%= error_tag f, :twitter_handle %>
-  </div>
-
-  <div>
-    <%= label f, :profession %>
-    <%= select f, :profession, profession_options %>
-    <%= error_tag f, :profession %>
-  </div>
-
-  <div>
-    <%= label f, :address_zip %>
-    <%= text_input f, :address_zip, autocomplete: "postal-code" %>
-    <%= error_tag f, :address_zip %>
-  </div>
-
-  <div>
-    <%= label f, :phone %>
-    <%= text_input f, :phone, autocomplete: "tel" %>
-    <%= error_tag f, :phone %>
-  </div>
-
-  <div>
-    <%= label f, :experience_starts_at %>
-    <p class="description">
-      When did you start working in your current profession?
-      This helps us calculate your rough experience level.
-    </p>
-    <%= us_date_input f, :experience_starts_at, data_end_date: "today" %>
-    <%= error_tag f, :experience_starts_at %>
   </div>
 
   <div class="expanded button-group">

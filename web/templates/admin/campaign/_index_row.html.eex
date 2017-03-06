@@ -1,0 +1,8 @@
+<tr>
+  <%= render "_index_cell.html", campaign: @campaign, key: :name %>
+  <%= render "_index_cell.html", campaign: @campaign, key: :type %>
+  <%= render "_index_cell.html", campaign: @campaign, key: :email %>
+  <%= render "_index_cell.html", campaign: @campaign, key: :inserted_at %>
+  <%= render "_index_link_cell.html", text: "View", to: campaign_path(@conn, :show, @campaign) %>
+  <%= render "_index_link_cell.html", text: "View Needs", to: campaign_ask_path(@conn, :index, @campaign) %>
+</tr>

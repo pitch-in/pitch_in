@@ -7,6 +7,7 @@ defmodule PitchIn.Ask do
     has_many :answers, PitchIn.Answer
     field :role, :string
     field :length, AskLengthEnum
+    field :hours, :integer
     field :profession, :string
     field :description, :string
     field :years_experience, :integer
@@ -27,8 +28,8 @@ defmodule PitchIn.Ask do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:role, :length, :profession, :description, :years_experience])
-    |> validate_required([:role, :length, :profession, :description, :years_experience])
+    |> cast(params, [:role, :length, :profession, :description, :years_experience, :hours])
+    |> validate_required([:role, :length, :profession, :description, :years_experience, :hours])
   end
 
   def archive_changeset(struct, params \\ %{}) do

@@ -36,7 +36,14 @@ defmodule PitchIn.UsDate do
          {:error, _} <- Timex.parse(date, "{M}/{D}/{YYYY}"),
          {:error, _} <- Timex.parse(date, "{M}-{D}-{YYYY}"),
          {:error, _} <- Timex.parse(date, "{M}.{D}.{YYYY}"),
-         {:error, _} <- Timex.parse(date, "{YYYY}-{M}-{D}")
+         {:error, _} <- Timex.parse(date, "{YYYY}-{M}-{D}"),
+         {:error, _} <- Timex.parse(date, "{M}/{YY}"),
+         {:error, _} <- Timex.parse(date, "{M}-{YY}"),
+         {:error, _} <- Timex.parse(date, "{M}.{YY}"),
+         {:error, _} <- Timex.parse(date, "{M}/{YYYY}"),
+         {:error, _} <- Timex.parse(date, "{M}-{YYYY}"),
+         {:error, _} <- Timex.parse(date, "{M}.{YYYY}"),
+         {:error, _} <- Timex.parse(date, "{YYYY}")
     do
       {:error, nil}
     else

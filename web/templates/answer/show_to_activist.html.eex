@@ -9,15 +9,12 @@
 <hr/>
 
 <h3>Your Answer</h3>
-<%= render "form.html", changeset: @changeset,
-                        conn: @conn,
-                        campaign: @campaign,
-                        ask: @ask,
-                        page: :new,
-                        action: campaign_ask_answer_path(@conn, :create, @campaign, @ask) %>
+<div>
+  <%= @answer.message %>
+</div>
+<br/>
 
 <div class="expanded button-group">
-  <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "warning button" %>
   <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>

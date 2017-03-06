@@ -1,12 +1,15 @@
 <section class="content-block">
-<h2>Show answer</h2>
+<h2>
+  Answer to <%= @ask.role %> for <%= @campaign.name %>
+</h2>
 
-<%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
-<hr/>
-<%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
-<hr/>
-
+<h3>Activist Info</h3>
 <ul>
+  <li>
+    <strong>Name:</strong>
+    <%= @answer.user.name %>
+  </li>
+
   <li>
     <strong>Email:</strong>
     <%= @answer.user.email %>
@@ -28,6 +31,12 @@
       <%= Timex.diff(Timex.today, @answer.user.pro.experience_starts_at, :years) %>
     <% end %>
   </li>
+
+  <%= if @answer.user.pro.has_campaign_experience do %>
+    <li>
+      Has worked or volunteered with a campaign before.
+    </li>
+  <% end %>
 
   <%= if @answer.user.pro.linkedin_url do %>
     <li>
@@ -55,16 +64,24 @@
       </a>
     </li>
   <% end %>
-
-  <li>
-    <strong>Message:</strong>
-    <%= @answer.message %>
-  </li>
 </ul>
 
+<%= if @answer.user.pro.intro do %>
+  <div>
+    <h3>Activist Intro</h3>
+    <%= @answer.user.pro.intro %>
+  </div>
+  <br/>
+<% end %>
+
+<div>
+  <h3>Activist Message</h3>
+  <%= @answer.message %>
+</div>
+<br/>
+
+
 <div class="expanded button-group">
-  <%= if @is_staff do %>
-    <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
-  <% end %>
+  <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
 </div>
 </section>

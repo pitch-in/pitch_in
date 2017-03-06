@@ -15,8 +15,7 @@
     <%= archive_button(@conn, @campaign, @ask) %>
     <%= unarchive_button(@conn, @campaign, @ask) %>
   <% else %>
-    <%= link "Show", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "warning button" %>
-    <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @campaign, @ask), class: "success button" %>
+    <%= link "Show", to: campaign_ask_answer_path(@conn, :new, @campaign, @ask), class: "success button" %>
   <% end %>
   </div>
 </section>

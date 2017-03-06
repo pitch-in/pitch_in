@@ -1,0 +1,19 @@
+<table class="stack">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Email</th>
+      <th>Inserted At</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= for campaign <- @campaigns do %>
+      <%= render "_index_row.html", conn: @conn, campaign: campaign %>
+    <% end %>
+  </tbody>
+</table>
+

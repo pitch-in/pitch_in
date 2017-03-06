@@ -57,9 +57,11 @@ defmodule PitchIn.Router do
     get "/.well-known/acme-challenge/:cert_id", StaticKeyController, :cert
   end
 
-  scope "/admin", PitchIn.Admin do
+  scope "/admin", PitchIn.Admin, as: :admin do
     pipe_through [:browser, :admin]
+
     get "/dashboard", DashboardController, :index
+    get "/campaigns", CampaignController, :index
   end
 
   # Other scopes may use custom stacks.
