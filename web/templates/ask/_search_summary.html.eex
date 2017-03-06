@@ -13,8 +13,16 @@
       <div class="need-text">
         <div><strong>Role</strong></div>
         <div><%= @ask.role %></div>
-        <div><strong>Length</strong></div>
-        <div><%= @ask.length %></div>
+        <%= if @ask.hours do %>
+          <div>
+            <%= if @ask.length == :ongoing do %>
+              <strong>Hours/Week:</strong>
+            <% else %>
+              <strong>Total Hours:</strong>
+            <% end %>
+          </div>
+        <% end %>
+        <div><%= @ask.hours %></div>
         <div><strong>Profession</strong></div>
         <div><%= @ask.profession %></div>
         <div><strong>Minimum Experience</strong></div>
