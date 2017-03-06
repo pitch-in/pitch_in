@@ -34,9 +34,7 @@
   </div>
 
   <br/>
-  <div class="clearfix">
-    <div class="button-group float-right">
-      <%= link "Pitch In", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "#{if @ask.campaign.is_verified, do: "success", else: "warning"} button" %>
-    </div>
+  <div class="expanded button-group">
+    <%= link "Pitch In", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "#{if @ask.campaign.is_verified, do: "success", else: "warning"} button" %>
   </div>
 </section>

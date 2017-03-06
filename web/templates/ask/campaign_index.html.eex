@@ -1,7 +1,6 @@
 <section class="list-header content-block">
   <h1>
-    <%= @campaign.name %><br/>
-    <%= if @active_asks != [], do: "Needs", else: "No Open Needs" %>
+    <%= @campaign.name %><%= if @active_asks != [], do: " Needs", else: ": No Open Needs" %>
   </h1>
 </section>
 
@@ -26,6 +25,7 @@
     <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
   <% end %>
 
+  <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "warning button" %>
   <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
   </div>
 </section>
