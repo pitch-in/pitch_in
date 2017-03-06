@@ -14,8 +14,13 @@
   </li>
 
   <li>
-    <strong>Length:</strong>
-    <%= @ask.length %>
+    <%= if @ask.length == :ongoing do %>
+      <strong>Hours/Week:</strong>
+    <% else %>
+      <strong>Total Hours:</strong>
+    <% end %>
+
+    <%= @ask.hours %>
   </li>
 
   <li>

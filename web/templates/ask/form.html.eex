@@ -5,31 +5,48 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div>
     <%= label f, :role %>
     <%= text_input f, :role %>
     <%= error_tag f, :role %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :length %>
     <%= select f, :length, enum_to_options(AskLengthEnum) %>
     <%= error_tag f, :length %>
   </div>
 
-  <div class="form-group">
+  <div>
+    <div data-hide-on="ask_length" data-show-case="ongoing">
+      <%= label f, :hours, "Hours/Week" %>
+      <p class="input-description">
+        How many hours per week are you asking activists to commit to?
+      <p>
+    </div>
+    <div data-hide-on="ask_length" data-show-case="one_time">
+      <%= label f, :hours, "Total Hours" %>
+      <p class="input-description">
+        About how many hours should an activist expect this to take?
+      <p>
+    </div>
+    <%= number_input f, :hours, min: 0, step: 1 %>
+    <%= error_tag f, :hours %>
+  </div>
+
+  <div>
     <%= label f, :profession %>
     <%= select f, :profession, profession_options %>
     <%= error_tag f, :profession %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :description %>
     <%= textarea f, :description %>
     <%= error_tag f, :description %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= label f, :years_experience, "Minimum Experience" %>
     <p class="input-description">
       About how many years of experience would someone need to have to be to be able
@@ -40,7 +57,7 @@
     <%= error_tag f, :years_experience %>
   </div>
 
-  <div class="form-group">
+  <div>
     <%= submit "Submit", class: "expanded success button" %>
   </div>
 <% end %>
