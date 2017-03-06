@@ -146,7 +146,6 @@ defmodule PitchIn.Auth do
       conn
     else
       conn
-      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
       |> put_status(404)
       |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
       |> halt
@@ -159,7 +158,6 @@ defmodule PitchIn.Auth do
       conn
     else
       conn
-      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
       |> put_status(404)
       |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
       |> halt

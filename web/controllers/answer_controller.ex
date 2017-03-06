@@ -109,7 +109,11 @@ defmodule PitchIn.AnswerController do
     ask = answer.ask
     campaign = ask.campaign
 
-    render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
+    if conn.assigns.is_owner do
+      render(conn, "show_to_activist.html", campaign: campaign, ask: ask, answer: answer)
+    else
+      render(conn, "show_to_campaign.html", campaign: campaign, ask: ask, answer: answer)
+    end
   end
 
   def edit(conn,
@@ -159,8 +163,19 @@ defmodule PitchIn.AnswerController do
       preload: [user: :pro]
     )
 
-    conn
-    |> Plug.Conn.assign(:answer, answer)
-    |> Plug.Conn.assign(:is_owner, answer.user_id == conn.assigns.current_user.id)
+    is_owner = answer.user_id == conn.assigns.current_user.id
+    is_staff = conn.assigns.is_staff
+
+    if is_owner || is_staff do
+      conn
+      |> Plug.Conn.assign(:answer, answer)
+      |> Plug.Conn.assign(:is_owner, is_owner)
+    else
+      conn
+      |> put_status(404)
+      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
+      |> halt
+    end
+
   end
 end
