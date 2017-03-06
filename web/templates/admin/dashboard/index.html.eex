@@ -13,6 +13,8 @@
         <th>Campaigns</th>
         <th>Asks</th>
         <th>Answers</th>
+        <th>Searches</th>
+        <th>Alerts</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +24,8 @@
         <td><%= @campaigns_count %></td>
         <td><%= @asks_count %></td>
         <td><%= @answers_count %></td>
+        <td><%= @searches_count %></td>
+        <td><%= @alerts_count %></td>
       </tr>
       <tr>
         <th>Last 24 Hours</th>
@@ -29,6 +33,8 @@
         <td><%= @new_campaigns_count %></td>
         <td><%= @new_asks_count %></td>
         <td><%= @new_answers_count %></td>
+        <td><%= @new_searches_count %></td>
+        <td><%= @new_alerts_count %></td>
       </tr>
     </tbody>
   </table>

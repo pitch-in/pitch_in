@@ -42,6 +42,15 @@
   </div>
 
   <div>
+    <%= label f, :issues %>
+    <p class="input-description">
+      What issues are important to you? You can put in a comma-seperated list.
+    </p>
+    <%= text_input f, :issues %>
+    <%= error_tag f, :issues %>
+  </div>
+
+  <div>
     <%= label f, :experience_starts_at %>
     <p class="description">
       When did you start working in your current profession?

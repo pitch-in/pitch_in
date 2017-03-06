@@ -198,6 +198,41 @@ ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 
 --
+-- Name: need_searches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE need_searches (
+    id integer NOT NULL,
+    profession character varying(255),
+    years_experience integer,
+    issue character varying(255),
+    found_count integer,
+    user_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: need_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE need_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: need_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE need_searches_id_seq OWNED BY need_searches.id;
+
+
+--
 -- Name: pros; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -212,7 +247,8 @@ CREATE TABLE pros (
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     twitter_handle character varying(255),
-    github_handle character varying(255)
+    github_handle character varying(255),
+    issues character varying(255)
 );
 
 
@@ -347,6 +383,13 @@ ALTER TABLE ONLY issues ALTER COLUMN id SET DEFAULT nextval('issues_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY need_searches ALTER COLUMN id SET DEFAULT nextval('need_searches_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY pros ALTER COLUMN id SET DEFAULT nextval('pros_id_seq'::regclass);
 
 
@@ -394,6 +437,14 @@ ALTER TABLE ONLY campaigns
 
 ALTER TABLE ONLY issues
     ADD CONSTRAINT issues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: need_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY need_searches
+    ADD CONSTRAINT need_searches_pkey PRIMARY KEY (id);
 
 
 --
@@ -596,6 +647,14 @@ ALTER TABLE ONLY issues
 
 
 --
+-- Name: need_searches_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY need_searches
+    ADD CONSTRAINT need_searches_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: pros_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -615,5 +674,5 @@ ALTER TABLE ONLY search_alerts
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728);
+INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728), (20170306065436), (20170306065857);
 
