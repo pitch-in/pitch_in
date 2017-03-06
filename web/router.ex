@@ -61,7 +61,7 @@ defmodule PitchIn.Router do
     pipe_through [:browser, :admin]
 
     get "/dashboard", DashboardController, :index
-    get "/campaign", CampaignController, :index
+    get "/campaigns", CampaignController, :index
   end
 
   # Other scopes may use custom stacks.
