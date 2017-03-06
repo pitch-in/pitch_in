@@ -30,7 +30,7 @@
         About how many hours should an activist expect this to take?
       <p>
     </div>
-    <%= number_input f, :hours %>
+    <%= number_input f, :hours, min: 0, step: 1 %>
     <%= error_tag f, :hours %>
   </div>
 
