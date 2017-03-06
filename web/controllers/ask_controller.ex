@@ -24,11 +24,21 @@ defmodule PitchIn.AskController do
   end
 
   def index(conn, %{"filter" => filter}) do
+    user = conn.assigns.current_user
     asks = search_asks(filter)
+
+    search_changeset_params = Map.put(filter, "found_count", length(asks))
+
+    search_changeset = 
+      user
+      |> build_assoc(:need_searches)
+      |> PitchIn.NeedSearch.changeset(search_changeset_params)
+
+    # Note this may fail, and that's fine.
+    Repo.insert(search_changeset)
 
     conn = 
       if filter["create_alert"] do
-        user = conn.assigns.current_user
 
         alert_changeset = 
           user

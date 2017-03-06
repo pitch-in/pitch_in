@@ -149,7 +149,7 @@ defmodule PitchIn.Auth do
       |> Phoenix.Controller.put_flash(:alert, "You don't have access to that page.")
       |> put_status(404)
       |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
-      |> Phoenix.Controller.halt
+      |> halt
     end
   end
 
