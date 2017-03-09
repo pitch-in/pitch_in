@@ -94,7 +94,7 @@
 
   <li>
     <strong>Twitter url:</strong>
-    <%= format_url @campaign.twitter_url %>
+    <%= link twitter_to_handle(@campaign.twitter_url), to: twitter_to_url(@campaign.twitter_url) %>
   </li>
 
   <li>
