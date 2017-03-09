@@ -5,6 +5,8 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Campaign
   alias PitchIn.Issue
   alias PitchIn.User
+  alias PitchIn.Email
+  alias PitchIn.Mailer
 
   use PitchIn.Auth, protect: :all, pass_user: true
   plug :check_campaign_staff, [id: "id"] when action in [:show, :edit, :update, :delete]
@@ -43,6 +45,8 @@ defmodule PitchIn.CampaignController do
 
     case Repo.insert(changeset) do
       {:ok, campaign} ->
+        Email.admin_new_campaign_email(conn, campaign) |> Mailer.deliver_later
+
         conn
         |> redirect(to: campaign_path(conn, :interstitial, campaign))
       {:error, changeset} ->

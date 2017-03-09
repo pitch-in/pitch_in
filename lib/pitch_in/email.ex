@@ -45,6 +45,13 @@ defmodule PitchIn.Email do
     |> text_body(user_body)
   end
 
+  def admin_new_campaign_email(conn, campaign) do
+    @contact_us_email
+    |> base_email
+    |> subject("New Campaign!")
+    |> render("admin_new_campaign.html", conn: conn, campaign: campaign)
+  end
+
   def test_email(email_address, conn) do
     email_address
     |> base_email
