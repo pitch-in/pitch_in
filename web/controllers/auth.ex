@@ -114,7 +114,7 @@ defmodule PitchIn.Auth do
   def check_campaign_staff(conn, opts) do
     id_key = opts[:id] || "campaign_id"
 
-    if !conn.params[id_key] do
+    if !conn.params[id_key] || !conn.assigns.current_user do
       assign(conn, :is_staff, false)
     else
       user_id = conn.assigns.current_user.id
