@@ -41,5 +41,6 @@
     <div class="form-group">
       <%= submit "Submit", class: "expanded success button" %>
     </div>
+    <%= link "View our Privacy Policy", to: html_path(@conn, :privacy_policy) %>
   <% end %>
 </section>

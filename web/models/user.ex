@@ -7,6 +7,7 @@ defmodule PitchIn.User do
     has_one :pro, PitchIn.Pro
     has_many :answers, PitchIn.Answer
     has_many :search_alerts, PitchIn.SearchAlert
+    has_many :need_searches, PitchIn.NeedSearch
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string

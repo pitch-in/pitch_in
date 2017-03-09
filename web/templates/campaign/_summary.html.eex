@@ -1,3 +1,4 @@
+<div class="campaign-summary">
 <ul>
   <li>
     <strong>Campaign:</strong>
@@ -26,3 +27,4 @@
     <%= @campaign.short_pitch %>
   </li>
 </ul>
+</div>

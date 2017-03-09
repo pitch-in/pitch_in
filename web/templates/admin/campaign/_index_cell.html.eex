@@ -1,0 +1,8 @@
+<td>
+  <strong class="hide-for-large">
+    <%= @key %>:
+  </strong>
+  <span>
+    <%= Map.get(@campaign, @key) %>
+  </span>
+</td>

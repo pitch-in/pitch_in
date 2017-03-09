@@ -1,0 +1,4 @@
+<p>
+  A new campaign just got created!
+  link: <%= link @campaign.name, to: full_domain(@conn) <> campaign_path(@conn, :show, @campaign) %>
+</p>

@@ -82,10 +82,14 @@ defmodule PitchIn.ViewHelpers do
   ##############
   # Formatters #
   ##############
+  def format_date(nil), do: ""
+  def format_date(""), do: ""
   def format_date(date) do
     Timex.format!(date, "%m/%d/%Y", :strftime)
   end
 
+  def format_phone(nil), do: ""
+  def format_phone(""), do: ""
   def format_phone(phone) do
     [_ | parts] = Regex.run(~r/(\d\d\d)(\d\d\d)(\d\d\d\d)/, phone)
     Enum.join(parts, "-")
@@ -103,6 +107,22 @@ defmodule PitchIn.ViewHelpers do
     url = "#{scheme}#{conn.host}"
     url = if Mix.env != :prod, do: url <> "#{conn.port}", else: url
     url <> path
+  end
+
+  def twitter_to_handle(nil), do: ""
+  def twitter_to_handle(twitter) do
+    case Regex.run(~r/@?(.+)/, twitter) do
+      [_, handle] -> "@#{handle}"
+      _ -> ""
+    end
+  end
+
+  def twitter_to_url(nil), do: ""
+  def twitter_to_url(twitter) do
+    case Regex.run(~r/@?(.+)/, twitter) do
+      [_, handle] -> "https://twitter.com/#{handle}"
+      _ -> ""
+    end
   end
 
   ##############

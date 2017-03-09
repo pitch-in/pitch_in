@@ -95,19 +95,19 @@
 
   <div>
     <%= optional_label f, :website_url %>
-    <%= text_input f, :website_url %>
+    <%= text_input f, :website_url, placeholder: "http://" %>
     <%= error_tag f, :website_url %>
   </div>
 
   <div>
-    <%= optional_label f, :twitter_url %>
-    <%= text_input f, :twitter_url %>
+    <%= optional_label f, :twitter_url, "Twitter Handle" %>
+    <%= text_input f, :twitter_url, placeholder: "@" %>
     <%= error_tag f, :twitter_url %>
   </div>
 
   <div>
     <%= optional_label f, :facebook_url %>
-    <%= text_input f, :facebook_url %>
+    <%= text_input f, :facebook_url, placeholder: "https://www.facebook.com/" %>
     <%= error_tag f, :facebook_url %>
   </div>
 
