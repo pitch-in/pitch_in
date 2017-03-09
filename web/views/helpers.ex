@@ -109,6 +109,7 @@ defmodule PitchIn.ViewHelpers do
     url <> path
   end
 
+  def twitter_to_handle(nil), do: ""
   def twitter_to_handle(twitter) do
     case Regex.run(~r/@?(.+)/, twitter) do
       [_, handle] -> "@#{handle}"
@@ -116,6 +117,7 @@ defmodule PitchIn.ViewHelpers do
     end
   end
 
+  def twitter_to_url(nil), do: ""
   def twitter_to_url(twitter) do
     case Regex.run(~r/@?(.+)/, twitter) do
       [_, handle] -> "https://twitter.com/#{handle}"
