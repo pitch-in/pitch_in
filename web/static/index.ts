@@ -11,6 +11,7 @@ import './fonts/Phosphate-Solid.ttf';
 import './favicon.ico';
 // import './img/logo.png';
 // import './img/shovels.png';
+import './img/hero.jpg';
 import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';

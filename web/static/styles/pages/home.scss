@@ -1,7 +1,27 @@
 .home {
   .home-section {
     padding: 20px;
-    background: $blue;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      background-color: $blue;
+      background-image: url('../img/hero.jpg');
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: top;
+      filter: blur(2px) brightness(0.5);
+      position: absolute;
+  
+      $blur-border: -5px;
+
+      top: $blur-border;
+      left: $blur-border;
+      bottom: $blur-border;
+      right: $blur-border;
+      z-index: -1;
+    }
 
     h1 {
       // Special bigger size text.
