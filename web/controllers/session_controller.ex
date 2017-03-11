@@ -10,8 +10,8 @@ defmodule PitchIn.SessionController do
     case Auth.login_by_identity(conn, email, password, repo: Repo) do
       {:ok, conn} ->
         case Auth.get_deep_link_path(conn) do
-          deep_link_path -> redirect_deep(conn, deep_link_path)
           nil -> redirect_to_default(conn)
+          deep_link_path -> redirect_deep(conn, deep_link_path)
         end
       {:error, _reason, conn} ->
         conn

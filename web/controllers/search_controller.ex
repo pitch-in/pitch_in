@@ -5,6 +5,9 @@ defmodule PitchIn.SearchController do
   alias PitchIn.Campaign
   alias PitchIn.SearchAlert
   alias PitchIn.NeedSearch
+  import Ecto.Changeset, only: [put_assoc: 3]
+
+  use PitchIn.Auth
 
   def index(conn, %{"filter" => filter}) do
     user = conn.assigns.current_user
@@ -13,20 +16,19 @@ defmodule PitchIn.SearchController do
     search_changeset_params = Map.put(filter, "found_count", length(asks))
 
     search_changeset = 
-      user
-      |> build_assoc(:need_searches)
+      %NeedSearch{}
       |> NeedSearch.changeset(search_changeset_params)
+      |> put_assoc(:user, user)
 
     # Note this may fail, and that's fine.
     Repo.insert(search_changeset)
 
     conn = 
       if filter["create_alert"] do
-
         alert_changeset = 
-          user
-          |> build_assoc(:search_alerts)
+          %SearchAlert{}
           |> SearchAlert.changeset(filter)
+          |> put_assoc(:user, user)
 
         # Note this may fail, and that's fine.
         Repo.insert(alert_changeset)
