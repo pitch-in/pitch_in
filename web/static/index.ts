@@ -11,7 +11,7 @@ import './fonts/Phosphate-Solid.ttf';
 import './favicon.ico';
 // import './img/logo.png';
 // import './img/shovels.png';
-import './img/hero.jpg';
+const hero_path: string = require('./img/hero.jpg');
 import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';
@@ -27,6 +27,7 @@ import 'foundation-sites/js/foundation.util.triggers';
 import 'foundation-sites/js/foundation.responsiveMenu';
 import 'foundation-sites/js/foundation.responsiveToggle';
 import 'motion-ui';
+import 'jquery-parallax.js';
 
 import components from './components/index';
 
@@ -34,5 +35,10 @@ $(document).ready(($) => {
   $(document).foundation();
   components($);
   $('body').removeClass('no-js');
+
+  $('.home-section .home-background').parallax({
+    imageSrc: hero_path,
+    position: 'center top'
+  });
 });
 

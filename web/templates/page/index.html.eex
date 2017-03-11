@@ -1,6 +1,7 @@
 <div class="home">
   <%= render "_home_navbar.html", conn: @conn %>
   <section class="home-section text-center" >
+    <div class="home-background"></div>
     <div class="column" >
       <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.svg") %>" />
 

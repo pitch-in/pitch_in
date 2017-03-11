@@ -1,3 +1,7 @@
+.parallax-slider {
+  filter: blur(2px) brightness(0.5);
+}
+
 .home {
   .home-section {
     padding: 20px;
@@ -7,23 +11,15 @@
       transparent, rgba($gray, 0.35) 75%
     );
 
-    &::before {
-      content: "";
-      background-color: $blue;
-      background-image: url('../img/hero.jpg');
-      background-size: cover;
-      background-position-x: center;
-      background-position-y: top;
-      filter: blur(2px) brightness(0.5);
-      position: absolute;
-  
+    .home-background {
       $blur-border: -5px;
+
+      position: absolute;
 
       top: $blur-border;
       left: $blur-border;
       bottom: $blur-border;
       right: $blur-border;
-      z-index: -1;
     }
 
     h1 {
