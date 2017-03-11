@@ -22,7 +22,7 @@
 
     <%= inputs_for f, :pro, fn i -> %>
       <div class="form-group">
-        <%= label i, :profession %>
+        <%= label i, :profession, "Profession or Passion" %>
         <%= select i, :profession, profession_options %>
         <%= error_tag i, :profession %>
       </div>
