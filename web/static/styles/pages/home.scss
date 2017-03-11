@@ -1,5 +1,6 @@
-.parallax-slider {
-  filter: blur(2px) brightness(0.5);
+.parallax-slider, .home-background {
+  filter: blur(2px) brightness(0.75);
+  z-index: -1;
 }
 
 .home {
