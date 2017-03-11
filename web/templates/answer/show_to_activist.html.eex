@@ -15,6 +15,6 @@
 <br/>
 
 <div class="expanded button-group">
-  <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
+  <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>

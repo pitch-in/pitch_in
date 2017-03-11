@@ -23,13 +23,13 @@ defmodule PitchIn.SessionController do
   def delete(conn, _) do
     conn
     |> Auth.logout
-    |> redirect(to: ask_path(conn, :index))
+    |> redirect(to: search_path(conn, :index))
   end
 
   defp redirect_to_default(conn) do
     conn
     |> put_flash(:success, "Welcome back!")
-    |> redirect(to: ask_path(conn, :index))
+    |> redirect(to: search_path(conn, :index))
   end
 
   defp redirect_deep(conn, deep_link_path) do

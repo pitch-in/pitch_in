@@ -6,7 +6,7 @@
       or filter the results by profession, minimum experience, or a keyword.
     </p>
 
-    <%= form_for @conn, ask_path(@conn, :index), [
+    <%= form_for @conn, search_path(@conn, :index), [
       as: :filter, method: :get, csrf_token: false, enforce_utf8: false
     ], fn f -> %>
       <div>
@@ -38,7 +38,7 @@
 
       <div class="expanded button-group">
         <%= submit "Search", class: "button" %>
-        <%= link "Clear", to: ask_path(@conn, :index, clear: true), class: "alert button" %>
+        <%= link "Clear", to: search_path(@conn, :index, clear: true), class: "alert button" %>
         <%= if @show_alert_button do %>
           <%= submit "Create Alert", class: "warning button", value: "create_alert", name: "filter[create_alert]" %>
         <%= end %>

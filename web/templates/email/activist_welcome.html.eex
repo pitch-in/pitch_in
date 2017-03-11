@@ -8,7 +8,7 @@
 
 <p>
   Campaigns are going to be looking for your skills! Check out the 
-  <%= link "search", to: full_domain(@conn) <> ask_path(@conn, :index) %>
+  <%= link "search", to: full_domain(@conn) <> search_path(@conn, :index) %>
   page to search for open Needs, and to set up email 
   alerts to commit to helping out as new campaings get started!
 </p>
