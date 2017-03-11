@@ -1,23 +1,63 @@
 .home {
   .home-section {
     padding: 20px;
-    background: $blue;
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(
+      transparent, rgba($gray, 0.35) 75%
+    );
+
+    &::before {
+      content: "";
+      background-color: $blue;
+      background-image: url('../img/hero.jpg');
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: top;
+      filter: blur(2px) brightness(0.5);
+      position: absolute;
+  
+      $blur-border: -5px;
+
+      top: $blur-border;
+      left: $blur-border;
+      bottom: $blur-border;
+      right: $blur-border;
+      z-index: -1;
+    }
 
     h1 {
-      // Special bigger size text.
-      font-size: 3rem;
+      @include breakpoint(large) {
+        // Special bigger size text.
+        font-size: 3rem;
+      }
     }
 
     h1, p {
       color: $white;
     }
+  }
 
+  .or-text {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    align-self: center;
+
+    @include breakpoint(medium) {
+      margin: 0 8px 0 0;
+    }
   }
 
   .home-logo {
     margin-top: 20px;
     max-width: 216px;
     width: 75%;
+
+    filter: drop-shadow(0 2px 1px $gray);
   }
 
+  .blue.pop {
+    color: $blue;
+  }
 }

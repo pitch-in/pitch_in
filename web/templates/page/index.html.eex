@@ -14,37 +14,37 @@
 
   <div class="row column">
     <section class="content-block" id="first-time-here">
-      <h2>First time here?</h2>
+      <p class="take-action"><strong>
+        <span class="blue pop">It’s time to for you to take action.</span>
+        We connect you to the local progressive campaigns and causes you care about most.
+      </strong></p>
 
-      <p>
-        We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about.
-      </p>
-
-      <div class="expanded button-group">
-        <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
-        <%= link "Sign up as a Campaign", to: user_path(@conn, :new, staff: true), class: "large warning button" %>
+      <div class="expanded stacked-for-small button-group">
+        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert button" %>
+        <div class="or-text">or</div>
+        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert button" %>
       </div>
     </section>
 
     <section class="content-block" id="how-this-works">
       <h2>How this works</h2>
       <p>
-        You’ve already taken the first step by coming here. Our mission is to utilize your passion and talents to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need of your unique profile of values and experience.
+      You’ve already taken the first step by coming here. Our mission is for you to use passions and skills to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need.
       </p>
     </section>
 
     <section class="content-block" id="verification-process">
       <h2>
-        Campaign Verification Process
+        Start the next movement
       </h2>
       <p>
-        Pitch In connects your movement with the inner activist in every American. You have the vision, the grit and the drive -- now you need the people power to get it done. We connect your campaign with budding activists of various skill levels willing to volunteer their time to make your campaign a success. They are the good samaritans translating their professional expertise into a world changing pastime. When you sign up with Pitch In, we will contact you to verify your campaign to ensure the best experience for our activists.
+        Pitch In connects your movement with with people hungry to make a difference. You have the vision, the grit and the drive &mdash; now you need the people power to get it done. We connect your campaign with the people of various skill levels willing to volunteer their time to make your campaign a success. They are the good samaritans translating their professional or personal expertise into a world changing pastime. When you sign up with Pitch In, we will contact you to verify your campaign to ensure the best experience for our users.
       </p>
     </section>
 
     <section class="content-block" id="about-us">
       <h2>
-        By Activists, For Activists
+        Who are we?
       </h2>
       <p>
         We are a group of friends, progressive organizers and start-up techies passionate about making activism accessible for everyone.
@@ -69,7 +69,7 @@
     <section class="content-block" id="contact-us">
       <h2>Contact Us</h2>
       <p>
-        We have a lot of work to do, so help us better serve your activism! 
+        We have a lot of work to do, so help us better serve you!
       </p>
       <%= render(
         PitchIn.ContactUsView,
@@ -82,8 +82,8 @@
 
     <section class="list-header content-block">
       <div class="expanded button-group">
-        <%= link "Sign up as an activist", to: user_path(@conn, :new), class: "large success button" %>
-        <%= link "Sign up as a Campaign", to: user_path(@conn, :new, staff: true), class: "large warning button" %>
+        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert button" %>
+        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert button" %>
       </div>
     </section>
   </div>
