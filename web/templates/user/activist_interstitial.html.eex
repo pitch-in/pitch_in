@@ -1,7 +1,7 @@
 <%= next_steps PitchIn.User, @user, "creating an account, #{@user.name}!", fn step_name -> %>
   <%= case step_name do %>
     <% :search -> %>
-      <%= next_step "Search", to: ask_path(@conn, :index), color: "primary" do %>
+      <%= next_step "Search", to: search_path(@conn, :index), color: "primary" do %>
         See what kind of help progressive campaigns are looking for, and start pitching in!
       <% end %>
     <% :profile -> %>

@@ -6,7 +6,7 @@ defmodule PitchIn.AskControllerTest do
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
-    conn = get conn, ask_path(conn, :index)
+    conn = get conn, search_path(conn, :index)
     assert html_response(conn, 200) =~ "Listing asks"
   end
 

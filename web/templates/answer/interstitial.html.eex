@@ -1,7 +1,7 @@
 <%= next_steps PitchIn.Answer, @answer, "pitching in with #{@campaign.name}!", fn step_name -> %>
   <%= case step_name do %>
     <% :search -> %>
-      <%= next_step "Search Again", to: ask_path(@conn, :index), color: "success" do %>
+      <%= next_step "Search Again", to: search_path(@conn, :index), color: "success" do %>
         Don't stop yet!
         You can search again to see where else you can pitch in.
       <% end %>

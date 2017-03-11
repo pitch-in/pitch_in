@@ -18,6 +18,6 @@
 
 <div class="expanded button-group">
   <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "warning button" %>
-  <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
+  <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary button" %>
 </div>
 </section>

@@ -11,7 +11,7 @@
 
         <%= if @current_user do %>
           <li class="show-for-large">
-            <%= link "Search Needs", to: ask_path(@conn, :index) %>
+            <%= link "Search Needs", to: search_path(@conn, :index) %>
           </li>
           <li class="show-for-large">
             <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
@@ -51,7 +51,7 @@
       <ul class="vertical large-horizontal menu">
         <%= if @current_user do %>
           <li class="hide-for-large">
-            <%= link "Search Needs", to: ask_path(@conn, :index) %>
+            <%= link "Search Needs", to: search_path(@conn, :index) %>
           </li>
           <li>
             <%= link "New Campaign", to: campaign_path(@conn, :new) %>
