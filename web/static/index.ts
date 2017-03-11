@@ -36,9 +36,9 @@ $(document).ready(($) => {
   components($);
   $('body').removeClass('no-js');
 
-  $('.home-section .home-background').parallax({
-    imageSrc: hero_path,
-    position: 'center top'
-  });
+  // $('.home-section .home-background').parallax({
+  //   imageSrc: hero_path,
+  //   position: 'center bottom'
+  // });
 });
 

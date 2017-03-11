@@ -1,5 +1,5 @@
 .parallax-slider, .home-background {
-  filter: blur(2px) brightness(0.75);
+  filter: blur(2px) brightness(0.95);
   z-index: -1;
 }
 
@@ -9,11 +9,15 @@
     position: relative;
     overflow: hidden;
     background-image: linear-gradient(
-      transparent, rgba($gray, 0.35) 75%
+      rgba($black, 0), rgba($black, 0.75) 75%
     );
 
     .home-background {
       $blur-border: -5px;
+
+      background-image: url('../img/hero.jpg');
+      background-position: center top;
+      background-size: cover;
 
       position: absolute;
 
