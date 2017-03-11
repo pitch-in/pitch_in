@@ -7,7 +7,6 @@ defmodule PitchIn.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
   defmacro __using__(opts) do
-    
     methods = opts[:protect]
     guard =
       case methods do
@@ -102,6 +101,7 @@ defmodule PitchIn.Auth do
       conn
     else
       conn
+      |> store_deep_link_path
       |> Phoenix.Controller.put_flash(:alert, "You must log in to view this page.")
       |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
       |> halt
@@ -162,5 +162,15 @@ defmodule PitchIn.Auth do
       |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
       |> halt
     end
+  end
+
+  def store_deep_link_path(conn) do
+    conn
+    |> put_session(:deep_link_path, conn.request_path)
+  end
+
+  def get_deep_link_path(conn) do
+    conn
+    |> get_session(:deep_link_path)
   end
 end

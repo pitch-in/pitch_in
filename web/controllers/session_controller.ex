@@ -9,9 +9,10 @@ defmodule PitchIn.SessionController do
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     case Auth.login_by_identity(conn, email, password, repo: Repo) do
       {:ok, conn} ->
-        conn
-        |> put_flash(:success, "Welcome back!")
-        |> redirect(to: ask_path(conn, :index))
+        case Auth.get_deep_link_path(conn) do
+          deep_link_path -> redirect_deep(conn, deep_link_path)
+          nil -> redirect_to_default(conn)
+        end
       {:error, _reason, conn} ->
         conn
         |> put_flash(:alert, "Invalid username/password combination.")
@@ -23,5 +24,17 @@ defmodule PitchIn.SessionController do
     conn
     |> Auth.logout
     |> redirect(to: ask_path(conn, :index))
+  end
+
+  defp redirect_to_default(conn) do
+    conn
+    |> put_flash(:success, "Welcome back!")
+    |> redirect(to: ask_path(conn, :index))
+  end
+
+  defp redirect_deep(conn, deep_link_path) do
+    conn
+    |> put_flash(:success, "Welcome back!")
+    |> redirect(to: deep_link_path)
   end
 end
