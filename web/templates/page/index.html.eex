@@ -14,16 +14,18 @@
   <%= render PitchIn.LayoutView, "_flash.html", conn: @conn %>
 
   <div class="row column">
-    <section class="content-block" id="first-time-here">
-      <p class="take-action"><strong>
-        <span class="blue pop">It’s time to for you to take action.</span>
-        We connect you to the local progressive campaigns and causes you care about most.
-      </strong></p>
+    <section class="expanded content-block" id="first-time-here">
+      <p class="take-action text-center">
+        <strong>
+          <span class="blue pop">It’s time to for you to take action.</span><br/>
+          We connect you to the local progressive campaigns and causes you care about most.
+        </strong>
+      </p>
 
-      <div class="expanded stacked-for-small button-group">
-        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert button" %>
+      <div class="expanded stacked-for-small home-action-buttons button-group">
+        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert action button" %>
         <div class="or-text">or</div>
-        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert button" %>
+        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert action button" %>
       </div>
     </section>
 
@@ -83,8 +85,8 @@
 
     <section class="list-header content-block">
       <div class="expanded button-group">
-        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert button" %>
-        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert button" %>
+        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert action button" %>
+        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert action button" %>
       </div>
     </section>
   </div>

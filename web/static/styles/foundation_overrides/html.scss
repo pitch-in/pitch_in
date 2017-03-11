@@ -27,6 +27,7 @@
 
   &.white {
     background-color: $white;
+    color: $black;
 
     &.hollow {
       color: $white;
@@ -37,6 +38,11 @@
 
   &.hollow {
     box-shadow: none;
+    border-width: 2px !important;
+  }
+
+  &.action {
+    text-transform: uppercase;
   }
 }
 

@@ -4,6 +4,16 @@
 }
 
 .home {
+  .expanded.home-action-buttons {
+    width: 55%;
+    margin: 0 auto;
+
+    .button {
+      height: 3.5rem;
+      display: flex;
+    }
+  }
+
   .home-section {
     padding: 20px;
     position: relative;
