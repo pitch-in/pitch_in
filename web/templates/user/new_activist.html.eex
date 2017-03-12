@@ -1,5 +1,5 @@
 <section class="content-block">
-  <h2>New activist!</h2>
+  <h2>Create your profile</h2>
 
   <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
     <%= if @changeset.action do %>
@@ -22,7 +22,7 @@
 
     <%= inputs_for f, :pro, fn i -> %>
       <div class="form-group">
-        <%= label i, :profession %>
+        <%= label i, :profession, "Profession or Passion" %>
         <%= select i, :profession, profession_options %>
         <%= error_tag i, :profession %>
       </div>

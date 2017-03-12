@@ -6,6 +6,7 @@ defmodule PitchIn.UserController do
   alias PitchIn.Campaign
   alias PitchIn.Email
   alias PitchIn.Mailer
+  alias PitchIn.Auth
 
   use PitchIn.Auth, protect: [:show, :edit, :update]
   plug :verify_user when action in [:show, :edit, :update]
@@ -50,7 +51,7 @@ defmodule PitchIn.UserController do
           Welcome to Pitch In! You can now create a campaign, and then start
           posting what you need to get your campaign going!
         """)
-        |> redirect(to: campaign_path(conn, :edit, campaign))
+        |> redirect(to: Auth.get_deep_link_path(conn) || campaign_path(conn, :edit, campaign))
       {:error, changeset} ->
         render(conn, "new_staff.html", changeset: changeset)
     end
@@ -68,7 +69,7 @@ defmodule PitchIn.UserController do
 
         conn
         |> PitchIn.Auth.login(user)
-        |> redirect(to: user_path(conn, :interstitial, user))
+        |> redirect(to: Auth.get_deep_link_path(conn) || user_path(conn, :interstitial, user))
       {:error, changeset} ->
         render(conn, "new_activist.html", changeset: changeset)
     end

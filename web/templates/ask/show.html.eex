@@ -45,7 +45,7 @@
     <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary button" %>
   <%= else %>
     <%= link "Answer", to: campaign_ask_answer_path(@conn, :new, @ask.campaign_id, @ask), class: "success button" %>
-    <%= link "Back to Search", to: ask_path(@conn, :index), class: "secondary button" %>
+    <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary button" %>
   <% end %>
 </div>
 </section>

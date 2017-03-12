@@ -1,7 +1,10 @@
 <nav class="navbar home-navbar" >
   <div class="top-bar title" data-responsive-toggle="top-nav" data-hide-for="none">
     <div class="title-bar-title logo">
-      <%= link "Sign In", to: session_path(@conn, :new), class: "alert dark-shadow button " %>
+      <div class="button-group">
+      <%= link "Sign Up", to: user_path(@conn, :new), class: "alert dark-shadow button " %>
+      <%= link "Log In", to: session_path(@conn, :new), class: "hollow white button " %>
+      </div>
     </div>
     <button class="menu-icon" type="button" data-toggle="top-nav"></button>
   </div>

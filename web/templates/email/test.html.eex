@@ -3,5 +3,5 @@
 </p>
 <p>
   Just a test email to see if this works.
-  <%= link "Search Link", to: full_domain(@conn) <> ask_path(@conn, :index) %>
+  <%= link "Search Link", to: full_domain(@conn) <> search_path(@conn, :index) %>
 </p>

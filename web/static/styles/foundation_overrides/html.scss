@@ -24,6 +24,26 @@
   &.cyan {
     background-color: $cyan;
   }
+
+  &.white {
+    background-color: $white;
+    color: $black;
+
+    &.hollow {
+      color: $white;
+      background-color: transparent;
+      border-color: $white;
+    }
+  }
+
+  &.hollow {
+    box-shadow: none;
+    border-width: 2px !important;
+  }
+
+  &.action {
+    text-transform: uppercase;
+  }
 }
 
 // Handle delete buttons in an expanded group.

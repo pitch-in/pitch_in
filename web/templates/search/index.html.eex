@@ -1,0 +1,65 @@
+<div class="ask-index">
+  <section class="expanded content-block">
+    <h2>Search Needs</h2>
+    <p>
+      Campaigns across the country are looking for help! You can take a look at all the open needs below,
+      or filter the results by profession, minimum experience, or a keyword.
+    </p>
+
+    <%= form_for @conn, search_path(@conn, :index), [
+      as: :filter, method: :get, csrf_token: false, enforce_utf8: false
+    ], fn f -> %>
+      <div>
+        <%= label f, :profession, "Indicate your profession" %>
+        <%= select f, :profession, [{"", ""}] ++ profession_options %>
+        <%= error_tag f, :profession %>
+      </div>
+      <div>
+        <%= label f, :years_experience, "Relevant years experience" %>
+        <%= number_input f, :years_experience, step: "any", min: 0 %>
+        <%= error_tag f, :years_experience %>
+      </div>
+      <div>
+        <%= label f, :issue, "Keyword (ex: \"women\", \"clean water\", \"education\")" %>
+        <%= text_input f, :issue %>
+        <%= error_tag f, :issue %>
+      </div>
+
+      <%= if @show_alert_button do %>
+        <p class="input-description text-center">
+          Create an alert, and we'll email you when campaigns 
+          tell us they have needs that match this search!
+          <br/>
+          Don't worry, we won't send you more than one email a day,
+          and we'll never give a campaign your contact information
+          without your permission.
+        </p>
+      <% end %>
+
+      <div class="expanded button-group">
+        <%= submit "Search", class: "button" %>
+        <%= link "Clear", to: search_path(@conn, :index, clear: true), class: "alert button" %>
+        <%= if @show_alert_button do %>
+          <%= submit "Create Alert", class: "warning button", value: "create_alert", name: "filter[create_alert]" %>
+        <%= end %>
+      </div>
+    <% end %>
+  </section>
+
+  <%= case @asks do %>
+    <% nil -> %>
+    <% [] -> %>
+      <div class="list-header content-block">
+        <h3>
+          Sorry, no results found.
+        </h3>
+        <p>
+          Make sure to set an alert, and check back in later, more campaigns will be looking for help soon!
+        </p>
+      </div>
+    <% _ -> %>
+      <%= for ask <- @asks do %>
+        <%= render "_search_summary.html", conn: @conn, ask: ask %>
+      <% end %>
+  <% end %>
+</div>

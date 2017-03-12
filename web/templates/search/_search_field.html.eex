@@ -1,0 +1,6 @@
+<div class="small-2 columns">
+  <%= label @form, @field, class: "text-right" %>
+</div>
+<div class="small-9 columns">
+  <%= text_input @form, @field %>
+</div>
