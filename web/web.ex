@@ -24,7 +24,7 @@ defmodule PitchIn.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-
+      import PitchIn.ModelHelpers
     end
   end
 

@@ -24,7 +24,7 @@
   </div>
 
   <div>
-    <%= label f, :profession %>
+    <%= label f, :profession, "Profession or Passion" %>
     <%= select f, :profession, profession_options %>
     <%= error_tag f, :profession %>
   </div>
@@ -59,7 +59,7 @@
 
   <div>
     <%= label f, :linkedin_url %>
-    <%= text_input f, :linkedin_url %>
+    <%= text_input f, :linkedin_url, placeholder: "https://www.linkedin.com/in/" %>
     <%= error_tag f, :linkedin_url %>
   </div>
 
@@ -71,7 +71,7 @@
 
   <div>
     <%= label f, :twitter_handle %>
-    <%= text_input f, :twitter_handle %>
+    <%= text_input f, :twitter_handle, placeholder: "@" %>
     <%= error_tag f, :twitter_handle %>
   </div>
 
