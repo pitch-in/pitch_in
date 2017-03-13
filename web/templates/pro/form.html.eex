@@ -31,7 +31,7 @@
 
   <div>
     <%= label f, :phone %>
-    <%= text_input f, :phone, autocomplete: "tel" %>
+    <%= text_input f, :phone, autocomplete: "tel", data_mask: "(000) 000-0000" %>
     <%= error_tag f, :phone %>
   </div>
 
