@@ -3,7 +3,7 @@
     <h2>Search Needs</h2>
     <p>
       Campaigns across the country are looking for help! You can take a look at all the open needs below,
-      or filter the results by profession, minimum experience, or a keyword.
+      or sort the results by profession or a keyword.
     </p>
 
     <%= form_for @conn, search_path(@conn, :index), [
@@ -46,7 +46,7 @@
     <% end %>
   </section>
 
-  <%= case @asks do %>
+  <%= case @campaigns do %>
     <% nil -> %>
     <% [] -> %>
       <div class="list-header content-block">
@@ -58,8 +58,8 @@
         </p>
       </div>
     <% _ -> %>
-      <%= for ask <- @asks do %>
-        <%= render "_search_summary.html", conn: @conn, ask: ask %>
+      <%= for campaign <- @campaigns do %>
+        <%= render "_search_summary.html", conn: @conn, campaign: campaign %>
       <% end %>
   <% end %>
 </div>

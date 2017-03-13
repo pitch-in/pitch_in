@@ -5,19 +5,18 @@ defmodule PitchIn.SearchController do
   alias PitchIn.Campaign
   alias PitchIn.SearchAlert
   alias PitchIn.NeedSearch
+  alias PitchIn.Issue
   import Ecto.Changeset, only: [put_assoc: 3]
 
   use PitchIn.Auth
 
   def index(conn, %{"filter" => filter}) do
     user = conn.assigns.current_user
-    asks = search_asks(filter)
-
-    search_changeset_params = Map.put(filter, "found_count", length(asks))
+    campaigns = sort_campaigns(filter)
 
     search_changeset = 
       %NeedSearch{}
-      |> NeedSearch.changeset(search_changeset_params)
+      |> NeedSearch.changeset(filter)
       |> put_assoc(:user, user)
 
     # Note this may fail, and that's fine.
@@ -39,12 +38,12 @@ defmodule PitchIn.SearchController do
         conn
       end
 
-    render(conn, "index.html", asks: asks, show_alert_button: !empty_filter?(filter))
+    render(conn, "index.html", campaigns: campaigns, show_alert_button: !empty_filter?(filter))
   end
 
   def index(conn, params) do
     user = conn.assigns.current_user
-    asks = search_asks(%{})
+    campaigns = sort_campaigns(%{})
 
     if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
@@ -68,7 +67,7 @@ defmodule PitchIn.SearchController do
     else
       conn
     end
-    |> render("index.html", asks: asks, show_alert_button: false)
+    |> render("index.html", campaigns: campaigns, show_alert_button: false)
   end
 
   defp empty_filter?(filter) do
@@ -83,50 +82,63 @@ defmodule PitchIn.SearchController do
   defp like_value(nil), do: "%"
   defp like_value(value), do: "%#{value}%"
 
-  defp to_int_or_infinity(nil), do: 100
-  defp to_int_or_infinity(""), do: 100
-  defp to_int_or_infinity(int) when is_integer(int), do: int
-  defp to_int_or_infinity(string) do
+  defp to_int_or_infinity(number), do: to_int_or_infinity(number, 0)
+  defp to_int_or_infinity(nil, _), do: 100
+  defp to_int_or_infinity("", _), do: 100
+  defp to_int_or_infinity(int, plus) when is_integer(int), do: int + plus
+  defp to_int_or_infinity(string, plus) do
     case Float.parse("0" <> string) do
-      {float, ""} -> round(float)
+      {float, ""} -> round(float) + plus
       _ -> 100
     end
   end
 
-  defp search_asks(filter) do
-    profession = like_value(filter["profession"])
-    years_experience = to_int_or_infinity(filter["years_experience"])
-    issue = filter["issue"]
-
+  defp sort_campaigns(filter) do
     query =
-      from a in Ask,
-      select: a,
-      join: c in Campaign, on: c.id == a.campaign_id,
-      where: ilike(a.profession, ^profession),
-      where: a.years_experience <= ^years_experience,
+      from c in Campaign,
+      left_join: need in (filter |> matching_ask_subquery |> subquery), on: c.id == need.campaign_id,
+      left_join: issue_count in (filter |> issue_count_subquery |> subquery), on: c.id == issue_count.id,
+      left_join: need_count in (filter |> matching_ask_count_subquery |> subquery), on: c.id == need_count.id,
       where: is_nil(c.archived_reason),
-      where: is_nil(a.archived_reason),
-      preload: :campaign
-
-    # Handle issues
-    query = 
-      if filter["issue"] != "" do
-        # Find campaigns with matching issues
-        from [a, c] in query,
-        where: fragment("""
-          ? IN (
-            SELECT DISTINCT campaign_id
-            FROM issues
-            WHERE issue ILIKE ?
-          )
-          OR ? ILIKE ?
-        """,
-        c.id, ^like_value(issue),
-        c.short_pitch, ^like_value(issue))
-      else
-        query
-      end
+      preload: :asks,
+      order_by: [
+        fragment("? DESC NULLS LAST", need_count.count),
+        fragment("? DESC NULLS LAST", issue_count.count),
+        desc: c.inserted_at
+      ]
 
     Repo.all(query)
+  end
+
+  defp matching_ask_subquery(filter) do
+    profession = like_value(filter["profession"])
+    years_experience = to_int_or_infinity(filter["years_experience"], 1)
+
+    from a in Ask,
+    where: ilike(a.profession, ^profession),
+    where: a.years_experience <= ^years_experience,
+    where: is_nil(a.archived_reason)
+  end
+
+  defp matching_ask_count_subquery(filter) do
+    ask_query = matching_ask_subquery(filter)
+
+    from a in ask_query,
+    select: %{id: a.campaign_id, count: count(a.campaign_id)},
+    group_by: a.campaign_id
+  end
+
+  defp issue_count_subquery(filter) do
+    issue = filter["issue"] || ""
+
+    from i in Issue,
+    select: %{id: i.campaign_id, count: count(i.campaign_id)},
+    where: i.issue == ^issue,
+    group_by: i.campaign_id
+  end
+
+  defp to_in_list(list) do
+    items = Enum.join(list, ", ")
+    "(#{items})"
   end
 end
