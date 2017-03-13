@@ -7,7 +7,7 @@ defmodule PitchIn.LayoutView do
 
     default_data = %{
       title: nil,
-      description: "We are a meeting place to connect progressive activists of all skill levels with the local campaigns and causes they care about.",
+      description: "We are a meeting place to connect progressive volunteers of all skill levels with the local campaigns and causes they care about.",
       type: "website",
       image: "/img/logo_blue.png"
     }

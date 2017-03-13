@@ -110,7 +110,7 @@ defmodule PitchIn.AnswerController do
     campaign = ask.campaign
 
     if conn.assigns.is_owner do
-      render(conn, "show_to_activist.html", campaign: campaign, ask: ask, answer: answer)
+      render(conn, "show_to_volunteer.html", campaign: campaign, ask: ask, answer: answer)
     else
       render(conn, "show_to_campaign.html", campaign: campaign, ask: ask, answer: answer)
     end

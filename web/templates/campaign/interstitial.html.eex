@@ -2,7 +2,7 @@
   <%= case step_name do %>
     <% :first_need -> %>
       <%= next_step "Create Need", to: campaign_ask_path(@conn, :new, @campaign), color: "success" do %>
-        Post your first Need, and connect with activists looking to help!
+        Post your first Need, and connect with volunteers looking to help!
       <% end %>
     <% :file_number -> %>
       <%= next_step "Enter File Number", to: campaign_path(@conn, :edit, @campaign), color: "warning" do %>

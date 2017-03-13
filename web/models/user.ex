@@ -36,7 +36,7 @@ defmodule PitchIn.User do
     |> unique_constraint(:email)
   end
 
-  def activist_registration_changeset(struct, params \\ %{}) do
+  def volunteer_registration_changeset(struct, params \\ %{}) do
     struct
     |> registration_changeset(params)
     |> cast_assoc(:pro)
