@@ -52,10 +52,19 @@ defmodule PitchIn.ViewHelpers do
           |> Timex.format!("{M}/{D}/{YYYY}")
       end
 
+    IO.puts "======DATE====="
+    IO.inspect fetch_and_delete(opts, :no_datepicker)
+
+    opts = 
+      case fetch_and_delete(opts, :no_datepicker) do
+        {:ok, true, opts} -> opts
+        _ -> Keyword.merge(opts, data_toggle: "datepicker")
+      end
+
     text_input(
       form,
       field,
-      Keyword.merge(opts, data_toggle: "datepicker", value: formatted_value)
+      Keyword.merge(opts, value: formatted_value)
     )
   end
 
@@ -135,5 +144,25 @@ defmodule PitchIn.ViewHelpers do
     label(form, field) do
       [text || humanize(field), optional_tag]
     end
+  end
+
+  defp get_and_delete(keywords, key) when is_list(keywords) do
+    case Keyword.fetch(keywords, key) do
+      {:ok, value} -> {value, Keyword.delete(keywords, key)}
+      _ -> {nil, keywords}
+    end
+  end
+
+  defp fetch_and_delete(keywords, key) when is_list(keywords) do
+    case Keyword.fetch(keywords, key) do
+      {:ok, value} -> {:ok, value, Keyword.delete(keywords, key)}
+      _ -> :error
+    end
+  end
+
+  defp fetch_and_delete!(keywords, key) when is_list(keywords) do
+    value = Keyword.fetch!(keywords, key)
+
+    {value, Keyword.delete(keywords, key)}
   end
 end
