@@ -7,7 +7,6 @@ defmodule PitchIn.NeedSearch do
     field :profession, :string
     field :years_experience, :integer
     field :issue, :string
-    field :found_count, :integer
 
     timestamps()
   end
@@ -17,7 +16,7 @@ defmodule PitchIn.NeedSearch do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:profession, :years_experience, :issue, :found_count])
+    |> cast(params, [:profession, :years_experience, :issue])
   end
 end
 

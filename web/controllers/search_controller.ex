@@ -32,7 +32,6 @@ defmodule PitchIn.SearchController do
 
   def index(conn, %{"filter" => filter}) do
     user = conn.assigns.current_user
-    results = sort_campaigns(filter)
 
     search_changeset = 
       %NeedSearch{}
@@ -40,54 +39,68 @@ defmodule PitchIn.SearchController do
       |> put_assoc(:user, user)
 
     # Note this may fail, and that's fine.
-    Repo.insert(search_changeset)
-
-    conn = 
-      if filter["create_alert"] do
-        alert_changeset = 
-          %SearchAlert{}
-          |> SearchAlert.changeset(filter)
-          |> put_assoc(:user, user)
-
-        # Note this may fail, and that's fine.
-        Repo.insert(alert_changeset)
+    case Repo.insert(search_changeset) do
+      {:ok, search} ->
+        results = sort_campaigns(search)
 
         conn
-        |> put_flash(:success, "Alert successfully created! You can turn it off at any time under settings.")
-      else
+        |> handle_alert(user, filter)
+        |> render("index.html", results: results, show_alert_button: !empty_filter?(filter))
+      {:error, search_changeset} ->
         conn
-      end
-
-    render(conn, "index.html", results: results, show_alert_button: !empty_filter?(filter))
+        |> render("index.html", changeset: search_changeset, show_alert_button: false)
+    end
   end
 
   def index(conn, params) do
-    user = conn.assigns.current_user
-    results = sort_campaigns(%{})
+    search = make_search(conn, params)
+    search_changeset = NeedSearch.changeset(search)
 
+    results = sort_campaigns(search)
+
+    conn
+    |> render("index.html", changeset: search_changeset, results: results, show_alert_button: false)
+  end
+
+  defp make_search(conn, params) do
+    user = conn.assigns.current_user
     if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
+
+      profession = user.pro.profession
       years_experience = 
         if user.pro.experience_starts_at do
           Timex.diff(Timex.today, user.pro.experience_starts_at, :years)
         else
           nil
         end
+      issues = user.pro.issues
+
+      %NeedSearch{
+        profession: profession,
+        years_experience: years_experience,
+        issue: issues
+      }
+    else
+      %NeedSearch{}
+    end
+  end
+
+  defp handle_alert(conn, user, filter) do
+    if filter["create_alert"] do
+      alert_changeset = 
+        %SearchAlert{}
+        |> SearchAlert.changeset(filter)
+        |> put_assoc(:user, user)
+
+      # Note this may fail, and that's fine.
+      Repo.insert(alert_changeset)
 
       conn
-      |> Map.put(
-        :params,
-        %{
-          "filter" => %{
-            "profession" => user.pro.profession,
-            "years_experience" => years_experience
-          }
-        }
-      )
+      |> put_flash(:success, "Alert successfully created! You can turn it off at any time under settings.")
     else
       conn
     end
-    |> render("index.html", results: results, show_alert_button: false)
   end
 
   defp empty_filter?(filter) do
@@ -97,20 +110,6 @@ defmodule PitchIn.SearchController do
       |> Enum.reduce(&(&1 <> &2))
 
     all_filters == "" 
-  end
-
-  defp like_value(nil), do: "%"
-  defp like_value(value), do: "%#{value}%"
-
-  defp to_int_or_infinity(number), do: to_int_or_infinity(number, 0)
-  defp to_int_or_infinity(nil, _), do: 100
-  defp to_int_or_infinity("", _), do: 100
-  defp to_int_or_infinity(int, plus) when is_integer(int), do: int + plus
-  defp to_int_or_infinity(string, plus) do
-    case Float.parse("0" <> string) do
-      {float, ""} -> round(float) + plus
-      _ -> 100
-    end
   end
 
   defp sort_campaigns(filter) do
@@ -138,8 +137,8 @@ defmodule PitchIn.SearchController do
   end
 
   defp ask_match_rating_subquery(filter) do
-    profession = filter["profession"]
-    years_experience = to_int_or_infinity(filter["years_experience"], 1)
+    profession = filter.profession
+    years_experience = to_int_or_infinity(filter.years_experience)
 
     from a in Ask,
     join: r in fragment(@ask_match_rating, ^profession, ^years_experience), on: a.id == r.id,
@@ -147,7 +146,7 @@ defmodule PitchIn.SearchController do
   end
 
   defp issue_count_subquery(filter) do
-    issue = filter["issue"] || ""
+    issue = filter.issue
 
     from i in Issue,
     select: %{id: i.campaign_id, count: count(i.campaign_id)},
@@ -158,5 +157,19 @@ defmodule PitchIn.SearchController do
   defp to_in_list(list) do
     items = Enum.join(list, ", ")
     "(#{items})"
+  end
+
+  defp like_value(nil), do: "%"
+  defp like_value(value), do: "%#{value}%"
+
+  defp to_int_or_infinity(number), do: to_int_or_infinity(number, 0)
+  defp to_int_or_infinity(nil, _), do: 100
+  defp to_int_or_infinity("", _), do: 100
+  defp to_int_or_infinity(int, plus) when is_integer(int), do: int + plus
+  defp to_int_or_infinity(string, plus) do
+    case Float.parse("0" <> string) do
+      {float, ""} -> round(float) + plus
+      _ -> 100
+    end
   end
 end
