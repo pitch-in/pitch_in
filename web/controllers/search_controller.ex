@@ -33,6 +33,8 @@ defmodule PitchIn.SearchController do
   def index(conn, %{"filter" => filter}) do
     user = conn.assigns.current_user
 
+    filter = Map.update!(filter, "issues", &(split_list(&1)))
+
     search_changeset = 
       %NeedSearch{}
       |> NeedSearch.changeset(filter)
@@ -42,10 +44,14 @@ defmodule PitchIn.SearchController do
     case Repo.insert(search_changeset) do
       {:ok, search} ->
         results = sort_campaigns(search)
+        search_changeset = 
+          search_changeset
+          |> Ecto.Changeset.apply_changes
+          |> NeedSearch.changeset
 
         conn
         |> handle_alert(user, filter)
-        |> render("index.html", results: results, show_alert_button: !empty_filter?(filter))
+        |> render("index.html", changeset: search_changeset, results: results, show_alert_button: !empty_search?(filter))
       {:error, search_changeset} ->
         conn
         |> render("index.html", changeset: search_changeset, show_alert_button: false)
@@ -55,13 +61,14 @@ defmodule PitchIn.SearchController do
   def index(conn, params) do
     search = make_search(conn, params)
     search_changeset = NeedSearch.changeset(search)
+    IO.inspect(search_changeset.data)
 
     results = sort_campaigns(search)
 
     conn
     |> render("index.html", changeset: search_changeset, results: results, show_alert_button: false)
   end
-
+  
   defp make_search(conn, params) do
     user = conn.assigns.current_user
     if user && !params["clear"] do
@@ -74,16 +81,20 @@ defmodule PitchIn.SearchController do
         else
           nil
         end
-      issues = user.pro.issues
+      issues = split_list(user.pro.issues)
 
       %NeedSearch{
         profession: profession,
         years_experience: years_experience,
-        issue: issues
+        issues: issues
       }
     else
       %NeedSearch{}
     end
+  end
+
+  defp split_list(string) do
+    String.split(string, ~r/\s*,\s*/, trim: true)
   end
 
   defp handle_alert(conn, user, filter) do
@@ -103,13 +114,8 @@ defmodule PitchIn.SearchController do
     end
   end
 
-  defp empty_filter?(filter) do
-    all_filters = 
-      filter
-      |> Map.values
-      |> Enum.reduce(&(&1 <> &2))
-
-    all_filters == "" 
+  defp empty_search?(search) do
+    search == %NeedSearch{}
   end
 
   defp sort_campaigns(filter) do
@@ -145,12 +151,10 @@ defmodule PitchIn.SearchController do
     select: %{id: r.id, rating: r.rating}
   end
 
-  defp issue_count_subquery(filter) do
-    issue = filter.issue
-
+  defp issue_count_subquery(search) do
     from i in Issue,
     select: %{id: i.campaign_id, count: count(i.campaign_id)},
-    where: i.issue == ^issue,
+    where: i.issue in ^search.issues,
     group_by: i.campaign_id
   end
 

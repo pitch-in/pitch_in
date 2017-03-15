@@ -20,9 +20,9 @@
         <%= error_tag f, :years_experience %>
       </div>
       <div>
-        <%= label f, :issue, "Keyword (ex: \"women\", \"clean water\", \"education\")" %>
-        <%= text_input f, :issue %>
-        <%= error_tag f, :issue %>
+        <%= label f, :issues, "Keyword (ex: women, clean water, education)" %>
+        <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ", ") %>
+        <%= error_tag f, :issues %>
       </div>
 
       <%= if @show_alert_button do %>
