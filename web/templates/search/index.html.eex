@@ -46,7 +46,7 @@
     <% end %>
   </section>
 
-  <%= case @campaigns do %>
+  <%= case @results do %>
     <% nil -> %>
     <% [] -> %>
       <div class="list-header content-block">
@@ -58,8 +58,8 @@
         </p>
       </div>
     <% _ -> %>
-      <%= for campaign <- @campaigns do %>
-        <%= render "_search_summary.html", conn: @conn, campaign: campaign %>
+      <%= for result <- @results do %>
+        <%= render "_search_summary.html", conn: @conn, result: result %>
       <% end %>
   <% end %>
 </div>

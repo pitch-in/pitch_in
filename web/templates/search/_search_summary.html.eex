@@ -1,9 +1,7 @@
-<%= case @campaign.asks do %>
-  <% [] -> %>
-    <%= render "_campaign_search_summary.html", conn: @conn, campaign: @campaign %>
-  <% asks -> %>
-    <%= for ask <- asks do %>
-      <%= render "_ask_search_summary.html", conn: @conn, campaign: @campaign, ask: ask %>
-    <% end %>
+<%= case @result[:ask] do %>
+  <% nil -> %>
+    <%= render "_campaign_search_summary.html", conn: @conn, campaign: @result[:campaign] %>
+  <% ask -> %>
+    <%= render "_ask_search_summary.html", conn: @conn, campaign: @result[:campaign], ask: ask %>
 <% end %>
 

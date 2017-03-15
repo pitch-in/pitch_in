@@ -10,9 +10,29 @@ defmodule PitchIn.SearchController do
 
   use PitchIn.Auth
 
+  @ask_match_rating """
+  SELECT
+    asks.id,
+    COALESCE(p.rating, 0) + COALESCE(e.rating, 0)
+    AS rating
+  FROM asks
+  LEFT JOIN (
+    SELECT id, 1 AS rating
+    FROM asks
+    WHERE profession = ?
+    AND archived_reason IS NULL
+  ) AS p ON asks.id = p.id
+  LEFT JOIN (
+    SELECT id, 1 as rating
+    FROM asks
+    WHERE years_experience <= ?
+    AND archived_reason IS NULL
+  ) AS e ON asks.id = e.id
+  """
+
   def index(conn, %{"filter" => filter}) do
     user = conn.assigns.current_user
-    campaigns = sort_campaigns(filter)
+    results = sort_campaigns(filter)
 
     search_changeset = 
       %NeedSearch{}
@@ -38,12 +58,12 @@ defmodule PitchIn.SearchController do
         conn
       end
 
-    render(conn, "index.html", campaigns: campaigns, show_alert_button: !empty_filter?(filter))
+    render(conn, "index.html", results: results, show_alert_button: !empty_filter?(filter))
   end
 
   def index(conn, params) do
     user = conn.assigns.current_user
-    campaigns = sort_campaigns(%{})
+    results = sort_campaigns(%{})
 
     if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
@@ -67,7 +87,7 @@ defmodule PitchIn.SearchController do
     else
       conn
     end
-    |> render("index.html", campaigns: campaigns, show_alert_button: false)
+    |> render("index.html", results: results, show_alert_button: false)
   end
 
   defp empty_filter?(filter) do
@@ -94,38 +114,36 @@ defmodule PitchIn.SearchController do
   end
 
   defp sort_campaigns(filter) do
+    campaign_fields = Campaign.__schema__(:fields) 
+    ask_fields = Ask.__schema__(:fields) 
+
     query =
       from c in Campaign,
-      left_join: need in (filter |> matching_ask_subquery |> subquery), on: c.id == need.campaign_id,
+      left_join: ask in subquery(ask_subquery), on: c.id == ask.campaign_id,
       left_join: issue_count in (filter |> issue_count_subquery |> subquery), on: c.id == issue_count.id,
-      left_join: need_count in (filter |> matching_ask_count_subquery |> subquery), on: c.id == need_count.id,
+      left_join: ask_match_rating in (filter |> ask_match_rating_subquery |> subquery), on: ask.id == ask_match_rating.id,
       where: is_nil(c.archived_reason),
-      preload: :asks,
+      select: %{campaign: c, ask: ask},
       order_by: [
-        fragment("? DESC NULLS LAST", need_count.count),
-        fragment("? DESC NULLS LAST", issue_count.count),
-        desc: c.inserted_at
+        desc: fragment("COALESCE(?, 0) + COALESCE(?, 0)", issue_count.count, ask_match_rating.rating),
+        desc: fragment("COALESCE(?, ?)", ask.inserted_at, c.inserted_at)
       ]
 
     Repo.all(query)
   end
 
-  defp matching_ask_subquery(filter) do
-    profession = like_value(filter["profession"])
-    years_experience = to_int_or_infinity(filter["years_experience"], 1)
-
+  defp ask_subquery do
     from a in Ask,
-    where: ilike(a.profession, ^profession),
-    where: a.years_experience <= ^years_experience,
     where: is_nil(a.archived_reason)
   end
 
-  defp matching_ask_count_subquery(filter) do
-    ask_query = matching_ask_subquery(filter)
+  defp ask_match_rating_subquery(filter) do
+    profession = filter["profession"]
+    years_experience = to_int_or_infinity(filter["years_experience"], 1)
 
-    from a in ask_query,
-    select: %{id: a.campaign_id, count: count(a.campaign_id)},
-    group_by: a.campaign_id
+    from a in Ask,
+    join: r in fragment(@ask_match_rating, ^profession, ^years_experience), on: a.id == r.id,
+    select: %{id: r.id, rating: r.rating}
   end
 
   defp issue_count_subquery(filter) do
