@@ -31,7 +31,7 @@ defmodule PitchIn.ArchiveReasons do
     ]
   end
 
-  def activist_answer do
+  def volunteer_answer do
     [
       "No longer interested",
       "No longer have time",
@@ -44,7 +44,7 @@ defmodule PitchIn.ArchiveReasons do
     [
       "Accepted",
       "Not interested",
-      "Couldn't reach activist"
+      "Couldn't reach volunteer"
     ]
   end
 end

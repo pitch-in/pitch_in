@@ -6,11 +6,11 @@
       <% end %>
     <% :update_campaign -> %>
       <%= next_step "Update your campaign", to: campaign_path(@conn, :edit, @ask.campaign), color: "warning" do %>
-        Make sure your campaign's profile is up-to-date, so activists can find it, and understand what you're about!
+        Make sure your campaign's profile is up-to-date, so volunteers can find it, and understand what you're about!
       <% end %>
     <% :view_need -> %>
       <%= next_step "View need", to: campaign_ask_path(@conn, :show, @ask.campaign, @ask), color: "primary" do %>
-        See what activists will see when they view your need, to make sure everything is just right!
+        See what volunteers will see when they view your need, to make sure everything is just right!
       <% end %>
     <% :edit_need -> %>
       <%= next_step "Edit need", to: campaign_ask_path(@conn, :edit, @ask.campaign, @ask), color: "secondary" do %>

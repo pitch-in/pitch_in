@@ -22,7 +22,7 @@
 <div class="form-group">
   <%= label @campaign, :short_pitch %>
     <p class="input-description">
-      This should be a short pitch about why activists should want to
+      This should be a short pitch about why volunteers should want to
       help your campaign. It should be about the length of a tweet -
       140 characters. Your short pitch is displayed on the Need search page,
       so it's your first chance to sell your cause.

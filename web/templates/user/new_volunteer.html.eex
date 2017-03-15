@@ -35,7 +35,7 @@
 
       <div class="form-group">
         <%= label i, :phone %>
-        <%= text_input i, :phone, type: "tel", autocomplete: "tel" %>
+        <%= text_input f, :phone, autocomplete: "tel", data_mask: "(000) 000-0000" %>
         <%= error_tag i, :phone %>
       </div>
 

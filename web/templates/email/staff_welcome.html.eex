@@ -3,14 +3,14 @@
 </p>
 <p>
   We're glad you're campaigning for a more progressive future,
-  and we know some skilled activists that are ready and willing
+  and we know some skilled volunteers that are ready and willing
   to pitch in!
 </p>
 
 <p>
   Make sure to finish setting up the campaign profile for
   <%= link @campaign.name, to: full_domain(@conn) <> campaign_path(@conn, :edit, @campaign.id) %>!
-  The more information you fill out, the easier it is for activists to
+  The more information you fill out, the easier it is for volunteers to
   decide to help you out.
 </p>
 
@@ -19,6 +19,6 @@
   about your 
   <%= link "Needs!", to: full_domain(@conn) <> campaign_ask_path(@conn, :index, @campaign.id) %>
   Needs.
-  Activists won't be able to find your campaign until you
+  Volunteers won't be able to find your campaign until you
   tell them what you're looking for!
 </p>

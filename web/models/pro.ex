@@ -37,5 +37,9 @@ defmodule PitchIn.Pro do
     ])
     |> validate_required([:phone])
     |> unique_constraint(:user_id)
+    |> validate_url(:linkedin_url)
+    |> validate_zip(:address_zip)
+    |> validate_one_word(:github_handle)
+    |> validate_one_word(:twitter_handle)
   end
 end

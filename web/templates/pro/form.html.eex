@@ -24,14 +24,14 @@
   </div>
 
   <div>
-    <%= label f, :profession %>
+    <%= label f, :profession, "Profession or Passion" %>
     <%= select f, :profession, profession_options %>
     <%= error_tag f, :profession %>
   </div>
 
   <div>
     <%= label f, :phone %>
-    <%= text_input f, :phone, autocomplete: "tel" %>
+    <%= text_input f, :phone, autocomplete: "tel", data_mask: "(000) 000-0000" %>
     <%= error_tag f, :phone %>
   </div>
 
@@ -47,7 +47,7 @@
       When did you start working in your current profession?
       This helps us calculate your experience level.
     </p>
-    <%= us_date_input f, :experience_starts_at, data_end_date: "today" %>
+    <%= us_date_input f, :experience_starts_at, no_datepicker: true %>
     <%= error_tag f, :experience_starts_at %>
   </div>
 
@@ -59,7 +59,7 @@
 
   <div>
     <%= label f, :linkedin_url %>
-    <%= text_input f, :linkedin_url %>
+    <%= text_input f, :linkedin_url, placeholder: "https://www.linkedin.com/in/" %>
     <%= error_tag f, :linkedin_url %>
   </div>
 
@@ -71,7 +71,7 @@
 
   <div>
     <%= label f, :twitter_handle %>
-    <%= text_input f, :twitter_handle %>
+    <%= text_input f, :twitter_handle, placeholder: "@" %>
     <%= error_tag f, :twitter_handle %>
   </div>
 

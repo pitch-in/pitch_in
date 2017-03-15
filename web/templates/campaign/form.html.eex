@@ -28,7 +28,7 @@
   <div>
     <%= label f, :email, "Campaign Email" %>
     <p class="input-description">
-      The email address we should send activists to.
+      The email address we should send volunteers to.
     </p>
     <%= email_input f, :email %>
     <%= error_tag f, :email %>

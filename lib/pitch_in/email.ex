@@ -11,11 +11,11 @@ defmodule PitchIn.Email do
     |> render("staff_welcome.html", conn: conn, user: user, campaign: campaign)
   end
 
-  def activist_welcome_email(email_address, conn, user) do
+  def volunteer_welcome_email(email_address, conn, user) do
     email_address
     |> base_email
     |> subject("Thanks for signing up with pitch in!")
-    |> render("activist_welcome.html", conn: conn, user: user)
+    |> render("volunteer_welcome.html", conn: conn, user: user)
   end
 
   def user_answer_email(email_address, conn, campaign, ask, answer) do

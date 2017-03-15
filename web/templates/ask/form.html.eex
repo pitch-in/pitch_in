@@ -21,13 +21,13 @@
     <div data-hide-on="ask_length" data-show-case="ongoing">
       <%= label f, :hours, "Hours/Week" %>
       <p class="input-description">
-        How many hours per week are you asking activists to commit to?
+        How many hours per week are you asking volunteers to commit to?
       <p>
     </div>
     <div data-hide-on="ask_length" data-show-case="one_time">
       <%= label f, :hours, "Total Hours" %>
       <p class="input-description">
-        About how many hours should an activist expect this to take?
+        About how many hours should a volunteer expect this to take?
       <p>
     </div>
     <%= number_input f, :hours, min: 0, step: 1 %>

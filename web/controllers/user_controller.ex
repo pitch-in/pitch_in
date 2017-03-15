@@ -21,12 +21,12 @@ defmodule PitchIn.UserController do
       %User{}
       |> User.changeset
       |> Ecto.Changeset.put_assoc(:pro, %Pro{})
-    render(conn, "new_activist.html", changeset: changeset)
+    render(conn, "new_volunteer.html", changeset: changeset)
   end
 
   def interstitial(conn, %{"id" => id}) do
     user = Repo.get(User, id)
-    render(conn, "activist_interstitial.html", user: user)
+    render(conn, "volunteer_interstitial.html", user: user)
   end
 
   def create(conn, %{"user" => user_params, "staff" => _}) do
@@ -60,18 +60,18 @@ defmodule PitchIn.UserController do
   def create(conn, %{"user" => user_params}) do
     changeset = 
       %User{}
-      |> User.activist_registration_changeset(user_params)
+      |> User.volunteer_registration_changeset(user_params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->
-        Email.activist_welcome_email(user.email, conn, user)
+        Email.volunteer_welcome_email(user.email, conn, user)
         |> Mailer.deliver_later
 
         conn
         |> PitchIn.Auth.login(user)
         |> redirect(to: Auth.get_deep_link_path(conn) || user_path(conn, :interstitial, user))
       {:error, changeset} ->
-        render(conn, "new_activist.html", changeset: changeset)
+        render(conn, "new_volunteer.html", changeset: changeset)
     end
   end
 

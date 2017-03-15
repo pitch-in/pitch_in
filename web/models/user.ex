@@ -33,10 +33,11 @@ defmodule PitchIn.User do
     |> cast_assoc(:pro)
     |> validate_required([:name, :email])
     |> update_change(:email, &String.downcase/1)
+    |> validate_email
     |> unique_constraint(:email)
   end
 
-  def activist_registration_changeset(struct, params \\ %{}) do
+  def volunteer_registration_changeset(struct, params \\ %{}) do
     struct
     |> registration_changeset(params)
     |> cast_assoc(:pro)

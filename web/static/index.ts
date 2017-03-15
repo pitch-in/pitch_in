@@ -27,7 +27,8 @@ import 'foundation-sites/js/foundation.util.triggers';
 import 'foundation-sites/js/foundation.responsiveMenu';
 import 'foundation-sites/js/foundation.responsiveToggle';
 import 'motion-ui';
-import 'jquery-parallax.js';
+// import 'jquery-parallax.js';
+import 'jquery-mask-plugin';
 
 import components from './components/index';
 
