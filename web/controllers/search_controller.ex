@@ -61,7 +61,6 @@ defmodule PitchIn.SearchController do
   def index(conn, params) do
     search = make_search(conn, params)
     search_changeset = NeedSearch.changeset(search)
-    IO.inspect(search_changeset.data)
 
     results = sort_campaigns(search)
 
@@ -93,6 +92,7 @@ defmodule PitchIn.SearchController do
     end
   end
 
+  defp split_list(nil), do: []
   defp split_list(string) do
     String.split(string, ~r/\s*,\s*/, trim: true)
   end
