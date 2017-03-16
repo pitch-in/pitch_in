@@ -147,7 +147,7 @@ defmodule PitchIn.Auth do
     else
       conn
       |> put_status(404)
-      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
+      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
   end
@@ -159,7 +159,7 @@ defmodule PitchIn.Auth do
     else
       conn
       |> put_status(404)
-      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
+      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
   end

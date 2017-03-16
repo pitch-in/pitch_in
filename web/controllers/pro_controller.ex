@@ -45,9 +45,8 @@ defmodule PitchIn.ProController do
       conn
     else
       conn
-      |> Phoenix.Controller.put_flash(:alert, "You don't have access to that user.")
       |> put_status(404)
-      |> render(PitchIn.ErrorView, "404.html")
+      |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
   end
