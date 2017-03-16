@@ -33,6 +33,10 @@
         It looks like we're having some technical issues. We've been notified, and are working to fix it as fast as possible.
         Please try again in just a moment.
         </p>
+
+        <div class="half stacked button-group">
+          <a href="/" class="alert dark-shadow button">Home</a>
+        </div>
       </div>
     </div>
 
