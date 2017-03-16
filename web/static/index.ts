@@ -16,6 +16,9 @@ import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';
 import './img/logo_blue.png';
+import './img/about/chris-profile.jpg';
+import './img/about/will-profile.jpg';
+import './img/about/laura-profile.jpg';
 import './apple-touch-icon.png';
 import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
