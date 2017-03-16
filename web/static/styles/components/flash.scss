@@ -1,0 +1,32 @@
+.callout.flash {
+  .flash__text {
+    margin: 0;
+  }
+
+  min-height: 2rem;
+  max-height: 5.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem;
+  border-width: 2px;
+
+  .close-button {
+    position: static;
+  }
+
+  @mixin state($color) {
+    border-color: $color;
+    
+    .close-button {
+      color: $color
+    }
+  }
+
+  &.success { @include state($success-color); }
+  &.warning { @include state($warning-color); }
+  &.alert { @include state($alert-color); }
+  &.secondary { @include state($secondary-color); }
+  &.primary { @include state($primary-color); }
+}

@@ -52,9 +52,6 @@ defmodule PitchIn.ViewHelpers do
           |> Timex.format!("{M}/{D}/{YYYY}")
       end
 
-    IO.puts "======DATE====="
-    IO.inspect fetch_and_delete(opts, :no_datepicker)
-
     opts = 
       case fetch_and_delete(opts, :no_datepicker) do
         {:ok, true, opts} -> opts

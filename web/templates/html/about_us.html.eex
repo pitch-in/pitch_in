@@ -7,17 +7,26 @@
   </p>
 
   <h3>Christopher Garretty</h3>
-  <p>
-  A native of Redondo Beach, CA, Chris worked in San Francisco politics for several years, successfully managing citywide organizing efforts in the heavily contested “No on E: Stop Regressive Beverage Taxes” campaign before joining Hillary Clinton’s presidential bid in New Hampshire, Maine and Wisconsin.
-  </p>
+  <div class="flex-row align-start">
+    <img src="<%= webpack_path(@conn, "/img/about/chris-profile.jpg") %>" title="Chris" class="standard-margin-right" />
+    <p>
+    A native of Redondo Beach, CA, Chris worked in San Francisco politics for several years, successfully managing citywide organizing efforts in the heavily contested “No on E: Stop Regressive Beverage Taxes” campaign before joining Hillary Clinton’s presidential bid in New Hampshire, Maine and Wisconsin.
+    </p>
+  </div>
 
   <h3>Will Ockelman-Wagner</h3>
-  <p>
-  Also born in Redondo Beach, Will served on the board of the San Francisco Young Democrats and managed the web presence of a San Francisco school board candidate. He now lives in Los Angeles where he works as a software engineer at a consulting company. A veteran of tech start ups, Will’s seasoned portfolio of work includes an Amazon Echo app that solely produced facts about sloths.
-  </p>
+  <div class="flex-row align-start">
+    <img src="<%= webpack_path(@conn, "/img/about/will-profile.jpg") %>" title="Will" class="standard-margin-right" />
+    <p>
+    Also born in Redondo Beach, Will served on the board of the San Francisco Young Democrats and managed the web presence of a San Francisco school board candidate. He now lives in Los Angeles where he works as a software engineer at a consulting company. A veteran of tech start ups, Will’s seasoned portfolio of work includes an Amazon Echo app that solely produced facts about sloths.
+    </p>
+  </div>
 
   <h3>Laura O’Neill</h3>
-  <p>
-  A born and raised progressive organizer and Granite Stater, Laura moved to Washington, D.C. to work for U.S. Senator Jeanne Shaheen before joining Secretary Hillary Clinton’s campaign in 2015. After two years of criss-crossing America in New Hampshire, Maine and Wisconsin, Laura returns to the Live Free or Die state to work for Democrats in the New Hampshire legislature.
-  </p>
+  <div class="flex-row align-start">
+    <img src="<%= webpack_path(@conn, "/img/about/laura-profile.jpg") %>" title="Laura" class="standard-margin-right" />
+    <p>
+    A born and raised progressive organizer and Granite Stater, Laura moved to Washington, D.C. to work for U.S. Senator Jeanne Shaheen before joining Secretary Hillary Clinton’s campaign in 2015. After two years of criss-crossing America in New Hampshire, Maine and Wisconsin, Laura returns to the Live Free or Die state to work for Democrats in the New Hampshire legislature.
+    </p>
+  </div>
 </section>

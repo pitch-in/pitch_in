@@ -26,7 +26,7 @@ defmodule PitchIn.AnswerController do
     else
       conn
       |> put_status(404)
-      |> render(PitchIn.ErrorView, "404.html")
+      |> render(PitchIn.ErrorView, "404.html", layout: false)
     end
   end
 
@@ -136,7 +136,7 @@ defmodule PitchIn.AnswerController do
     else
       conn
       |> put_status(404)
-      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html")
+      |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
 

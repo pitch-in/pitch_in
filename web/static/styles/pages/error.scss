@@ -1,0 +1,27 @@
+.error-page {
+  background: $light-blue;
+  text-align: center;
+
+  p, h1, h2 {
+    color: $white;
+  }
+
+  .error-body {
+    margin-top: 2rem;
+  }
+
+  .error-logo {
+    margin-top: 20px;
+    max-width: 216px;
+    width: 75%;
+
+    filter: drop-shadow(0 2px 1px $gray);
+
+    &--404 {
+      transform: rotate(15deg);
+    }
+    &--500 {
+      transform: rotate(145deg);
+    }
+  }
+}
