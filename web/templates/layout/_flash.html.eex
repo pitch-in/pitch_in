@@ -1,6 +1,6 @@
 <%= for {code, message} <- get_flash(@conn) do %>
-  <div class="callout <%= code %>" data-closable>
-    <p><%= message %></p>
+  <div class="flash callout <%= code %>" data-closable>
+    <p class="flash__text"><%= message %></p>
 
     <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
       <span aria-hidden="true">&times;</span>
