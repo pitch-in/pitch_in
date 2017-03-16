@@ -8,12 +8,40 @@
     <meta name="author" content="Pitch In">
     <title>Pitch In | Server Error</title>
 
-    <%= render "_error_styles.html" %>
+    <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(PitchIn.Endpoint, "/favicon.ico") %>" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+
+    <%= if Mix.env != :dev do %>
+      <link href="<%= static_path(PitchIn.Endpoint, "/main.min.css") %>" rel="stylesheet" type="text/css" />
+    <% end %>
   </head>
 
-  <body>
-    <h1>Oops! Something went wrong!</h1>
-    <p>
-      Try hitting your browser's back button, or refreshing the page.</p>
+  <body class="error-page view-login no-js">
+    <%= render "_error_navbar.html", conn: PitchIn.Endpoint %>
+
+    <div class="column row">
+      <div class="error-body column">
+        <h1 class="text-shadow-dark">500 Error</h1>
+
+        <img class="error-logo error-logo--500" src="<%= webpack_path(@conn, "/img/logo.svg") %>" />
+
+        <h2 class="text-shadow-dark">Yikes!</h2>
+
+        <p>
+        It looks like we're having some technical issues. We've been notified, and are working to fix it as fast as possible.
+        Please try again in just a moment.
+        </p>
+      </div>
+    </div>
+
+    <%= render PitchIn.LayoutView, "_footer.html", conn: PitchIn.Endpoint %>
+
+    <%= if Mix.env == :dev do %>
+      <script src='http://localhost:4001/main.js'></script>
+    <% else %>
+      <script src="<%= static_path(PitchIn.Endpoint, "/main.min.js") %>"></script>
+    <% end %>
   </body>
 </html>

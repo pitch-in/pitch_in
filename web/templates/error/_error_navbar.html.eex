@@ -1,0 +1,14 @@
+<nav class="navbar" >
+  <div class="top-bar title" data-responsive-toggle="top-nav" data-hide-for="none">
+    <div class="top-bar-left">
+      <ul class="horizontal menu">
+        <li>
+          <a class="logo" href="/">
+            <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
+            <h3 class="name">Pitch In</h3>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

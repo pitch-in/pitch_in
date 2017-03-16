@@ -55,6 +55,12 @@
   }
 }
 
+.button-group.stacked.half {
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 select {
   background-image: $select-arrow;
   background-position: right -1.5rem center;
