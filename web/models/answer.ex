@@ -5,6 +5,7 @@ defmodule PitchIn.Answer do
   schema "answers" do
     belongs_to :user, PitchIn.User
     belongs_to :ask, PitchIn.Ask
+    has_one :campaign, through: [:ask, :campaign]
     field :message, :string
 
     timestamps()

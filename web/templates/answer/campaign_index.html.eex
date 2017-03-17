@@ -1,0 +1,40 @@
+<section class="list-header content-block">
+  <h1>
+    All Answers For:
+  </h1>
+  <h2>
+    Campaign: <%= @campaign.name %><br/>
+  </h2>
+</section>
+
+<%= for answer <- @answers do %>
+  <section class="content-block">
+    <h3>
+      Role:
+      <%= answer.ask.role %>
+    </h3>
+
+    <p>
+      Volunteer name:
+      <strong><%= answer.user.name %></strong>
+    </h3>
+
+    <p>
+      Volunteer Profession:
+      <%= answer.user.pro.profession %>
+    </h3>
+
+    <p>
+      <%= answer.message %>
+    </p>
+
+    <div class="expanded button-group">
+      <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, answer.ask, answer), class: "success button" %>
+    </div>
+  </section>
+<% end %>
+
+<section class="list-header content-block">
+  <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
+</section>
+

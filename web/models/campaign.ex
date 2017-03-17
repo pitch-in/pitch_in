@@ -5,6 +5,7 @@ defmodule PitchIn.Campaign do
   schema "campaigns" do
     many_to_many :users, PitchIn.User, join_through: "campaign_staff"
     has_many :asks, PitchIn.Ask
+    has_many :answers, through: [:asks, :answers]
     has_many :issues, PitchIn.Issue, on_replace: :delete
     field :name, :string
     field :email, :string
