@@ -113,26 +113,30 @@ defmodule PitchIn.Auth do
   """
   def check_campaign_staff(conn, opts) do
     id_key = opts[:id] || "campaign_id"
+    user = conn.assigns.current_user
 
-    if !conn.params[id_key] || !conn.assigns.current_user do
-      assign(conn, :is_staff, false)
-    else
-      user_id = conn.assigns.current_user.id
-      {campaign_id, _} = Integer.parse(conn.params[id_key])
-
-      staff_query =
-        from s in PitchIn.CampaignStaff,
-        select: count(s.user_id),
-        where: s.campaign_id == ^campaign_id,
-        where: s.user_id == ^user_id
-
-      count = Repo.one(staff_query)
-
-      if count > 0 do
-        assign(conn, :is_staff, true)
-      else
+    cond do
+      !conn.params[id_key] || !user ->
         assign(conn, :is_staff, false)
-      end
+      user.is_admin ->
+        assign(conn, :is_staff, true)
+      true ->
+        user_id = user.id
+        {campaign_id, _} = Integer.parse(conn.params[id_key])
+
+        staff_query =
+          from s in PitchIn.CampaignStaff,
+          select: count(s.user_id),
+          where: s.campaign_id == ^campaign_id,
+          where: s.user_id == ^user_id
+
+        count = Repo.one(staff_query)
+
+        if count > 0 do
+          assign(conn, :is_staff, true)
+        else
+          assign(conn, :is_staff, false)
+        end
     end
   end
 

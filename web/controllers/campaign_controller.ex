@@ -8,12 +8,12 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
-  use PitchIn.Auth, protect: :all, pass_user: true
+  use PitchIn.Auth, protect: :all
   plug :check_campaign_staff, [id: "id"] when action in [:show, :edit, :update, :delete]
   plug :verify_campaign_staff when action in [:edit, :update, :delete]
 
-  def index(conn, _params, user) do
-    user = user |> Repo.preload(:campaigns)
+  def index(conn, _params) do
+    user = conn.assigns.current_user |> Repo.preload(:campaigns)
 
     active_campaigns = Enum.filter(user.campaigns, &(!PitchIn.ArchiveReasons.archived?(&1)))
     archived_campaigns = Enum.filter(user.campaigns, &(PitchIn.ArchiveReasons.archived?(&1)))
@@ -21,7 +21,7 @@ defmodule PitchIn.CampaignController do
     render(conn, "index.html", active_campaigns: active_campaigns, archived_campaigns: archived_campaigns)
   end
 
-  def new(conn, _params, _user) do
+  def new(conn, _params) do
     changeset =
       %Campaign{issues: []}
       |> Campaign.changeset
@@ -29,12 +29,14 @@ defmodule PitchIn.CampaignController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def interstitial(conn, %{"id" => id}, _user) do
+  def interstitial(conn, %{"id" => id}) do
     campaign = Repo.get(Campaign, id)
     render(conn, "interstitial.html", campaign: campaign)
   end
 
-  def create(conn, %{"campaign" => campaign_params}, user) do
+  def create(conn, %{"campaign" => campaign_params}) do
+    user = conn.assigns.current_user
+
     campaign_params = 
       campaign_params
       |> Map.update("issues", [], &clean_up_issues/1)
@@ -54,20 +56,20 @@ defmodule PitchIn.CampaignController do
     end
   end
 
-  def show(conn, %{"id" => id}, user) do
+  def show(conn, %{"id" => id}) do
     campaign = get_campaign(id)
     render(conn, "show.html", campaign: campaign)
   end
 
-  def edit(conn, %{"id" => id, "archive" => "true"}, user) do
-    campaign = get_campaign(id, user)
+  def edit(conn, %{"id" => id, "archive" => "true"}) do
+    campaign = get_campaign(id)
     changeset = Campaign.archive_changeset(campaign)
 
     render(conn, "edit_archived.html", campaign: campaign, changeset: changeset)
   end
 
-  def edit(conn, %{"id" => id}, user) do
-    campaign = get_campaign(id, user)
+  def edit(conn, %{"id" => id}) do
+    campaign = get_campaign(id)
 
     changeset =
       campaign
@@ -77,8 +79,8 @@ defmodule PitchIn.CampaignController do
     render(conn, "edit.html", campaign: campaign, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "campaign" => campaign_params, "archive" => "true"}, user) do
-    campaign = get_campaign(id, user)
+  def update(conn, %{"id" => id, "campaign" => campaign_params, "archive" => "true"}) do
+    campaign = get_campaign(id)
     changeset = campaign |> Campaign.archive_changeset(campaign_params)
 
     case Repo.update(changeset) do
@@ -95,8 +97,8 @@ defmodule PitchIn.CampaignController do
     end
   end
 
-  def update(conn, %{"id" => id, "campaign" => campaign_params}, user) do
-    campaign = get_campaign(id, user)
+  def update(conn, %{"id" => id, "campaign" => campaign_params}) do
+    campaign = get_campaign(id)
 
     campaign_params = 
       campaign_params
@@ -158,14 +160,4 @@ defmodule PitchIn.CampaignController do
   defp get_campaign(id) do
     Repo.get!(PitchIn.Campaign, id) |> Repo.preload(:issues)
   end
-  defp get_campaign(id, user) do
-    user =
-      user
-      |> Repo.preload(campaigns: from(c in Campaign, where: c.id == ^id))
-
-    # TODO: Handle not found.
-    [campaign] = user.campaigns
-    campaign |> Repo.preload(:issues)
-  end
-
 end
