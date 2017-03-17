@@ -106,7 +106,8 @@
 <div class="expanded button-group">
   <%= if @is_staff do %>
     <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "warning button" %>
-    <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+    <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "primary button" %>
+    <%= link "Manage Answers", to: campaign_answer_path(@conn, :index, @campaign), class: "success button" %>
     <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
   <%= else %>
     <%= link "View Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>

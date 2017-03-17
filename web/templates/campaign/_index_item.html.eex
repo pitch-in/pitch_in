@@ -7,7 +7,8 @@
 
   <div class="expanded stacked-for-small button-group standard-margin-bottom">
     <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "warning button" %>
-    <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+    <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "primary button" %>
+    <%= link "Manage Answers", to: campaign_answer_path(@conn, :index, @campaign), class: "success button" %>
     <%= archive_button(@conn, @campaign) %>
     <%= unarchive_button(@conn, @campaign) %>
   </div>

@@ -4,22 +4,31 @@
   </h1>
 </section>
 
-<%= for answer <- @answers do %>
-  <section class="content-block">
-    <h2>
-      <%= answer.campaign.name %>:
-      <%= answer.ask.role %>
-    </h2>
+<%= case @answers do %>
+  <% [] -> %>
+    <section class="list-header content-block">
+      <h3>
+        You don't have any open answers right now.
+      </h3>
+    </section>
+  <% answers -> %>
+    <%= for answer <- answers do %>
+      <section class="content-block">
+        <h2>
+          <%= answer.campaign.name %>:
+          <%= answer.ask.role %>
+        </h2>
 
-    <p><strong>Your message:</strong></p>
-    <p>
-      <%= answer.message %>
-    </p>
+        <p><strong>Your message:</strong></p>
+        <p>
+          <%= answer.message %>
+        </p>
 
-    <div class="expanded button-group">
-      <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
-    </div>
-  </section>
+        <div class="expanded button-group">
+          <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
+        </div>
+      </section>
+    <% end %>
 <% end %>
 
 <section class="list-header content-block">
