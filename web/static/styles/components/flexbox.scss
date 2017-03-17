@@ -74,6 +74,14 @@
   justify-content: space-around;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
 .align-start {
   align-items: flex-start;
 }
