@@ -1,0 +1,30 @@
+<section class="list-header content-block">
+  <h1>
+    My Answers
+  </h1>
+</section>
+
+<%= for answer <- @answers do %>
+  <section class="content-block">
+    <h2>
+      <%= answer.campaign.name %>:
+      <%= answer.ask.role %>
+    </h2>
+
+    <p><strong>Your message:</strong></p>
+    <p>
+      <%= answer.message %>
+    </p>
+
+    <div class="expanded button-group">
+      <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
+    </div>
+  </section>
+<% end %>
+
+<section class="list-header content-block">
+  <div class="expanded button-group">
+    <%= link "Back to search", to: search_path(@conn, :index), class: "secondary button" %>
+  </div>
+</section>
+

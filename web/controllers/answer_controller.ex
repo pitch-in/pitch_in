@@ -39,6 +39,14 @@ defmodule PitchIn.AnswerController do
     render(conn, "campaign_index.html", campaign: campaign, answers: answers)
   end
 
+  def volunteer_index(conn, _params) do
+    user =
+      conn.assigns.current_user
+      |> Repo.preload([answers: [:ask, :campaign]])
+
+    render(conn, "volunteer_index.html", answers: user.answers)
+  end
+
   def new(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
     ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
     campaign = ask.campaign
