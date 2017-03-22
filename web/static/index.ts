@@ -17,6 +17,7 @@ import './img/logo.svg';
 import './img/shovels.svg';
 import './img/logo_blue.png';
 import './img/plus-icon.svg';
+import './img/minus-icon.svg';
 import './img/about/chris-profile.jpg';
 import './img/about/will-profile.jpg';
 import './img/about/laura-profile.jpg';
