@@ -3,17 +3,18 @@
     <%= render "form.html", conn: @conn, changeset: @changeset, show_alert_button: @show_alert_button %>
 
     <%= for type <- [:expand, :minimize] do %>
-      <div id="search__form-toggle--<%= type %>" class="flex-row justify-start <%= if type == :minimize, do: "hide" %>" data-toggler=".hide">
-        <button class="search__toggle-button standard-margin-right" data-toggle="search-form search__form-toggle--expand search__form-toggle--minimize">
-          <img src="<%= webpack_path(@conn, "/img/#{type}-icon.svg") %>" title="Show" />
-        </button>
-        <p class="no-margin">
-        <%= if type == :expand do %>
-          Click here to search by issues that matter, or how you can help.
-        <% else %>
-          Click here to minimize this window.
-        <% end %>
-        </p>
+      <div id="search__form-toggle--<%= type %>" class="<%= if type == :minimize, do: "hide" %>" data-toggler=".hide">
+        <a class="flex-row justify-start" data-toggle="search-form search__form-toggle--expand search__form-toggle--minimize">
+          <img src="<%= webpack_path(@conn, "/img/#{type}-icon.svg") %>" title="Show" class="search__toggle-button standard-margin-right " />
+
+          <p class="no-margin body-color">
+            <%= if type == :expand do %>
+              Click here to search by issues that matter, or how you can help.
+            <% else %>
+              Click here to minimize this window.
+            <% end %>
+          </p>
+        </a>
       </div>
     <% end %>
   </section>
