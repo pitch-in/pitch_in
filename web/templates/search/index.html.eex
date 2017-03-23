@@ -2,13 +2,13 @@
   <section class="expanded content-block">
     <%= render "form.html", conn: @conn, changeset: @changeset, show_alert_button: @show_alert_button %>
 
-    <%= for type <- [:plus, :minus] do %>
-      <div id="search__form-toggle--<%= type %>" class="flex-row justify-start <%= if type == :minus, do: "hide" %>" data-toggler=".hide">
-        <button class="search__toggle-button standard-margin-right" data-toggle="search-form search__form-toggle--plus search__form-toggle--minus">
+    <%= for type <- [:expand, :minimize] do %>
+      <div id="search__form-toggle--<%= type %>" class="flex-row justify-start <%= if type == :minimize, do: "hide" %>" data-toggler=".hide">
+        <button class="search__toggle-button standard-margin-right" data-toggle="search-form search__form-toggle--expand search__form-toggle--minimize">
           <img src="<%= webpack_path(@conn, "/img/#{type}-icon.svg") %>" title="Show" />
         </button>
         <p class="no-margin">
-        <%= if type == :plus do %>
+        <%= if type == :expand do %>
           Click here to search by issues that matter, or how you can help.
         <% else %>
           Click here to minimize this window.
