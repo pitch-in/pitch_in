@@ -3,9 +3,9 @@ import $ = require('jquery');
 import BaseComponent from './BaseComponent';
 
 const starterText = {
-  candidate: "I want to...",
-  measure: "We want...",
-  issue: "We believe..."
+  candidate: 'I want to...',
+  measure: 'We want...',
+  issue: 'We believe...'
 };
 
 export default class ShortDescription extends BaseComponent {
@@ -27,7 +27,7 @@ export default class ShortDescription extends BaseComponent {
 
   private updateStarter() {
     const type: string = this.$campaignType.val();
-    this.currentStarter = starterText[type] || "";
+    this.currentStarter = starterText[type] || '';
 
     this.element.attr('placeholder', this.currentStarter);
   }
@@ -45,7 +45,7 @@ export default class ShortDescription extends BaseComponent {
       return;
     }
 
-    this.element.val("");
+    this.element.val('');
   }
 
   private get currentStarterForInput() {

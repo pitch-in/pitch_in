@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1426 475 40 40">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #3f6abf;
+      }
+
+      .cls-1 {
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Icon_Expand" transform="translate(-1367 604) rotate(-180)">
+    <g id="Rectangle_372" data-name="Rectangle 372" class="cls-1" transform="translate(19 89)">
+      <rect class="cls-3" width="40" height="40"/>
+      <rect class="cls-4" x="1.5" y="1.5" width="37" height="37"/>
+    </g>
+    <line id="Line_21" data-name="Line 21" class="cls-2" x2="18" transform="translate(27.686 102.586) rotate(45)"/>
+    <line id="Line_22" data-name="Line 22" class="cls-2" y2="18" transform="translate(50.314 102.586) rotate(45)"/>
+  </g>
+</svg>

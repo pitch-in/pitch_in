@@ -16,6 +16,8 @@ import './img/verified.png';
 import './img/logo.svg';
 import './img/shovels.svg';
 import './img/logo_blue.png';
+import './img/expand-icon.svg';
+import './img/minimize-icon.svg';
 import './img/about/chris-profile.jpg';
 import './img/about/will-profile.jpg';
 import './img/about/laura-profile.jpg';
@@ -29,6 +31,8 @@ import 'foundation-sites/js/foundation.util.motion';
 import 'foundation-sites/js/foundation.util.triggers';
 import 'foundation-sites/js/foundation.responsiveMenu';
 import 'foundation-sites/js/foundation.responsiveToggle';
+import 'foundation-sites/js/foundation.toggler';
+
 import 'motion-ui';
 // import 'jquery-parallax.js';
 import 'jquery-mask-plugin';
