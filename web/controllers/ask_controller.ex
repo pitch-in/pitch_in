@@ -4,7 +4,6 @@ defmodule PitchIn.AskController do
   alias PitchIn.Ask
   alias PitchIn.Campaign
 
-  use PitchIn.Auth, protect: :all
   use PitchIn.Auth, protect: [:new, :create, :edit, :update, :interstitial]
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:new, :create, :edit, :update, :interstitial]
