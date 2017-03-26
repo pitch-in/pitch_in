@@ -161,10 +161,11 @@ defmodule PitchIn.AnswerController do
       preload: [user: :pro]
     )
 
-    is_owner = answer.user_id == conn.assigns.current_user.id
+    is_owner = answer && answer.user_id == conn.assigns.current_user.id
     is_staff = conn.assigns.is_staff
+    is_correct_campaign = answer && answer.ask && Integer.to_string(answer.ask.campaign.id) == conn.params["campaign_id"]
 
-    if (answer.ask.campaign.id == conn.params["campaign_id"]) && is_owner || is_staff do
+    if is_correct_campaign && (is_owner || is_staff) do
       conn
       |> Conn.assign(:answer, answer)
       |> Conn.assign(:is_owner, is_owner)
