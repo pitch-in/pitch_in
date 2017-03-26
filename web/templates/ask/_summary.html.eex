@@ -1,29 +1,24 @@
-<ul>
+<ul class="ask-summary no-dots">
   <li>
-    <strong>Role:</strong>
+    <strong>Need Name</strong><br/>
     <%= link to: campaign_ask_path(@conn, :show, @campaign, @ask) do %>
-      <%= @ask.role %>
+      <%= @ask.role %>:
     <% end %>
+    <%= @ask.description %>
   </li>
 
   <li>
-    <%= if @ask.length == :ongoing do %>
-      <strong>Hours/Week:</strong>
-    <% else %>
-      <strong>Total Hours:</strong>
-    <% end %>
-
-    <%= @ask.hours %>
-  </li>
-
-  <li>
-    <strong>Profession:</strong>
+    <strong>Skills</strong><br/>
     <%= @ask.profession %>
   </li>
 
   <li>
-    <strong>Description:</strong>
-    <%= @ask.description %>
+    <strong>
+      Estimated
+      <%= if @ask.length == :ongoing, do: "Hours/Week", else: "Total Hours" %>:
+    </strong>
+
+    <%= @ask.hours %>
   </li>
 
   <li>

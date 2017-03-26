@@ -1,0 +1,6 @@
+ul, .ul {
+  &.no-dots {
+    list-style-type: none;
+    margin-left: 0;
+  }
+}

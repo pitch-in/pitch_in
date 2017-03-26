@@ -1,7 +1,7 @@
 <div class="list-header content-block">
   <div class="expanded button-group">
     <%= if @is_staff do %>
-      <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "warning hollow button" %>
+      <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "primary hollow button" %>
       <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary hollow button" %>
     <% else %>
       <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary hollow button" %>

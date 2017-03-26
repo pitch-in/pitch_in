@@ -10,9 +10,9 @@ defmodule PitchIn.AnswerController do
   use PitchIn.Auth, protect: :all
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
-  plug :get_answer when action in [:show, :interstitial, :update]
+  plug :get_answer when action in [:show, :interstitial]
 
-  def index(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
+  def index(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
     ask = 
       Repo.get(Ask, ask_id)
       |> Repo.preload(answers: [user: :pro])
@@ -47,7 +47,7 @@ defmodule PitchIn.AnswerController do
     render(conn, "volunteer_index.html", answers: user.answers)
   end
 
-  def new(conn, %{"campaign_id" => campaign_id, "ask_id" => ask_id}) do
+  def new(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
     ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
     campaign = ask.campaign
 
@@ -56,12 +56,12 @@ defmodule PitchIn.AnswerController do
       |> build_assoc(:answers)
       |> Answer.changeset
       
-    render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
+    render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
   end
 
   def create(conn,
     %{
-      "campaign_id" => campaign_id,
+      "campaign_id" => _campaign_id,
       "ask_id" => ask_id,
       "answer" => answer_params
     }) do
@@ -99,15 +99,15 @@ defmodule PitchIn.AnswerController do
         conn
         |> redirect(to: campaign_ask_answer_path(conn, :interstitial, campaign, ask, answer))
       {:error, changeset} ->
-        render(conn, "new.html", campaign: campaign, ask: ask, changeset: changeset)
+        render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
     end
   end
 
   def interstitial(conn,
     %{
-      "campaign_id" => campaign_id,
-      "ask_id" => ask_id,
-      "id" => id
+      "campaign_id" => _campaign_id,
+      "ask_id" => _ask_id,
+      "id" => _id
     }) do
     answer = conn.assigns.answer
     ask = answer.ask
@@ -118,16 +118,16 @@ defmodule PitchIn.AnswerController do
 
   def show(conn,
     %{
-      "campaign_id" => campaign_id,
-      "ask_id" => ask_id,
-      "id" => id
+      "campaign_id" => _campaign_id,
+      "ask_id" => _ask_id,
+      "id" => _id
     }) do
     answer = conn.assigns.answer
     ask = answer.ask
     campaign = ask.campaign
 
     if conn.assigns.is_owner do
-      render(conn, "show_to_volunteer.html", campaign: campaign, ask: ask, answer: answer)
+      render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
     else
       render(conn, "show_to_campaign.html", campaign: campaign, ask: ask, answer: answer)
     end
@@ -146,7 +146,7 @@ defmodule PitchIn.AnswerController do
     is_owner = answer.user_id == conn.assigns.current_user.id
     is_staff = conn.assigns.is_staff
 
-    if is_owner || is_staff do
+    if (answer.ask.campaign.id == conn.params["campaign_id"]) && is_owner || is_staff do
       conn
       |> Plug.Conn.assign(:answer, answer)
       |> Plug.Conn.assign(:is_owner, is_owner)
@@ -156,6 +156,5 @@ defmodule PitchIn.AnswerController do
       |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
-
   end
 end
