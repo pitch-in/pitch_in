@@ -5,8 +5,9 @@ defmodule PitchIn.AskController do
   alias PitchIn.Campaign
 
   use PitchIn.Auth, protect: :all
+  use PitchIn.Auth, protect: [:new, :create, :edit, :update, :interstitial]
   plug :check_campaign_staff
-  plug :verify_campaign_staff
+  plug :verify_campaign_staff when action in [:new, :create, :edit, :update, :interstitial]
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)

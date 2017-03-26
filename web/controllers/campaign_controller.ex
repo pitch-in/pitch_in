@@ -8,7 +8,7 @@ defmodule PitchIn.CampaignController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
-  use PitchIn.Auth, protect: :all
+  use PitchIn.Auth, protect: [:index, :new, :create, :edit, :update, :delete]
   plug :check_campaign_staff, [id: "id"] when action in [:show, :edit, :update, :delete]
   plug :verify_campaign_staff when action in [:edit, :update, :delete]
 

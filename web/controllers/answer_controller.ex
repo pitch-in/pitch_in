@@ -1,13 +1,15 @@
 defmodule PitchIn.AnswerController do
   use PitchIn.Web, :controller
 
+  alias Plug.Conn
   alias PitchIn.Campaign
   alias PitchIn.Ask
   alias PitchIn.Answer
   alias PitchIn.Email
   alias PitchIn.Mailer
+  alias PitchIn.Auth
 
-  use PitchIn.Auth, protect: :all
+  use PitchIn.Auth, protect: [:index, :edit, :update, :interstitial]
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
   plug :get_answer when action in [:show, :interstitial]
@@ -51,55 +53,75 @@ defmodule PitchIn.AnswerController do
     ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
     campaign = ask.campaign
 
+    {conn, answer_params} =
+      case Conn.get_session(conn, :answer_params) do
+        nil ->
+          {conn, %{}}
+        answer_params ->
+          conn = 
+            conn
+            |> Conn.delete_session(:answer_params)
+            |> put_flash(:warning, "Thanks for logging in! You can now submit your answer.")
+
+          {conn, answer_params}
+      end
+
     changeset =
       ask
       |> build_assoc(:answers)
-      |> Answer.changeset
+      |> Answer.changeset(answer_params)
       
     render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
   end
 
   def create(conn,
     %{
-      "campaign_id" => _campaign_id,
+      "campaign_id" => campaign_id,
       "ask_id" => ask_id,
       "answer" => answer_params
     }) do
-    ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
-    campaign = ask.campaign
-    
-    changeset =
-      ask
-      |> build_assoc(:answers)
-      |> Answer.changeset(answer_params)
-      |> Ecto.Changeset.put_assoc(:user, conn.assigns.current_user)
+  
+    if !conn.assigns.current_user do
+      conn
+      |> Conn.put_session(:answer_params, answer_params)
+      |> Auth.deep_link_redirect(campaign_ask_answer_path(conn, :new, campaign_id, ask_id))
+    else
+      ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
+      campaign = ask.campaign
+      
+      changeset =
+        ask
+        |> build_assoc(:answers)
+        |> Answer.changeset(answer_params)
+        |> Ecto.Changeset.put_assoc(:user, conn.assigns.current_user)
 
-    case Repo.insert(changeset) do
-      {:ok, answer} ->
-        answer = answer |> Repo.preload(user: :pro)
+      case Repo.insert(changeset) do
+        {:ok, answer} ->
+          answer = answer |> Repo.preload(user: :pro)
 
-        Email.user_answer_email(
-          conn.assigns.current_user.email,
-          conn,
-          campaign,
-          ask,
-          answer
-        )
-        |> Mailer.deliver_later
+          Email.user_answer_email(
+            conn.assigns.current_user.email,
+            conn,
+            campaign,
+            ask,
+            answer
+          )
+          |> Mailer.deliver_later
 
-        Email.campaign_answer_email(
-          campaign.email,
-          conn,
-          campaign,
-          ask,
-          answer
-        )
-        |> Mailer.deliver_later
+          Email.campaign_answer_email(
+            campaign.email,
+            conn,
+            campaign,
+            ask,
+            answer
+          )
+          |> Mailer.deliver_later
 
-        conn
-        |> redirect(to: campaign_ask_answer_path(conn, :interstitial, campaign, ask, answer))
-      {:error, changeset} ->
-        render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
+          conn
+          |> redirect(to: campaign_ask_answer_path(conn, :interstitial, campaign, ask, answer))
+        {:error, changeset} ->
+          render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
+      end
     end
   end
 
@@ -148,8 +170,8 @@ defmodule PitchIn.AnswerController do
 
     if (answer.ask.campaign.id == conn.params["campaign_id"]) && is_owner || is_staff do
       conn
-      |> Plug.Conn.assign(:answer, answer)
-      |> Plug.Conn.assign(:is_owner, is_owner)
+      |> Conn.assign(:answer, answer)
+      |> Conn.assign(:is_owner, is_owner)
     else
       conn
       |> put_status(404)
