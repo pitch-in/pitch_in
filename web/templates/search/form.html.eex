@@ -1,4 +1,4 @@
-<div id="search-form" data-toggler=".hide" class="search__form hide">
+<div id="search-form" data-toggler=".hide" class="search__form">
 <h2>Search Needs</h2>
 <p>
 Campaigns across the country are looking for help! You can take a look at all the open needs below,
@@ -20,7 +20,7 @@ or sort the results by profession or a keyword.
   </div>
   <div>
     <%= label f, :issues, "Keyword (ex: women, clean water, education)" %>
-    <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ", ") %>
+    <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ","), data_tags: true, placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>
   </div>
 
