@@ -53,25 +53,21 @@ defmodule PitchIn.AnswerController do
     ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
     campaign = ask.campaign
 
-    {conn, answer_params} =
-      case Conn.get_session(conn, :answer_params) do
-        nil ->
-          {conn, %{}}
-        answer_params ->
-          conn = 
-            conn
-            |> Conn.delete_session(:answer_params)
-            |> put_flash(:warning, "Thanks for logging in! You can now submit your answer.")
+    case Conn.get_session(conn, :answer_params) do
+      nil ->
+        changeset =
+          ask
+          |> build_assoc(:answers)
+          |> Answer.changeset
+          
+        render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
+      answer_params ->
+        conn = 
+          conn
+          |> Conn.delete_session(:answer_params)
 
-          {conn, answer_params}
-      end
-
-    changeset =
-      ask
-      |> build_assoc(:answers)
-      |> Answer.changeset(answer_params)
-      
-    render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
+        create(conn, answer_params)
+    end
   end
 
   def create(conn,
@@ -79,11 +75,11 @@ defmodule PitchIn.AnswerController do
       "campaign_id" => campaign_id,
       "ask_id" => ask_id,
       "answer" => answer_params
-    }) do
+    } = params) do
   
     if !conn.assigns.current_user do
       conn
-      |> Conn.put_session(:answer_params, answer_params)
+      |> Conn.put_session(:answer_params, params)
       |> Auth.deep_link_redirect(campaign_ask_answer_path(conn, :new, campaign_id, ask_id))
     else
       ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
