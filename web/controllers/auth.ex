@@ -177,4 +177,9 @@ defmodule PitchIn.Auth do
     conn
     |> get_session(:deep_link_path)
   end
+
+  def clear_deep_link_path(conn) do
+    conn
+    |> delete_session(:deep_link_path)
+  end
 end

@@ -1,0 +1,13 @@
+.pop {
+  &--primary {
+    color: $blue;
+  }
+  &--alert {
+    color: $red;
+  }
+}
+
+a .body-color {
+  color: $black;
+}
+
