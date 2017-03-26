@@ -3,8 +3,8 @@
   Answer to <%= @ask.role %> for <%= @campaign.name %>
 </h2>
 
-<h3>Activist Info</h3>
-<ul>
+<h3>Volunteer Info</h3>
+<ul class="no-dots">
   <li>
     <strong>Name:</strong>
     <%= @answer.user.name %>
@@ -68,14 +68,14 @@
 
 <%= if @answer.user.pro.intro do %>
   <div>
-    <h3>Activist Intro</h3>
+    <h3>Volunteer Intro</h3>
     <%= @answer.user.pro.intro %>
   </div>
   <br/>
 <% end %>
 
 <div>
-  <h3>Activist Message</h3>
+  <h3>Volunteer Message</h3>
   <%= @answer.message %>
 </div>
 <br/>

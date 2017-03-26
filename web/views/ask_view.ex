@@ -10,9 +10,11 @@ defmodule PitchIn.AskView do
 
   def archive_button(conn, campaign, ask, opts \\ []) do
     opts =
-      Keyword.merge([
-        to: campaign_ask_path(conn, :edit, campaign, ask, archive: true),
-        class: "alert button"],
+      Keyword.merge(
+        [
+          to: campaign_ask_path(conn, :edit, campaign, ask, archive: true),
+          class: "alert button"
+        ],
         opts 
       )
     

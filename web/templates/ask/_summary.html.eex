@@ -1,9 +1,7 @@
 <ul class="ask-summary no-dots">
   <li>
     <strong>Need Name</strong><br/>
-    <%= link to: campaign_ask_path(@conn, :show, @campaign, @ask) do %>
-      <%= @ask.role %>:
-    <% end %>
+    <%= @ask.role %>:
     <%= @ask.description %>
   </li>
 
