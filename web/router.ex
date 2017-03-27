@@ -42,7 +42,7 @@ defmodule PitchIn.Router do
     end
     get "/users/:id/interstitial", UserController, :interstitial
     get "/answers", AnswerController, :volunteer_index
-    resources "/users", UserController
+    resources "/users", UserController, only: [:new, :create, :show, :edit, :update]
     resources "/search-alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
