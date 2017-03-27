@@ -1,4 +1,4 @@
-<div id="search-form" data-toggler=".hide" class="search__form">
+<div id="search-form" data-toggler=".hide" class="search__form hide">
 <h2>Search Needs</h2>
 <p>
 Campaigns across the country are looking for help! You can take a look at all the open needs below,

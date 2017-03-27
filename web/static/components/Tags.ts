@@ -19,7 +19,7 @@ export default class Tags extends BaseComponent {
   static selector = 'tags';
 }
 
-const confirmKeys = [9, 13, 188];
+const confirmKeys = [9, 13];
 
 class TagPicker extends BaseComponent {
   tags: string[];
@@ -44,8 +44,10 @@ class TagPicker extends BaseComponent {
     this.render();
 
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.onInput = this.onInput.bind(this);
     this.onTagClick = this.onTagClick.bind(this);
     this.element.on('keydown', this.$nextInput, this.onKeyPress);
+    this.element.on('input', this.$nextInput, this.onInput);
     this.element.on('click', '.tags__tag', this.onTagClick);
   }
 
@@ -57,6 +59,17 @@ class TagPicker extends BaseComponent {
       event.preventDefault();
     } else if (key === 8 && this.$nextInput.val() === '') {
       this.removeLastTag();
+    }
+  }
+
+  onInput() {
+    const value: string = this.$nextInput.val();
+
+    if (value.slice(-1) === ',') {
+      const newValue: string = value.slice(0, -1);
+      this.$nextInput.val(newValue);
+
+      this.finishTag();
     }
   }
 
