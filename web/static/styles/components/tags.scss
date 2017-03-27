@@ -1,20 +1,22 @@
 .tags {
-  background: $off-white;
-  padding: 0.25rem;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  border: $input-border;
+  margin-bottom: 1rem;
 
-  &__tag, &__next-input {
+  &__next-input {
+    margin-bottom: 0;
+  }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
     background: $light-blue;
     color: white;
     border-radius: 2px;
     padding: 0.25rem 0.5rem;
     margin: 0.25rem;
-  }
-
-  &__tag {
     cursor: pointer;
   }
 
@@ -26,42 +28,6 @@
     &:before {
       content: "|";
       margin: 0 0.25rem;
-    }
-  }
-
-  &__next-input {
-    border: none;
-    width: initial;
-    height: initial;
-
-    &::-webkit-input-placeholder {
-      color: $white;
-      opacity: 0.5;
-    }
-
-    &::-moz-placeholder {
-      color: $white;
-      opacity: 0.5;
-    }
-
-    &:-ms-input-placeholder {
-      color: $white;
-      opacity: 0.5;
-    }
-
-    &:-moz-placeholder {
-      color: $white;
-      opacity: 0.5;
-    }
-
-    &::placeholder {
-      color: $white;
-      opacity: 0.5;
-    }
-
-    &:focus {
-      background: $light-blue;
-      color: $white;
     }
   }
 }

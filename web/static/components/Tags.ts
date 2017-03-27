@@ -11,7 +11,7 @@ export default class Tags extends BaseComponent {
     super(element);
 
     element.addClass('hide');
-    const $tags = $(`<label class="tags"></label>`).insertAfter(element);
+    const $tags = $(`<div class="tags"></div>`).insertAfter(element);
 
     new TagPicker($tags, this.element);
   }
@@ -24,6 +24,7 @@ const confirmKeys = [9, 13, 188];
 class TagPicker extends BaseComponent {
   tags: string[];
   $nextInput: JQuery;
+  $tagsContainer: JQuery;
 
   constructor(
     public element: JQuery,
@@ -33,6 +34,10 @@ class TagPicker extends BaseComponent {
 
     const placeholder = $input.attr('placeholder');
     this.$nextInput = $(`<input class="tags__next-input" type="text" placeholder="${placeholder || 'enter tags...'}"/>`);
+    this.$tagsContainer = $('<div class="tags__container"></div>');
+
+    this.element.append(this.$nextInput);
+    this.element.append(this.$tagsContainer);
 
     this.initializeTags();
 
@@ -64,7 +69,7 @@ class TagPicker extends BaseComponent {
 
   render() {
     this.writeTags();
-    this.startNextTag();
+    this.clearInput();
   }
 
   renderAndFocus() {
@@ -99,9 +104,8 @@ class TagPicker extends BaseComponent {
     this.tags = inputVal === '' ? [] : inputVal.split(',');
   }
 
-  startNextTag() {
+  clearInput() {
     this.$nextInput.val('');
-    this.element.append(this.$nextInput);
   }
 
   tagsToString(): string {
@@ -116,6 +120,6 @@ class TagPicker extends BaseComponent {
     this.$input.val(this.tagsToString());
 
     const tagsHtml = _.map(this.tags, this.tagHtml).join('');
-    this.element.html(tagsHtml);
+    this.$tagsContainer.html(tagsHtml);
   }
 }
