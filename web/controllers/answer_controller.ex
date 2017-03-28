@@ -46,10 +46,9 @@ defmodule PitchIn.AnswerController do
   def volunteer_index(conn, _params) do
     user =
       conn.assigns.current_user
-      |> Repo.preload([answers: [:ask, :campaign]])
-      |> Repo.preload([direct_answers: [:campaign]])
+      |> Repo.preload([answers: [:ask, :campaign, :direct_campaign]])
 
-    render(conn, "volunteer_index.html", answers: user.answers, direct_answers: user.direct_answers)
+    render(conn, "volunteer_index.html", answers: user.answers)
   end
 
   def new(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
@@ -127,20 +126,20 @@ defmodule PitchIn.AnswerController do
       campaign = Repo.get(Campaign, campaign_id)
       
       changeset =
-        campaign
-        |> build_assoc(:answers)
+        %Answer{}
         |> Answer.changeset(answer_params)
+        |> Ecto.Changeset.put_assoc(:direct_campaign, campaign)
         |> Ecto.Changeset.put_assoc(:user, conn.assigns.current_user)
 
       case Repo.insert(changeset) do
         {:ok, answer} ->
           answer = answer |> Repo.preload(user: :pro)
-          send_answer_emails(conn, campaign, ask, answer)
+          send_answer_emails(conn, campaign, nil, answer)
 
           conn
           |> redirect(to: campaign_answer_path(conn, :interstitial, campaign, answer))
         {:error, changeset} ->
-          render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
+          render(conn, "show.html", campaign: campaign, ask: nil, changeset: changeset)
       end
     end
   end
@@ -151,8 +150,8 @@ defmodule PitchIn.AnswerController do
       "id" => _id
     }) do
     answer = conn.assigns.answer
-    ask = answer.ask
-    campaign = ask.campaign
+    ask = conn.assigns.ask
+    campaign = conn.assigns.campaign
 
     render(conn, "interstitial.html", campaign: campaign, ask: ask, answer: answer)
   end
@@ -163,8 +162,8 @@ defmodule PitchIn.AnswerController do
       "id" => _id
     }) do
     answer = conn.assigns.answer
-    ask = answer.ask
-    campaign = ask.campaign
+    ask = conn.assigns.ask
+    campaign = conn.assigns.campaign
 
     if conn.assigns.is_owner do
       render(conn, "show.html", campaign: campaign, ask: ask, answer: answer)
@@ -184,20 +183,17 @@ defmodule PitchIn.AnswerController do
       preload: [user: :pro]
     )
 
-    answer =
-      answer
-      |> Map.update!(:campaign, fn 
-        nil -> answer.direct_campaign
-        campaign -> campaign
-      end)
+    campaign = if answer.ask, do: answer.ask.campaign, else: answer.direct_campaign
 
     is_owner = answer && answer.user_id == conn.assigns.current_user.id
     is_staff = conn.assigns.is_staff
-    is_correct_campaign = answer && answer.ask && Integer.to_string(answer.ask.campaign.id) == conn.params["campaign_id"]
+    is_correct_campaign = campaign && Integer.to_string(campaign.id) == conn.params["campaign_id"]
 
     if is_correct_campaign && (is_owner || is_staff) do
       conn
       |> Conn.assign(:answer, answer)
+      |> Conn.assign(:campaign, campaign)
+      |> Conn.assign(:ask, answer.ask)
       |> Conn.assign(:is_owner, is_owner)
     else
       conn

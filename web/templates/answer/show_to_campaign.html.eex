@@ -1,6 +1,10 @@
 <section class="content-block">
 <h2>
-  Answer to <%= @ask.role %> for <%= @campaign.name %>
+  <%= if @ask do %>
+    Answer to <%= @ask.role %> for <%= @campaign.name %>
+  <% else %>
+    Direct Message for <%= @campaign.name %>
+  <% end %>
 </h2>
 
 <h3>Volunteer Info</h3>
@@ -82,6 +86,10 @@
 
 
 <div class="expanded button-group">
-  <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
+  <%= if @ask do %>
+    <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
+  <% else %>
+    <%= link "All Messages", to: campaign_answer_path(@conn, :index, @campaign), class: "secondary button" %>
+  <% end %>
 </div>
 </section>

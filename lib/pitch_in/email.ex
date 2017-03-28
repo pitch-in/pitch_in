@@ -32,7 +32,7 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
-  def contact_us_email(conn, %PitchIn.ContactUs{
+  def contact_us_email(_conn, %PitchIn.ContactUs{
     subject: user_subject,
     body: user_body,
     email: from_email,

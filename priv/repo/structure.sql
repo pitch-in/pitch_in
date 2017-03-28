@@ -44,7 +44,8 @@ CREATE TABLE answers (
     ask_id integer,
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    archived_reason character varying(255)
+    archived_reason character varying(255),
+    direct_campaign_id integer
 );
 
 
@@ -497,6 +498,13 @@ CREATE INDEX answers_ask_id_index ON answers USING btree (ask_id);
 
 
 --
+-- Name: answers_direct_campaign_id_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX answers_direct_campaign_id_index ON answers USING btree (direct_campaign_id);
+
+
+--
 -- Name: answers_user_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -610,6 +618,14 @@ ALTER TABLE ONLY answers
 
 
 --
+-- Name: answers_direct_campaign_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY answers
+    ADD CONSTRAINT answers_direct_campaign_id_fkey FOREIGN KEY (direct_campaign_id) REFERENCES campaigns(id);
+
+
+--
 -- Name: answers_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -677,5 +693,5 @@ ALTER TABLE ONLY search_alerts
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728), (20170306065436), (20170306065857), (20170306100000), (20170306103847), (20170315074520);
+INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728), (20170306065436), (20170306065857), (20170306100000), (20170306103847), (20170315074520), (20170327094309);
 

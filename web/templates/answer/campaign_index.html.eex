@@ -41,6 +41,38 @@
     <% end %>
 <% end %>
 
+<%= case @direct_answers do %>
+  <% [] -> %>
+  <% answers -> %>
+    <section class="list-header content-block">
+      <h3>
+        Direct Messages
+      </h3>
+    </section>
+    <%= for answer <- answers do %>
+      <section class="content-block">
+        <p>
+          Volunteer name:
+          <strong><%= answer.user.name %></strong>
+        </h3>
+
+        <p>
+          Volunteer Profession:
+          <%= answer.user.pro.profession %>
+        </h3>
+
+        <p><strong>Volunteer message:</strong></p>
+        <p>
+          <%= answer.message %>
+        </p>
+
+        <div class="expanded button-group">
+          <%= link "Show", to: campaign_answer_path(@conn, :show, @campaign, answer), class: "success button" %>
+        </div>
+      </section>
+    <% end %>
+<% end %>
+
 <section class="list-header content-block">
   <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
 </section>
