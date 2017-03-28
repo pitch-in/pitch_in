@@ -110,6 +110,7 @@
     <%= link "Manage Answers", to: campaign_answer_path(@conn, :index, @campaign), class: "success button" %>
     <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
   <%= else %>
+    <%= link "Message the campaign", to: campaign_answer_path(@conn, :new, @campaign), class: "primary button" %>
     <%= link "View Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
   <% end %>
 </div>

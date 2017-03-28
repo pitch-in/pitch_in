@@ -1,10 +1,15 @@
 <p>
-  You've received a new volunteer request for the
-  <strong><%= @campaign.name %></strong> <%= @ask.role %> role!
+  <% if @ask do %>
+    You've received a new volunteer request for the
+    <strong><%= @campaign.name %></strong> <%= @ask.role %> role!
+  <% else %>
+    You've received a new volunteer message for
+    <strong><%= @campaign.name %></strong>!
+  <% end %>
 </p>
 
 <p>
-  Here's the data they shared:
+  Here's the data the volunteer shared:
 </p>
 <ul>
   <li>
@@ -29,4 +34,8 @@
   </li>
 </ul>
 
-<%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, @answer), class: "button" %>
+<% if @ask do %>
+  <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, @answer), class: "button" %>
+<% else %>
+  <%= link "Show", to: campaign_answer_path(@conn, :show, @campaign, @answer), class: "button" %>
+<% end %>

@@ -18,6 +18,6 @@
 
   <br/>
   <div class="expanded button-group">
-    <%= link "Pitch In", to: campaign_path(@conn, :show, @campaign), class: "#{if @campaign.is_verified, do: "success", else: "warning"} button" %>
+    <%= link "Pitch In", to: campaign_answer_path(@conn, :new, @campaign), class: "#{if @campaign.is_verified, do: "success", else: "warning"} button" %>
   </div>
 </section>

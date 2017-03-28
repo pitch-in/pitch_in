@@ -1,9 +1,11 @@
 <div class="list-header content-block">
   <div class="expanded button-group">
     <%= if @is_staff do %>
-      <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @ask.campaign_id), class: "secondary hollow button" %>
-      <%= link "Edit", to: campaign_ask_path(@conn, :edit, @ask.campaign_id, @ask), class: "primary hollow button" %>
-      <%= PitchIn.AskView.archive_button(@conn, @campaign, @ask, class: "hollow alert button") %>
+      <%= link "Back to Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "secondary hollow button" %>
+      <%= if @ask do %>
+        <%= link "Edit", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "primary hollow button" %>
+        <%= PitchIn.AskView.archive_button(@conn, @campaign, @ask, class: "hollow alert button") %>
+      <% end %>
     <% else %>
       <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary hollow button" %>
       <%= link "Veiw Campaign", to: campaign_path(@conn, :show, @campaign), class: "primary hollow button" %>
@@ -23,21 +25,16 @@
   </div>
   <hr/>
 <% else %>
-  <%= render "form.html", changeset: @changeset,
-                          conn: @conn,
-                          campaign: @campaign,
-                          ask: @ask,
-                          action: campaign_ask_answer_path(@conn, :create, @campaign, @ask) %>
+  <%= render "form.html", 
+    changeset: @changeset,
+    conn: @conn,
+    campaign: @campaign,
+    action: if @ask, [
+      do: campaign_ask_answer_path(@conn, :create, @campaign, @ask),
+      else: campaign_answer_path(@conn, :create, @campaign),
+    ]
+  %>
 <% end %>
 
-<h2>Additional Info</h2>
-<div class="row">
-  <div class="small-12 medium-6 columns">
-    <%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
-    <hr class="hide-for-medium" />
-  </div>
-  <div class="small-12 medium-6 columns">
-    <%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
-  </div>
-</div>
+<%= render "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
 </section>

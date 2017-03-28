@@ -1,0 +1,13 @@
+<h2>Additional Info</h2>
+<div class="row">
+  <%= if @ask do %>
+    <div class="small-12 medium-6 columns">
+      <%= render PitchIn.AskView, "_summary.html", conn: @conn, campaign: @campaign, ask: @ask %>
+      <hr class="hide-for-medium" />
+    </div>
+  <% end %>
+  <div class="small-12 <%= if @ask, do: "medium-6" %> columns">
+    <%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
+  </div>
+</div>
+
