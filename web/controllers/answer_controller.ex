@@ -205,9 +205,9 @@ defmodule PitchIn.AnswerController do
 
   defp handle_anonymous_create(conn, params) do
     deep_path = 
-      case params[:ask_id] do
-        nil -> campaign_answer_path(conn, :new, params[:campaign_id])
-        ask_id -> campaign_ask_answer_path(conn, :new, params[:campaign_id], ask_id)
+      case params["ask_id"] do
+        nil -> campaign_answer_path(conn, :new, params["campaign_id"])
+        ask_id -> campaign_ask_answer_path(conn, :new, params["campaign_id"], ask_id)
       end
     
     conn
