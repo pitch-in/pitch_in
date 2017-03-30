@@ -1,47 +1,30 @@
-<section class="ask-search-summary content-block">
+<section class="ask-search-summary content-block not-top flex-column align-stretch">
   <%= link to: campaign_ask_answer_path(@conn, :new, @campaign.id, @ask) do %>
     <h3 class="flex-left">
-      <%= @ask.role %>:&nbsp
       <%= render PitchIn.CampaignView, "_name.html", conn: @conn, campaign: @campaign %>
     </h3>
   <% end %>
 
-  <div class="column row">
-    <div class="search-summary-details text-center">
-      <%= campaign_logo(@campaign) %>
-
-      <div class="need-text">
-        <div><strong>Role</strong></div>
-        <div><%= @ask.role %></div>
-        <%= if @ask.hours do %>
-          <div>
-            <%= if @ask.length == :ongoing do %>
-              <strong>Hours/Week:</strong>
-            <% else %>
-              <strong>Total Hours:</strong>
-            <% end %>
-          </div>
-        <% end %>
-        <div><%= @ask.hours %></div>
-        <div><strong>Profession</strong></div>
-        <div><%= @ask.profession %></div>
-        <div><strong>Minimum Experience</strong></div>
-        <div>
-          <%= @ask.years_experience %>
-          <%= if @ask.years_experience == 1, do: "year", else: "years" %>
-        </div>
-      </div>
+  <div><strong>Need Description</strong></div>
+  <div><%= @ask.role %>: <%= @ask.description %></div>
+  <div><strong>Profession</strong></div>
+  <div><%= @ask.profession %></div>
+  <%= if @ask.hours do %>
+    <div>
+      <%= if @ask.length == :ongoing do %>
+        <strong>Hours/Week:</strong>
+      <% else %>
+        <strong>Total Hours:</strong>
+      <% end %>
+     <%= @ask.hours %>
     </div>
+  <% end %>
 
-    <div class="column">
-      <div><strong>Campaign Description</strong></div>
-      <div><%= @campaign.short_pitch %></div>
-      <div><strong>Need Description</strong></div>
-      <div><%= @ask.description %></div>
-    </div>
-  </div>
+  <div><strong>Campaign Short Pitch</strong></div>
+  <div><%= @campaign.short_pitch %></div>
 
-  <br/>
+  <div class="flex-spacer"></div>
+
   <div class="expanded button-group">
     <%= link "Pitch In", to: campaign_ask_answer_path(@conn, :new, @campaign, @ask), class: "#{if @campaign.is_verified, do: "success", else: "warning"} button" %>
   </div>

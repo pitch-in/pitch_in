@@ -10,6 +10,13 @@
     margin-top: 1rem;
   }
 
+  &.not-top {
+    // Override the 'first-child' margin.
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   @mixin expanded {
     margin: 0 -1rem 1rem -1rem;
     padding: 1rem;

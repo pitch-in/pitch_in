@@ -94,3 +94,16 @@
   align-items: flex-end;
 }
 
+.align-stretch {
+  align-items: stretch;
+}
+
+.flex-fill {
+  @include flex(row);
+  align-items: stretch;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+

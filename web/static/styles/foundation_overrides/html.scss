@@ -72,8 +72,28 @@ select {
   }
 }
 
+@mixin even-gutters {
+  &:nth-child(even) {
+    padding-left: 0;
+  }
+}
+
 .column, .columns {
   padding-right: 1rem;
   padding-left: 1rem;
+
+  &.even-gutters {
+    @include even-gutters;
+  }
+  &.medium-even-gutters {
+    @include breakpoint(medium) {
+      @include even-gutters;
+    }
+  }
+  &.large-even-gutters {
+    @include breakpoint(large) {
+      @include even-gutters;
+    }
+  }
 }
 
