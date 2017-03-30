@@ -32,11 +32,9 @@
             </p>
 
             <div class="expanded button-group">
-              <% if answer.ask do %>
-                <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
-              <% else %>
-                <%= link "Show", to: campaign_ask_path(@conn, :show, answer.direct_campaign, answer), class: "success button" %>
-              <% end %>
+              <%= link "Show", to: any_answer_path(@conn, :show, answer), class: "success button" %>
+              <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
+              <%= archive_button @conn, answer, :remove, "alert" %>
             </div>
           </section>
         </div>

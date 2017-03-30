@@ -1,0 +1,5 @@
+<%= form_for @conn, @path, [as: :answer, method: "put"], fn f -> %>
+  <%= text_input f, :archived_reason, class: "hide", value: @reason %>
+
+  <%= submit @reason_text, class: "#{@button_class} button" %>
+<% end %>
