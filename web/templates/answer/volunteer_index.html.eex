@@ -15,8 +15,8 @@
     <%= for answer <- answers do %>
       <section class="content-block">
         <h2>
-          <%= answer.campaign.name %>:
-          <%= answer.ask.role %>
+          <%= if answer.campaign, do: answer.campaign.name, else: answer.direct_campaign.name %>:
+          <%= if answer.ask, do: answer.ask.role %>
         </h2>
 
         <p><strong>Your message:</strong></p>
@@ -25,7 +25,11 @@
         </p>
 
         <div class="expanded button-group">
-          <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
+          <% if answer.ask do %>
+            <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
+          <% else %>
+            <%= link "Show", to: campaign_ask_path(@conn, :show, answer.direct_campaign, answer), class: "success button" %>
+          <% end %>
         </div>
       </section>
     <% end %>
@@ -36,4 +40,3 @@
     <%= link "Back to search", to: search_path(@conn, :index), class: "secondary button" %>
   </div>
 </section>
-

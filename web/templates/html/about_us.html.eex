@@ -10,7 +10,7 @@
   <div class="flex-row align-start">
     <img src="<%= webpack_path(@conn, "/img/about/chris-profile.jpg") %>" title="Chris" class="standard-margin-right" />
     <p>
-    A native of Redondo Beach, CA, Chris worked in San Francisco politics for several years, successfully managing citywide organizing efforts in the heavily contested “No on E: Stop Regressive Beverage Taxes” campaign before joining Hillary Clinton’s presidential bid in New Hampshire, Maine and Wisconsin.
+    A native of Redondo Beach, CA, Chris worked in San Francisco politics for several years, successfully managing citywide organizing efforts in a heavily contested citywide race before joining Hillary Clinton’s presidential bid in New Hampshire, Maine and Wisconsin.
     </p>
   </div>
 

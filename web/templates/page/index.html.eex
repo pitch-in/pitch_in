@@ -14,20 +14,7 @@
   <%= render PitchIn.LayoutView, "_flash.html", conn: @conn %>
 
   <div class="row column">
-    <section class="expanded content-block" id="first-time-here">
-      <p class="take-action text-center">
-        <strong>
-          <span class="blue pop">It’s time to for you to take action.</span><br/>
-          We connect you to the local progressive campaigns and causes you care about most.
-        </strong>
-      </p>
-
-      <div class="expanded stacked-for-small home-action-buttons button-group">
-        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert action button" %>
-        <div class="or-text">or</div>
-        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert action button" %>
-      </div>
-    </section>
+    <%= render PitchIn.PageView, "_first_time_here.html", conn: @conn %>
 
     <section class="content-block" id="how-this-works">
       <h2>How this works</h2>

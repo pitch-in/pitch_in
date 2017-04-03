@@ -21,6 +21,6 @@
 
   <div class="expanded button-group">
     <%= unarchive_button(@conn, @campaign, @ask) %>
-    <%= link "Back to Need", to: campaign_ask_path(@conn, :show, @campaign, @ask), class: "secondary button" %>
+    <%= link "Back to Need", to: campaign_ask_path(@conn, :edit, @campaign, @ask), class: "secondary button" %>
   </div>
 </section>

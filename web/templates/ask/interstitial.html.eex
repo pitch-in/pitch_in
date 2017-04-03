@@ -9,7 +9,7 @@
         Make sure your campaign's profile is up-to-date, so volunteers can find it, and understand what you're about!
       <% end %>
     <% :view_need -> %>
-      <%= next_step "View need", to: campaign_ask_path(@conn, :show, @ask.campaign, @ask), color: "primary" do %>
+      <%= next_step "View need", to: campaign_ask_answer_path(@conn, :new, @ask.campaign, @ask), color: "primary" do %>
         See what volunteers will see when they view your need, to make sure everything is just right!
       <% end %>
     <% :edit_need -> %>

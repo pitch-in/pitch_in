@@ -10,4 +10,9 @@
 
     <%= submit "Log on", class: "expanded button" %>
   <% end %>
+
 </section>
+
+<%= if PitchIn.Auth.get_deep_link_path(@conn) do %>
+  <%= render PitchIn.PageView, "_first_time_here.html", conn: @conn, header: true %>
+<% end %>

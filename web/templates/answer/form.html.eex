@@ -5,25 +5,18 @@
     </div>
   <% end %>
 
+  <p><strong>Thanks for pitching in!</strong></p>
   <p>
-    We're glad you're interested in pitching in! 
-    Once you hit Submit, we'll pass your profile and contact info along
-    to <%= @campaign.name %>. We'll keep your name private though,
-    to help campaigns make unbiased decisions. If they're interested,
-    you should hear back from the campaign soon!
-  </p>
-  <p>
-    And remember, this is just the start of a conversation, you're
-    not obligated to do anything a this point.
+    Once you hit Submit, we'll pass your contact info along
+    to <%= @campaign.name %> and you should hear back soon.
   </p>
 
   <div>
-    <%= required_label f, :message %>
-    <%= textarea f, :message %>
+    <%= textarea f, :message, placeholder: "Write a quick message!", class: "message" %>
     <%= error_tag f, :message %>
   </div>
 
   <div class="expanded button-group">
-    <%= submit "Submit", class: "success button" %>
+    <%= submit "Send", class: "success button" %>
   </div>
 <% end %>

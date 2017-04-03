@@ -20,7 +20,7 @@ or sort the results by profession or a keyword.
   </div>
   <div>
     <%= label f, :issues, "Keyword (ex: women, clean water, education)" %>
-    <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ", ") %>
+    <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ","), data_tags: true, placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>
   </div>
 

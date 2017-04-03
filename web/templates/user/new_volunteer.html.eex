@@ -22,30 +22,30 @@
 
     <%= inputs_for f, :pro, fn i -> %>
       <div class="form-group">
-        <%= label i, :profession, "Profession or Passion" %>
-        <%= select i, :profession, profession_options %>
-        <%= error_tag i, :profession %>
-      </div>
-
-      <div class="form-group">
-        <%= label i, :address_zip %>
-        <%= text_input i, :address_zip, autocomplete: "postal-code" %>
-        <%= error_tag i, :address_zip %>
-      </div>
-
-      <div class="form-group">
         <%= label i, :phone %>
         <%= text_input i, :phone, autocomplete: "tel", data_mask: "(000) 000-0000" %>
         <%= error_tag i, :phone %>
       </div>
 
       <div class="form-group">
-        <%= label i, :experience_starts_at, "When did you start working in your current profession?" %>
+        <%= label i, :profession, "Profession or Passion" %>
+        <%= select i, :profession, profession_options %>
+        <%= error_tag i, :profession %>
+      </div>
+
+      <div class="form-group">
+        <%= label i, :experience_starts_at, "What year did you start learning your profession or passion?" %>
         <p class="input-description">
           This helps us calculate your experience level.
         </p>
-        <%= us_date_input i, :experience_starts_at, data_end_date: "today" %>
+        <%= us_date_input i, :experience_starts_at, no_datepicker: true %>
         <%= error_tag i, :experience_starts_at %>
+      </div>
+
+      <div class="form-group">
+        <%= label i, :address_zip, "Your ZIP Code" %>
+        <%= text_input i, :address_zip, autocomplete: "postal-code" %>
+        <%= error_tag i, :address_zip %>
       </div>
     <% end %>
 

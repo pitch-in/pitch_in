@@ -31,8 +31,12 @@
         </p>
       </div>
     <% _ -> %>
-      <%= for result <- @results do %>
-        <%= render "_search_summary.html", conn: @conn, result: result %>
-      <% end %>
+      <div class="row">
+        <%= for result <- @results do %>
+          <div class="small-12 medium-6 columns flex-fill medium-even-gutters">
+            <%= render "_search_summary.html", conn: @conn, result: result %>
+          </div>
+        <% end %>
+      </div>
   <% end %>
 </div>

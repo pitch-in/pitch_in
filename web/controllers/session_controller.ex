@@ -11,7 +11,10 @@ defmodule PitchIn.SessionController do
       {:ok, conn} ->
         case Auth.get_deep_link_path(conn) do
           nil -> redirect_to_default(conn)
-          deep_link_path -> redirect_deep(conn, deep_link_path)
+          deep_link_path ->
+            conn
+            |> Auth.clear_deep_link_path
+            |> redirect_deep(deep_link_path)
         end
       {:error, _reason, conn} ->
         conn

@@ -100,11 +100,7 @@ defmodule PitchIn.Auth do
     if conn.assigns.current_user do
       conn
     else
-      conn
-      |> store_deep_link_path
-      |> Phoenix.Controller.put_flash(:alert, "You must log in to view this page.")
-      |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
-      |> halt
+      deep_link_redirect(conn)
     end
   end
 
@@ -168,13 +164,29 @@ defmodule PitchIn.Auth do
     end
   end
 
-  def store_deep_link_path(conn) do
+  def deep_link_redirect(conn, path \\ nil) do
+    path = path || conn.request_path
+
     conn
-    |> put_session(:deep_link_path, conn.request_path)
+    |> store_deep_link_path(path)
+    |> Phoenix.Controller.put_flash(:alert, "You must log in to view this page.")
+    |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
+    |> halt
+  end
+
+  def store_deep_link_path(conn, path) do
+    conn
+    |> put_session(:deep_link_path, path)
   end
 
   def get_deep_link_path(conn) do
     conn
     |> get_session(:deep_link_path)
+    |> IO.inspect
+  end
+
+  def clear_deep_link_path(conn) do
+    conn
+    |> delete_session(:deep_link_path)
   end
 end

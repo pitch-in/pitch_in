@@ -4,9 +4,9 @@ defmodule PitchIn.AskController do
   alias PitchIn.Ask
   alias PitchIn.Campaign
 
-  use PitchIn.Auth, protect: :all
+  use PitchIn.Auth, protect: [:new, :create, :edit, :update, :interstitial]
   plug :check_campaign_staff
-  plug :verify_campaign_staff
+  plug :verify_campaign_staff when action in [:new, :create, :edit, :update, :interstitial]
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = get_campaign(campaign_id)
@@ -54,8 +54,8 @@ defmodule PitchIn.AskController do
   end
 
   def show(conn, %{"campaign_id" => campaign_id, "id" => id}) do
-    ask = get_ask(campaign_id, id)
-    render(conn, "show.html", campaign: ask.campaign, ask: ask)
+    conn
+    |> redirect(to: campaign_ask_answer_path(conn, :new, campaign_id, id))
   end
 
   def edit(conn, %{"campaign_id" => campaign_id, "id" => id, "archive" => "true"}) do
@@ -84,7 +84,7 @@ defmodule PitchIn.AskController do
       {:ok, %{archived_reason: _} = ask} ->
         conn
         |> put_flash(:warning, "Need successfully archived.")
-        |> redirect(to: campaign_ask_path(conn, :show, ask.campaign, ask))
+        |> redirect(to: campaign_ask_path(conn, :index, ask.campaign))
       {:error, changeset} ->
         render(conn, "edit.html", ask: ask, campaign: ask.campaign, changeset: changeset)
     end

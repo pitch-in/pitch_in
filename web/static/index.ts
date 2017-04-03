@@ -48,5 +48,6 @@ $(document).ready(($) => {
   //   imageSrc: hero_path,
   //   position: 'center bottom'
   // });
+  //
 });
 

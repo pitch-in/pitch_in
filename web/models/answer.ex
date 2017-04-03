@@ -6,6 +6,7 @@ defmodule PitchIn.Answer do
     belongs_to :user, PitchIn.User
     belongs_to :ask, PitchIn.Ask
     has_one :campaign, through: [:ask, :campaign]
+    belongs_to :direct_campaign, PitchIn.Campaign
     field :message, :string
 
     timestamps()

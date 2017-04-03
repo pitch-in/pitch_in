@@ -45,13 +45,16 @@ defmodule PitchIn.UserController do
         Email.staff_welcome_email(user.email, conn, user, campaign)
         |> Mailer.deliver_later
 
+        path = Auth.get_deep_link_path(conn) || campaign_path(conn, :edit, campaign)
+
         conn
-        |> PitchIn.Auth.login(user)
+        |> Auth.login(user)
         |> put_flash(:success, """
           Welcome to Pitch In! You can now create a campaign, and then start
           posting what you need to get your campaign going!
         """)
-        |> redirect(to: Auth.get_deep_link_path(conn) || campaign_path(conn, :edit, campaign))
+        |> Auth.clear_deep_link_path
+        |> redirect(to: path)
       {:error, changeset} ->
         render(conn, "new_staff.html", changeset: changeset)
     end
@@ -67,9 +70,12 @@ defmodule PitchIn.UserController do
         Email.volunteer_welcome_email(user.email, conn, user)
         |> Mailer.deliver_later
 
+        path = Auth.get_deep_link_path(conn) || user_path(conn, :interstitial, user)
+
         conn
-        |> PitchIn.Auth.login(user)
-        |> redirect(to: Auth.get_deep_link_path(conn) || user_path(conn, :interstitial, user))
+        |> Auth.login(user)
+        |> Auth.clear_deep_link_path
+        |> redirect(to: path)
       {:error, changeset} ->
         render(conn, "new_volunteer.html", changeset: changeset)
     end
