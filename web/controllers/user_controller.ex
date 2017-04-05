@@ -123,13 +123,12 @@ defmodule PitchIn.UserController do
   defp send_user_to_sendgrid(user) do
     HTTPoison.post(
       "https://api.sendgrid.com/v3/contactdb/recipients",
-      Poison.encode!([%{email: user.email, first_name: user.name}]) |> IO.inspect,
+      Poison.encode!([%{email: user.email, first_name: user.name}]),
       [
         {"Content-Type", "application/json"}, 
         {"Authorization", "Bearer #{Application.get_env(:pitch_in, PitchIn.Mailer)[:api_key]}"}
       ]
     )
-    |> IO.inspect
   end
 
   defp get_pro_user(id) do
