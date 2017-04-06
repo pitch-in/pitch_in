@@ -21,7 +21,8 @@ defmodule PitchIn.Mixfile do
      applications: [
        :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
        :phoenix_ecto, :postgrex,
-       :timex, :comeonin, :bamboo, :sentry
+       :timex, :comeonin, :bamboo, :sentry,
+       :httpoison, :poison
        # :uberauth, :ueberauth_identity
      ]]
   end
@@ -48,7 +49,10 @@ defmodule PitchIn.Mixfile do
      {:comeonin, "~> 3.0.0"},
      {:bamboo, "~> 0.8"},
      {:basic_auth, "~> 2.0"},
-     {:sentry, "~> 2.2.0"},
+     {:sentry, "~> 3.0.0"},
+     {:hackney, "~> 1.7.0", override: true},
+     {:httpoison, "~> 0.11.1"},
+     {:poison, "~> 2.0"},
 
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},

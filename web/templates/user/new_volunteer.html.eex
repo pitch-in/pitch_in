@@ -38,7 +38,7 @@
         <p class="input-description">
           This helps us calculate your experience level.
         </p>
-        <%= us_date_input i, :experience_starts_at, no_datepicker: true %>
+        <%= us_date_input i, :experience_starts_at, no_datepicker: true, placeholder: 'YYYY' %>
         <%= error_tag i, :experience_starts_at %>
       </div>
 

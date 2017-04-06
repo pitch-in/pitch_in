@@ -47,6 +47,8 @@ defmodule PitchIn.UserController do
 
         path = Auth.get_deep_link_path(conn) || campaign_path(conn, :edit, campaign)
 
+        send_user_to_sendgrid(user)
+
         conn
         |> Auth.login(user)
         |> put_flash(:success, """
@@ -71,6 +73,8 @@ defmodule PitchIn.UserController do
         |> Mailer.deliver_later
 
         path = Auth.get_deep_link_path(conn) || user_path(conn, :interstitial, user)
+
+        send_user_to_sendgrid(user)
 
         conn
         |> Auth.login(user)
@@ -105,12 +109,26 @@ defmodule PitchIn.UserController do
 
     case Repo.update(changeset) do
       {:ok, user} ->
+
+        send_user_to_sendgrid(user)
+
         conn
         |> put_flash(:success, "User updated successfully.")
         |> redirect(to: user_path(conn, :edit, user))
       {:error, changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
+  end
+
+  defp send_user_to_sendgrid(user) do
+    HTTPoison.post(
+      "https://api.sendgrid.com/v3/contactdb/recipients",
+      Poison.encode!([%{email: user.email, first_name: user.name}]),
+      [
+        {"Content-Type", "application/json"}, 
+        {"Authorization", "Bearer #{Application.get_env(:pitch_in, PitchIn.Mailer)[:api_key]}"}
+      ]
+    )
   end
 
   defp get_pro_user(id) do
