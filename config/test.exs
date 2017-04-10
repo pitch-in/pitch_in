@@ -17,3 +17,28 @@ config :pitch_in, PitchIn.Repo,
   database: "pitch_in_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :pitch_in, PitchIn.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  server: "smtp.domain",
+  port: 1025,
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
+
+config :pitch_in, :server_env, :local
+
+config :pitch_in, :staging_auth,
+  username: "username",
+  password: "password",
+  realm: "Staging"
+
+config :pitch_in, :cert, "success"
+
+config :pitch_in, PitchIn.Mailer,
+  api_key: "mailer_key"
+
+config :pitch_in, PitchIn.Email,
+  test_email: "test@pitch-in.us",
+  from_email: "from@pitch-in.us",
+  contact_us_email: "contact_us@pitch-in.us"

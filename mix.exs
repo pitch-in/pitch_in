@@ -53,6 +53,7 @@ defmodule PitchIn.Mixfile do
      {:hackney, "~> 1.7.0", override: true},
      {:httpoison, "~> 0.11.1"},
      {:poison, "~> 2.0"},
+     {:credo, "~> 0.7", only: [:dev, :test]},
 
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},
