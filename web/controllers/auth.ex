@@ -1,4 +1,8 @@
 defmodule PitchIn.Auth do
+  @moduledoc """
+  Holds the auth pipeline, and auth functions
+  """
+
   alias PitchIn.Repo
   import Ecto
   import Ecto.Query

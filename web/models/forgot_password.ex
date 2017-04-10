@@ -1,4 +1,8 @@
 defmodule PitchIn.ForgotPassword do
+  @moduledoc """
+  Model for forgot password tokens.
+  """
+
   use PitchIn.Web, :model
 
   schema "forgot_passwords" do

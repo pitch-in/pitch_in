@@ -1,4 +1,8 @@
 defmodule PitchIn.User do
+  @moduledoc """
+  A volunteer or campaign user.
+  """
+
   use PitchIn.Web, :model
   use PitchIn.NextSteps
 
@@ -8,6 +12,7 @@ defmodule PitchIn.User do
     has_many :answers, PitchIn.Answer
     has_many :search_alerts, PitchIn.SearchAlert
     has_many :need_searches, PitchIn.NeedSearch
+    has_many :forgot_passwords, PitchIn.ForgotPassword
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string

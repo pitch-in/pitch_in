@@ -14,6 +14,8 @@ defmodule PitchIn.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  import PitchIn.Factory
+  import Plug.Conn
 
   using do
     quote do
@@ -26,6 +28,9 @@ defmodule PitchIn.ConnCase do
       import Ecto.Query
 
       import PitchIn.Router.Helpers
+
+      import PitchIn.Factory
+      import PitchIn.ConnCase
 
       # The default endpoint for testing
       @endpoint PitchIn.Endpoint
@@ -40,5 +45,12 @@ defmodule PitchIn.ConnCase do
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
+  def login(conn) do
+    user = insert(:user)
+
+    conn
+    |> assign(:current_user, user)
   end
 end

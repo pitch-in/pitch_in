@@ -100,7 +100,11 @@ defmodule PitchIn.ViewHelpers do
     link(url, to: url)
   end
 
-  def base_url(conn, path \\ "") do
+  def base_url(conn), do: base_url(conn, "")
+  def base_url(PitchIn.Endpoint, path) do
+    "https://www.example.com" <> path
+  end
+  def base_url(conn, path) do
     scheme = "#{conn.scheme}://"
 
     url = "#{scheme}#{conn.host}"

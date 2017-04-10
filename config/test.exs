@@ -42,3 +42,6 @@ config :pitch_in, PitchIn.Email,
   test_email: "test@pitch-in.us",
   from_email: "from@pitch-in.us",
   contact_us_email: "contact_us@pitch-in.us"
+  
+config :comeonin,
+  bcrypt_log_rounds: 4
