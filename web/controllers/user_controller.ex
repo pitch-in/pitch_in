@@ -102,14 +102,14 @@ defmodule PitchIn.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user =
-      get_pro_user(id)
+      id
+      |> get_pro_user
       |> Repo.preload(:search_alerts)
 
     changeset = User.changeset(user, user_params)
 
     case Repo.update(changeset) do
       {:ok, user} ->
-
         send_user_to_sendgrid(user)
 
         conn

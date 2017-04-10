@@ -6,13 +6,15 @@ defmodule PitchIn.User do
   use PitchIn.Web, :model
   use PitchIn.NextSteps
 
+  alias PitchIn.Tokens
+
   schema "users" do
     many_to_many :campaigns, PitchIn.Campaign, join_through: "campaign_staff"
     has_one :pro, PitchIn.Pro
     has_many :answers, PitchIn.Answer
     has_many :search_alerts, PitchIn.SearchAlert
     has_many :need_searches, PitchIn.NeedSearch
-    has_many :forgot_passwords, PitchIn.ForgotPassword
+    has_one :password_reset, PitchIn.PasswordReset
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string
@@ -20,6 +22,10 @@ defmodule PitchIn.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :password_hash, :string
+
+    field :reset_token, :string, virtual: true
+    field :reset_digest, :string
+    field :reset_time, Timex.Ecto.DateTime
 
     timestamps()
   end
@@ -55,14 +61,31 @@ defmodule PitchIn.User do
     |> put_assoc(:pro, %PitchIn.Pro{})
   end
 
-  defp registration_changeset(struct, params \\ %{}) do
+  def password_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
-    |> cast(params, [:name, :email, :password])
-    |> validate_required([:name, :email, :password])
+    |> cast(params, [:password])
+    |> validate_required([:password])
     |> validate_confirmation(:password)
     |> validate_length(:password, min: 6, max: 100)
     |> put_pass_hash
+  end
+
+  def forgot_password_changeset(struct, params \\ %{}) do
+    token = Tokens.token
+
+    struct
+    |> cast(params, [:email])
+    |> validate_required([:email])
+    |> put_change(:reset_token, token)
+    |> put_change(:reset_digest, Comeonin.Bcrypt.hashpwsalt(token))
+    |> put_change(:reset_requested_at, Timex.now)
+  end
+
+  defp registration_changeset(struct, params \\ %{}) do
+    struct
+    |> changeset(params)
+    |> password_changeset(params)
   end
 
   defp put_pass_hash(changeset) do
