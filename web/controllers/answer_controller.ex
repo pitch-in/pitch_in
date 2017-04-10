@@ -16,7 +16,8 @@ defmodule PitchIn.AnswerController do
 
   def index(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
     ask = 
-      Repo.get(Ask, ask_id)
+      Ask
+      |> Repo.get(ask_id)
       |> Repo.preload(answers: [user: :pro])
       |> Repo.preload(:campaign)
     campaign = ask.campaign
@@ -34,7 +35,8 @@ defmodule PitchIn.AnswerController do
 
   def index(conn, %{"campaign_id" => campaign_id}) do
     campaign = 
-      Repo.get(Campaign, campaign_id)
+      Campaign
+      |> Repo.get(campaign_id)
       |> Repo.preload([answers: [:ask, [user: :pro]]])
       |> Repo.preload([direct_answers: [:ask, [user: :pro]]])
     answers = campaign.answers
@@ -52,7 +54,7 @@ defmodule PitchIn.AnswerController do
   end
 
   def new(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
-    ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
+    ask = Ask |> Repo.get(ask_id) |> Repo.preload(:campaign)
     campaign = ask.campaign
 
     case Conn.get_session(conn, :answer_params) do
@@ -89,10 +91,8 @@ defmodule PitchIn.AnswerController do
       "answer" => answer_params
     } = params) do
   
-    if !conn.assigns.current_user do
-      handle_anonymous_create(conn, params)
-    else
-      ask = Repo.get(Ask, ask_id) |> Repo.preload(:campaign)
+    if conn.assigns.current_user do
+      ask = Ask |> Repo.get(ask_id) |> Repo.preload(:campaign)
       campaign = ask.campaign
       
       changeset =
@@ -111,6 +111,8 @@ defmodule PitchIn.AnswerController do
         {:error, changeset} ->
           render(conn, "show.html", campaign: campaign, ask: ask, changeset: changeset)
       end
+    else
+      handle_anonymous_create(conn, params)
     end
   end
 
@@ -120,9 +122,7 @@ defmodule PitchIn.AnswerController do
       "answer" => answer_params
     } = params) do
   
-    if !conn.assigns.current_user do
-      handle_anonymous_create(conn, params)
-    else
+    if conn.assigns.current_user do
       campaign = Repo.get(Campaign, campaign_id)
       
       changeset =
@@ -141,6 +141,8 @@ defmodule PitchIn.AnswerController do
         {:error, changeset} ->
           render(conn, "show.html", campaign: campaign, ask: nil, changeset: changeset)
       end
+    else
+      handle_anonymous_create(conn, params)
     end
   end
 
@@ -224,8 +226,8 @@ defmodule PitchIn.AnswerController do
   end
 
   defp send_answer_emails(conn, campaign, ask, answer) do
-    Email.user_answer_email(
-      conn.assigns.current_user.email,
+    conn.assigns.current_user.email
+    |> Email.user_answer_email(
       conn,
       campaign,
       ask,
@@ -233,8 +235,8 @@ defmodule PitchIn.AnswerController do
     )
     |> Mailer.deliver_later
 
-    Email.campaign_answer_email(
-      campaign.email,
+    campaign.email
+    |> Email.campaign_answer_email(
       conn,
       campaign,
       ask,
