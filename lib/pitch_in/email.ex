@@ -1,4 +1,7 @@
 defmodule PitchIn.Email do
+  @moduledoc """
+  Defines emails the app can send.
+  """
   use Bamboo.Phoenix, view: PitchIn.EmailView
 
   @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
@@ -16,6 +19,20 @@ defmodule PitchIn.Email do
     |> base_email
     |> subject("Thanks for signing up with pitch in!")
     |> render("volunteer_welcome.html", conn: conn, user: user)
+  end
+
+  def password_reset_token_email(conn, user) do
+    user.email
+    |> base_email
+    |> subject("Your password reset link")
+    |> render("password_reset_token.html", conn: conn, user: user)
+  end
+
+  def password_reset_success_email(conn, user) do
+    user.email
+    |> base_email
+    |> subject("Password reset!")
+    |> render("password_reset_success.html", conn: conn, user: user)
   end
 
   def user_answer_email(email_address, conn, campaign, ask, answer) do

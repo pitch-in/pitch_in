@@ -14,7 +14,6 @@ defmodule PitchIn.User do
     has_many :answers, PitchIn.Answer
     has_many :search_alerts, PitchIn.SearchAlert
     has_many :need_searches, PitchIn.NeedSearch
-    has_one :password_reset, PitchIn.PasswordReset
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string
@@ -79,7 +78,7 @@ defmodule PitchIn.User do
     |> validate_required([:email])
     |> put_change(:reset_token, token)
     |> put_change(:reset_digest, Comeonin.Bcrypt.hashpwsalt(token))
-    |> put_change(:reset_requested_at, Timex.now)
+    |> put_change(:reset_time, Timex.now)
   end
 
   defp registration_changeset(struct, params \\ %{}) do

@@ -4,10 +4,8 @@ defmodule PitchIn.ForgotPasswordController do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
   alias PitchIn.User
   alias PitchIn.Auth
-
-  def new(conn, _params) do
-    render conn, "new.html"
-  end
+  alias PitchIn.Email
+  alias PitchIn.Mailer
 
   def create(conn, %{"forgot_password" => params}) do
     email = params["email"]
@@ -23,7 +21,9 @@ defmodule PitchIn.ForgotPasswordController do
 
         case Repo.update(changeset) do
           {:ok, user} ->
-            # TODO: Send email.
+            conn
+            |> Email.password_reset_token_email(user)
+            |> Mailer.deliver_later
             
             redirect_to_email_sent(conn, email)
           {:error, changeset} ->
@@ -35,7 +35,7 @@ defmodule PitchIn.ForgotPasswordController do
     end
   end
 
-  def show(conn, %{"email" => email, "token" => token} = params) do
+  def index(conn, %{"email" => email, "token" => token} = params) do
     user = Repo.get_by(User, email: params["email"])
     changeset = User.changeset(user)
 
@@ -44,25 +44,34 @@ defmodule PitchIn.ForgotPasswordController do
         redirect_to_home(conn)
       !valid_token?(conn, user, params) ->
         conn
-        |> render("show_error.html")
+        |> render("error.html")
       true ->
         conn
-        |> render("show.html", changeset: changeset)
+        |> render("edit.html", changeset: changeset, token: token)
     end
   end
 
-  def update(conn, %{"email" => email, "token" => token, "user" => user_params} = params) do
-    user = Repo.get_by(User, email: params["email"])
+  def index(conn, _params) do
+    render conn, "new.html"
+  end
+
+  def update(conn, %{"id" => id, "token" => token, "user" => user_params} = params) do
+    user = Repo.get(User, id)
     changeset = User.password_changeset(user, user_params)
 
     cond do
       !valid_token?(conn, user, params) ->
         conn
-        |> render("show_error.html")
+        |> render("error.html")
       true ->
         case Repo.update(changeset) do
           {:ok, user} ->
             conn
+            |> Email.password_reset_success_email(user)
+            |> Mailer.deliver_later
+
+            conn
+            |> put_flash(:success, "Password successfully reset!")
             |> Auth.login(user)
             |> redirect_to_home
           {:error, changeset} ->
@@ -77,9 +86,9 @@ defmodule PitchIn.ForgotPasswordController do
     |> render("email_sent.html", email: email)
   end
 
-  defp valid_token?(conn, user, %{"email" => email, "token" => token}) do
+  defp valid_token?(conn, user, %{"token" => token}) do
     user &&
-      Timex.diff(Timex.now, user.reset_requested_at, :hours) > 2 &&
+      Timex.diff(Timex.now, user.reset_time, :hours) < 2 &&
       checkpw(token, user.reset_digest)
   end
 
