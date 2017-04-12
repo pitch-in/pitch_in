@@ -1,0 +1,9 @@
+<section class="content-block">
+  <h2>Password reset request received!</h2>
+  <p>
+  If a Pitch In account exists for <%= @email %>, we'll send you a password reset link.
+  </p>
+  <p>
+  If you don't receive an email from us in a few minutes, check your spam folder, or try <%= link "another email address", to: forgot_password_path(@conn, :new) %>
+  </p>
+</section>

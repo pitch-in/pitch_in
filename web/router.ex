@@ -44,8 +44,8 @@ defmodule PitchIn.Router do
     get "/users/:id/interstitial", UserController, :interstitial
     get "/answers", AnswerController, :volunteer_index
     resources "/users", UserController, only: [:new, :create, :show, :edit, :update]
-    resources "/forgot_password", ForgotPasswordController, only: [:new, :create, :show]
-    get "/forgot_password", ForgotPasswordController, :email_sent
+    get "/forgot-password/email-sent", ForgotPasswordController, :email_sent
+    resources "/forgot-password", ForgotPasswordController, only: [:new, :create, :show, :edit]
     resources "/search-alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]

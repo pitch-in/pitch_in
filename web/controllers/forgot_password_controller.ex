@@ -5,7 +5,7 @@ defmodule PitchIn.ForgotPasswordController do
   alias PitchIn.User
   alias PitchIn.Auth
 
-  def new(conn) do
+  def new(conn, _params) do
     render conn, "new.html"
   end
 
@@ -72,6 +72,11 @@ defmodule PitchIn.ForgotPasswordController do
     end
   end
 
+  def email_sent(conn, %{"email" => email}) do
+    conn
+    |> render("email_sent.html", email: email)
+  end
+
   defp valid_token?(conn, user, %{"email" => email, "token" => token}) do
     user &&
       Timex.diff(Timex.now, user.reset_requested_at, :hours) > 2 &&
@@ -80,7 +85,7 @@ defmodule PitchIn.ForgotPasswordController do
 
   defp redirect_to_email_sent(conn, email) do
     conn
-    |> redirect(to: forgot_password_path(conn, :email_sent, email))
+    |> redirect(to: forgot_password_path(conn, :email_sent, email: email))
   end
 
   defp redirect_to_home(conn) do
