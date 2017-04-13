@@ -31,10 +31,10 @@
               <%= answer.message %>
             </p>
 
-            <div class="expanded button-group">
+            <div class="stacked-for-small expanded button-group">
               <%= link "Show", to: any_answer_path(@conn, :show, answer), class: "success button" %>
               <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
-              <%= archive_button @conn, answer, :remove, "alert" %>
+              <%= archive_link @conn, answer %>
             </div>
           </section>
         </div>

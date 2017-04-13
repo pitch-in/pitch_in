@@ -25,6 +25,7 @@ defmodule PitchIn.Web do
       import Ecto.Changeset
       import Ecto.Query
       import PitchIn.ModelHelpers
+      import PitchIn.Helpers
     end
   end
 
@@ -38,6 +39,7 @@ defmodule PitchIn.Web do
 
       import PitchIn.Router.Helpers
       import PitchIn.Gettext
+      import PitchIn.Helpers
     end
   end
 
@@ -55,6 +57,7 @@ defmodule PitchIn.Web do
       import PitchIn.ViewHelpers
       import PitchIn.ErrorHelpers
       import PitchIn.Gettext
+      import PitchIn.Helpers
     end
   end
 

@@ -11,7 +11,14 @@ defmodule PitchIn.CampaignView do
   def election?(campaign), do: candidate?(campaign) || measure?(campaign)
 
   def unarchive_button(conn, campaign) do
-    render("_unarchive.html", conn: conn, campaign: campaign)
+    render(
+      PitchIn.SharedView,
+      "_unarchive_button.html",
+      conn: conn,
+      data: campaign,
+      type: :campaign, 
+      action: campaign_path(conn, :update, campaign)
+    )
   end
 
   def archive_button(conn, campaign, opts \\ []) do

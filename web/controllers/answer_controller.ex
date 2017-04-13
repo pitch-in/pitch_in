@@ -8,11 +8,12 @@ defmodule PitchIn.AnswerController do
   alias PitchIn.Email
   alias PitchIn.Mailer
   alias PitchIn.Auth
+  alias PitchIn.ArchiveReasons
 
   use PitchIn.Auth, protect: [:index, :edit, :update, :interstitial]
   plug :check_campaign_staff
   plug :verify_campaign_staff when action in [:index]
-  plug :get_answer when action in [:show, :interstitial]
+  plug :get_answer when action in [:show, :interstitial, :edit, :update]
 
   def index(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
     ask = 
@@ -175,6 +176,52 @@ defmodule PitchIn.AnswerController do
     end
   end
 
+  def edit(conn,
+    %{
+      "campaign_id" => _campaign_id,
+      "id" => _id,
+      "archive" => "true"
+    }) do
+    answer = conn.assigns.answer
+    user = conn.assigns.current_user
+    is_staff = conn.assigns.is_staff
+
+    changeset = Answer.changeset(answer)
+
+    reasons = cond do
+      conn.assigns.current_user.is_admin -> :admin_answer
+      is_staff -> :campaign_answer
+      true -> :volunteer_answer
+    end
+
+    render(conn, "edit_archived.html", changeset: changeset, reasons: reasons)
+  end
+
+  def update(conn,
+    %{
+      "campaign_id" => _campaign_id,
+      "id" => _id,
+      "answer" => answer_params
+    }) do
+    answer = conn.assigns.answer
+    campaign = conn.assigns.campaign
+
+    changeset = Answer.archive_changeset(answer, answer_params)
+
+    case Repo.update(changeset) do
+      {:ok, %{archived_reason: nil} = answer} ->
+        conn
+        |> put_flash(:success, "Answer successfully opened!")
+        |> redirect(to: answser_index_path(conn))
+      {:ok, %{archived_reason: _} = answer} ->
+        conn
+        |> put_flash(:warning, "Answer successfully closed!")
+        |> redirect(to: answser_index_path(conn))
+      {:error, changeset} ->
+        render(conn, "edit_archived.html", changeset: changeset)
+    end
+  end
+
   defp get_answer(conn, _opts) do
     id = conn.params["id"]
 
@@ -207,11 +254,7 @@ defmodule PitchIn.AnswerController do
   end
 
   defp handle_anonymous_create(conn, params) do
-    deep_path = 
-      case params["ask_id"] do
-        nil -> campaign_answer_path(conn, :new, params["campaign_id"])
-        ask_id -> campaign_ask_answer_path(conn, :new, params["campaign_id"], ask_id)
-      end
+    deep_path = any_answer_path(conn, :new, params["campaign_id"], params["ask_id"])
     
     conn
     |> Conn.put_session(:answer_params, params)
@@ -244,5 +287,13 @@ defmodule PitchIn.AnswerController do
       answer
     )
     |> Mailer.deliver_later
+  end
+
+  def answser_index_path(conn) do
+    if conn.assigns.is_staff do
+      any_answer_path(conn, :index, conn.assigns.campaign)
+    else
+      answer_path(conn, :index)
+    end
   end
 end

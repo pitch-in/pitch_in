@@ -8,6 +8,7 @@ defmodule PitchIn.Answer do
     has_one :campaign, through: [:ask, :campaign]
     belongs_to :direct_campaign, PitchIn.Campaign
     field :message, :string
+    field :archived_reason, :string
 
     timestamps()
   end
@@ -24,5 +25,10 @@ defmodule PitchIn.Answer do
     struct
     |> cast(params, [:message])
     |> validate_required([:message])
+  end
+
+  def archive_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:archived_reason])
   end
 end

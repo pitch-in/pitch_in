@@ -47,4 +47,8 @@ defmodule PitchIn.ArchiveReasons do
       "Couldn't reach volunteer"
     ]
   end
+
+  def admin_answer do
+    campaign_answer ++ volunteer_answer
+  end
 end

@@ -5,7 +5,14 @@ defmodule PitchIn.AskView do
   use PitchIn.NextStepView
 
   def unarchive_button(conn, campaign, ask) do
-    render("_unarchive.html", conn: conn, campaign: campaign, ask: ask)
+    render(
+      PitchIn.SharedView,
+      "_unarchive_button.html",
+      conn: conn,
+      data: ask,
+      type: :ask, 
+      action: campaign_ask_path(conn, :update, campaign, ask)
+    )
   end
 
   def archive_button(conn, campaign, ask, opts \\ []) do
