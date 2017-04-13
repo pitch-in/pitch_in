@@ -12,34 +12,11 @@
       </h3>
     </section>
   <% answers -> %>
-    <div class="row">
-      <%= for answer <- answers do %>
-        <div class="small-12 medium-6 columns flex-fill medium-even-gutters">
-          <section class="content-block">
-            <h2>
-              <%= render(
-                PitchIn.CampaignView,
-                "_name.html",
-                conn: @conn,
-                campaign: (if answer.campaign, do: answer.campaign, else: answer.direct_campaign)
-              ) %>
-              <%= if answer.ask, do: answer.ask.role %>
-            </h2>
-
-            <p><strong>Your message:</strong></p>
-            <p>
-              <%= answer.message %>
-            </p>
-
-            <div class="stacked-for-small expanded button-group">
-              <%= link "Show", to: any_answer_path(@conn, :show, answer), class: "success button" %>
-              <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
-              <%= archive_link @conn, answer %>
-            </div>
-          </section>
-        </div>
+    <%= for answer <- answers do %>
+      <%= card @conn, answer.campaign, answer.ask, answer do %>
+        <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
       <% end %>
-    </div>
+    <% end %>
 <% end %>
 
 <section class="list-header content-block">

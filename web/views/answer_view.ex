@@ -39,6 +39,10 @@ defmodule PitchIn.AnswerView do
     )
   end
 
+  def card(conn, campaign, ask, answer, do: buttons) do
+    render "_card.html", conn: conn, campaign: campaign, ask: ask, answer: answer, buttons: buttons
+  end
+
   defp render_archive_button(conn, path, reason, button_class) do
     render "_archive_reason_button.html", conn: conn, path: path, reason: reason, reason_text: @reason_texts[reason], button_class: button_class
   end

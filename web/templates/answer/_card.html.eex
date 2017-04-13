@@ -1,0 +1,23 @@
+<section class="content-block">
+  <h2>
+    <%= render(
+      PitchIn.CampaignView,
+      "_name.html",
+      conn: @conn,
+      campaign: (if @answer.campaign, do: @answer.campaign, else: @answer.direct_campaign)
+    ) %>
+    <%= if @answer.ask, do: @answer.ask.role %>
+  </h2>
+
+  <p><strong>Your message:</strong></p>
+  <p>
+    <%= @answer.message %>
+  </p>
+
+  <div class="stacked-for-small expanded button-group">
+    <%= link "Show", to: any_answer_path(@conn, :show, @answer), class: "success button" %>
+    <%= @buttons %>
+    <%= archive_link @conn, @answer %>
+  </div>
+
+</section>

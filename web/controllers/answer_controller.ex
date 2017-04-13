@@ -27,7 +27,7 @@ defmodule PitchIn.AnswerController do
     answers = ask.answers
 
     if ask.campaign_id == campaign.id do
-      render(conn, "index.html", campaign: campaign, ask: ask, answers: answers)
+      render(conn, "ask_index.html", campaign: campaign, ask: ask, answers: answers)
     else
       conn
       |> put_status(404)
