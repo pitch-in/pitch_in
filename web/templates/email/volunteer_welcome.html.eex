@@ -16,5 +16,5 @@
 <p>
   Also, make sure to finish filling out your
   <%= link "profile", to: full_domain(@conn) <> pro_path(@conn, :show, @user.id) %>
-  to make it easier find a good match for your skills!
+  to make it easier to find a good match for your skills!
 </p>
