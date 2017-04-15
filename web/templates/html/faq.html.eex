@@ -135,5 +135,12 @@
   <p class="faq__answer">
   We’ve made it easy to manage multiple campaign from a single user account. However you can also have separate accounts for each campaign, if you have an email address specifically associated with that campaign.
   </p>
+
+  <p class="faq__question">
+  Have a question we haven't covered here?
+  </p>
+  <p class="faq__answer">
+  <%= link "Contact us!", to: contact_us_path(@conn, :index) %>
+  </p>
 </section>
 
