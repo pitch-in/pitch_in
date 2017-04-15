@@ -1,3 +1,9 @@
+<h2>Contact Us</h2>
+
+<p>
+  For general questions and press inquiries, contact us below.
+</p>
+
 <%= form_for @changeset, @action, [as: :contact_us], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">

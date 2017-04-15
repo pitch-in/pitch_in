@@ -23,22 +23,24 @@
       </p>
     </section>
 
-    <section class="content-block" id="verification-process">
+    <section class="content-block" id="why-pitch-in">
       <h2>
-        Start the next movement
+				Why Pitch In?
       </h2>
       <p>
-        Pitch In connects your movement with people hungry to make a difference. You have the vision, the grit and the drive &mdash; now you need the people power to get it done. We connect your campaign with the people of various skill levels willing to volunteer their time to make your campaign a success. They are the good samaritans translating their professional or personal expertise into a world changing pastime. When you sign up with Pitch In, we will contact you to verify your campaign to ensure the best experience for our users.
+      We know it’s critically important to elect more Democrats and progressive leaders on the local level. But it’s often those small, local races that have the hardest time getting off the ground. We believe that a lot of the resources and help our candidates need to win can be provided on a volunteer basis from skilled people ready to donate their time. 
+			</p>
+			<p>
+      The beauty of this system is that geography isn’t important. We believe that voter contact is most effective within communities. But web design and outreach, data modeling and targeting can be done by anyone with the skills, anywhere they are.
+			</p>
+			<p>
+      Free up your campaign to do the hard and important work on the ground. We’ll help you connect with tech do-gooders to do the rest. 
       </p>
     </section>
 
     <%= render PitchIn.HtmlView, "about_us.html", conn: @conn %>
 
     <section class="content-block" id="contact-us">
-      <h2>Contact Us</h2>
-      <p>
-        We have a lot of work to do, so help us better serve you!
-      </p>
       <%= render(
         PitchIn.ContactUsView,
         "form.html",
