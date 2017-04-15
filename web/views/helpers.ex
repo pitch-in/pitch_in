@@ -104,11 +104,16 @@ defmodule PitchIn.ViewHelpers do
   def base_url(PitchIn.Endpoint, path) do
     "https://www.example.com" <> path
   end
-  def base_url(conn, path) do
-    scheme = "#{conn.scheme}://"
+  def base_url(%Plug.Conn{scheme: scheme, host: host, port: port}, path) do
+    url = "#{scheme}://#{host}"
 
-    url = "#{scheme}#{conn.host}"
-    url = if Mix.env != :prod, do: url <> "#{conn.port}", else: url
+    url =
+      if port do
+        "#{url}:#{Integer.to_string(port)}"
+      else
+        url
+      end
+
     url <> path
   end
 
