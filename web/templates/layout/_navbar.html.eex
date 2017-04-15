@@ -64,6 +64,9 @@
           <%= link "About Us", to: html_path(@conn, :about_us) %>
         </li>
         <li>
+          <%= link "FAQ", to: html_path(@conn, :faq) %>
+        </li>
+        <li>
           <%= link "Contact Us", to: contact_us_path(@conn, :index) %>
         </li>
       </ul>

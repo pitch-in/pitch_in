@@ -1,7 +1,8 @@
 <h2>Contact Us</h2>
 
 <p>
-  For general questions and press inquiries, contact us below.
+Check out our <%= link "Frequently Asked Questions", to: html_path(@conn, :faq) %> page!<br/>
+For general questions and press inquiries, contact us below.
 </p>
 
 <%= form_for @changeset, @action, [as: :contact_us], fn f -> %>

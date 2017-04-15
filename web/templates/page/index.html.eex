@@ -44,6 +44,7 @@
       <%= render(
         PitchIn.ContactUsView,
         "form.html",
+        conn: @conn,
         changeset: PitchIn.ContactUs.changeset(%PitchIn.ContactUs{}),
         action: contact_us_path(@conn, :create),
         from_page: :home
