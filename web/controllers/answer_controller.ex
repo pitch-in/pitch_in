@@ -20,6 +20,7 @@ defmodule PitchIn.AnswerController do
       |> Repo.get(ask_id)
       |> Repo.preload(answers: [user: :pro])
       |> Repo.preload(:campaign)
+      |> Repo.preload(:skills)
     campaign = ask.campaign
 
     answers = ask.answers
@@ -37,7 +38,7 @@ defmodule PitchIn.AnswerController do
     campaign = 
       Campaign
       |> Repo.get(campaign_id)
-      |> Repo.preload([answers: [:ask, [user: :pro]]])
+      |> Repo.preload([answers: [[ask: :skills], [user: :pro]]])
       |> Repo.preload([direct_answers: [:ask, [user: :pro]]])
     answers = campaign.answers
     direct_answers = campaign.direct_answers
@@ -48,13 +49,13 @@ defmodule PitchIn.AnswerController do
   def volunteer_index(conn, _params) do
     user =
       conn.assigns.current_user
-      |> Repo.preload([answers: [:ask, :campaign, :direct_campaign]])
+      |> Repo.preload([answers: [[ask: :skills], :campaign, :direct_campaign]])
 
     render(conn, "volunteer_index.html", answers: user.answers)
   end
 
   def new(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
-    ask = Ask |> Repo.get(ask_id) |> Repo.preload(:campaign)
+    ask = Ask |> Repo.get(ask_id) |> Repo.preload(:campaign) |> Repo.preload(:skills)
     campaign = ask.campaign
 
     case Conn.get_session(conn, :answer_params) do
@@ -180,7 +181,7 @@ defmodule PitchIn.AnswerController do
     answer = Repo.one(
       from a in Answer,
       where: a.id == ^id,
-      preload: [ask: :campaign],
+      preload: [ask: [:skills, :campaign]],
       preload: :direct_campaign,
       preload: [user: :pro]
     )

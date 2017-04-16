@@ -206,7 +206,7 @@ ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 CREATE TABLE need_searches (
     id integer NOT NULL,
-    profession character varying(255),
+    skills character varying(255),
     years_experience integer,
     issue character varying(255),
     user_id integer,
@@ -292,7 +292,7 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE search_alerts (
     id integer NOT NULL,
-    profession character varying(255),
+    skills character varying(255),
     role character varying(255),
     years_experience integer,
     issue character varying(255),
@@ -319,6 +319,38 @@ CREATE SEQUENCE search_alerts_id_seq
 --
 
 ALTER SEQUENCE search_alerts_id_seq OWNED BY search_alerts.id;
+
+
+--
+-- Name: skills; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE skills (
+    id integer NOT NULL,
+    skill character varying(255),
+    ask_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE skills_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE skills_id_seq OWNED BY skills.id;
 
 
 --
@@ -413,6 +445,13 @@ ALTER TABLE ONLY search_alerts ALTER COLUMN id SET DEFAULT nextval('search_alert
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY skills ALTER COLUMN id SET DEFAULT nextval('skills_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -478,6 +517,14 @@ ALTER TABLE ONLY schema_migrations
 
 ALTER TABLE ONLY search_alerts
     ADD CONSTRAINT search_alerts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: skills_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skills
+    ADD CONSTRAINT skills_pkey PRIMARY KEY (id);
 
 
 --
@@ -594,10 +641,24 @@ CREATE INDEX search_alerts_user_id_index ON search_alerts USING btree (user_id);
 
 
 --
+-- Name: skills_ask_id_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX skills_ask_id_index ON skills USING btree (ask_id);
+
+
+--
+-- Name: skills_skill_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX skills_skill_index ON skills USING btree (skill);
+
+
+--
 -- Name: unique_alerts; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_alerts ON search_alerts USING btree ((COALESCE(profession, ' '::character varying)), (COALESCE(role, ' '::character varying)), (COALESCE(years_experience, '-1'::integer)), (COALESCE(issue, ' '::character varying)), (COALESCE(user_id, '-1'::integer)));
+CREATE UNIQUE INDEX unique_alerts ON search_alerts USING btree ((COALESCE(skills, ' '::character varying)), (COALESCE(role, ' '::character varying)), (COALESCE(years_experience, '-1'::integer)), (COALESCE(issue, ' '::character varying)), (COALESCE(user_id, '-1'::integer)));
 
 
 --
@@ -695,8 +756,16 @@ ALTER TABLE ONLY search_alerts
 
 
 --
+-- Name: skills_ask_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skills
+    ADD CONSTRAINT skills_ask_id_fkey FOREIGN KEY (ask_id) REFERENCES asks(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728), (20170306065436), (20170306065857), (20170306100000), (20170306103847), (20170315074520), (20170327094309), (20170409234430), (20170416014304), (20170416044911);
+INSERT INTO "schema_migrations" (version) VALUES (20170103105041), (20170103105108), (20170103105120), (20170103105226), (20170103105410), (20170103112246), (20170107084713), (20170110103734), (20170115080533), (20170131090755), (20170213010034), (20170213085404), (20170214070629), (20170217091648), (20170219002838), (20170224080238), (20170227095728), (20170306065436), (20170306065857), (20170306100000), (20170306103847), (20170315074520), (20170327094309), (20170409234430), (20170416014304), (20170416044911), (20170416094317);
 

@@ -66,7 +66,7 @@ defmodule PitchIn.IncompleteReminder do
         "profile",
         PitchIn.Router.Helpers.pro_path(conn, :show, user.id),
         PitchIn.Router.Helpers.pro_path(conn, :update, user.id),
-        PitchIn.Router.Helpers.pro_path(conn, :interstitial, user.id)
+        PitchIn.Router.Helpers.user_path(conn, :interstitial, user.id)
       }
     end
   end

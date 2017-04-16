@@ -20,7 +20,7 @@
       <tbody>
         <%= for alert <- @user.search_alerts do %>
           <tr>
-            <%= render "_remove_alert_cell.html", key: :profession, alert: alert %>
+            <%= render "_remove_alert_cell.html", key: :skills, alert: alert %>
             <%= render "_remove_alert_cell.html", key: :role, alert: alert %>
             <%= render "_remove_alert_cell.html", key: :years_experience, alert: alert %>
             <%= render "_remove_alert_cell.html", key: :issue, alert: alert %>

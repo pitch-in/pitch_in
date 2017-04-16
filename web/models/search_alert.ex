@@ -4,7 +4,7 @@ defmodule PitchIn.SearchAlert do
   schema "search_alerts" do
     belongs_to :user, PitchIn.User
 
-    field :profession, :string
+    field :skills, :string
     field :role, :string
     field :years_experience, :integer
     field :issue, :string
@@ -17,7 +17,7 @@ defmodule PitchIn.SearchAlert do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:profession, :role, :years_experience, :issue])
+    |> cast(params, [:skills, :role, :years_experience, :issue])
     |> unique_constraint(:unique_alerts, name: :unique_alerts)
   end
 end
