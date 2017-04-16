@@ -9,7 +9,7 @@
 
   <p>
     <strong>Skills</strong><br/>
-    <%= @ask.profession %>
+    <%= display_skills(@ask) %>
   </p>
 
   <div class="expanded stacked-for-small button-group standard-margin-bottom">

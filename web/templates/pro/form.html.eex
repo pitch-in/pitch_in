@@ -17,15 +17,19 @@
   <div>
     <%= label f, :issues %>
     <p class="input-description">
-      What issues are important to you? You can put in a comma-seperated list.
+      What issues are important to you?
     </p>
-    <%= text_input f, :issues %>
+    <%= text_input f, :issues, data_tags: true, placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>
   </div>
 
   <div>
-    <%= label f, :profession, "Profession or Passion" %>
-    <%= select f, :profession, profession_options %>
+    <%= label f, :profession, "Enter your skills" %>
+    <p class="input-description">
+      You can enter your relevant skills here. These will tell campaigns about
+      what you can do, and help you match with relevant needs.
+    </p>
+    <%= text_input f, :profession, data_tags: true, placeholder: "enter skills..." %>
     <%= error_tag f, :profession %>
   </div>
 

@@ -26,7 +26,7 @@ defmodule PitchIn.AskController do
     campaign = get_campaign(campaign_id)
     changeset =
       campaign
-      |> build_assoc(:asks)
+      |> build_assoc(:asks, skills: [])
       |> Ask.changeset
 
     render(conn, "new.html", campaign: campaign, changeset: changeset)
@@ -109,12 +109,12 @@ defmodule PitchIn.AskController do
       from a in Ask,
       where: a.id == ^id,
       where: a.campaign_id == ^campaign_id,
-      preload: :campaign
+      preload: [:campaign, :skills]
     )
   end
 
   defp get_campaign(id) do
     Repo.get!(Campaign, id)
-    |> Repo.preload(:asks)
+    |> Repo.preload(asks: :skills)
   end
 end

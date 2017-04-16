@@ -7,8 +7,8 @@
 
   <div><strong>Need Description</strong></div>
   <div><%= @ask.role %>: <%= @ask.description %></div>
-  <div><strong>Profession</strong></div>
-  <div><%= @ask.profession %></div>
+  <div><strong>Skills</strong></div>
+  <div><%= @skills.skills %></div>
   <%= if @ask.hours do %>
     <div>
       <%= if @ask.length == :ongoing do %>

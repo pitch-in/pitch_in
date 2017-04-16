@@ -5,13 +5,16 @@ defmodule PitchIn.Ask do
   schema "asks" do
     belongs_to :campaign, PitchIn.Campaign
     has_many :answers, PitchIn.Answer
+    has_many :skills, PitchIn.Skill, on_replace: :delete
     field :role, :string
     field :length, AskLengthEnum
     field :hours, :integer
-    field :profession, :string
     field :description, :string
     field :years_experience, :integer
     field :archived_reason, :string
+
+    # TODO: Remove
+    field :profession, :string
 
     timestamps()
   end
@@ -28,12 +31,31 @@ defmodule PitchIn.Ask do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:role, :length, :profession, :description, :years_experience, :hours])
-    |> validate_required([:role, :length, :profession, :description, :years_experience, :hours])
+    |> cast(params, [:role, :length, :description, :years_experience, :hours])
+    |> validate_required([:role, :length, :description, :years_experience, :hours])
+    |> skills_changeset(params)
   end
 
   def archive_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:archived_reason])
+  end
+
+  defp skills_changeset(changeset, params \\ %{}) do
+    if params["skills"] do
+      params = Map.update!(params, "skills", &skills_string_to_maps/1)
+
+      changeset
+      |> cast(params, [])
+      |> cast_assoc(:skills, params["skills"])
+    else
+      changeset
+    end
+  end
+
+  defp skills_string_to_maps(skills) do
+    skills
+    |> String.split(",")
+    |> Enum.map(fn skill -> %{"skill" => skill} end)
   end
 end

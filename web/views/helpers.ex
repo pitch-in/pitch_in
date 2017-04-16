@@ -4,6 +4,8 @@ defmodule PitchIn.ViewHelpers do
   import PitchIn.Router.Helpers
   use Phoenix.HTML
 
+  alias PitchIn.Ask
+
   @moduledoc """
   This module holds random shared helpers for the views.
   """
@@ -67,19 +69,11 @@ defmodule PitchIn.ViewHelpers do
 
   def profession_options do
     professions = [
-      "Other",
-      "Accounting",
-      "Advertising",
-      "Campaign Finance",
-      "Communications",
-      "Data Manager",
-      "Designer/Artist",
-      "Fundraiser",
-      "Lawyer",
-      "Marketing",
-      "Organizer",
-      "Project Manager",
-      "Web Developer"
+      "",
+      "Web Development",
+      "Data",
+      "Design",
+      "None of those"
     ]
 
     List.zip([professions, professions])
@@ -131,6 +125,11 @@ defmodule PitchIn.ViewHelpers do
       [_, handle] -> "https://twitter.com/#{handle}"
       _ -> ""
     end
+  end
+
+  def display_skills(%Ask{} = ask) do
+    ask.skills
+    |> Enum.map_join(",", fn skill -> skill.skill end)
   end
 
   ##############
