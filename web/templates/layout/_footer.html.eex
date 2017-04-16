@@ -1,5 +1,8 @@
 <footer>
   <div class="floating-footer">
     <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" class="logo" />
+    <a href="https://github.com/pitch-in/pitch_in/issues" title="Report an issue" class="footer__problem-link" target="_blank">
+      <img src="<%= webpack_path(@conn, "/img/report-problem-icon.svg") %>" class="footer__problem-icon" />
+    </a>
   </div>
 </footer>

@@ -18,6 +18,7 @@ import './img/shovels.svg';
 import './img/logo_blue.png';
 import './img/expand-icon.svg';
 import './img/minimize-icon.svg';
+import './img/report-problem-icon.svg';
 import './img/about/chris-profile.jpg';
 import './img/about/will-profile.jpg';
 import './img/about/laura-profile.jpg';
