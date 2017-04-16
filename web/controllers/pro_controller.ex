@@ -19,6 +19,8 @@ defmodule PitchIn.ProController do
 
     case Repo.update(changeset) do
       {:ok, pro} ->
+        complete_user(user)
+
         conn
         |> put_flash(:success, "Pro updated successfully.")
         |> redirect(to: pro_path(conn, :show, user))
@@ -48,6 +50,13 @@ defmodule PitchIn.ProController do
       |> put_status(404)
       |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
+    end
+  end
+
+  defp complete_user(user) do
+    unless user.is_complete do
+      changeset = User.complete_changeset(user)
+      Repo.update!(changeset)
     end
   end
 end

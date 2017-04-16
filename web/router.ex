@@ -17,6 +17,7 @@ defmodule PitchIn.Router do
     plug :put_csrf_token_in_header
     plug :put_secure_browser_headers
     plug PitchIn.Auth, repo: PitchIn.Repo
+    plug PitchIn.IncompleteReminder
   end
 
   pipeline :admin do

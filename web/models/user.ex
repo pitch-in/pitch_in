@@ -26,6 +26,9 @@ defmodule PitchIn.User do
     field :reset_digest, :string
     field :reset_time, Timex.Ecto.DateTime
 
+    field :is_complete, :boolean
+    field :is_staffer, :boolean
+
     timestamps()
   end
 
@@ -39,7 +42,7 @@ defmodule PitchIn.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email])
+    |> cast(params, [:name, :email, :is_complete])
     |> cast_assoc(:pro)
     |> validate_required([:name, :email])
     |> update_change(:email, &String.downcase/1)
@@ -79,6 +82,16 @@ defmodule PitchIn.User do
     |> put_change(:reset_token, token)
     |> put_change(:reset_digest, Comeonin.Bcrypt.hashpwsalt(token))
     |> put_change(:reset_time, Timex.now)
+  end
+
+  def complete_changeset(struct) do
+    struct
+    |> change(is_complete: true)
+  end
+
+  def staffer_changeset(struct) do
+    struct
+    |> change(is_staffer: true)
   end
 
   defp registration_changeset(struct, params \\ %{}) do

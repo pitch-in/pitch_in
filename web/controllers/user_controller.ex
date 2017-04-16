@@ -30,19 +30,22 @@ defmodule PitchIn.UserController do
   end
 
   def create(conn, %{"user" => user_params, "staff" => _}) do
-    # Use staff email for campaign as a default.
     user_params = 
       user_params
+      # Use staff email for campaign as a default.
       |> put_in(["campaigns", "0", "email"], user_params["email"])
+      # Note the campaign still needs a "what's next", even though it's been created.
       |> put_in(["campaigns", "0", "shown_whats_next"], "false")
 
     changeset = 
       %User{}
       |> User.staff_registration_changeset(user_params)
+      |> Ecto.Changeset.put_change(:is_staffer, true)
 
     case Repo.insert(changeset) do
       {:ok, %User{campaigns: [campaign]} = user} ->
-        Email.staff_welcome_email(user.email, conn, user, campaign)
+        user.email
+        |> Email.staff_welcome_email(conn, user, campaign)
         |> Mailer.deliver_later
 
         path = Auth.get_deep_link_path(conn) || campaign_path(conn, :edit, campaign)
