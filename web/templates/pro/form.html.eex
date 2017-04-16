@@ -17,9 +17,9 @@
   <div>
     <%= label f, :issues %>
     <p class="input-description">
-      What issues are important to you? You can put in a comma-seperated list.
+      What issues are important to you? Press Enter, Tab, or "," to confirm an entry.
     </p>
-    <%= text_input f, :issues %>
+    <%= text_input f, :issues, data_tags: true, placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>
   </div>
 

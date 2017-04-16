@@ -46,9 +46,11 @@ class TagPicker extends BaseComponent {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onInput = this.onInput.bind(this);
     this.onTagClick = this.onTagClick.bind(this);
+    this.finishTag = this.finishTag.bind(this);
     this.element.on('keydown', this.$nextInput, this.onKeyPress);
     this.element.on('input', this.$nextInput, this.onInput);
     this.element.on('click', '.tags__tag', this.onTagClick);
+    this.element.on('blur', '.tags__next-input', this.finishTag);
   }
 
   onKeyPress(event) {
