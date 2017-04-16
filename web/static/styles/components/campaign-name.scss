@@ -11,18 +11,30 @@
   }
 }
 
-.content-block .campaign-name:first-child {
-  // Undo the margins from the content-block;
+@mixin content-block-campaign-name-spacing($padding) {
+  .campaign-name:first-child {
+    // Undo the margins from the content-block;
 
-  .campaign-name__img {
-    margin-top: -$content-block-margin;
+    .campaign-name__img {
+      margin-top: -$padding;
+    }
+
+    margin-left: -$padding;
+    margin-right: -$padding;
+
+    .campaign-name__text {
+      margin-left: $padding;
+      margin-right: $padding;
+    }
   }
+}
 
-  margin-left: -$content-block-margin;
-  margin-right: -$content-block-margin;
-
-  .campaign-name__text {
-    margin-left: $content-block-margin;
-    margin-right: $content-block-margin;
-  }
+.content-block {
+  @include content-block-campaign-name-spacing($content-block-padding);
+}
+.content-block.expanded {
+  @include content-block-campaign-name-spacing($content-block-expanded-padding);
+}
+.content-block.list-header {
+  @include content-block-campaign-name-spacing($content-block-expanded-padding);
 }

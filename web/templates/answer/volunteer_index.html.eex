@@ -12,32 +12,36 @@
       </h3>
     </section>
   <% answers -> %>
-    <%= for answer <- answers do %>
-      <section class="content-block">
-        <h2>
-          <%= render(
-            PitchIn.CampaignView,
-            "_name.html",
-            conn: @conn,
-            campaign: (if answer.campaign, do: answer.campaign, else: answer.direct_campaign)
-          ) %>
-          <%= if answer.ask, do: answer.ask.role %>
-        </h2>
+    <div class="row">
+      <%= for answer <- answers do %>
+        <div class="small-12 medium-6 columns flex-fill medium-even-gutters">
+          <section class="content-block">
+            <h2>
+              <%= render(
+                PitchIn.CampaignView,
+                "_name.html",
+                conn: @conn,
+                campaign: (if answer.campaign, do: answer.campaign, else: answer.direct_campaign)
+              ) %>
+              <%= if answer.ask, do: answer.ask.role %>
+            </h2>
 
-        <p><strong>Your message:</strong></p>
-        <p>
-          <%= answer.message %>
-        </p>
+            <p><strong>Your message:</strong></p>
+            <p>
+              <%= answer.message %>
+            </p>
 
-        <div class="expanded button-group">
-          <% if answer.ask do %>
-            <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
-          <% else %>
-            <%= link "Show", to: campaign_ask_path(@conn, :show, answer.direct_campaign, answer), class: "success button" %>
-          <% end %>
+            <div class="expanded button-group">
+              <% if answer.ask do %>
+                <%= link "Show", to: campaign_ask_answer_path(@conn, :show, answer.campaign, answer.ask, answer), class: "success button" %>
+              <% else %>
+                <%= link "Show", to: campaign_ask_path(@conn, :show, answer.direct_campaign, answer), class: "success button" %>
+              <% end %>
+            </div>
+          </section>
         </div>
-      </section>
-    <% end %>
+      <% end %>
+    </div>
 <% end %>
 
 <section class="list-header content-block">

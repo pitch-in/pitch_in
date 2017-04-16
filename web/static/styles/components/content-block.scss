@@ -3,6 +3,7 @@ body {
 }
 
 $content-block-padding: 0.5rem;
+$content-block-expanded-padding: 1rem;
 $content-block-margin: 1rem;
 
 .content-block {
@@ -27,7 +28,7 @@ $content-block-margin: 1rem;
 
   @mixin expanded {
     margin: 0 (-$content-block-margin) $content-block-margin (-$content-block-margin);
-    padding: 1rem;
+    padding: $content-block-expanded-padding;
     width: calc(100% + #{$content-block-margin * 2});
     box-shadow: none;
 
