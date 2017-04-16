@@ -1,10 +1,15 @@
+body {
+  overflow-x: hidden;
+}
+
 .content-block {
-  background: $white;
+  $shadow: 0 3px 1px -1px rgba($black, 0.16);
+
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
-
-  box-shadow: 0 3px 1px -1px rgba($black, 0.16);
+  background: $white;
+  box-shadow: $shadow;
 
   &:first-child {
     margin-top: 1rem;
@@ -21,6 +26,20 @@
     margin: 0 -1rem 1rem -1rem;
     padding: 1rem;
     width: calc(100% + 2rem);
+    box-shadow: none;
+
+    position: relative;
+    &::after {
+      background: $white;
+      box-shadow: $shadow;
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: -100000px;
+      bottom: 0;
+      right: -100000px;
+    }
   }
 
   &.expanded {
@@ -29,6 +48,11 @@
 
   &.list-header {
     @include expanded();
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     & > * {
       // Cancel out any child margins, so they are centered.
       margin-top: 0;
