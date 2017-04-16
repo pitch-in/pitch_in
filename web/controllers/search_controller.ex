@@ -152,7 +152,7 @@ defmodule PitchIn.SearchController do
 
     from s in Skill,
     select: %{id: s.ask_id, count: count(s.ask_id)},
-    where: s.skill in ^skills,
+    where: fragment("? ilike any (?)", s.skill, ^skills),
     group_by: s.ask_id
   end
 
@@ -165,7 +165,7 @@ defmodule PitchIn.SearchController do
   defp issue_count_subquery(search) do
     from i in Issue,
     select: %{id: i.campaign_id, count: count(i.campaign_id)},
-    where: i.issue in ^search.issues,
+    where: fragment("? ilike any (?)", i.issue, ^search.issues),
     group_by: i.campaign_id
   end
 
