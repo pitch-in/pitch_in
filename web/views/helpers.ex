@@ -108,10 +108,10 @@ defmodule PitchIn.ViewHelpers do
     url = "#{scheme}://#{host}"
 
     url =
-      if port do
-        "#{url}:#{Integer.to_string(port)}"
-      else
+      if Mix.env == :prod do
         url
+      else
+        "#{url}:#{Integer.to_string(port)}"
       end
 
     url <> path
