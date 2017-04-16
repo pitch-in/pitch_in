@@ -76,7 +76,7 @@ defmodule PitchIn.ForgotPasswordController do
             |> redirect_to_home
           {:error, changeset} ->
             conn
-            |> render("show.html", changeset: changeset)
+            |> render("edit.html", changeset: changeset, token: token)
         end
     end
   end
