@@ -31,7 +31,8 @@
     @include expanded();
     & > * {
       // Cancel out any child margins, so they are centered.
-      margin: 0;
+      margin-top: 0;
+      margin-bottom: 0;
 
       // Also handle interior buttons.
       &.button-group > .button {

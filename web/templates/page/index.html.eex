@@ -51,9 +51,10 @@
       ) %>
     </section>
 
-    <section class="list-header content-block">
-      <div class="expanded button-group">
+    <section class="list-header content-block first-time-here no-margin-bottom">
+      <div class="expanded stacked-for-small action-buttons button-group">
         <%= link "Get involved", to: user_path(@conn, :new), class: "large alert action button" %>
+        <div class="or-text">or</div>
         <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert action button" %>
       </div>
     </section>
