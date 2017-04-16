@@ -39,7 +39,8 @@ config :pitch_in, PitchIn.Mailer,
 config :pitch_in, PitchIn.Email,
   test_email: System.get_env("TEST_EMAIL"),
   from_email: System.get_env("FROM_EMAIL"),
-  contact_us_email: System.get_env("CONTACT_US_EMAIL")
+  contact_us_email: System.get_env("CONTACT_US_EMAIL"),
+  basic_template_id: System.get_env("SENDGRID_TEMPLATE_ID")
 
 config :pitch_in, :staging_auth,
   username: System.get_env("STAGING_AUTH_USERNAME") || "username",
