@@ -24,6 +24,8 @@ import './img/about/laura-profile.jpg';
 import './apple-touch-icon.png';
 import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
+import './img/campaigns/ben-haynes.jpg';
+
 // Import foundation stuff.
 import 'foundation-sites/js/foundation.core';
 import 'foundation-sites/js/foundation.util.mediaQuery';

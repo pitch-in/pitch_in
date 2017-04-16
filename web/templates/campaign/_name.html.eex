@@ -1,8 +1,13 @@
-<div class="flex-left flex-spacing">
-  <span>
-    <%= @campaign.name %>
-  </span>
-  <%= if @campaign.is_verified do %>
-    <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
+<div class="campaign-name">
+  <%= if @campaign.img_url do %>
+    <img class="campaign-name__img" src="<%= webpack_path(@conn, "/img/campaigns/" <> @campaign.img_url) %>" />
   <% end %>
+  <div class="flex-left flex-spacing">
+    <span>
+      <%= @campaign.name %>
+    </span>
+    <%= if @campaign.is_verified do %>
+      <img src="<%= webpack_path(@conn, "/img/verified.png") %>" />
+    <% end %>
+  </div>
 </div>
