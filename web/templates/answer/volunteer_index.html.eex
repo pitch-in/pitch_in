@@ -15,7 +15,12 @@
     <%= for answer <- answers do %>
       <section class="content-block">
         <h2>
-          <%= if answer.campaign, do: answer.campaign.name, else: answer.direct_campaign.name %>:
+          <%= render(
+            PitchIn.CampaignView,
+            "_name.html",
+            conn: @conn,
+            campaign: (if answer.campaign, do: answer.campaign, else: answer.direct_campaign)
+          ) %>
           <%= if answer.ask, do: answer.ask.role %>
         </h2>
 
