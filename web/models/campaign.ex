@@ -29,6 +29,7 @@ defmodule PitchIn.Campaign do
     field :archived_reason, :string
     field :is_verified, :boolean
     field :shown_whats_next, :boolean
+    field :img_url, :string
 
     timestamps()
   end

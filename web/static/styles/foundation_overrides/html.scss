@@ -8,6 +8,10 @@
   align-items: center;
   font-weight: bold;
 
+  &.expanded {
+    display: flex;
+  }
+
   &.success, &.alert {
     // Success buttons are black color for some reason.
     color: $white;

@@ -1,0 +1,28 @@
+.campaign-name {
+  &__img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    line-height: 1;
+  }
+}
+
+.content-block .campaign-name:first-child {
+  // Undo the margins from the content-block;
+
+  .campaign-name__img {
+    margin-top: -$content-block-margin;
+  }
+
+  margin-left: -$content-block-margin;
+  margin-right: -$content-block-margin;
+
+  .campaign-name__text {
+    margin-left: $content-block-margin;
+    margin-right: $content-block-margin;
+  }
+}
