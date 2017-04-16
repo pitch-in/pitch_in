@@ -2,7 +2,7 @@
   <%= if @campaign.img_url do %>
     <img class="campaign-name__img" src="<%= webpack_path(@conn, "/img/campaigns/" <> @campaign.img_url) %>" />
   <% end %>
-  <div class="flex-left flex-spacing">
+  <div class="campaign-name__text flex-left flex-spacing">
     <span>
       <%= @campaign.name %>
     </span>

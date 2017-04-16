@@ -1,5 +1,5 @@
 <div class="campaign-summary">
-  <ul class="no-dots">
+  <ul class="no-dots no-margin-bottom">
     <li>
       <strong>Campaign Short pitch</strong><br/>
       <%= @campaign.short_pitch %>

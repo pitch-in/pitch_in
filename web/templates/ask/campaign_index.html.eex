@@ -1,7 +1,14 @@
 <section class="list-header content-block">
-  <h1>
-    <%= @campaign.name %><%= if @active_asks != [], do: " Needs", else: ": No Open Needs" %>
-  </h1>
+  <h2>
+    <%= render PitchIn.CampaignView, "_name.html", conn: @conn, campaign: @campaign %>
+  </h2>
+</section>
+
+<section class="content-block">
+  <%= if @campaign.long_pitch do %>
+    <p><%= @campaign.long_pitch %></p>
+  <% end %>
+  <%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
 </section>
 
 <%= if @active_asks != [] do %>
@@ -20,12 +27,19 @@
 <% end %>
 
 <section class="list-header content-block">
-  <div class="expanded button-group">
-  <%= if @is_staff do %>
-    <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
-  <% end %>
+  <h2 class="text-center">Want to learn more?</h2>
+  <%= link "Message the campaign", to: campaign_answer_path(@conn, :new, @campaign), class: "primary button" %>
+</section>
 
-  <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "warning button" %>
-  <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "secondary button" %>
+<section class="list-header content-block">
+  <div class="expanded button-group">
+    <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "hollow secondary button" %>
+
+    <%= if @is_staff do %>
+      <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "hollow success button" %>
+    <% end %>
+
+    <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "hollow primary button" %>
   </div>
 </section>
+
