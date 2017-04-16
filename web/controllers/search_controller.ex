@@ -148,7 +148,7 @@ defmodule PitchIn.SearchController do
   end
 
   defp skill_count_subquery(search) do
-    skills = search.skills |> String.split(",")
+    skills = (search.skills || "") |> String.split(",")
 
     from s in Skill,
     select: %{id: s.ask_id, count: count(s.ask_id)},
