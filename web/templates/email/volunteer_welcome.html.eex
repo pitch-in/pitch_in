@@ -8,13 +8,13 @@
 
 <p>
   Campaigns are going to be looking for your skills! Check out the 
-  <%= link "search", to: full_domain(@conn) <> search_path(@conn, :index) %>
+  <%= link "search", to: base_url(@conn) <> search_path(@conn, :index) %>
   page to search for open Needs, and to set up email 
   alerts to commit to helping out as new campaings get started!
 </p>
 
 <p>
   Also, make sure to finish filling out your
-  <%= link "profile", to: full_domain(@conn) <> pro_path(@conn, :show, @user.id) %>
-  to make it easier find a good match for your skills!
+  <%= link "profile", to: base_url(@conn) <> pro_path(@conn, :show, @user.id) %>
+  to make it easier to find a good match for your skills!
 </p>

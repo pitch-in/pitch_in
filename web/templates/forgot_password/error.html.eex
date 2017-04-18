@@ -1,0 +1,7 @@
+<section class="content-block">
+  <h2>Password reset link not valid</h2>
+  <p>
+  It looks like your password reset token is either invalid or expired. Reset links expire in two hours for security reasons. If you still can't access your account, you can <%= link "request a new token ", to: forgot_password_path(@conn, :index) %>.
+  </p>
+</section>
+

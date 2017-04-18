@@ -11,7 +11,6 @@ body {
 footer {
   $height: 5rem;
   height: $height;
-  margin-top: 1rem;
 
   .floating-footer {
     position: absolute;
@@ -26,7 +25,20 @@ footer {
   .logo {
     @include absolute-center;
 
-    height: 56px;
-    width: 56px;
+    $icon-height: 3.5rem;
+    height: $icon-height;
+    width: $icon-height;
+  }
+
+  .footer__problem-link {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .footer__problem-icon {
+    $icon-height: 2rem;
+    height: $icon-height;
+    width: $icon-height;
   }
 }

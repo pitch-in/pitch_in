@@ -18,11 +18,17 @@ import './img/shovels.svg';
 import './img/logo_blue.png';
 import './img/expand-icon.svg';
 import './img/minimize-icon.svg';
+import './img/report-problem-icon.svg';
 import './img/about/chris-profile.jpg';
 import './img/about/will-profile.jpg';
 import './img/about/laura-profile.jpg';
 import './apple-touch-icon.png';
 import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
+
+import './img/campaigns/ben-haynes.jpg';
+import './img/campaigns/heather-ledoux.jpg';
+import './img/campaigns/maria-mclaughlin.jpg';
+import './img/campaigns/suzy-montero.jpg';
 
 // Import foundation stuff.
 import 'foundation-sites/js/foundation.core';

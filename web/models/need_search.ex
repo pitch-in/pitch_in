@@ -4,7 +4,7 @@ defmodule PitchIn.NeedSearch do
   schema "need_searches" do
     belongs_to :user, PitchIn.User
 
-    field :profession, :string
+    field :skills, :string
     field :years_experience, :integer
     field :issues, {:array, :string}, default: []
 
@@ -16,7 +16,7 @@ defmodule PitchIn.NeedSearch do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:profession, :years_experience, :issues])
+    |> cast(params, [:skills, :years_experience, :issues])
   end
 end
 

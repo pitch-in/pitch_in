@@ -2,6 +2,12 @@ import * as _ from 'lodash';
 import $ = require('jquery');
 import BaseComponent from './BaseComponent';
 
+const defaultValues = {
+  'Web Development': ['html', 'css', 'application development'],
+  'Data': ['data analysis', 'data science'],
+  'Design': ['digital design', 'print design'],
+};
+
 export default class Tags extends BaseComponent {
   $tags: JQuery;
 
@@ -12,8 +18,10 @@ export default class Tags extends BaseComponent {
 
     element.addClass('hide');
     const $tags = $(`<div class="tags"></div>`).insertAfter(element);
+    const watchId: string = element.data('tagsWatch');
+    const $watched = watchId ? $(`#${watchId}`) : undefined;
 
-    new TagPicker($tags, this.element);
+    new TagPicker($tags, this.element, $watched);
   }
 
   static selector = 'tags';
@@ -28,7 +36,8 @@ class TagPicker extends BaseComponent {
 
   constructor(
     public element: JQuery,
-    public $input: JQuery
+    public $input: JQuery,
+    public $watched: JQuery,
   ) {
     super(element);
 
@@ -43,12 +52,20 @@ class TagPicker extends BaseComponent {
 
     this.render();
 
+
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onInput = this.onInput.bind(this);
     this.onTagClick = this.onTagClick.bind(this);
+    this.finishTag = this.finishTag.bind(this);
     this.element.on('keydown', this.$nextInput, this.onKeyPress);
     this.element.on('input', this.$nextInput, this.onInput);
     this.element.on('click', '.tags__tag', this.onTagClick);
+    this.element.on('blur', '.tags__next-input', this.finishTag);
+
+    if (this.$watched) {
+      this.onWatchChange = this.onWatchChange.bind(this);
+      this.$watched.on('change', this.onWatchChange);
+    }
   }
 
   onKeyPress(event) {
@@ -73,10 +90,16 @@ class TagPicker extends BaseComponent {
     }
   }
 
+  onWatchChange() {
+    const value: string = this.$watched.val();
+
+    this.tags = defaultValues[value] || [];
+
+    this.render();
+  }
+
   onTagClick(event) {
     const tag = $(event.currentTarget);
-    console.log(event.currentTarget);
-    console.log(tag.val());
     this.removeTag(tag.text());
   }
 

@@ -1,0 +1,40 @@
+.campaign-name {
+  &__img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    line-height: 1;
+  }
+}
+
+@mixin content-block-campaign-name-spacing($padding) {
+  .campaign-name:first-child {
+    // Undo the margins from the content-block;
+
+    .campaign-name__img {
+      margin-top: -$padding;
+    }
+
+    margin-left: -$padding;
+    margin-right: -$padding;
+
+    .campaign-name__text {
+      margin-left: $padding;
+      margin-right: $padding;
+    }
+  }
+}
+
+.content-block {
+  @include content-block-campaign-name-spacing($content-block-padding);
+}
+.content-block.expanded {
+  @include content-block-campaign-name-spacing($content-block-expanded-padding);
+}
+.content-block.list-header {
+  @include content-block-campaign-name-spacing($content-block-expanded-padding);
+}

@@ -28,8 +28,12 @@
       </div>
 
       <div class="form-group">
-        <%= label i, :profession, "Profession or Passion" %>
-        <%= select i, :profession, profession_options %>
+        <%= label i, :profession_type, "Profession or Passion" %>
+        <%= select i, :profession_type, profession_options %>
+      </div>
+      <div>
+        <%= label i, :profession, "Skills" %>
+        <%= text_input f, :profession, data_tags: true, data_tags_watch: "user_pro_profession_type", placeholder: "enter skills..." %>
         <%= error_tag i, :profession %>
       </div>
 
@@ -40,12 +44,6 @@
         </p>
         <%= us_date_input i, :experience_starts_at, no_datepicker: true, placeholder: 'YYYY' %>
         <%= error_tag i, :experience_starts_at %>
-      </div>
-
-      <div class="form-group">
-        <%= label i, :address_zip, "Your ZIP Code" %>
-        <%= text_input i, :address_zip, autocomplete: "postal-code" %>
-        <%= error_tag i, :address_zip %>
       </div>
     <% end %>
 
@@ -60,7 +58,6 @@
       <%= password_input f, :password_confirmation, autocomplete: "new-password" %>
       <%= error_tag f, :password_confirmation %>
     </div>
-
 
     <div class="form-group">
       <%= submit "Submit", class: "expanded success button" %>

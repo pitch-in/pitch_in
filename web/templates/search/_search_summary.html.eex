@@ -2,5 +2,5 @@
   <% nil -> %>
     <%= render "_campaign_search_summary.html", conn: @conn, campaign: @result[:campaign] %>
   <% ask -> %>
-    <%= render "_ask_search_summary.html", conn: @conn, campaign: @result[:campaign], ask: ask %>
+    <%= render "_ask_search_summary.html", conn: @conn, campaign: @result[:campaign], ask: ask, skills: @result[:skills] %>
 <% end %>

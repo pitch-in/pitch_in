@@ -7,5 +7,9 @@ $directions: (left, right, top, bottom);
   .standard-margin-#{$direction} {
     margin-#{$direction}: $global-margin;
   }
+
+  .no-margin-#{$direction} {
+    margin-#{$direction}: 0 !important;
+  }
 }
 

@@ -1,0 +1,14 @@
+<section class="content-block">
+  <h2>Forgot your password?</h1>
+
+  <p>
+    Enter your email address. If a Pitch In account exists for that email, we'll send you a password reset link.
+  </p>
+
+  <%= form_for @conn, forgot_password_path(@conn, :create), [as: :forgot_password], fn f -> %>
+    <%= label f, :email %>
+    <%= email_input f, :email, autocomplete: "email" %>
+
+    <%= submit "Submit", class: "expanded success button" %>
+  <% end %>
+</section>

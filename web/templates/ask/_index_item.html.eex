@@ -4,8 +4,12 @@
   </h2>
 
   <p>
-    <strong>Description</strong><br/>
     <%= @ask.description %>
+  </p>
+
+  <p>
+    <strong>Skills</strong><br/>
+    <%= display_skills(@ask) %>
   </p>
 
   <div class="expanded stacked-for-small button-group standard-margin-bottom">

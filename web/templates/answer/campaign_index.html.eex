@@ -25,7 +25,7 @@
         </h3>
 
         <p>
-          Volunteer Profession:
+          Volunteer Skills:
           <%= answer.user.pro.profession %>
         </h3>
 
@@ -57,7 +57,7 @@
         </h3>
 
         <p>
-          Volunteer Profession:
+          Volunteer Skills:
           <%= answer.user.pro.profession %>
         </h3>
 

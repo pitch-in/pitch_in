@@ -1,7 +1,12 @@
 defmodule PitchIn.Auth do
+  @moduledoc """
+  Holds the auth pipeline, and auth functions
+  """
+
   alias PitchIn.Repo
   import Ecto
   import Ecto.Query
+  import Phoenix.Controller, only: [put_flash: 3, render: 4, redirect: 2]
 
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
@@ -147,7 +152,7 @@ defmodule PitchIn.Auth do
     else
       conn
       |> put_status(404)
-      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html", layout: false)
+      |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
   end
@@ -159,7 +164,7 @@ defmodule PitchIn.Auth do
     else
       conn
       |> put_status(404)
-      |> Phoenix.Controller.render(PitchIn.ErrorView, "404.html", layout: false)
+      |> render(PitchIn.ErrorView, "404.html", layout: false)
       |> halt
     end
   end
@@ -169,8 +174,8 @@ defmodule PitchIn.Auth do
 
     conn
     |> store_deep_link_path(path)
-    |> Phoenix.Controller.put_flash(:alert, "You must log in to view this page.")
-    |> Phoenix.Controller.redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
+    |> put_flash(:alert, "You must log in to view this page.")
+    |> redirect(to: PitchIn.Router.Helpers.session_path(conn, :new))
     |> halt
   end
 
@@ -182,7 +187,6 @@ defmodule PitchIn.Auth do
   def get_deep_link_path(conn) do
     conn
     |> get_session(:deep_link_path)
-    |> IO.inspect
   end
 
   def clear_deep_link_path(conn) do

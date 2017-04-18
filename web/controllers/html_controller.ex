@@ -12,4 +12,8 @@ defmodule PitchIn.HtmlController do
   def donate_thanks(conn, _) do
     render(conn, "donate_thanks.html")
   end
+
+  def faq(conn, _) do
+    render(conn, "faq.html")
+  end
 end

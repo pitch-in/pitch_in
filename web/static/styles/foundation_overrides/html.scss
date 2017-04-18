@@ -8,6 +8,10 @@
   align-items: center;
   font-weight: bold;
 
+  &.expanded {
+    display: flex;
+  }
+
   &.success, &.alert {
     // Success buttons are black color for some reason.
     color: $white;
@@ -23,6 +27,12 @@
 
   &.cyan {
     background-color: $cyan;
+  }
+
+  &.warning.hollow {
+    // Normal yellow is too light for hollow buttons.
+    color: $dark-yellow;
+    border-color: $dark-yellow;
   }
 
   &.white {

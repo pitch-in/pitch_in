@@ -57,6 +57,9 @@ config :pitch_in, :staging_auth,
 
 config :pitch_in, :cert, "success"
 
+config :comeonin,
+  bcrypt_log_rounds: 4
+
 try do
   # Use dev.secret if it exists.
   import_config "dev.secret.exs"

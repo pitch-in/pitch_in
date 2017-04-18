@@ -18,13 +18,16 @@
         <%= link "How This Works", to: "#how-this-works" %>
       </li>
       <li>
-        <%= link "About Us", to: "#about-us" %>
+        <%= link "Why Pitch In?", to: "#why-pitch-in" %>
       </li>
       <li>
-        <%= link "Verification Process", to: "#verification-process" %>
+        <%= link "Who Are We?", to: "#about-us" %>
       </li>
       <li>
         <%= link "Contact Us", to: "#contact-us" %>
+      </li>
+      <li>
+        <%= link "FAQ", to: html_path(@conn, :faq) %>
       </li>
       <li>
         <%= link "Privacy Policy", to: html_path(@conn, :privacy_policy) %>

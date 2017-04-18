@@ -7,7 +7,7 @@
 
   <li>
     <strong>Skills</strong><br/>
-    <%= @ask.profession %>
+    <%= display_skills(@ask) %>
   </li>
 
   <li>

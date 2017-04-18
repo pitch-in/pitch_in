@@ -14,7 +14,7 @@ defmodule PitchIn.ContactUsController do
     render(conn, "index.html", changeset: changeset)
   end
 
-  def create(conn, %{"contact_us" => contact_us_params}, user) do
+  def create(conn, %{"contact_us" => contact_us_params}, _user) do
     changeset = ContactUs.changeset(%ContactUs{}, contact_us_params)
 
     if changeset.valid? do

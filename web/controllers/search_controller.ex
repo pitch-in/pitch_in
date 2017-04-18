@@ -3,6 +3,7 @@ defmodule PitchIn.SearchController do
 
   alias PitchIn.Ask
   alias PitchIn.Campaign
+  alias PitchIn.Skill
   alias PitchIn.SearchAlert
   alias PitchIn.NeedSearch
   alias PitchIn.Issue
@@ -13,15 +14,9 @@ defmodule PitchIn.SearchController do
   @ask_match_rating """
   SELECT
     asks.id,
-    COALESCE(p.rating, 0) + COALESCE(e.rating, 0)
+    COALESCE(e.rating, 0)
     AS rating
   FROM asks
-  LEFT JOIN (
-    SELECT id, 1 AS rating
-    FROM asks
-    WHERE profession = ?
-    AND archived_reason IS NULL
-  ) AS p ON asks.id = p.id
   LEFT JOIN (
     SELECT id, 1 as rating
     FROM asks
@@ -73,7 +68,7 @@ defmodule PitchIn.SearchController do
     if user && !params["clear"] do
       user = user |> Repo.preload(:pro)
 
-      profession = user.pro.profession
+      skills = user.pro.profession
       years_experience = 
         if user.pro.experience_starts_at do
           Timex.diff(Timex.today, user.pro.experience_starts_at, :years)
@@ -83,7 +78,7 @@ defmodule PitchIn.SearchController do
       issues = split_list(user.pro.issues)
 
       %NeedSearch{
-        profession: profession,
+        skills: skills,
         years_experience: years_experience,
         issues: issues
       }
@@ -126,11 +121,13 @@ defmodule PitchIn.SearchController do
       from c in Campaign,
       left_join: ask in subquery(ask_subquery), on: c.id == ask.campaign_id,
       left_join: issue_count in (filter |> issue_count_subquery |> subquery), on: c.id == issue_count.id,
+      left_join: skill_count in (filter |> skill_count_subquery |> subquery), on: ask.id == skill_count.id,
+      left_join: skills in (skill_display_subquery |> subquery), on: ask.id == skills.id,
       left_join: ask_match_rating in (filter |> ask_match_rating_subquery |> subquery), on: ask.id == ask_match_rating.id,
       where: is_nil(c.archived_reason),
-      select: %{campaign: c, ask: ask},
+      select: %{campaign: c, ask: ask, skills: skills},
       order_by: [
-        desc: fragment("COALESCE(?, 0) + COALESCE(?, 0)", issue_count.count, ask_match_rating.rating),
+        desc: fragment("COALESCE(?, 0) + COALESCE(?, 0) + COALESCE(?, 0)", issue_count.count, skill_count.count, ask_match_rating.rating),
         desc: fragment("COALESCE(?, ?)", ask.inserted_at, c.inserted_at)
       ]
 
@@ -143,18 +140,32 @@ defmodule PitchIn.SearchController do
   end
 
   defp ask_match_rating_subquery(filter) do
-    profession = filter.profession
     years_experience = to_int_or_infinity(filter.years_experience)
 
     from a in Ask,
-    join: r in fragment(@ask_match_rating, ^profession, ^years_experience), on: a.id == r.id,
+    join: r in fragment(@ask_match_rating, ^years_experience), on: a.id == r.id,
     select: %{id: r.id, rating: r.rating}
+  end
+
+  defp skill_count_subquery(search) do
+    skills = (search.skills || "") |> String.split(",")
+
+    from s in Skill,
+    select: %{id: s.ask_id, count: count(s.ask_id)},
+    where: fragment("? ilike any (?)", s.skill, ^skills),
+    group_by: s.ask_id
+  end
+
+  defp skill_display_subquery do
+    from s in Skill,
+    select: %{id: s.ask_id, skills: fragment("string_agg(skill, ', ')")},
+    group_by: s.ask_id
   end
 
   defp issue_count_subquery(search) do
     from i in Issue,
     select: %{id: i.campaign_id, count: count(i.campaign_id)},
-    where: i.issue in ^search.issues,
+    where: fragment("? ilike any (?)", i.issue, ^search.issues),
     group_by: i.campaign_id
   end
 

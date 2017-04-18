@@ -4,6 +4,8 @@ defmodule PitchIn.ViewHelpers do
   import PitchIn.Router.Helpers
   use Phoenix.HTML
 
+  alias PitchIn.Ask
+
   @moduledoc """
   This module holds random shared helpers for the views.
   """
@@ -67,19 +69,11 @@ defmodule PitchIn.ViewHelpers do
 
   def profession_options do
     professions = [
-      "Other",
-      "Accounting",
-      "Advertising",
-      "Campaign Finance",
-      "Communications",
-      "Data Manager",
-      "Designer/Artist",
-      "Fundraiser",
-      "Lawyer",
-      "Marketing",
-      "Organizer",
-      "Project Manager",
-      "Web Developer"
+      "",
+      "Web Development",
+      "Data",
+      "Design",
+      "None of those"
     ]
 
     List.zip([professions, professions])
@@ -100,11 +94,20 @@ defmodule PitchIn.ViewHelpers do
     link(url, to: url)
   end
 
-  def base_url(conn, path \\ "") do
-    scheme = "#{conn.scheme}://"
+  def base_url(conn), do: base_url(conn, "")
+  def base_url(PitchIn.Endpoint, path) do
+    "https://www.example.com" <> path
+  end
+  def base_url(%Plug.Conn{scheme: scheme, host: host, port: port}, path) do
+    url = "#{scheme}://#{host}"
 
-    url = "#{scheme}#{conn.host}"
-    url = if Mix.env != :prod, do: url <> "#{conn.port}", else: url
+    url =
+      if Mix.env == :prod do
+        url
+      else
+        "#{url}:#{Integer.to_string(port)}"
+      end
+
     url <> path
   end
 
@@ -122,6 +125,11 @@ defmodule PitchIn.ViewHelpers do
       [_, handle] -> "https://twitter.com/#{handle}"
       _ -> ""
     end
+  end
+
+  def display_skills(%Ask{} = ask) do
+    ask.skills
+    |> Enum.map_join(",", fn skill -> skill.skill end)
   end
 
   ##############

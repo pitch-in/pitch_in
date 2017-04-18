@@ -17,6 +17,7 @@ defmodule PitchIn.Router do
     plug :put_csrf_token_in_header
     plug :put_secure_browser_headers
     plug PitchIn.Auth, repo: PitchIn.Repo
+    plug PitchIn.IncompleteReminder
   end
 
   pipeline :admin do
@@ -44,12 +45,15 @@ defmodule PitchIn.Router do
     get "/users/:id/interstitial", UserController, :interstitial
     get "/answers", AnswerController, :volunteer_index
     resources "/users", UserController, only: [:new, :create, :show, :edit, :update]
+    get "/forgot-password/email-sent", ForgotPasswordController, :email_sent
+    resources "/forgot-password", ForgotPasswordController, only: [:index, :create, :update]
     resources "/search-alerts", SearchAlertController, only: [:delete]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/pros", ProController, only: [:show, :update]
     resources "/contact-us", ContactUsController, only: [:index, :create]
     get "/privacy-policy", HtmlController, :privacy_policy
     get "/about-us", HtmlController, :about_us
+    get "/faq", HtmlController, :faq
     get "/donate-thanks", HtmlController, :donate_thanks
   end
 

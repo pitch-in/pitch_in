@@ -42,12 +42,15 @@ defmodule PitchIn.CampaignController do
       |> Map.update("issues", [], &clean_up_issues/1)
 
     changeset =
-      Campaign.changeset(%Campaign{}, campaign_params)
+      %Campaign{}
+      |> Campaign.changeset(campaign_params)
       |> Ecto.Changeset.put_assoc(:users, [user])
 
     case Repo.insert(changeset) do
       {:ok, campaign} ->
-        Email.admin_new_campaign_email(conn, campaign) |> Mailer.deliver_later
+        conn
+        |> Email.admin_new_campaign_email(campaign)
+        |> Mailer.deliver_later
 
         conn
         |> redirect(to: campaign_path(conn, :interstitial, campaign))
@@ -98,6 +101,7 @@ defmodule PitchIn.CampaignController do
   end
 
   def update(conn, %{"id" => id, "campaign" => campaign_params}) do
+    user = conn.assigns.current_user
     campaign = get_campaign(id)
 
     campaign_params = 
@@ -113,6 +117,10 @@ defmodule PitchIn.CampaignController do
 
     case Repo.update(changeset) do
       {:ok, campaign} ->
+        user
+        |> complete_user
+        |> make_user_staffer
+
         if show_whats_next do
           conn
           |> redirect(to: campaign_path(conn, :interstitial, campaign))
@@ -158,6 +166,32 @@ defmodule PitchIn.CampaignController do
   end
 
   defp get_campaign(id) do
-    Repo.get!(PitchIn.Campaign, id) |> Repo.preload(:issues)
+    Campaign |> Repo.get!(id) |> Repo.preload(:issues)
+  end
+
+  defp complete_user(user) do
+    if user.is_staffer && !user.is_complete do
+      changeset = User.complete_changeset(user)
+
+      case Repo.update(changeset) do
+        {:ok, user} -> user
+        {:error, _} -> user
+      end
+    else
+      user
+    end
+  end
+
+  defp make_user_staffer(user) do
+    if user.is_staffer do
+      user
+    else
+      changeset = User.staffer_changeset(user)
+
+      case Repo.update(changeset) do
+        {:ok, user} -> user
+        {:error, _} -> user
+      end
+    end
   end
 end
