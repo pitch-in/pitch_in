@@ -14,7 +14,7 @@
     </p>
   </div>
 
-  <h3>Will Ockelman-Wagner</h3>
+  <h3>Will Ockelmann-Wagner</h3>
   <div class="flex-row align-start">
     <img src="<%= webpack_path(@conn, "/img/about/will-profile.jpg") %>" title="Will" class="standard-margin-right" />
     <p>
