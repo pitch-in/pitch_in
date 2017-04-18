@@ -26,6 +26,9 @@ import './apple-touch-icon.png';
 import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
 import './img/campaigns/ben-haynes.jpg';
+import './img/campaigns/heather-ledoux.jpg';
+import './img/campaigns/maria-mclaughlin.jpg';
+import './img/campaigns/suzy-montero.jpg';
 
 // Import foundation stuff.
 import 'foundation-sites/js/foundation.core';
