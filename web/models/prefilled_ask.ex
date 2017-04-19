@@ -1,21 +1,27 @@
 defmodule PitchIn.PrefilledAsk do
+  @defmodule """
+  Data and functions for setting up prefilled asks.
+  """
+
   alias PitchIn.Ask
 
   @prefilled_asks [
     %{
+      id: "create_website",
       name: "Create a website (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :one_time,
         hours: 16,
-        skill: "html,css,javascript",
+        skills: "html,css,javascript",
         description: "We need someone who can create a website for us, to highlight our campaign's best light! Sign up to develop a beautiful website tailored to our community, values and needs.",
         years_experience: 0
       }
     },
     %{
+      id: "maintain_website",
       name: "Maintain/Update website (ongoing)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :ongoing,
         hours: 4,
@@ -25,8 +31,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "design_email_template",
       name: "Design email template (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :one_time,
         hours: 4,
@@ -36,8 +43,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "ongoing_emails",
       name: "Create ongoing emails (ongoing)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :ongoing,
         hours: 2,
@@ -47,8 +55,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "third_party_apis",
       name: "Connect website with services like donation and volunteer sign-up (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :one_time,
         hours: 4,
@@ -58,8 +67,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "logo",
       name: "Create logos and graphics (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Graphic Designer",
         length: :one_time,
         hours: 3,
@@ -69,8 +79,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "event_design",
       name: "Graphics for a specific event (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Social Medial Graphic Designer",
         length: :one_time,
         hours: 1,
@@ -80,8 +91,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "staff_designer",
       name: "Designer (ongoing)",
-      ask: %Ask{
+      ask: %{
         role: "Staff Graphic Designer",
         length: :ongoing,
         hours: 2,
@@ -91,8 +103,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "van_connect",
       name: "Connect VAN to Website (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Web Developer",
         length: :one_time,
         hours: 3,
@@ -102,8 +115,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "walk_lists",
       name: "Cut voter contact walk-lists (one-time)",
-      ask: %Ask{
+      ask: %{
         role: "Data Manager",
         length: :one_time,
         hours: 2,
@@ -113,8 +127,9 @@ defmodule PitchIn.PrefilledAsk do
       }
     },
     %{
+      id: "data_analyst",
       name: "Data analyst (ongoing)",
-      ask: %Ask{
+      ask: %{
         role: "Data Director",
         length: :one_time,
         hours: 3,
@@ -129,14 +144,16 @@ defmodule PitchIn.PrefilledAsk do
     @prefilled_asks
   end
 
-  def asks_to_create(campaign_id, names) do
+  def asks_to_create(ids, campaign) do
     @prefilled_asks
     |> Enum.filter_map(
       fn ask_data ->
-        ask_data.name in names
+        ask_data.id in ids
       end,
       fn ask_data ->
-        Map.put(ask_data.ask, :campaign_id, campaign_id)
+        campaign
+        |> Ecto.build_assoc(:asks)
+        |> Ask.changeset(ask_data.ask)
       end
     )
   end

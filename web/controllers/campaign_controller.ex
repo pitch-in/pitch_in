@@ -53,7 +53,7 @@ defmodule PitchIn.CampaignController do
         |> Mailer.deliver_later
 
         conn
-        |> redirect(to: campaign_path(conn, :interstitial, campaign))
+        |> redirect(to: campaign_prefilled_ask_path(conn, :index, campaign))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -123,7 +123,7 @@ defmodule PitchIn.CampaignController do
 
         if show_whats_next do
           conn
-          |> redirect(to: campaign_path(conn, :interstitial, campaign))
+          |> redirect(to: campaign_prefilled_ask_path(conn, :index, campaign))
         else
           conn
           |> put_flash(:success, "Campaign updated successfully.")

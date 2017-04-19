@@ -35,7 +35,7 @@ defmodule PitchIn.Router do
     get "/campaigns/:id/interstitial", CampaignController, :interstitial
     resources "/campaigns", CampaignController do
       get "/asks/:id/interstitial", AskController, :interstitial
-      get "/asks/:id/prefill", PrefilledAskController, :index
+      resources "/prefill-asks", PrefilledAskController, only: [:index, :create]
       resources "/asks", AskController do
         get "/answers/:id/interstitial", AnswerController, :interstitial
         resources "/answers", AnswerController, only: [:index, :show, :new, :create]
