@@ -36,8 +36,13 @@ defmodule PitchIn.Campaign do
 
   next_step_list do
     step :first_need
+    step :list_needs, :show_list_needs_step
     step :file_number, :show_file_number_step
     step :edit_campaign
+  end
+
+  def show_list_needs_step(campaign) do
+    campaign.asks != []
   end
 
   def show_file_number_step(campaign) do

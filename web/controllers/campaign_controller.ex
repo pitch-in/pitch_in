@@ -30,7 +30,7 @@ defmodule PitchIn.CampaignController do
   end
 
   def interstitial(conn, %{"id" => id}) do
-    campaign = Repo.get(Campaign, id)
+    campaign = Campaign |> Repo.get(id) |> Repo.preload(:asks)
     render(conn, "interstitial.html", campaign: campaign)
   end
 
