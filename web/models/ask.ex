@@ -42,12 +42,13 @@ defmodule PitchIn.Ask do
   end
 
   defp skills_changeset(changeset, params \\ %{}) do
-    if params["skills"] do
-      params = Map.update!(params, "skills", &skills_string_to_maps/1)
+    skills = params["skills"] || params[:skills]
+    if skills do
+      skills_list = skills_string_to_maps(skills)
 
       changeset
-      |> cast(params, [])
-      |> cast_assoc(:skills, params["skills"])
+      |> cast(%{skills: skills_list}, [])
+      |> cast_assoc(:skills)
     else
       changeset
     end
