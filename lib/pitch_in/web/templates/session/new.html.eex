@@ -1,0 +1,19 @@
+<section class="content-block">
+  <h2>Welcome Back</h1>
+
+  <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+    <%= label f, :email %>
+    <%= email_input f, :email, autocomplete: "email" %>
+
+    <%= label f, :password %>
+    <%= password_input f, :password, autocomplete: "current-password" %>
+
+    <%= submit "Log on", class: "expanded button" %>
+  <% end %>
+  <%= link "Forgot password?", to: forgot_password_path(@conn, :index) %>
+
+</section>
+
+<%= if Auth.get_deep_link_path(@conn) do %>
+  <%= render PageView, "_first_time_here.html", conn: @conn, header: true %>
+<% end %>

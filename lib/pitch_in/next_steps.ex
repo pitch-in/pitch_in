@@ -1,4 +1,4 @@
-defmodule PitchIn.NextSteps do
+defmodule PitchIn.Web.NextSteps do
   @moduledoc """
   Handles calculating next steps.
   """
@@ -7,12 +7,12 @@ defmodule PitchIn.NextSteps do
 
   defmacro __using__(_) do
     quote do
-      import PitchIn.NextSteps, only: [next_step_list: 1, step: 1, step: 2]
+      import PitchIn.Web.NextSteps, only: [next_step_list: 1, step: 1, step: 2]
       @next_steps []
 
       # Wait until just before compiling to set up the next_steps method
       # so all the steps are registered first.
-      @before_compile PitchIn.NextSteps
+      @before_compile PitchIn.Web.NextSteps
     end
   end
 
@@ -41,7 +41,7 @@ defmodule PitchIn.NextSteps do
   defmacro step(name, checker \\ :show) do
     quote do
       step = struct(
-        PitchIn.NextSteps,
+        PitchIn.Web.NextSteps,
         %{name: unquote(name), checker: unquote(checker)}
       )
 
@@ -53,7 +53,7 @@ defmodule PitchIn.NextSteps do
   defmacro __before_compile__(_env) do
     quote do
       def next_steps(struct) do
-        PitchIn.NextSteps.check(__MODULE__, struct, @next_steps)
+        PitchIn.Web.NextSteps.check(__MODULE__, struct, @next_steps)
       end
     end
   end

@@ -1,4 +1,3 @@
-require IEx
 defmodule PitchIn.UsDate do
   @moduledoc """
   Support passing US-formatted date strings to Timex Ecto.

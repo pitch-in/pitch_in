@@ -1,0 +1,16 @@
+<section class="ask-search-summary content-block not-top flex-column align-stretch">
+  <%= link to: campaign_answer_path(@conn, :new, @campaign) do %>
+    <h3 class="flex-left">
+      <%= render PitchIn.Web.CampaignView, "_name.html", conn: @conn, campaign: @campaign %>
+    </h3>
+  <% end %>
+
+  <div><strong>Campaign Short Pitch</strong></div>
+  <div><%= @campaign.short_pitch %></div>
+
+  <div class="flex-spacer"></div>
+
+  <div class="expanded button-group">
+    <%= link "Pitch In", to: campaign_answer_path(@conn, :new, @campaign), class: "#{if @campaign.is_verified, do: "success", else: "warning"} button" %>
+  </div>
+</section>

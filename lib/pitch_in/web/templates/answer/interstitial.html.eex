@@ -1,0 +1,14 @@
+<%= next_steps PitchIn.Web.Answer, @answer, "pitching in with #{@campaign.name}!", fn step_name -> %>
+  <%= case step_name do %>
+    <% :search -> %>
+      <%= next_step "Search Again", to: search_path(@conn, :index), color: "success" do %>
+        Don't stop yet!
+        You can search again to see where else you can pitch in.
+      <% end %>
+    <% :campaign_needs -> %>
+      <%= next_step "List Needs", to: campaign_ask_path(@conn, :index, @campaign), color: "warning" do %>
+        Want to see how else you can help out <%= @campaign.name %>? Take
+        a look at their other open needs!
+      <% end %>
+  <% end %>
+<% end %>

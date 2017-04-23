@@ -1,0 +1,46 @@
+<section class="content-block">
+  <h2>New campaign staff user</h2>
+
+  <%= form_for @changeset, user_path(@conn, :create, staff: true), fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= label f, :name, "Your Name" %>
+      <%= text_input f, :name, autocomplete: "name" %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :email, "Your Email Address" %>
+      <%= email_input f, :email, autocomplete: "email" %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <%= inputs_for f, :campaigns, fn i -> %>
+      <hr/>
+      <%= render PitchIn.Web.CampaignView, "_basic_form.html", campaign: i %>
+      <hr/>
+    <% end %>
+
+    <div class="form-group">
+      <%= label f, :password %>
+      <%= password_input f, :password, autocomplete: "new-password" %>
+      <%= error_tag f, :password %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :password_confirmation, "Confirm Password", autocomplete: "new-password" %>
+      <%= password_input f, :password_confirmation %>
+      <%= error_tag f, :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Submit", class: "expanded success button" %>
+    </div>
+    <%= link "View our Privacy Policy", to: html_path(@conn, :privacy_policy) %>
+  <% end %>
+</section>

@@ -1,0 +1,119 @@
+<%= if @is_staff do %>
+  <section class="list-header content-block">
+    <div class="expanded stacked-for-small button-group">
+      <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "hollow secondary button" %>
+      <%= link "Edit", to: campaign_path(@conn, :edit, @campaign), class: "hollow warning button" %>
+      <%= link "Manage Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "hollow primary button" %>
+      <%= link "Manage Answers", to: campaign_answer_path(@conn, :index, @campaign), class: "hollow success button" %>
+    </div>
+  </section>
+<%= end %>
+
+<section class="list-header content-block">
+  <h2>
+    <%= render PitchIn.Web.CampaignView, "_name.html", conn: @conn, campaign: @campaign %>
+  </h2>
+</section>
+
+<section class="content-block">
+<ul>
+  <li>
+    <strong>Type:</strong>
+    <%= @campaign.type %>
+  </li>
+
+  <li>
+    <strong>State:</strong>
+    <%= @campaign.state %>
+  </li>
+
+  <li>
+    <strong>District:</strong>
+    <%= @campaign.district %>
+  </li>
+
+  <li>
+    <strong>Short pitch:</strong>
+    <%= @campaign.short_pitch %>
+  </li>
+
+  <%# CANDIDATE %>
+  <%= if candidate?(@campaign) do %>
+    <li>
+      <strong>Candidate name:</strong>
+      <%= @campaign.candidate_name %>
+    </li>
+
+    <li>
+      <strong>Candidate profession:</strong>
+      <%= @campaign.candidate_profession %>
+    </li>
+
+    <%= if @campaign.is_partisan do %>
+      <li>
+        <strong>
+          Partisan
+        </strong>
+      </li>
+
+      <li>
+        <strong>Current party:</strong>
+        <%= @campaign.current_party %>
+      </li>
+    <% else %>
+      <li>
+        <strong>
+          Non-Partisan
+        </strong>
+      </li>
+    <% end %>
+  <% end %>
+
+  <%# MEASURE %>
+  <%= if measure?(@campaign) do %>
+    <li>
+      <strong>Measure name:</strong>
+      <%= @campaign.measure_name %>
+    </li>
+
+    <li>
+      <strong>Measure position:</strong>
+      <%= @campaign.measure_position %>
+    </li>
+  <% end %>
+
+  <%# ELECTION %>
+  <%= if election?(@campaign) do %>
+    <li>
+      <strong>Election date:</strong>
+      <%= format_date @campaign.election_date %>
+    </li>
+  <% end %>
+
+  <li>
+    <strong>Long pitch:</strong><br/>
+    <%= @campaign.long_pitch %>
+  </li>
+
+  <%# URLS %>
+  <li>
+    <strong>Website url:</strong>
+    <%= format_url @campaign.website_url %>
+  </li>
+
+  <li>
+    <strong>Twitter url:</strong>
+    <%= link twitter_to_handle(@campaign.twitter_url), to: twitter_to_url(@campaign.twitter_url) %>
+  </li>
+
+  <li>
+    <strong>Facebook url:</strong>
+    <%= format_url @campaign.facebook_url %>
+  </li>
+</ul>
+
+<div class="expanded button-group">
+  <%= link "Message the campaign", to: campaign_answer_path(@conn, :new, @campaign), class: "primary button" %>
+  <%= link "View Needs", to: campaign_ask_path(@conn, :index, @campaign), class: "success button" %>
+</div>
+</section>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="progressive,politics,activism">
+    <meta name="author" content="Pitch In">
+    <title>Pitch In | Server Error</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<%= webpack_path(PitchIn.Web.Endpoint, "/favicon.ico") %>" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+
+    <%= if Mix.env != :dev do %>
+      <link href="<%= static_path(PitchIn.Web.Endpoint, "/main.min.css") %>" rel="stylesheet" type="text/css" />
+    <% end %>
+  </head>
+
+  <body class="error-page view-login no-js">
+    <%= render "_error_navbar.html", conn: PitchIn.Web.Endpoint %>
+
+    <div class="column row">
+      <div class="error-body column">
+        <h1 class="text-shadow-dark">500 Error</h1>
+
+        <img class="error-logo error-logo--500" src="<%= webpack_path(@conn, "/img/logo.svg") %>" />
+
+        <h2 class="text-shadow-dark">Yikes!</h2>
+
+        <p>
+        It looks like we're having some technical issues. We've been notified, and are working to fix it as fast as possible.
+        Please try again in just a moment.
+        </p>
+
+        <div class="half stacked button-group">
+          <a href="/" class="alert dark-shadow button">Home</a>
+        </div>
+      </div>
+    </div>
+
+    <%= render PitchIn.Web.LayoutView, "_footer.html", conn: PitchIn.Web.Endpoint %>
+
+    <%= if Mix.env == :dev do %>
+      <script src='http://localhost:4001/main.js'></script>
+    <% else %>
+      <script src="<%= static_path(PitchIn.Web.Endpoint, "/main.min.js") %>"></script>
+    <% end %>
+  </body>
+</html>

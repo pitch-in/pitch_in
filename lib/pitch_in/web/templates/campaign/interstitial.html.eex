@@ -1,0 +1,20 @@
+<%= next_steps PitchIn.Web.Campaign, @campaign, "registering #{@campaign.name}", fn step_name -> %>
+  <%= case step_name do %>
+    <% :first_need -> %>
+      <%= next_step "Create Need", to: campaign_ask_path(@conn, :new, @campaign), color: "success" do %>
+        Post a custom Need, and connect with volunteers looking to help!
+      <% end %>
+    <% :list_needs -> %>
+      <%= next_step "View Needs", to: campaign_ask_path(@conn, :index, @campaign), color: "primary" do %>
+        View the needs you just created!
+      <% end %>
+    <% :file_number -> %>
+      <%= next_step "Enter File Number", to: campaign_path(@conn, :edit, @campaign), color: "warning" do %>
+        Enter your campaign's file number and state to start the campaign verification process.
+      <% end %>
+    <% :edit_campaign -> %>
+      <%= next_step "Back to Campaign", to: campaign_path(@conn, :edit, @campaign), color: "secondary" do %>
+        Go back and edit your campaign profile some more:
+      <% end %>
+  <% end %>
+<% end %>

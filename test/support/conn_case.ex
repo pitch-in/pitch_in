@@ -1,4 +1,4 @@
-defmodule PitchIn.ConnCase do
+defmodule PitchIn.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -27,13 +27,13 @@ defmodule PitchIn.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import PitchIn.Router.Helpers
+      import PitchIn.Web.Router.Helpers
 
       import PitchIn.Factory
-      import PitchIn.ConnCase
+      import PitchIn.Web.ConnCase
 
       # The default endpoint for testing
-      @endpoint PitchIn.Endpoint
+      @endpoint PitchIn.Web.Endpoint
     end
   end
 
