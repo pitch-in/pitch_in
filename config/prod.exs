@@ -13,7 +13,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :pitch_in, PitchIn.Endpoint,
   http: [port: {:system, "PORT"}],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :pitch_in, PitchIn.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
