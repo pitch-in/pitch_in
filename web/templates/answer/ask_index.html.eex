@@ -8,12 +8,19 @@
   </h2>
 </section>
 
-<%= archivable_index "Answers", @answers, card: fn (answer) -> %>
+<%= archivable_index "Answers", @answers, allowed_reasons: :campaign_answer, card: fn (answer) -> %>
   <section class="content-block">
-    <h3>
+    <p>
+      Volunteer name:
+      <strong><%= answer.user.name %></strong>
+    </h3>
+
+    <p>
+      Volunteer Skills:
       <%= answer.user.pro.profession %>
     </h3>
 
+    <p><strong>Volunteer message:</strong></p>
     <p>
       <%= answer.message %>
     </p>

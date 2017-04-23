@@ -22,18 +22,24 @@ defmodule PitchIn.ArchivableView do
     Enum.filter(structs, &Archivable.archived?/1)
   end
 
+  def archived_for(structs, nil), do: archived(structs)
+  def archived_for(structs, list_name) do
+    Enum.filter(structs, &(Archivable.archived_for?(&1, get_reasons(list_name))))
+  end
+
   def archivable_index(name, structs, opts) do
     card = Keyword.fetch!(opts, :card)
     hide_archived = Keyword.get(opts, :hide_archived, false)
+    allowed_reasons = Keyword.get(opts, :allowed_reasons, nil)
 
-    render "index.html", name: name, items: structs, card: card, hide_archived: hide_archived
+    render "index.html", name: name, items: structs, card: card, hide_archived: hide_archived, allowed_reasons: allowed_reasons
   end
 
   @doc """
   The options for a select input for a set of archive_reasons.
   """
-  def select_options(list_atom) do
-    list = apply(__MODULE__, list_atom, [])
+  def select_options(list_name) do
+    list = get_reasons(list_name)
     list = list ++ ["Other"]
     
     List.zip([list, list])
@@ -78,5 +84,7 @@ defmodule PitchIn.ArchivableView do
   def admin_answer do
     campaign_answer ++ volunteer_answer
   end
+
+  def get_reasons(list_name), do: apply(__MODULE__, list_name, [])
 end
 

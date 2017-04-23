@@ -4,7 +4,7 @@
   </h2>
 </section>
 
-<%= archivable_index "Answers", @answers, card: fn (answer) -> %>
+<%= archivable_index "Answers", @answers, allowed_reasons: :campaign_answer, card: fn (answer) -> %>
   <section class="content-block">
     <h3>
       Role:
@@ -35,7 +35,7 @@
 <section class="list-header content-block">
   <h2>Direct Messages</h2>
 </section>
-<%= archivable_index "Direct Messages", @direct_answers, card: fn (answer) -> %>
+<%= archivable_index "Direct Messages", @direct_answers, allowed_reasons: :campaign_answer, card: fn (answer) -> %>
   <section class="content-block">
     <p>
       Volunteer name:
@@ -61,4 +61,3 @@
 <section class="list-header content-block">
   <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
 </section>
-
