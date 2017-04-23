@@ -1,8 +1,7 @@
-require IEx
-
 defmodule PitchIn.AskView do
   use PitchIn.Web, :view
   use PitchIn.NextStepView
+  use PitchIn.ArchivableView
 
   def unarchive_button(conn, campaign, ask) do
     render(

@@ -12,7 +12,7 @@
 
     <div>
       <%= label f, :archived_reason %>
-      <%= select f, :archived_reason, PitchIn.ArchiveReasons.select_options(@reasons) %>
+      <%= select f, :archived_reason, select_options(@reasons) %>
       <%= error_tag f, :archived %>
     </div>
 

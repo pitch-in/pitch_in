@@ -2,12 +2,16 @@
   <h2>All Campaigns</h2>
 </section>
 
-<section class="content-block">
+<section class="list-header content-block">
   <h3>Active Campaigns</h3>
-  <%= render "_index_table.html", conn: @conn, campaigns: @active_campaigns %>
+</section>
+<section class="content-block">
+  <%= render "_index_table.html", conn: @conn, campaigns: active(@campaigns) %>
+</section>
 
-  <hr/>
-
+<section class="list-header content-block">
   <h3>Archived Campaigns</h3>
-  <%= render "_index_table.html", conn: @conn, campaigns: @archived_campaigns %>
+</section>
+<section class="content-block">
+  <%= render "_index_table.html", conn: @conn, campaigns: archived(@campaigns) %>
 </section>

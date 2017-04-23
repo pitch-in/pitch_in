@@ -2,6 +2,8 @@ defmodule PitchIn.Answer do
   use PitchIn.Web, :model
   use PitchIn.NextSteps
 
+  @derive [PitchIn.Archivable]
+
   schema "answers" do
     belongs_to :user, PitchIn.User
     belongs_to :ask, PitchIn.Ask

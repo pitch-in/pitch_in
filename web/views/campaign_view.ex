@@ -1,9 +1,12 @@
 defmodule PitchIn.CampaignView do
   use PitchIn.Web, :view
 
+  use PitchIn.NextStepView
+
+  import PitchIn.ArchivableView, only: [archivable_index: 3, select_options: 1]
+
   alias PitchIn.Campaign
   alias PitchIn.Issue
-  use PitchIn.NextStepView
 
   def candidate?(campaign), do: campaign.type == :candidate
   def measure?(campaign), do: campaign.type == :measure

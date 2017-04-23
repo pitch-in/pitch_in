@@ -11,19 +11,8 @@
   <%= render PitchIn.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
 </section>
 
-<%= if @active_asks != [] do %>
-  <%= for ask <- @active_asks do %>
-    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
-  <% end %>
-<% end %>
-
-<%= if @archived_asks != [] do %>
-  <section class="list-header content-block">
-    <h2>Archived Needs</h2>
-  </section>
-  <%= for ask <- @archived_asks do %>
-    <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
-  <% end %>
+<%= archivable_index "Needs", @asks, hide_archived: @hide_archived, card: fn (ask) -> %>
+  <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
 <% end %>
 
 <section class="list-header content-block">

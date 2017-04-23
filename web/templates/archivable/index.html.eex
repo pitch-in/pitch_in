@@ -1,0 +1,24 @@
+<%= case active(@items) do %>
+  <%= [] -> %>
+    <section class="list-header content-block">
+      <h3>No active <%= @name %></h3>
+    </section>
+  <%= items -> %>
+    <%= for item <- items do %>
+      <%= @card.(item) %>
+    <% end %>
+<% end %>
+
+<%= unless @hide_archived do %>
+  <%= case archived(@items) do %>
+    <%= [] -> %>
+    <%= items -> %>
+      <section class="list-header content-block">
+        <h3>Archived <%= @name %></h3>
+      </section>
+
+      <%= for item <- items do %>
+        <%= @card.(item) %>
+      <% end %>
+  <% end %>
+<% end %>

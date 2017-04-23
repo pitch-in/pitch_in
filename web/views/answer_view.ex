@@ -1,6 +1,8 @@
 defmodule PitchIn.AnswerView do
   use PitchIn.Web, :view
   use PitchIn.NextStepView
+  use PitchIn.ArchivableView
+
   alias PitchIn.Campaign
   alias PitchIn.Ask
 

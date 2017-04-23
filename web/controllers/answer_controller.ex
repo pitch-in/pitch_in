@@ -8,7 +8,6 @@ defmodule PitchIn.AnswerController do
   alias PitchIn.Email
   alias PitchIn.Mailer
   alias PitchIn.Auth
-  alias PitchIn.ArchiveReasons
 
   use PitchIn.Auth, protect: [:index, :edit, :update, :interstitial]
   plug :check_campaign_staff
