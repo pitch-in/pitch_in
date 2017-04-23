@@ -57,11 +57,27 @@
 }
 
 // Handle delete buttons in an expanded group.
-.expanded.button-group form[method] {
-  flex: 1 1 0px;
+.button-group {
+  $button-margin: 0.5rem;
 
-  .button {
-    width: 100%;
+  &.expanded form[method] {
+    flex: 1 1 0px;
+    margin-right: $button-margin;
+
+    .button {
+      width: 100%;
+    }
+  }
+
+  &.stacked-for-small form[method] {
+    margin-right: 0;
+    margin-bottom: $button-margin;
+
+    @include breakpoint(medium) {
+      margin-right: $button-margin;
+      margin-bottom: 0;
+
+    }
   }
 }
 

@@ -2,6 +2,8 @@ defmodule PitchIn.Ask do
   use PitchIn.Web, :model
   use PitchIn.NextSteps
 
+  @derive [PitchIn.Archivable]
+
   schema "asks" do
     belongs_to :campaign, PitchIn.Campaign
     has_many :answers, PitchIn.Answer

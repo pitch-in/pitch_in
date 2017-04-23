@@ -2,6 +2,8 @@ defmodule PitchIn.Campaign do
   use PitchIn.Web, :model
   use PitchIn.NextSteps
 
+  @derive [PitchIn.Archivable]
+
   schema "campaigns" do
     many_to_many :users, PitchIn.User, join_through: "campaign_staff"
     has_many :asks, PitchIn.Ask

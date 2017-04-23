@@ -2,30 +2,10 @@
   <h2>Your Campaigns</h2>
 </section>
 
-<%= if @active_campaigns == [] do %>
-  <section class="list-header content-block">
-    <h3>No Active Campaigns</h3>
-  </section>
-<% else %>
-  <section class="list-header content-block">
-    <h3>Active Campaigns</h3>
-  </section>
-  <hr/>
-  <%= for campaign <- @active_campaigns do %>
-    <%= render "_index_item.html", conn: @conn, campaign: campaign %>
-  <% end %>
+<%= archivable_index "Campaigns", @campaigns, card: fn (campaign) -> %>
+  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
 <% end %>
 
-<%= if @archived_campaigns != [] do %>
-  <section class="list-header content-block">
-    <h3>Archived Campaigns</h3>
-  </section>
-  <hr/>
-  <%= for campaign <- @archived_campaigns do %>
-    <%= render "_index_item.html", conn: @conn, campaign: campaign %>
-  <% end %>
-<% end %>
-
-  <section class="list-header content-block">
+<section class="list-header content-block">
   <%= link "New campaign", to: campaign_path(@conn, :new), class: "primary button" %>
 </section>

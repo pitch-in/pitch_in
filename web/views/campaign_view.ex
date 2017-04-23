@@ -1,9 +1,12 @@
 defmodule PitchIn.CampaignView do
   use PitchIn.Web, :view
 
+  use PitchIn.NextStepView
+
+  import PitchIn.ArchivableView, only: [archivable_index: 3, select_options: 1]
+
   alias PitchIn.Campaign
   alias PitchIn.Issue
-  use PitchIn.NextStepView
 
   def candidate?(campaign), do: campaign.type == :candidate
   def measure?(campaign), do: campaign.type == :measure
@@ -11,7 +14,14 @@ defmodule PitchIn.CampaignView do
   def election?(campaign), do: candidate?(campaign) || measure?(campaign)
 
   def unarchive_button(conn, campaign) do
-    render("_unarchive.html", conn: conn, campaign: campaign)
+    render(
+      PitchIn.SharedView,
+      "_unarchive_button.html",
+      conn: conn,
+      data: campaign,
+      type: :campaign, 
+      action: campaign_path(conn, :update, campaign)
+    )
   end
 
   def archive_button(conn, campaign, opts \\ []) do

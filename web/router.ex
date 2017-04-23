@@ -38,10 +38,10 @@ defmodule PitchIn.Router do
       resources "/prefill-asks", PrefilledAskController, only: [:index, :create]
       resources "/asks", AskController do
         get "/answers/:id/interstitial", AnswerController, :interstitial
-        resources "/answers", AnswerController, only: [:index, :show, :new, :create]
+        resources "/answers", AnswerController, only: [:index, :show, :new, :create, :edit, :update]
       end
       get "/answers/:id/interstitial", AnswerController, :interstitial
-      resources "/answers", AnswerController, only: [:index, :show, :new, :create]
+      resources "/answers", AnswerController, only: [:index, :show, :new, :create, :edit, :update]
     end
     get "/users/:id/interstitial", UserController, :interstitial
     get "/answers", AnswerController, :volunteer_index

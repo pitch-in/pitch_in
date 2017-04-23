@@ -68,6 +68,10 @@ $content-block-margin: 1rem;
       &.button-group > .button {
         margin-bottom: 0;
       }
+      // Also handle interior buttons in forms.
+      &.button-group > form > .button {
+        margin-bottom: 0;
+      }
     }
   }
 }
