@@ -1,3 +1,11 @@
+<section class="list-header content-block">
+  <div class="expanded button-group">
+    <%= archive_button @conn, @answer, :accept, "hollow success button" %>
+    <%= archive_link @conn, @answer, text: "Not right now", class: "hollow alert button" %>
+    <%= unarchive_button @conn, @answer, class: "hollow warning button" %>
+  </div>
+</section>
+
 <section class="content-block">
 <h2>
   <%= if @ask do %>
@@ -87,9 +95,9 @@
 
 <div class="expanded button-group">
   <%= if @ask do %>
-    <%= link "All Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
+    <%= link "Back to Need Answers", to: campaign_ask_answer_path(@conn, :index, @campaign, @ask), class: "secondary button" %>
   <% else %>
-    <%= link "All Messages", to: campaign_answer_path(@conn, :index, @campaign), class: "secondary button" %>
+    <%= link "Back to Direct Messages", to: campaign_answer_path(@conn, :index, @campaign), class: "secondary button" %>
   <% end %>
 </div>
 </section>
