@@ -8,7 +8,7 @@
   </h2>
 </section>
 
-<%= for answer <- @answers do %>
+<%= archivable_index "Answers", @answers, card: fn (answer) -> %>
   <section class="content-block">
     <h3>
       <%= answer.user.pro.profession %>

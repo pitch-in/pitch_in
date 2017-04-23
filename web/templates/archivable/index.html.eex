@@ -1,7 +1,7 @@
 <%= case active(@items) do %>
   <%= [] -> %>
     <section class="list-header content-block">
-      <h3>No active <%= @name %></h3>
+      <h3>No Active <%= @name %></h3>
     </section>
   <%= items -> %>
     <%= for item <- items do %>

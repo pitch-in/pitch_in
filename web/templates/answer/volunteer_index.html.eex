@@ -4,19 +4,10 @@
   </h1>
 </section>
 
-<%= case @answers do %>
-  <% [] -> %>
-    <section class="list-header content-block">
-      <h3>
-        You don't have any open answers right now.
-      </h3>
-    </section>
-  <% answers -> %>
-    <%= for answer <- answers do %>
-      <%= card @conn, answer.campaign, answer.ask, answer do %>
-        <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
-      <% end %>
-    <% end %>
+<%= archivable_index "Answers", @answers, card: fn (answer) -> %>
+  <%= card @conn, answer.campaign, answer.ask, answer do %>
+    <%= archive_button @conn, answer, :no_campaign_response, "warning" %>
+  <% end %>
 <% end %>
 
 <section class="list-header content-block">
