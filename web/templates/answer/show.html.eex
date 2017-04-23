@@ -8,7 +8,7 @@
       <% end %>
     <% else %>
       <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary hollow button" %>
-      <%= link "Veiw Campaign", to: campaign_path(@conn, :show, @campaign), class: "primary hollow button" %>
+      <%= link "View Campaign", to: campaign_path(@conn, :show, @campaign), class: "primary hollow button" %>
     <% end %>
   </div>
 </div>
