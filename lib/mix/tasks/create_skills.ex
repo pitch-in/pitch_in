@@ -11,8 +11,8 @@ defmodule Mix.Tasks.PitchIn.CreateSkills do
   import Ecto.Query
 
   alias PitchIn.Repo
-  alias PitchIn.Ask
-  alias PitchIn.Skill
+  alias PitchIn.Web.Ask
+  alias PitchIn.Web.Skill
 
   def run(_args) do
     [:postgrex, :ecto, :tzdata]

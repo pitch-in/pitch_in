@@ -1,0 +1,21 @@
+// Do this first, since it includes foundation overrides.
+@import './variables/index';
+@import './foundation_overrides/variables';
+
+// Foundation
+@import '~foundation-sites/scss/foundation';
+@include foundation-everything(true);
+
+// Datepicker
+@import '~@fengyuanchen/datepicker/src/datepicker';
+
+// Motion-ui.
+@import '~motion-ui/src/motion-ui';
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+@import './foundation_overrides/html';
+
+// Other
+@import './components/index';
+@import './pages/index';
