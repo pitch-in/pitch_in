@@ -11,7 +11,7 @@ config :pitch_in, PitchIn.Web.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["server.js"]]
+  watchers: [node: ["server.js", cd: Path.expand("../assets", __DIR__)]]
 
 # Watch static and templates for browser reloading.
 config :pitch_in, PitchIn.Web.Endpoint,

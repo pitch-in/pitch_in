@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
 
-var SOURCE_DIR = path.join(__dirname, '../web/static/');
+var SOURCE_DIR = path.join(__dirname, './src/');
 var DIST_DIR = path.join(__dirname, '../priv/static/');
 
 module.exports = {
@@ -72,7 +72,7 @@ module.exports = {
       loaders: ['babel-loader', 'ts-loader']
     }, {
       test: /\.jsx?$/,
-      // exclude: /node_modules/,
+      exclude: /node_modules\/lodash/,
       loaders: ['babel-loader']
     }, {
       test: /\.json?$/,
@@ -88,14 +88,14 @@ module.exports = {
       loader: 'url?limit=10000&mimetype=application/font-woff'
     }, {
       test: /favicon\.ico$/,
-      loader: 'file?name=[name].[ext]&context=web/static'
+      loader: 'file?name=[name].[ext]&context=src'
     }, {
       test: /\.txt$/,
-      loader: 'file?name=[path][name].[ext]&context=web/static'
+      loader: 'file?name=[path][name].[ext]&context=src'
     }, {
       test: /\.(png|jpg|svg)(\?[a-z0-9#=&.]+)?$/,
       // loader: 'url?limit=10000&name=img-[hash:6].[ext]'
-      loader: 'file?name=[path][name].[ext]&context=web/static'
+      loader: 'file?name=[path][name].[ext]&context=src'
     }, {
       test: /\.(ttf|eot)(\?[a-z0-9#=&.]+)?$/,
       loader: 'file'
@@ -105,6 +105,6 @@ module.exports = {
     require('autoprefixer')
   ],
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "../node_modules")]
+    includePaths: [path.resolve(__dirname, "./node_modules")]
   }
 };

@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./config/webpack.config');
+var config = require('./webpack.config');
 
 var app = new WebpackDevServer(webpack(config), {
   contentBase: 'http://localhost:4001',

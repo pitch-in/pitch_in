@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "outDir": "./static",
-    "rootDir": "web/static",
-    "sourceRoot": "web/static",
+    "outDir": "../priv/static",
+    "rootDir": "src",
+    "sourceRoot": "src",
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
@@ -10,10 +10,9 @@
     "target": "es2015"
   },
   "include": [
-    "web/static/**/*"
+    "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "static"
+    "node_modules"
   ]
 }

@@ -3,14 +3,14 @@
 @import './foundation_overrides/variables';
 
 // Foundation
-@import 'foundation-sites/scss/foundation';
+@import '~foundation-sites/scss/foundation';
 @include foundation-everything(true);
 
 // Datepicker
-@import '@fengyuanchen/datepicker/src/datepicker';
+@import '~@fengyuanchen/datepicker/src/datepicker';
 
-// Motion-ui. For some reason importing just motion-ui doesn't work.
-@import 'motion-ui/src/motion-ui';
+// Motion-ui.
+@import '~motion-ui/src/motion-ui';
 @include motion-ui-transitions;
 @include motion-ui-animations;
 

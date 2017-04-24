@@ -4,7 +4,7 @@
   "scripts": {
     "test": "",
     "watch": "node server",
-    "deploy": "rimraf ./priv/static && webpack --config ./config/webpack.production.config.js --progress --profile --colors --display-error-details",
+    "deploy": "rimraf ./priv/static && webpack --config ./webpack.production.config.js --progress --profile --colors --display-error-details",
     "lint": "tslint ."
   },
   "keywords": [
@@ -23,8 +23,8 @@
     "jquery-parallax.js": "^1.4.3",
     "lodash": "^4.17.2",
     "motion-ui": "^1.2.2",
-    "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
     "resolve-url-loader": "^1.6.1"
   },
   "devDependencies": {

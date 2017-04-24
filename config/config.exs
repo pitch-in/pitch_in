@@ -10,10 +10,10 @@ config :pitch_in,
   ecto_repos: [PitchIn.Repo]
 
 # Configures the endpoint
-config :pitch_in, PitchIn.Endpoint,
+config :pitch_in, PitchIn.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "zOqh1hLfoP3/dzXyth7TYlVQSEZDHiTNGkuDtm1CRABd7tImDxeMPuTxEriWJsoQ",
-  render_errors: [view: PitchIn.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: PitchIn.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: PitchIn.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
