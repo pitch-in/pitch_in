@@ -9,7 +9,7 @@ defmodule PitchIn.Web.Helpers do
     campaign_answer_path(conn, type, campaign)
   end
   def any_answer_path(conn, type, campaign, ask) when type in [:new, :index, :create] do
-    campaign_answer_path(conn, type, campaign, ask)
+    campaign_ask_answer_path(conn, type, campaign, ask)
   end
   def any_answer_path(conn, type, campaign, nil) when type in [:new, :index, :create] do
     campaign_answer_path(conn, type, campaign)

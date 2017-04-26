@@ -128,8 +128,12 @@ defmodule PitchIn.Web.ViewHelpers do
   end
 
   def display_skills(%Ask{} = ask) do
-    ask.skills
-    |> Enum.map_join(",", fn skill -> skill.skill end)
+    if Ecto.assoc_loaded?(ask.skills) do
+      ask.skills
+      |> Enum.map_join(",", fn skill -> skill.skill end)
+    else
+      ""
+    end
   end
 
   ##############

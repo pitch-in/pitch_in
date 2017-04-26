@@ -3,6 +3,7 @@ defmodule PitchIn.Web.Campaign do
   use PitchIn.Web.NextSteps
 
   alias PitchIn.Web.User
+  alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
   alias PitchIn.Web.Issue
   alias PitchIn.UsDate
