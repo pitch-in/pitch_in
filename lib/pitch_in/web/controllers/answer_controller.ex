@@ -56,7 +56,12 @@ defmodule PitchIn.Web.AnswerController do
   end
 
   def new(conn, %{"campaign_id" => _campaign_id, "ask_id" => ask_id}) do
-    ask = Ask |> Repo.get(ask_id) |> Repo.preload(:campaign) |> Repo.preload(:skills)
+    ask =
+      Ask
+      |> Repo.get(ask_id)
+      |> Repo.preload(:campaign)
+      |> Repo.preload(:skills)
+
     campaign = ask.campaign
 
     case Conn.get_session(conn, :answer_params) do
