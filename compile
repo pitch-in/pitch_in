@@ -1,2 +1,3 @@
-npm run deploy 
-mix phoenix.digest
+cd $phoenix_dir 
+cd assets && yarn run deploy
+cd .. && mix "${phoenix_ex}.digest"

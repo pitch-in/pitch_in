@@ -1,0 +1,36 @@
+<section class="list-header content-block">
+  <h1>
+    Answers
+  </h1>
+  <h2>
+    Campaign: <%= @campaign.name %><br/>
+    Need: <%= @ask.role %>
+  </h2>
+</section>
+
+<%= archivable_index "Answers", @answers, allowed_reasons: :campaign_answer, card: fn (answer) -> %>
+  <section class="content-block">
+    <p>
+      Volunteer name:
+      <strong><%= answer.user.name %></strong>
+    </h3>
+
+    <p>
+      Volunteer Skills:
+      <%= answer.user.pro.profession %>
+    </h3>
+
+    <p><strong>Volunteer message:</strong></p>
+    <p>
+      <%= answer.message %>
+    </p>
+
+    <div class="expanded button-group">
+      <%= link "Show", to: campaign_ask_answer_path(@conn, :show, @campaign, @ask, answer), class: "success button" %>
+    </div>
+  </section>
+<% end %>
+
+<section class="list-header content-block">
+  <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "expanded button" %>
+</section>

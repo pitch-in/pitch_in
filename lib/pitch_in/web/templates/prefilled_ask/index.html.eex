@@ -1,0 +1,23 @@
+<section class="content-block">
+  <h2>Thanks for registering <%= @campaign.name %></h2>
+
+  <h3>Here's what's next</h3>
+
+  <p><strong>
+    Post your first needs, and connect with volunteers looking to help!
+  </strong></p>
+
+  <%= form_for @conn, campaign_prefilled_ask_path(@conn, :create, @campaign), [as: :prefilled_asks, method: "post"], fn f -> %>
+    <%= for %{id: id, name: name} <- @prefilled_asks do %>
+      <%= label f, id do %>
+        <%= checkbox f, String.to_atom(id) %>
+        <%= name %>
+      <% end %>
+    <% end %>
+
+    <div class="expanded button-group">
+      <%= submit "Create needs", class: "success button" %>
+      <%= link "Not right now", to: campaign_path(@conn, :interstitial, @campaign), class: "warning button" %>
+    </div>
+  <% end %>
+</section>

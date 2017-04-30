@@ -1,0 +1,78 @@
+body {
+  overflow-x: hidden;
+}
+
+$content-block-padding: 0.5rem;
+$content-block-expanded-padding: 1rem;
+$content-block-margin: 1rem;
+
+.content-block {
+  $shadow: 0 3px 1px -1px rgba($black, 0.16);
+
+  width: 100%;
+  padding: $content-block-padding;
+  margin-bottom: $content-block-margin;
+  background: $white;
+  box-shadow: $shadow;
+
+  &:first-child {
+    margin-top: $content-block-margin;
+  }
+
+  &.not-top {
+    // Override the 'first-child' margin.
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  @mixin expanded {
+    margin: 0 (-$content-block-margin) $content-block-margin (-$content-block-margin);
+    padding: $content-block-expanded-padding;
+    width: calc(100% + #{$content-block-margin * 2});
+    box-shadow: none;
+
+    position: relative;
+    &::after {
+      @include breakpoint(large) {
+        background: $white;
+        box-shadow: $shadow;
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: -10000px;
+        bottom: 0;
+        right: -10000px;
+      }
+    }
+  }
+
+  &.expanded {
+    @include expanded();
+  }
+
+  &.list-header {
+    @include expanded();
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & > * {
+      // Cancel out any child margins, so they are centered.
+      margin-top: 0;
+      margin-bottom: 0;
+
+      // Also handle interior buttons.
+      &.button-group > .button {
+        margin-bottom: 0;
+      }
+      // Also handle interior buttons in forms.
+      &.button-group > form > .button {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+

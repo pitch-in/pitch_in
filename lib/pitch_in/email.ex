@@ -2,7 +2,7 @@ defmodule PitchIn.Email do
   @moduledoc """
   Defines emails the app can send.
   """
-  use Bamboo.Phoenix, view: PitchIn.EmailView
+  use Bamboo.Phoenix, view: PitchIn.Web.EmailView
   import Bamboo.SendgridHelper
 
   @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
@@ -51,7 +51,7 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
-  def contact_us_email(_conn, %PitchIn.ContactUs{
+  def contact_us_email(_conn, %PitchIn.Web.ContactUs{
     subject: user_subject,
     body: user_body,
     email: from_email,

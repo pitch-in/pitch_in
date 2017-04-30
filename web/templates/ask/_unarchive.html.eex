@@ -1,9 +1,0 @@
-<%= if @ask.archived_reason do %>
-  <%= form_for @conn, campaign_ask_path(@conn, :update, @campaign, @ask), [as: :ask, method: "put"], fn f -> %>
-    <input name="archive" value="true" class="hide" />
-    <%= text_input f, :archived_reason, class: "hide", value: "" %>
-
-
-    <%= submit "Unarchive", class: "warning button" %>
-  <% end %>
-<% end %>

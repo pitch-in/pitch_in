@@ -1,0 +1,17 @@
+<section class="list-header content-block">
+  <h2>All Campaigns</h2>
+</section>
+
+<section class="list-header content-block">
+  <h3>Active Campaigns</h3>
+</section>
+<section class="content-block">
+  <%= render "_index_table.html", conn: @conn, campaigns: active(@campaigns) %>
+</section>
+
+<section class="list-header content-block">
+  <h3>Archived Campaigns</h3>
+</section>
+<section class="content-block">
+  <%= render "_index_table.html", conn: @conn, campaigns: archived(@campaigns) %>
+</section>

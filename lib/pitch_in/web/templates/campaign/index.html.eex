@@ -1,0 +1,11 @@
+<section class="list-header content-block">
+  <h2>Your Campaigns</h2>
+</section>
+
+<%= archivable_index "Campaigns", @campaigns, card: fn (campaign) -> %>
+  <%= render "_index_item.html", conn: @conn, campaign: campaign %>
+<% end %>
+
+<section class="list-header content-block">
+  <%= link "New campaign", to: campaign_path(@conn, :new), class: "primary button" %>
+</section>

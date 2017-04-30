@@ -1,0 +1,34 @@
+<section class="list-header content-block">
+  <h2>
+    <%= render PitchIn.Web.CampaignView, "_name.html", conn: @conn, campaign: @campaign %>
+  </h2>
+</section>
+
+<section class="content-block">
+  <%= if @campaign.long_pitch do %>
+    <p><%= @campaign.long_pitch %></p>
+  <% end %>
+  <%= render PitchIn.Web.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
+</section>
+
+<%= archivable_index "Needs", @asks, hide_archived: @hide_archived, card: fn (ask) -> %>
+  <%= render "_index_item.html", conn: @conn, campaign: @campaign, ask: ask, is_staff: @is_staff %>
+<% end %>
+
+<section class="list-header content-block">
+  <h2 class="text-center">Want to learn more?</h2>
+  <%= link "Message the campaign", to: campaign_answer_path(@conn, :new, @campaign), class: "primary button" %>
+</section>
+
+<section class="list-header content-block">
+  <div class="expanded button-group">
+    <%= link "Back to Campaigns", to: campaign_path(@conn, :index), class: "hollow secondary button" %>
+
+    <%= if @is_staff do %>
+      <%= link "New Need", to: campaign_ask_path(@conn, :new, @campaign), class: "hollow success button" %>
+    <% end %>
+
+    <%= link "Back to Campaign", to: campaign_path(@conn, :show, @campaign), class: "hollow primary button" %>
+  </div>
+</section>
+
