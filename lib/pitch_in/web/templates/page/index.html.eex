@@ -40,6 +40,17 @@
 
     <%= render PitchIn.Web.HtmlView, "about_us.html", conn: @conn %>
 
+    <div class="content-block flex-row align-center">
+      <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
+         class="image home-the-organizers standard-margin-right">
+      </a>
+      <strong>
+        Check out our interview on the podcast
+        <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands">
+          The Organizers</a>!
+      </strong>
+    </div>
+
     <section class="content-block" id="contact-us">
       <%= render(
         PitchIn.Web.ContactUsView,

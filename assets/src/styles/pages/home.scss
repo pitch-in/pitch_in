@@ -47,3 +47,7 @@
     filter: drop-shadow(0 2px 1px $gray);
   }
 }
+
+.home-the-organizers {
+  @include image("../img/home/the-organizers.jpg", 4.5rem);
+}
