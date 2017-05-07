@@ -29,7 +29,7 @@ defmodule PitchIn.Web.ContactUsController do
         |> put_flash(:success, "Thanks for your comments - we'll get back to you soon!")
 
       if contact_us_data.from_page == "home" do
-        conn |> redirect(to: search_path(conn, :index))
+        conn |> redirect(to: homepage_path(conn, :index))
       else
         conn |> redirect(to: contact_us_path(conn, :index))
       end

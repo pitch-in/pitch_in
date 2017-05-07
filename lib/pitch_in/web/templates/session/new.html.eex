@@ -15,5 +15,5 @@
 </section>
 
 <%= if Auth.get_deep_link_path(@conn) do %>
-  <%= render PageView, "_first_time_here.html", conn: @conn, header: true %>
+  <%= render HomepageView, "_first_time_here.html", conn: @conn, header: true %>
 <% end %>

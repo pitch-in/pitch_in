@@ -14,7 +14,7 @@
   <%= render PitchIn.Web.LayoutView, "_flash.html", conn: @conn %>
 
   <div class="row column">
-    <%= render PitchIn.Web.PageView, "_first_time_here.html", conn: @conn %>
+    <%= render PitchIn.Web.HomepageView, "_first_time_here.html", conn: @conn %>
 
     <section class="content-block" id="how-this-works">
       <h2>How this works</h2>

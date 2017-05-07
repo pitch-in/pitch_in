@@ -31,7 +31,8 @@ defmodule PitchIn.Web.Router do
   scope "/", PitchIn.Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/", SearchController, :index
+    get "/", HomepageController, :index
+    get "/search", SearchController, :index
     get "/campaigns/:id/interstitial", CampaignController, :interstitial
     resources "/campaigns", CampaignController do
       get "/asks/:id/interstitial", AskController, :interstitial
