@@ -72,6 +72,11 @@ defmodule PitchIn.Web.Campaign do
     |> validate_url(:facebook_url)
   end
 
+  def admin_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:is_verified])
+  end
+
   def archive_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:archived_reason])
