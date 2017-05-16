@@ -1,3 +1,3 @@
-defmodule PitchIn.Admin.DashboardView do
+defmodule PitchIn.Web.Admin.DashboardView do
   use PitchIn.Web, :view
 end

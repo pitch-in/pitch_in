@@ -42,14 +42,14 @@ defmodule PitchIn.ForgotPasswordControllerTest do
     token = forgot_password.token
     
     get conn, forgot_password_path(conn, :show, token)
-    assert redirected_to(conn) == search_path(conn, :index)
+    assert redirected_to(conn) == homepage_path(conn, :index)
   end
 
   test "redirects when the user is already logged in", %{conn: conn} do
     conn = login(conn)
 
     get conn, forgot_password_path(conn, :show, "abc")
-    assert redirected_to(conn) == search_path(conn, :index)
+    assert redirected_to(conn) == homepage_path(conn, :index)
   end
 end
 

@@ -5,4 +5,9 @@
   <%= render "_index_cell.html", campaign: @campaign, key: :inserted_at %>
   <%= render "_index_link_cell.html", text: "View", to: campaign_path(@conn, :show, @campaign) %>
   <%= render "_index_link_cell.html", text: "View Needs", to: campaign_ask_path(@conn, :index, @campaign) %>
+  <%= if @campaign.is_verified do %>
+    <%= render "_index_button_cell.html", text: "Un-verify", to: admin_campaign_path(@conn, :update, @campaign, campaign: [is_verified: false]), class: "alert button" %>
+  <% else %>
+    <%= render "_index_button_cell.html", text: "Verify", to: admin_campaign_path(@conn, :update, @campaign, campaign: [is_verified: true]), class: "success button" %>
+  <% end %>
 </tr>

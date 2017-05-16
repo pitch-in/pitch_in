@@ -1,0 +1,6 @@
+<td>
+  <span>
+    <%= button @text, to: @to, method: "put", form: [class: ""], class: @class %>
+  </span>
+</td>
+

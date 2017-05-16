@@ -1,0 +1,13 @@
+@mixin image($path, $width, $height: $width) {
+  position: relative;
+  width: $width;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-bottom: $width / $height * 100%;
+    background-image: url($path);
+    background-size: contain;
+  }
+}

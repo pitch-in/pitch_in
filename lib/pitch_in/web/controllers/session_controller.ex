@@ -26,7 +26,7 @@ defmodule PitchIn.Web.SessionController do
   def delete(conn, _) do
     conn
     |> Auth.logout
-    |> redirect(to: search_path(conn, :index))
+    |> redirect(to: homepage_path(conn, :index))
   end
 
   defp redirect_to_default(conn) do

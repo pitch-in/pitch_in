@@ -133,7 +133,6 @@ defmodule PitchIn.Web.CampaignController do
     end
   end
 
-
   defp fill_issues(changeset) do
     campaign = Ecto.Changeset.apply_changes(changeset)
     issues = campaign.issues

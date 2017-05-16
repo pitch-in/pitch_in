@@ -8,22 +8,25 @@ import './styles/main.scss';
 import './fonts/Phosphate-Inline.ttf';
 import './fonts/Phosphate-Solid.ttf';
 
-import './favicon.ico';
-// import './img/logo.png';
-// import './img/shovels.png';
 const hero_path: string = require('./img/hero.jpg');
-import './img/verified.png';
+import './img/home/the-organizers.jpg';
+
+import './favicon.ico';
+import './apple-touch-icon.png';
+import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
+
 import './img/logo.svg';
 import './img/shovels.svg';
 import './img/logo_blue.png';
+
+import './img/verified.png';
 import './img/expand-icon.svg';
 import './img/minimize-icon.svg';
 import './img/report-problem-icon.svg';
+
 import './img/about/chris-profile.jpg';
 import './img/about/will-profile.jpg';
 import './img/about/laura-profile.jpg';
-import './apple-touch-icon.png';
-import './loaderio-5c03e76471bc81be95a31e8c9013e53c.txt';
 
 import './img/campaigns/ben-haynes.jpg';
 import './img/campaigns/heather-ledoux.jpg';

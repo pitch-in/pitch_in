@@ -99,7 +99,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
 
   defp redirect_to_home(conn) do
     conn
-    |> redirect(to: search_path(conn, :index))
+    |> redirect(to: homepage_path(conn, :index))
   end
 end
 

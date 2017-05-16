@@ -19,8 +19,8 @@
 </head>
 
 <body class="view-login no-js">
-  <%= if @conn.path_info == [] && !@current_user do %>
-    <%= render PitchIn.Web.PageView, "index.html", conn: @conn %>
+  <%= if @conn.path_info == [] do %>
+    <%= render PitchIn.Web.HomepageView, "index.html", conn: @conn %>
   <% else %>
     <%= render "_navbar.html", conn: @conn, current_user: @current_user %>
 

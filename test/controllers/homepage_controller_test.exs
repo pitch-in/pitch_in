@@ -1,4 +1,4 @@
-defmodule PitchIn.PageControllerTest do
+defmodule PitchIn.HomepageControllerTest do
   use PitchIn.ConnCase
 
   test "GET /", %{conn: conn} do
