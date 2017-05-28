@@ -21,7 +21,7 @@
 <% end %>
 
 <%= unless @hide_archived do %>
-  <%= case archived_for(@items, @allowed_reasons) do %>
+  <%= case archived_for(@items, @allowed_reasons, without_accepted: true) do %>
     <%= [] -> %>
     <%= items -> %>
       <section class="list-header content-block">

@@ -218,9 +218,13 @@ defmodule PitchIn.Web.AnswerController do
         conn
         |> put_flash(:success, "Answer successfully opened!")
         |> redirect(to: any_answer_path(conn, :show, answer))
+      {:ok, %{archived_reason: "Accepted"} = answer} ->
+        conn
+        |> put_flash(:success, "Answer successfully accepted! We'll email the volunteer to let them know!")
+        |> redirect(to: any_answer_path(conn, :show, answer))
       {:ok, %{archived_reason: _} = answer} ->
         conn
-        |> put_flash(:warning, "Answer successfully closed!")
+        |> put_flash(:warning, "Answer successfully closed")
         |> redirect(to: any_answer_path(conn, :show, answer))
       {:error, changeset} ->
         render(conn, "edit_archived.html", changeset: changeset)

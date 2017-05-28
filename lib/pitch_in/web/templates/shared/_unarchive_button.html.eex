@@ -1,4 +1,4 @@
-<%= if @data.archived_reason && (!@allowed_reasons || @data.archived_reason in @allowed_reasons) do %>
+<%= if @data.archived_reason && (!assigns[:allowed_reasons] || @data.archived_reason in @allowed_reasons) do %>
   <%= form_for @conn, @action, [as: @type, method: "put"], fn f -> %>
     <input name="archive" value="true" class="hide" />
     <%= text_input f, :archived_reason, class: "hide", value: "" %>
