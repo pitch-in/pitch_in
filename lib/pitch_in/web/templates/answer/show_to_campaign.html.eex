@@ -1,6 +1,6 @@
 <section class="list-header content-block">
   <div class="expanded button-group">
-    <%= archive_button @conn, @answer, :accept, "hollow success button" %>
+    <%= archive_button @conn, @answer, "Accepted", "hollow success button" %>
     <%= archive_link @conn, @answer, text: "Not right now", class: "hollow alert button" %>
     <%= unarchive_button @conn, @answer, class: "hollow warning button" %>
   </div>

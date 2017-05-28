@@ -3,6 +3,6 @@
     <input name="archive" value="true" class="hide" />
     <%= text_input f, :archived_reason, class: "hide", value: "" %>
 
-    <%= submit (assigns[:text] || "Unarchive"), class: (assigns[:class] || "warning button") %>
+    <%= submit unarchive_text(assigns[:text], @data.archived_reason), class: (assigns[:class] || "warning button") %>
   <% end %>
 <% end %>

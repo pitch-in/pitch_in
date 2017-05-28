@@ -9,6 +9,17 @@
     <% end %>
 <% end %>
 
+<%= case archived_for(@items, :accepted) do %>
+  <%= [] -> %>
+  <%= items -> %>
+    <section class="list-header content-block">
+      <h3>Accepted <%= @name %></h3>
+    </section>
+    <%= for item <- items do %>
+      <%= @card.(item) %>
+    <% end %>
+<% end %>
+
 <%= unless @hide_archived do %>
   <%= case archived_for(@items, @allowed_reasons) do %>
     <%= [] -> %>

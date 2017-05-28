@@ -81,6 +81,11 @@ defmodule PitchIn.Web.ArchivableView do
     ]
   end
 
+  # For displaying accepted answers.
+  def accepted do
+    ["Accepted"]
+  end
+
   def admin_answer do
     campaign_answer ++ volunteer_answer
   end
