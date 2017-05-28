@@ -217,11 +217,11 @@ defmodule PitchIn.Web.AnswerController do
       {:ok, %{archived_reason: nil} = answer} ->
         conn
         |> put_flash(:success, "Answer successfully opened!")
-        |> redirect(to: answser_index_path(conn))
+        |> redirect(to: any_answer_path(conn, :show, answer))
       {:ok, %{archived_reason: _} = answer} ->
         conn
         |> put_flash(:warning, "Answer successfully closed!")
-        |> redirect(to: answser_index_path(conn))
+        |> redirect(to: any_answer_path(conn, :show, answer))
       {:error, changeset} ->
         render(conn, "edit_archived.html", changeset: changeset)
     end

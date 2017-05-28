@@ -28,14 +28,17 @@ defmodule PitchIn.Web.AnswerView do
   end
 
   def archive_link(conn, answer, opts \\ []) do
-    class = Keyword.get(opts, :class, "alert_button")
-    text = Keyword.get(opts, :text, "Remove Answer")
+    unless answer.archived_reason do
+      class = Keyword.get(opts, :class, "alert button")
+      text = Keyword.get(opts, :text, "Remove Answer")
 
-    link(text, to: any_answer_path(conn, :edit, answer, archive: "true"), class: class)
+      link(text, to: any_answer_path(conn, :edit, answer, archive: "true"), class: class)
+    end
   end
 
   def unarchive_button(conn, answer, opts \\ []) do
-    class = Keyword.get(opts, :class, "alert_button")
+    class = Keyword.get(opts, :class, "warning button")
+    allowed_reasons = Keyword.get(opts, :allowed_reasons, nil)
 
     render(
       SharedView,
@@ -44,7 +47,8 @@ defmodule PitchIn.Web.AnswerView do
       data: answer,
       type: :answer, 
       class: class,
-      action: any_answer_path(conn, :update, answer)
+      action: any_answer_path(conn, :update, answer),
+      allowed_reasons: allowed_reasons
     )
   end
 
