@@ -1,11 +1,11 @@
-import * as _ from 'lodash';
-import $ = require('jquery');
-import BaseComponent from './BaseComponent';
+import * as _ from "lodash";
+import $ = require("jquery");
+import BaseComponent from "./BaseComponent";
 
 const defaultValues = {
-  'Web Development': ['html', 'css', 'application development'],
-  Data: ['data analysis', 'data science'],
-  Design: ['digital design', 'print design']
+  "Web Development": ["html", "css", "application development"],
+  Data: ["data analysis", "data science"],
+  Design: ["digital design", "print design"]
 };
 
 export default class Tags extends BaseComponent {
@@ -14,15 +14,15 @@ export default class Tags extends BaseComponent {
   constructor(public element) {
     super(element);
 
-    element.addClass('hide');
+    element.addClass("hide");
     const $tags = $(`<div class="tags"></div>`).insertAfter(element);
-    const watchId: string = element.data('tagsWatch');
+    const watchId: string = element.data("tagsWatch");
     const $watched = watchId ? $(`#${watchId}`) : undefined;
 
     new TagPicker($tags, this.element, $watched);
   }
 
-  static selector = 'tags';
+  static selector = "tags";
 }
 
 const confirmKeys = [9, 13];
@@ -39,10 +39,10 @@ class TagPicker extends BaseComponent {
   ) {
     super(element);
 
-    const placeholder = $input.attr('placeholder');
+    const placeholder = $input.attr("placeholder");
     this.$nextInput = $(
       `<input class="tags__next-input" type="text" placeholder="${placeholder ||
-        'enter tags...'}"/>`
+        "enter tags..."}"/>`
     );
     this.$tagsContainer = $('<div class="tags__container"></div>');
 
@@ -57,14 +57,14 @@ class TagPicker extends BaseComponent {
     this.onInput = this.onInput.bind(this);
     this.onTagClick = this.onTagClick.bind(this);
     this.finishTag = this.finishTag.bind(this);
-    this.element.on('keydown', this.$nextInput, this.onKeyPress);
-    this.element.on('input', this.$nextInput, this.onInput);
-    this.element.on('click', '.tags__tag', this.onTagClick);
-    this.element.on('blur', '.tags__next-input', this.finishTag);
+    this.element.on("keydown", this.$nextInput, this.onKeyPress);
+    this.element.on("input", this.$nextInput, this.onInput);
+    this.element.on("click", ".tags__tag", this.onTagClick);
+    this.element.on("blur", ".tags__next-input", this.finishTag);
 
     if (this.$watched) {
       this.onWatchChange = this.onWatchChange.bind(this);
-      this.$watched.on('change', this.onWatchChange);
+      this.$watched.on("change", this.onWatchChange);
     }
   }
 
@@ -74,7 +74,7 @@ class TagPicker extends BaseComponent {
     if (_.includes(confirmKeys, key)) {
       this.finishTag();
       event.preventDefault();
-    } else if (key === 8 && this.$nextInput.val() === '') {
+    } else if (key === 8 && this.$nextInput.val() === "") {
       this.removeLastTag();
     }
   }
@@ -82,7 +82,7 @@ class TagPicker extends BaseComponent {
   onInput() {
     const value: string = this.$nextInput.val();
 
-    if (value.slice(-1) === ',') {
+    if (value.slice(-1) === ",") {
       const newValue: string = value.slice(0, -1);
       this.$nextInput.val(newValue);
 
@@ -125,7 +125,7 @@ class TagPicker extends BaseComponent {
 
   finishTag() {
     const nextTag = this.$nextInput.val();
-    if (_.trim(nextTag) === '') {
+    if (_.trim(nextTag) === "") {
       return;
     }
 
@@ -137,15 +137,15 @@ class TagPicker extends BaseComponent {
 
   initializeTags() {
     const inputVal = this.$input.val().trim();
-    this.tags = inputVal === '' ? [] : inputVal.split(',');
+    this.tags = inputVal === "" ? [] : inputVal.split(",");
   }
 
   clearInput() {
-    this.$nextInput.val('');
+    this.$nextInput.val("");
   }
 
   tagsToString(): string {
-    return this.tags.join(',');
+    return this.tags.join(",");
   }
 
   tagHtml(value: string | number): string {
@@ -155,7 +155,7 @@ class TagPicker extends BaseComponent {
   writeTags() {
     this.$input.val(this.tagsToString());
 
-    const tagsHtml = _.map(this.tags, this.tagHtml).join('');
+    const tagsHtml = _.map(this.tags, this.tagHtml).join("");
     this.$tagsContainer.html(tagsHtml);
   }
 }

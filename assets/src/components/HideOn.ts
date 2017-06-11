@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
-import $ = require('jquery');
+import * as _ from "lodash";
+import $ = require("jquery");
 
-import BaseComponent from './BaseComponent';
+import BaseComponent from "./BaseComponent";
 
 export default class HideOn extends BaseComponent {
   private controllingElement: JQuery;
@@ -25,7 +25,7 @@ export default class HideOn extends BaseComponent {
 
   private isShown() {
     const value = this.controllingElement.val();
-    const checked: boolean = this.controllingElement.is(':checked');
+    const checked: boolean = this.controllingElement.is(":checked");
 
     return (
       this.data.showCase === value ||
@@ -43,5 +43,5 @@ export default class HideOn extends BaseComponent {
     this.element.show();
   }
 
-  static selector = 'hide-on';
+  static selector = "hide-on";
 }
