@@ -73,6 +73,12 @@ defmodule PitchIn.Web.Router do
     resources "/campaigns", CampaignController, only: [:index, :update]
   end
 
+  scope "/api", PitchIn.Web.Api, as: :api do
+    pipe_through [:api]
+
+    resources "/issues", IssueController, only: [:index]
+  end
+
   def put_csrf_token_in_header(conn, _) do
     token = Phoenix.Controller.get_csrf_token
 

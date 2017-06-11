@@ -4,9 +4,8 @@ defmodule PitchIn.Factory do
   """
   use ExMachina.Ecto, repo: PitchIn.Repo
 
-  alias PitchIn.User
-  alias PitchIn.Pro
-  alias PitchIn.ForgotPassword
+  alias PitchIn.Web.User
+  alias PitchIn.Web.Pro
 
   def user_factory do
     %User{
@@ -31,16 +30,5 @@ defmodule PitchIn.Factory do
   def with_user(%Pro{} = pro) do
     insert(:user, pro: pro)
     pro
-  end
-
-  def forgot_password_factory do
-    %ForgotPassword{
-      token: "abc123",
-    }
-  end
-
-  def with_user(%ForgotPassword{} = forgot_password) do
-    insert(:user, forgot_passwords: [forgot_password])
-    forgot_password
   end
 end

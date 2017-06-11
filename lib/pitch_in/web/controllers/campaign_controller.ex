@@ -3,7 +3,7 @@ defmodule PitchIn.Web.CampaignController do
   import PitchIn.Utils
 
   alias PitchIn.Web.Campaign
-  alias PitchIn.Web.Issue
+  alias PitchIn.Tags.Issue
   alias PitchIn.Web.User
   alias PitchIn.Email
   alias PitchIn.Mailer

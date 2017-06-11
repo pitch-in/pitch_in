@@ -5,7 +5,7 @@ defmodule PitchIn.Web.Campaign do
   alias PitchIn.Web.User
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
-  alias PitchIn.Web.Issue
+  alias PitchIn.Tags.Issue
   alias PitchIn.UsDate
 
   @derive [PitchIn.Archivable]
