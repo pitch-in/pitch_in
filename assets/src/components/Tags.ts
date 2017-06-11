@@ -1,19 +1,17 @@
-import * as _ from 'lodash'; 
+import * as _ from 'lodash';
 import $ = require('jquery');
 import BaseComponent from './BaseComponent';
 
 const defaultValues = {
   'Web Development': ['html', 'css', 'application development'],
-  'Data': ['data analysis', 'data science'],
-  'Design': ['digital design', 'print design'],
+  Data: ['data analysis', 'data science'],
+  Design: ['digital design', 'print design']
 };
 
 export default class Tags extends BaseComponent {
   $tags: JQuery;
 
-  constructor(
-    public element
-  ) {
+  constructor(public element) {
     super(element);
 
     element.addClass('hide');
@@ -37,12 +35,15 @@ class TagPicker extends BaseComponent {
   constructor(
     public element: JQuery,
     public $input: JQuery,
-    public $watched: JQuery,
+    public $watched: JQuery
   ) {
     super(element);
 
     const placeholder = $input.attr('placeholder');
-    this.$nextInput = $(`<input class="tags__next-input" type="text" placeholder="${placeholder || 'enter tags...'}"/>`);
+    this.$nextInput = $(
+      `<input class="tags__next-input" type="text" placeholder="${placeholder ||
+        'enter tags...'}"/>`
+    );
     this.$tagsContainer = $('<div class="tags__container"></div>');
 
     this.element.append(this.$nextInput);
@@ -51,7 +52,6 @@ class TagPicker extends BaseComponent {
     this.initializeTags();
 
     this.render();
-
 
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onInput = this.onInput.bind(this);

@@ -1,4 +1,4 @@
-import * as _ from 'lodash'; 
+import * as _ from 'lodash';
 import $ = require('jquery');
 import BaseComponent from './BaseComponent';
 
@@ -12,12 +12,12 @@ export default class ShortDescription extends BaseComponent {
   private $campaignType: JQuery;
   private currentStarter: string;
 
-  constructor(
-    public element
-  ) {
+  constructor(public element) {
     super(element);
 
-    this.$campaignType = element.parents('form').find(`#${this.data.shortDescription}`);
+    this.$campaignType = element
+      .parents('form')
+      .find(`#${this.data.shortDescription}`);
 
     this.updateStarter();
     this.$campaignType.change(() => this.updateStarter());
@@ -51,7 +51,6 @@ export default class ShortDescription extends BaseComponent {
   private get currentStarterForInput() {
     return this.currentStarter.replace('...', ' ');
   }
-
 
   static selector = 'short-description';
 }

@@ -1,4 +1,4 @@
-import * as _ from 'lodash'; 
+import * as _ from 'lodash';
 import $ = require('jquery');
 
 import BaseComponent from './BaseComponent';
@@ -6,9 +6,7 @@ import BaseComponent from './BaseComponent';
 export default class HideOn extends BaseComponent {
   private controllingElement: JQuery;
 
-  constructor(
-    public element
-  ) {
+  constructor(public element) {
     super(element);
 
     this.controllingElement = $(`#${this.data.hideOn}`);
@@ -31,8 +29,7 @@ export default class HideOn extends BaseComponent {
 
     return (
       this.data.showCase === value ||
-      (this.data.showCases &&
-        _.includes(this.data.showCases, value)) ||
+      (this.data.showCases && _.includes(this.data.showCases, value)) ||
       (this.data.showChecked && checked) ||
       (this.data.showChecked === false && !checked)
     );

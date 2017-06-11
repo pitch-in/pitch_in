@@ -48,7 +48,7 @@ import 'jquery-mask-plugin';
 
 import components from './components/index';
 
-$(document).ready(($) => {
+$(document).ready($ => {
   $(document).foundation();
   components($);
   $('body').removeClass('no-js');
@@ -59,4 +59,3 @@ $(document).ready(($) => {
   // });
   //
 });
-
