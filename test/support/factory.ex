@@ -31,6 +31,13 @@ defmodule PitchIn.Factory do
     %User{user | pro: build(:pro)}
   end
 
+  def with_forgot_password(%User{} = user, token) do
+    %User{user |
+      reset_digest: Comeonin.Bcrypt.hashpwsalt(token),
+      reset_time: Timex.zero
+    }
+  end
+
   def build(:pro) do
     %Pro{
       phone: "5551234567"

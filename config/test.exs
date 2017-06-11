@@ -41,7 +41,10 @@ config :pitch_in, PitchIn.Mailer,
 config :pitch_in, PitchIn.Email,
   test_email: "test@pitch-in.us",
   from_email: "from@pitch-in.us",
-  contact_us_email: "contact_us@pitch-in.us"
+  contact_us_email: "contact_us@pitch-in.us",
+  basic_template_id: "80509523-83de-42b6-a2bf-54b7513bd2aa"
   
 config :comeonin,
   bcrypt_log_rounds: 4
+
+import_config "test.mocks.exs"
