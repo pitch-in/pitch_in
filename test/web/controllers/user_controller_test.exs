@@ -1,5 +1,5 @@
 defmodule PitchIn.UserControllerTest do
-  use PitchIn.ConnCase
+  use PitchIn.Web.ConnCase
 
   alias PitchIn.User
   @valid_attrs %{email: "some content", is_admin: true, name: "some content"}

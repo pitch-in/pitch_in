@@ -1,5 +1,5 @@
 defmodule PitchIn.AskControllerTest do
-  use PitchIn.ConnCase
+  use PitchIn.Web.ConnCase
 
   alias PitchIn.Ask
   @valid_attrs %{description: "some content", experience: 42, length: 42, profession: "some content", role: "some content"}

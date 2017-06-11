@@ -1,5 +1,5 @@
 defmodule PitchIn.CampaignControllerTest do
-  use PitchIn.ConnCase
+  use PitchIn.Web.ConnCase
 
   alias PitchIn.Campaign
   @valid_attrs %{candidate_name: "some content", candidate_profession: "some content", current_party: 42, district: "some content", election_date: %{day: 17, month: 4, year: 2010}, facebook_url: "some content", is_partisan: true, long_pitch: "some content", measure_name: "some content", measure_position: "some content", name: "some content", percent_dem: 42, short_pitch: "some content", state: "some content", twitter_url: "some content", type: 42, website_url: "some content"}

@@ -1,5 +1,5 @@
 defmodule PitchIn.AnswerControllerTest do
-  use PitchIn.ConnCase
+  use PitchIn.Web.ConnCase
 
   alias PitchIn.Answer
   @valid_attrs %{message: "some content", share_address: true, share_email: true, share_phone: true}

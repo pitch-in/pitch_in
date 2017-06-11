@@ -59,25 +59,24 @@ defmodule PitchIn.Web.ForgotPasswordController do
     user = Repo.get(User, id)
     changeset = User.password_changeset(user, user_params)
 
-    cond do
-      !valid_token?(conn, user, params) ->
-        conn
-        |> render("error.html")
-      true ->
-        case Repo.update(changeset) do
-          {:ok, user} ->
-            conn
-            |> Email.password_reset_success_email(user)
-            |> Mailer.deliver_later
+    if valid_token?(conn, user, params) do
+      case Repo.update(changeset) do
+        {:ok, user} ->
+          conn
+          |> Email.password_reset_success_email(user)
+          |> Mailer.deliver_later
 
-            conn
-            |> put_flash(:success, "Password successfully reset!")
-            |> Auth.login(user)
-            |> redirect_to_home
-          {:error, changeset} ->
-            conn
-            |> render("edit.html", changeset: changeset, token: token)
-        end
+          conn
+          |> put_flash(:success, "Password successfully reset!")
+          |> Auth.login(user)
+          |> redirect_to_home
+        {:error, changeset} ->
+          conn
+          |> render("edit.html", changeset: changeset, token: token)
+      end
+    else
+      conn
+      |> render("error.html")
     end
   end
 

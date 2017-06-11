@@ -1,5 +1,5 @@
 defmodule PitchIn.ProControllerTest do
-  use PitchIn.ConnCase
+  use PitchIn.Web.ConnCase
 
   alias PitchIn.Pro
   @valid_attrs %{address_city: "some content", address_state: "some content", address_street: "some content", address_unit: "some content", address_zip: "some content", experience_starts_at: %{day: 17, month: 4, year: 2010}, linkedin_url: "some content", phone: "some content", profession: "some content"}

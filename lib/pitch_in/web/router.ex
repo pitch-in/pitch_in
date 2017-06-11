@@ -83,7 +83,7 @@ defmodule PitchIn.Web.Router do
     token = Phoenix.Controller.get_csrf_token
 
     conn
-    |> Plug.Conn.put_resp_header("X-Csrf-Token", token)
+    |> Plug.Conn.put_resp_header("x-csrf-token", token)
   end
 
 end
