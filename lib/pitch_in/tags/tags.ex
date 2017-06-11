@@ -3,10 +3,12 @@ defmodule PitchIn.Tags do
   The boundary for the Tags system.
   """
 
+  import Ecto, warn: false
   import Ecto.{Query, Changeset}, warn: false
   alias PitchIn.Repo
 
   alias PitchIn.Tags.Issue
+  alias PitchIn.Web.Campaign
 
   @doc """
   Returns the list of issues.
@@ -37,5 +39,14 @@ defmodule PitchIn.Tags do
       order_by: [desc: i.count]
 
     Repo.all(ordered_query)
+  end
+
+  def add_issue(%Campaign{} = campaign, value) do
+    changeset =
+      campaign
+      |> build_assoc(:issues)
+      |> Issue.changeset(%{issue: value})
+
+    Repo.insert(changeset)
   end
 end

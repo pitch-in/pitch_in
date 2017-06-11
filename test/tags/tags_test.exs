@@ -3,9 +3,15 @@ defmodule PitchIn.Tags.TagsTest do
 
   alias PitchIn.Tags
   alias PitchIn.Tags.Issue
+  alias PitchIn.Web.User
+  alias PitchIn.Web.Campaign
 
   def build(:issue) do
     %Issue{issue: "testing"}
+  end
+
+  def build(:campaign) do
+    %Campaign{}
   end
 
   def build(factory_name, attributes) do
@@ -16,19 +22,36 @@ defmodule PitchIn.Tags.TagsTest do
     Repo.insert! build(factory_name, attributes)
   end
 
-  test "list_issues/0 returns all issues" do
-    insert!(:issue, issue: "other")
-    insert!(:issue, issue: "testing")
-    insert!(:issue, issue: "testing")
+  describe "list_issues" do
+    setup do
+      insert!(:issue, issue: "other")
+      insert!(:issue, issue: "testing")
+      insert!(:issue, issue: "testing")
+    end
 
-    assert Tags.list_issues() == ["testing", "other"]
+    test "list_issues/0 returns all issues" do
+      insert!(:issue, issue: "other")
+      insert!(:issue, issue: "testing")
+      insert!(:issue, issue: "testing")
+
+      assert Tags.list_issues() == ["testing", "other"]
+    end
+
+    test "list_issues/1 returns filtered issues" do
+      insert!(:issue, issue: "other")
+      insert!(:issue, issue: "testing")
+      insert!(:issue, issue: "testing")
+
+      assert Tags.list_issues(filter: "the") == ["other"]
+    end
   end
 
-  test "list_issues/1 returns filtered issues" do
-    insert!(:issue, issue: "other")
-    insert!(:issue, issue: "testing")
-    insert!(:issue, issue: "testing")
-
-    assert Tags.list_issues(filter: "the") == ["other"]
+  describe "add_issue" do
+    test "adds the issue to a campaign" do
+      campaign = insert!(:campaign)
+      
+      assert {:ok, %Issue{campaign: campaign}} = Tags.add_issue(campaign, "new")
+      assert Tags.list_issues() == ["new"]
+    end
   end
 end
