@@ -22,6 +22,7 @@ defmodule PitchIn.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import PitchIn.DataCase
+      import PitchIn.Factory
     end
   end
 
