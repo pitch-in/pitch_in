@@ -1,0 +1,32 @@
+{
+  "lib/pitch_in/*.ex": {
+    "type": "src",
+    "alternate": "test/{}_test.exs"
+  },
+  "test/*_test.exs": {
+    "type": "test",
+    "alternate": "lib/pitch_in/{}.ex",
+    "template": [
+      "defmodule PitchIn.Test do",
+      "  @moduledoc \\"\\"\\"",
+      "  \\"\\"\\"",
+      "end"
+    ]
+  },
+  "lib/pitch_in/web/controllers/*.ex": {
+    "type": "controller",
+    "template": [
+      "defmodule PitchIn.Web.Controller. do",
+      "  @moduledoc \\"\\"\\"",
+      "  \\"\\"\\"",
+      "end"
+    ]
+  },
+  "lib/pitch_in/web/views/*.ex": {
+    "type": "view",
+    "template": [
+      "defmodule PitchIn.Web.View. do",
+      "end"
+    ]
+  }
+}
