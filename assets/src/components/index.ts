@@ -5,12 +5,12 @@ import HideOn from "./HideOn";
 import ShortDescription from "./ShortDescription";
 import Tags from "./Tags";
 
-const components = [HideOn, ShortDescription, Tags];
+const topComponents = [HideOn, ShortDescription, Tags];
 
 export default function($: JQueryStatic) {
   datepicker();
 
-  _.each(components, Component => {
+  _.each(topComponents, Component => {
     $(`[data-${Component.selector}]`).each(function() {
       new Component($(this));
     });
