@@ -18,9 +18,10 @@ export default class Tags extends BaseComponent {
     element.addClass("hide");
     const $tags = $(`<div class="tags"></div>`).insertAfter(element);
     const watchId: string = element.data("tagsWatch");
+    const tagType = element.data("tags");
     const $watched = watchId ? $(`#${watchId}`) : undefined;
 
-    new TagPicker($tags, this.element, $watched);
+    new TagPicker($tags, this.element, $watched, tagType);
   }
 
   static selector = "tags";
@@ -38,7 +39,8 @@ class TagPicker extends BaseComponent {
   constructor(
     public element: JQuery,
     public $input: JQuery,
-    public $watched: JQuery
+    public $watched: JQuery,
+    public tagType: string
   ) {
     super(element);
 
@@ -66,11 +68,13 @@ class TagPicker extends BaseComponent {
       "onTagClick",
       "finishTag",
       "onAutoCompleteClick",
-      "onAutoCompleteFocus"
+      "onAutoCompleteFocus",
+      "showAutoCompleteIfEmpty"
     ]);
 
     this.element.on("keydown", this.$nextInput, this.onKeyPress);
     this.element.on("input", this.$nextInput, this.onInput);
+    this.$nextInput.focus(this.showAutoCompleteIfEmpty);
     this.element.on("click", ".tags__tag", this.onTagClick);
 
     if (this.$watched) {
@@ -104,12 +108,16 @@ class TagPicker extends BaseComponent {
   }
 
   fetchAutoCompleteValues(value) {
+    if (this.tagType !== "issues") {
+      return;
+    }
+
     $.ajax({
       dataType: "json",
       method: "GET",
-      url: `/api/issues?filter=${value}`
+      url: `/api/${this.tagType}?filter=${value}`
     }).done(response => {
-      this.autoCompleteValues = response.data;
+      this.setAutoCompleteValues(response.data);
       this.renderAutocomplete();
     });
   }
@@ -194,11 +202,19 @@ class TagPicker extends BaseComponent {
     this.$autoComplete.append(autoComplete.render());
   }
 
+  setAutoCompleteValues(tags: string) {
+    const inputValue = this.$nextInput.val();
+    const filteredValues = reject(tags, tag => tag === inputValue);
+    console.log(filteredValues);
+    this.autoCompleteValues = filteredValues;
+  }
+
   clearAutoComplete() {
     this.$autoComplete.empty();
   }
 
   onAutoCompleteClick(value) {
+    this.autoCompleteValues = [];
     this.$nextInput.val(value);
     this.finishTag();
     this.renderAndFocus();
@@ -206,6 +222,12 @@ class TagPicker extends BaseComponent {
 
   onAutoCompleteFocus(value) {
     this.$nextInput.val(value);
+  }
+
+  showAutoCompleteIfEmpty() {
+    if (!(this.$nextInput.val() || this.autoCompleteValues.length))  {
+      this.fetchAutoCompleteValues("");
+    }
   }
 
   endsWithComma(value): boolean {
