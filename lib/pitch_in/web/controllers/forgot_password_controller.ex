@@ -7,6 +7,8 @@ defmodule PitchIn.Web.ForgotPasswordController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
+  @mailer Application.get_env(:pitch_in, :mailer, Mailer)
+
   def create(conn, %{"forgot_password" => params}) do
     email = params["email"]
     user = Repo.get_by(User, email: params["email"])
@@ -23,7 +25,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
           {:ok, user} ->
             conn
             |> Email.password_reset_token_email(user)
-            |> Mailer.deliver_later
+            |> @mailer.deliver_later
             
             redirect_to_email_sent(conn, email)
           {:error, changeset} ->
@@ -37,7 +39,6 @@ defmodule PitchIn.Web.ForgotPasswordController do
 
   def index(conn, %{"email" => email, "token" => token} = params) do
     user = Repo.get_by(User, email: params["email"])
-    changeset = User.changeset(user)
 
     cond do
       conn.assigns.current_user ->
@@ -46,6 +47,8 @@ defmodule PitchIn.Web.ForgotPasswordController do
         conn
         |> render("error.html")
       true ->
+        changeset = User.changeset(user)
+
         conn
         |> render("edit.html", changeset: changeset, token: token)
     end
@@ -59,25 +62,24 @@ defmodule PitchIn.Web.ForgotPasswordController do
     user = Repo.get(User, id)
     changeset = User.password_changeset(user, user_params)
 
-    cond do
-      !valid_token?(conn, user, params) ->
-        conn
-        |> render("error.html")
-      true ->
-        case Repo.update(changeset) do
-          {:ok, user} ->
-            conn
-            |> Email.password_reset_success_email(user)
-            |> Mailer.deliver_later
+    if valid_token?(conn, user, params) do
+      case Repo.update(changeset) do
+        {:ok, user} ->
+          conn
+          |> Email.password_reset_success_email(user)
+          |> @mailer.deliver_later
 
-            conn
-            |> put_flash(:success, "Password successfully reset!")
-            |> Auth.login(user)
-            |> redirect_to_home
-          {:error, changeset} ->
-            conn
-            |> render("edit.html", changeset: changeset, token: token)
-        end
+          conn
+          |> put_flash(:success, "Password successfully reset!")
+          |> Auth.login(user)
+          |> redirect_to_home
+        {:error, changeset} ->
+          conn
+          |> render("edit.html", changeset: changeset, token: token)
+      end
+    else
+      conn
+      |> render("error.html")
     end
   end
 
@@ -86,6 +88,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
     |> render("email_sent.html", email: email)
   end
 
+  defp valid_token?(_, nil, _), do: false
   defp valid_token?(conn, user, %{"token" => token}) do
     user &&
       Timex.diff(Timex.now, user.reset_time, :hours) < 2 &&

@@ -33,7 +33,7 @@
       </div>
       <div>
         <%= label i, :profession, "Skills" %>
-        <%= text_input f, :profession, data_tags: true, data_tags_watch: "user_pro_profession_type", placeholder: "enter skills..." %>
+        <%= text_input f, :profession, data_tags: "skills", data_tags_watch: "user_pro_profession_type", placeholder: "enter skills..." %>
         <%= error_tag i, :profession %>
       </div>
 

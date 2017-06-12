@@ -1,4 +1,4 @@
-defmodule PitchIn.ModelCase do
+defmodule PitchIn.DataCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -21,7 +21,7 @@ defmodule PitchIn.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import PitchIn.ModelCase
+      import PitchIn.DataCase
       import PitchIn.Factory
     end
   end

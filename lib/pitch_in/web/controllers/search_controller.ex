@@ -6,7 +6,7 @@ defmodule PitchIn.Web.SearchController do
   alias PitchIn.Web.Skill
   alias PitchIn.Web.SearchAlert
   alias PitchIn.Web.NeedSearch
-  alias PitchIn.Web.Issue
+  alias PitchIn.Tags.Issue
   import Ecto.Changeset, only: [put_assoc: 3]
 
   use PitchIn.Web.Auth

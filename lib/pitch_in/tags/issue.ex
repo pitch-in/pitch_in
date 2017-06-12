@@ -1,5 +1,9 @@
-defmodule PitchIn.Web.Issue do
+defmodule PitchIn.Tags.Issue do
+  @moduledoc """
+  An important political issue for a campaign or user.
+  """
   use PitchIn.Web, :model
+  # use Ecto.Schema
 
   alias PitchIn.Web.Campaign 
 
@@ -19,3 +23,7 @@ defmodule PitchIn.Web.Issue do
     |> validate_required([:issue])
   end
 end
+
+defimpl PitchIn.Tags.Tag, for: Any do
+end
+

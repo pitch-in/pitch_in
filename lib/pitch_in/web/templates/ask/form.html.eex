@@ -36,7 +36,7 @@
 
   <div>
     <%= label f, :skills %>
-    <%= text_input f, :skills, value: display_skills(@changeset.data), data_tags: true, placeholder: "enter skills..."  %>
+    <%= text_input f, :skills, value: display_skills(@changeset.data), data_tags: "skills", placeholder: "enter skills..."  %>
     <%= error_tag f, :skills %>
   </div>
 

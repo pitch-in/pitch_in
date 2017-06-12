@@ -48,7 +48,7 @@ defmodule PitchIn.Web.ConnCase do
   end
 
   def login(conn) do
-    user = insert(:user)
+    user = insert!(:user)
 
     conn
     |> assign(:current_user, user)

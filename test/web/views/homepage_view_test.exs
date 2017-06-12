@@ -1,3 +1,3 @@
 defmodule PitchIn.HomepageViewTest do
-  use PitchIn.ConnCase, async: true
+  use PitchIn.Web.ConnCase, async: true
 end

@@ -19,7 +19,7 @@
     <p class="input-description">
       What issues are important to you?
     </p>
-    <%= text_input f, :issues, data_tags: true, placeholder: "enter issues..." %>
+    <%= text_input f, :issues, data_tags: "issues", placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>
   </div>
 
@@ -29,7 +29,7 @@
       You can enter your relevant skills here. These will tell campaigns about
       what you can do, and help you match with relevant needs.
     </p>
-    <%= text_input f, :profession, data_tags: true, placeholder: "enter skills..." %>
+    <%= text_input f, :profession, data_tags: "skills", placeholder: "enter skills..." %>
     <%= error_tag f, :profession %>
   </div>
 
