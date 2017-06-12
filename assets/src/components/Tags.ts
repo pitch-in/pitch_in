@@ -99,9 +99,19 @@ class TagPicker extends BaseComponent {
 
       this.finishTag();
     } else {
-      this.autoCompleteValues = [this.$nextInput.val(), "test", "foo", "bar"];
-      this.renderAutocomplete();
+      this.fetchAutoCompleteValues(value);
     }
+  }
+
+  fetchAutoCompleteValues(value) {
+    $.ajax({
+      dataType: "json",
+      method: "GET",
+      url: `/api/issues?filter=${value}`
+    }).done(response => {
+      this.autoCompleteValues = response.data;
+      this.renderAutocomplete();
+    });
   }
 
   onWatchChange() {
