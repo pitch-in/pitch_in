@@ -3,7 +3,7 @@ defmodule PitchIn.Mixfile do
 
   def project do
     [app: :pitch_in,
-     version: "1.2.1",
+     version: "1.2.2",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
