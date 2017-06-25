@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.NeedSearch do
+defmodule PitchIn.Politics.NeedSearch do
   use PitchIn.Web, :model
 
   alias PitchIn.Web.User
@@ -19,6 +19,20 @@ defmodule PitchIn.Web.NeedSearch do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:skills, :years_experience, :issues])
+  end
+
+  def form_changeset(struct, filter \\ %{}) do
+    filter = 
+      filter
+      |> Map.update("issues", [], &(split_list(&1)))
+
+    struct
+    |> changeset(filter)
+  end
+
+  def split_list(nil), do: []
+  def split_list(string) do
+    String.split(string, ~r/\s*,\s*/, trim: true)
   end
 end
 

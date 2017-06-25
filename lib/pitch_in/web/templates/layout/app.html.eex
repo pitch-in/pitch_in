@@ -20,7 +20,7 @@
 
 <body class="view-login no-js">
   <%= if @conn.path_info == [] do %>
-    <%= render PitchIn.Web.HomepageView, "index.html", conn: @conn %>
+    <%= render PitchIn.Web.HomepageView, "index.html", conn: @conn, search_changeset: @search_changeset %>
   <% else %>
     <%= render "_navbar.html", conn: @conn, current_user: @current_user %>
 

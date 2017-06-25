@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.SearchAlert do
+defmodule PitchIn.Politics.SearchAlert do
   use PitchIn.Web, :model
 
   alias PitchIn.Web.User

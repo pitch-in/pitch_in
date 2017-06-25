@@ -26,26 +26,22 @@
       bottom: $blur-border;
       right: $blur-border;
     }
-
-    h1 {
-      @include breakpoint(large) {
-        // Special bigger size text.
-        font-size: 3rem;
-      }
-    }
-
-    h1, p {
-      color: $white;
-    }
   }
+}
 
-  .home-logo {
-    margin-top: 20px;
-    max-width: 216px;
-    width: 75%;
-
-    filter: drop-shadow(0 2px 1px $gray);
+.home__header {
+  color: $white;
+  @extend .text-shadow-dark;
+  @include breakpoint(large) {
+    // Special bigger size text.
+    font-size: 3rem;
   }
+}
+
+.home__subhead {
+  @extend .text-shadow-dark;
+  color: $white;
+  font-family: $base-font-family;
 }
 
 .home-the-organizers {

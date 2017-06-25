@@ -11,8 +11,8 @@ defmodule PitchIn.Web.User do
   alias PitchIn.Web.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
-  alias PitchIn.Web.SearchAlert
-  alias PitchIn.Web.NeedSearch
+  alias PitchIn.Politics.SearchAlert
+  alias PitchIn.Politics.NeedSearch
 
   schema "users" do
     many_to_many :campaigns, Campaign, join_through: "campaign_staff"
