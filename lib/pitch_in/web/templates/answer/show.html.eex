@@ -9,6 +9,10 @@
     <% else %>
       <%= link "Back to Search", to: search_path(@conn, :index), class: "secondary hollow button" %>
       <%= link "View Campaign", to: campaign_path(@conn, :show, @campaign), class: "primary hollow button" %>
+    <%= if assigns[:answer] do %>
+        <%= archive_link @conn, @answer, text: "Withdraw", class: "hollow alert button" %>
+        <%= unarchive_button @conn, @answer, class: "hollow warning button" %>
+      <% end %>
     <% end %>
   </div>
 </div>

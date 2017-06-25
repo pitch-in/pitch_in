@@ -217,11 +217,17 @@ defmodule PitchIn.Web.AnswerController do
       {:ok, %{archived_reason: nil} = answer} ->
         conn
         |> put_flash(:success, "Answer successfully opened!")
-        |> redirect(to: answser_index_path(conn))
+        |> redirect(to: any_answer_path(conn, :show, answer))
+      {:ok, %{archived_reason: "Accepted"} = answer} ->
+        send_accepted_answer_email(conn, campaign, answer)
+
+        conn
+        |> put_flash(:success, "Answer successfully accepted! We'll email the volunteer to let them know, but you should reach out to them if you haven't already!")
+        |> redirect(to: any_answer_path(conn, :show, answer))
       {:ok, %{archived_reason: _} = answer} ->
         conn
-        |> put_flash(:warning, "Answer successfully closed!")
-        |> redirect(to: answser_index_path(conn))
+        |> put_flash(:warning, "Answer successfully closed")
+        |> redirect(to: any_answer_path(conn, :show, answer))
       {:error, changeset} ->
         render(conn, "edit_archived.html", changeset: changeset)
     end
@@ -289,6 +295,16 @@ defmodule PitchIn.Web.AnswerController do
       conn,
       campaign,
       ask,
+      answer
+    )
+    |> Mailer.deliver_later
+  end
+
+  defp send_accepted_answer_email(conn, campaign, answer) do
+    answer.user.email
+    |> Email.accepted_answer_email(
+      conn,
+      campaign,
       answer
     )
     |> Mailer.deliver_later

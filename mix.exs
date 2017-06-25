@@ -3,7 +3,7 @@ defmodule PitchIn.Mixfile do
 
   def project do
     [app: :pitch_in,
-     version: "1.2.1",
+     version: "1.2.2",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -28,7 +28,7 @@ defmodule PitchIn.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/mocks"]
   defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.

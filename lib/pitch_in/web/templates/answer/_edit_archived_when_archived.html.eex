@@ -1,0 +1,2 @@
+<label>Archived Reason</label>
+<%= select :answer, :archived_reason, [{@answer.archived_reason, @answer.archived_reason}], value: @answer.archived_reason %>

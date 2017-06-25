@@ -51,6 +51,13 @@ defmodule PitchIn.Email do
     |> render("campaign_answer.html", conn: conn, campaign: campaign, ask: ask, answer: answer)
   end
 
+  def accepted_answer_email(email_address, conn, campaign, answer) do
+    email_address
+    |> base_email
+    |> subject("#{campaign.name} wants to work with you!")
+    |> render("accepted_answer.html", conn: conn, campaign: campaign, answer: answer)
+  end
+
   def contact_us_email(_conn, %PitchIn.Web.ContactUs{
     subject: user_subject,
     body: user_body,

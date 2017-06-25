@@ -23,8 +23,11 @@ defmodule PitchIn.Web.ArchivableView do
   end
 
   def archived_for(structs, nil), do: archived(structs)
-  def archived_for(structs, list_name) do
-    Enum.filter(structs, &(Archivable.archived_for?(&1, get_reasons(list_name))))
+  def archived_for(structs, nil, _), do: archived_for(structs, nil)
+  def archived_for(structs, list_name, opts \\ []) do
+    without_accepted = Keyword.get(opts, :without_accepted, false)
+
+    Enum.filter(structs, &(Archivable.archived_for?(&1, get_reasons(list_name, without_accepted))))
   end
 
   def archivable_index(name, structs, opts) do
@@ -75,10 +78,15 @@ defmodule PitchIn.Web.ArchivableView do
 
   def campaign_answer do
     [
-      "Accepted",
       "Not interested",
-      "Couldn't reach volunteer"
+      "Couldn't reach volunteer",
+      "Accepted"
     ]
+  end
+
+  # For displaying accepted answers.
+  def accepted do
+    ["Accepted"]
   end
 
   def admin_answer do
@@ -86,5 +94,11 @@ defmodule PitchIn.Web.ArchivableView do
   end
 
   def get_reasons(list_name), do: apply(__MODULE__, list_name, [])
+  def get_reasons(list_name, false), do: get_reasons(list_name)
+  def get_reasons(list_name, _) do
+    list_name
+    |> get_reasons
+    |> List.delete("Accepted")
+  end
 end
 

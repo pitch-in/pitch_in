@@ -1,0 +1,15 @@
+<p>
+  <%= @campaign.name %> saw your 
+  <%= link "message", to: base_url(@conn) <> any_answer_path(@conn, :show, @answer) %>!
+  and they'd like to work with you!
+</p>
+
+<p>
+  If they haven't reached out already, feel free to contact them at
+  <%= link @campaign.email, to: "mailto:#{@campaign.email}" %>
+</p>
+
+<p>
+  Thanks for pitching in!
+</p>
+

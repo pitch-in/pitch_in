@@ -1,23 +1,23 @@
-import * as _ from 'lodash'; 
-import $ = require('jquery');
-import BaseComponent from './BaseComponent';
+import * as _ from "lodash";
+import $ = require("jquery");
+import BaseComponent from "./BaseComponent";
 
 const starterText = {
-  candidate: 'I want to...',
-  measure: 'We want...',
-  issue: 'We believe...'
+  candidate: "I want to...",
+  measure: "We want...",
+  issue: "We believe..."
 };
 
 export default class ShortDescription extends BaseComponent {
   private $campaignType: JQuery;
   private currentStarter: string;
 
-  constructor(
-    public element
-  ) {
+  constructor(public element) {
     super(element);
 
-    this.$campaignType = element.parents('form').find(`#${this.data.shortDescription}`);
+    this.$campaignType = element
+      .parents("form")
+      .find(`#${this.data.shortDescription}`);
 
     this.updateStarter();
     this.$campaignType.change(() => this.updateStarter());
@@ -27,9 +27,9 @@ export default class ShortDescription extends BaseComponent {
 
   private updateStarter() {
     const type: string = this.$campaignType.val();
-    this.currentStarter = starterText[type] || '';
+    this.currentStarter = starterText[type] || "";
 
-    this.element.attr('placeholder', this.currentStarter);
+    this.element.attr("placeholder", this.currentStarter);
   }
 
   private insertStarter() {
@@ -45,13 +45,12 @@ export default class ShortDescription extends BaseComponent {
       return;
     }
 
-    this.element.val('');
+    this.element.val("");
   }
 
   private get currentStarterForInput() {
-    return this.currentStarter.replace('...', ' ');
+    return this.currentStarter.replace("...", " ");
   }
 
-
-  static selector = 'short-description';
+  static selector = "short-description";
 }

@@ -33,7 +33,7 @@ defmodule PitchIn.Web.ViewHelpers do
   end
 
   def webpack_path(conn, path) do
-    if Mix.env == :dev do
+    if Enum.member?([:dev, :test], Mix.env) do
       "http://localhost:4001#{path}"
     else
       base_url(conn, static_path(conn, path))
@@ -96,7 +96,7 @@ defmodule PitchIn.Web.ViewHelpers do
 
   def base_url(conn), do: base_url(conn, "")
   def base_url(PitchIn.Web.Endpoint, path) do
-    "https://www.example.com" <> path
+    "https://www.pitch-in.us" <> path
   end
   def base_url(%Plug.Conn{scheme: scheme, host: host, port: port}, path) do
     url = "#{scheme}://#{host}"

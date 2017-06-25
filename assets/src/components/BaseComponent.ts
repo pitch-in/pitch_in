@@ -1,9 +1,7 @@
 export default class BaseComponent {
   public data: any;
 
-  constructor(
-    public element
-  ) {
+  constructor(public element) {
     this.data = element.data();
   }
 
