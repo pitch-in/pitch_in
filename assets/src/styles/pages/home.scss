@@ -15,7 +15,7 @@
     .home-background {
       $blur-border: -5px;
 
-      background-image: url('../img/hero.jpg');
+      background-image: url('../img/homepage/hero.jpg');
       background-position: center top;
       background-size: cover;
 
@@ -49,5 +49,5 @@
 }
 
 .home-the-organizers {
-  @include image("../img/home/the-organizers.jpg", 4.5rem);
+  @include image("../img/homepage/the-organizers.jpg", 4.5rem);
 }
