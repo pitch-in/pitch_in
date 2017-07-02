@@ -14,6 +14,7 @@ or sort the results by your skills and important issues.
     <%= error_tag f, :skills %>
   </div>
   <div>
+    <%= @changeset.data.issues %>
     <%= label f, :issues, "Keyword (ex: women, clean water, education)" %>
     <%= text_input f, :issues, value: Enum.join(@changeset.data.issues, ","), data_tags: "issues", placeholder: "enter issues..." %>
     <%= error_tag f, :issues %>

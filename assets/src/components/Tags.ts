@@ -69,12 +69,14 @@ class TagPicker extends BaseComponent {
       "finishTag",
       "onAutoCompleteClick",
       "onAutoCompleteFocus",
-      "showAutoCompleteIfEmpty"
+      "showAutoCompleteIfEmpty",
+      "saveTagIfAutoCompleteEmpty"
     ]);
 
     this.element.on("keydown", this.$nextInput, this.onKeyPress);
     this.element.on("input", this.$nextInput, this.onInput);
     this.$nextInput.focus(this.showAutoCompleteIfEmpty);
+    this.$nextInput.blur(this.saveTagIfAutoCompleteEmpty);
     this.element.on("click", ".tags__tag", this.onTagClick);
 
     if (this.$watched) {
@@ -227,6 +229,12 @@ class TagPicker extends BaseComponent {
   showAutoCompleteIfEmpty() {
     if (!(this.$nextInput.val() || this.autoCompleteValues.length))  {
       this.fetchAutoCompleteValues("");
+    }
+  }
+
+  saveTagIfAutoCompleteEmpty() {
+    if (this.$nextInput.val() && !this.autoCompleteValues.length)  {
+      this.finishTag();
     }
   }
 

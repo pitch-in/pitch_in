@@ -4,6 +4,7 @@ defmodule PitchIn.Web.SearchController do
   alias PitchIn.Politics
   alias PitchIn.Politics.Search
   alias PitchIn.Politics.NeedSearch
+  alias Ecto.Changeset
 
   use PitchIn.Web.Auth
 
@@ -15,7 +16,7 @@ defmodule PitchIn.Web.SearchController do
          {:ok, results} <- Search.search(search)
     do
       search_changeset = 
-        search_changeset
+        search
         |> NeedSearch.changeset
       
       conn
@@ -24,6 +25,7 @@ defmodule PitchIn.Web.SearchController do
     else
       {:error, search_changeset} ->
         conn
+        |> put_flash(:alert, "Something went wrong! Please try searching again.")
         |> render("index.html", changeset: search_changeset, show_alert_button: false)
     end
   end
