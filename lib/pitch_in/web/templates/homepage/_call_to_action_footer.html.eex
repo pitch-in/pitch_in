@@ -1,0 +1,13 @@
+<section class="list-header content-block call-to-action-footer first-time-here row">
+  <div class="small-12 medium-7 columns flex-row align-center">
+    <h3 class="call-to-action-footer__header">Ready to dive in?</h3>
+  </div>
+
+  <div class="small-12 medium-5 columns">
+    <div class="expanded stacked-for-small button-group">
+      <%= link "Sign up", to: user_path(@conn, :new), class: "alert action dark-shadow button" %>
+      <div class="or-text__red">or</div>
+      <%= link "Start a campaign", to: user_path(@conn, :new, staff: true), class: "hollow alert action button" %>
+    </div>
+  </div>
+</div>

@@ -8,8 +8,8 @@ import "./styles/main.scss";
 import "./fonts/Phosphate-Inline.ttf";
 import "./fonts/Phosphate-Solid.ttf";
 
-const hero_path: string = require("./img/hero.jpg");
-import "./img/home/the-organizers.jpg";
+const hero_path: string = require("./img/homepage/hero.jpg");
+import "./img/homepage/the-organizers.jpg";
 
 import "./favicon.ico";
 import "./apple-touch-icon.png";

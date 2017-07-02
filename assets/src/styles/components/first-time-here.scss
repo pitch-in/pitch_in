@@ -8,5 +8,10 @@
     @include breakpoint(medium) {
       margin: 0 8px 0 0;
     }
+
+    &__red {
+      @extend .or-text;
+      color: $red;
+    }
   }
 }

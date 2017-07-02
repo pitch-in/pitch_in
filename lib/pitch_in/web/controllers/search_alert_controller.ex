@@ -1,8 +1,8 @@
-defmodule PitchIn.Web.SearchAlertController do
+defmodule PitchIn.Politics.SearchAlertController do
   use PitchIn.Web, :controller
   use PitchIn.Web.Auth, protect: :all, pass_user: true
 
-  alias PitchIn.Web.SearchAlert
+  alias PitchIn.Politics.SearchAlert
 
   def delete(conn, %{"id" => id}, user) do
     alert = Repo.one(
