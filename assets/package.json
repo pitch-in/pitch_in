@@ -5,11 +5,10 @@
     "test": "",
     "watch": "node server",
     "deploy": "rimraf ./priv/static && webpack --config ./webpack.production.config.js --progress --profile --colors --display-error-details",
-    "lint": "tslint ."
+    "lint": "tslint .",
+    "fix": "prettier --single-quote --write 'assets/**/.ts'"
   },
-  "keywords": [
-    "politics"
-  ],
+  "keywords": ["politics"],
   "author": "Will Ockelmann-Wagner",
   "dependencies": {
     "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
@@ -42,7 +41,7 @@
     "json-loader": "^0.5.4",
     "node-sass": "^3.7.0",
     "postcss-loader": "^0.9.1",
-    "prettier": "^1.4.4",
+    "prettier": "^1.5.3",
     "rimraf": "^2.5.2",
     "sass-loader": "^3.2.0",
     "script-loader": "^0.7.0",
@@ -50,7 +49,7 @@
     "stats-webpack-plugin": "^0.3.1",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.1.0",
-    "tslint": "^3.15.1",
+    "tslint": "^5.5.0",
     "tslint-config-airbnb": "^5.1.2",
     "tslint-config-prettier": "^1.0.0",
     "tslint-loader": "^2.1.5",
