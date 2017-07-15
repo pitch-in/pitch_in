@@ -1,16 +1,17 @@
-import { bindAll } from "lodash";
-import AutoCompleteItem from "./AutoCompleteItem";
+import { bindAll } from 'lodash';
+import AutoCompleteItem from './AutoCompleteItem';
 
 export interface IAutoCompleteProps {
   values: string[];
   onClick: (value: string) => void;
   onFocus: (value: string) => void;
+  onBlur: (value: string) => void;
 }
 
 export default class AutoComplete {
   public $element: JQuery;
   constructor(public props: IAutoCompleteProps) {
-    bindAll(this, ["renderItem"]);
+    bindAll(this, ['renderItem']);
   }
 
   render() {
@@ -24,12 +25,13 @@ export default class AutoComplete {
   }
 
   renderItem(value) {
-    const { onClick, onFocus } = this.props;
+    const { onClick, onFocus, onBlur } = this.props;
 
     const item = new AutoCompleteItem({
       value,
       onClick,
-      onFocus
+      onFocus,
+      onBlur
     });
     return item.render();
   }

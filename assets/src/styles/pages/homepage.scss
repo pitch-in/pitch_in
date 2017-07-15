@@ -8,9 +8,7 @@
     padding: 20px;
     position: relative;
     overflow: hidden;
-    background-image: linear-gradient(
-      rgba($black, 0), rgba($black, 0.75) 75%
-    );
+    background-image: linear-gradient(rgba($black, 0), rgba($black, 0.75) 75%);
 
     .home-background {
       $blur-border: -5px;
@@ -47,7 +45,6 @@
 .home-the-organizers {
   @include image("../img/homepage/the-organizers.jpg", 4.5rem);
 }
-
 
 .call-to-action-footer {
   background: $black;

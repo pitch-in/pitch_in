@@ -1,15 +1,13 @@
 .auto-complete {
-  width: 100%;
-}
+  &__item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 4px 8px;
+    background: $off-white;
 
-.auto-complete__item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 4px 8px;
-  background: $off-white;
-
-  &:hover, &:focus {
-    background: $light-gray;
+    &:hover, &:focus {
+      background: $light-gray;
+    }
   }
 }

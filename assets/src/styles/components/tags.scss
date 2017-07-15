@@ -1,5 +1,6 @@
 .tags {
   margin-bottom: 1rem;
+  position: relative;
 
   &__next-input {
     margin-bottom: 0;
@@ -29,5 +30,11 @@
       content: "|";
       margin: 0 0.25rem;
     }
+  }
+
+  &__auto-complete {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
   }
 }

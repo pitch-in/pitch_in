@@ -1,12 +1,12 @@
-import { bindAll, reject, includes, trim, uniq, map } from "lodash";
-import $ = require("jquery");
-import BaseComponent from "./BaseComponent";
-import AutoComplete from "./AutoComplete";
+import { bindAll, reject, includes, trim, uniq, map } from 'lodash';
+import $ = require('jquery');
+import BaseComponent from './BaseComponent';
+import AutoComplete from './AutoComplete';
 
 const defaultValues = {
-  "Web Development": ["html", "css", "application development"],
-  Data: ["data analysis", "data science"],
-  Design: ["digital design", "print design"]
+  'Web Development': ['html', 'css', 'application development'],
+  Data: ['data analysis', 'data science'],
+  Design: ['digital design', 'print design']
 };
 
 export default class Tags extends BaseComponent {
@@ -15,19 +15,25 @@ export default class Tags extends BaseComponent {
   constructor(public element) {
     super(element);
 
-    element.addClass("hide");
+    element.addClass('hide');
     const $tags = $(`<div class="tags"></div>`).insertAfter(element);
-    const watchId: string = element.data("tagsWatch");
-    const tagType = element.data("tags");
+    const watchId: string = element.data('tagsWatch');
+    const tagType = element.data('tags');
     const $watched = watchId ? $(`#${watchId}`) : undefined;
 
     new TagPicker($tags, this.element, $watched, tagType);
   }
 
-  static selector = "tags";
+  static selector = 'tags';
 }
 
-const confirmKeys = [13];
+enum Keys {
+  Backspace = 8,
+  Enter = 13,
+  Escape = 27
+}
+
+const confirmKeys = [Keys.Enter];
 
 class TagPicker extends BaseComponent {
   tags: string[];
@@ -35,6 +41,7 @@ class TagPicker extends BaseComponent {
   $tagsContainer: JQuery;
   $autoComplete: JQuery;
   autoCompleteValues: string[];
+  autoCompleteFocused: boolean;
 
   constructor(
     public element: JQuery,
@@ -45,11 +52,12 @@ class TagPicker extends BaseComponent {
     super(element);
 
     this.autoCompleteValues = [];
+    this.autoCompleteFocused = false;
 
-    const placeholder = $input.attr("placeholder");
+    const placeholder = $input.attr('placeholder');
     this.$nextInput = $(
       `<input class="tags__next-input" type="text" placeholder="${placeholder ||
-        "enter tags..."}"/>`
+        'enter tags...'}"/>`
     );
     this.$tagsContainer = $(`<div class="tags__container"></div>`);
     this.$autoComplete = $(`<div class="tags__auto-complete"></div>`);
@@ -63,25 +71,27 @@ class TagPicker extends BaseComponent {
     this.render();
 
     bindAll(this, [
-      "onKeyPress",
-      "onInput",
-      "onTagClick",
-      "finishTag",
-      "onAutoCompleteClick",
-      "onAutoCompleteFocus",
-      "showAutoCompleteIfEmpty",
-      "saveTagIfAutoCompleteEmpty"
+      'onKeyPress',
+      'onInput',
+      'onInputBlur',
+      'onTagClick',
+      'finishTag',
+      'showAutoCompleteIfEmpty',
+      'onAutoCompleteClick',
+      'onAutoCompleteFocus',
+      'closeAutoCompleteOnBlur',
+      'saveTagIfAutoCompleteEmpty'
     ]);
 
-    this.element.on("keydown", this.$nextInput, this.onKeyPress);
-    this.element.on("input", this.$nextInput, this.onInput);
+    this.element.on('keydown', this.$nextInput, this.onKeyPress);
+    this.element.on('input', this.$nextInput, this.onInput);
     this.$nextInput.focus(this.showAutoCompleteIfEmpty);
-    this.$nextInput.blur(this.saveTagIfAutoCompleteEmpty);
-    this.element.on("click", ".tags__tag", this.onTagClick);
+    this.$nextInput.blur(this.onInputBlur);
+    this.element.on('click', '.tags__tag', this.onTagClick);
 
     if (this.$watched) {
       this.onWatchChange = this.onWatchChange.bind(this);
-      this.$watched.on("change", this.onWatchChange);
+      this.$watched.on('change', this.onWatchChange);
     }
   }
 
@@ -91,8 +101,10 @@ class TagPicker extends BaseComponent {
     if (includes(confirmKeys, key)) {
       this.finishTag();
       event.preventDefault();
-    } else if (key === 8 && this.$nextInput.val() === "") {
+    } else if (key === Keys.Backspace && this.$nextInput.val() === '') {
       this.removeLastTag();
+    } else if (key === Keys.Escape) {
+      this.clearAutoComplete();
     }
   }
 
@@ -110,13 +122,13 @@ class TagPicker extends BaseComponent {
   }
 
   fetchAutoCompleteValues(value) {
-    if (this.tagType !== "issues") {
+    if (this.tagType !== 'issues') {
       return;
     }
 
     $.ajax({
-      dataType: "json",
-      method: "GET",
+      dataType: 'json',
+      method: 'GET',
       url: `/api/${this.tagType}?filter=${value}`
     }).done(response => {
       this.setAutoCompleteValues(response.data);
@@ -160,7 +172,7 @@ class TagPicker extends BaseComponent {
 
   finishTag() {
     const nextTag = this.$nextInput.val();
-    if (trim(nextTag) === "") {
+    if (trim(nextTag) === '') {
       return;
     }
 
@@ -172,15 +184,15 @@ class TagPicker extends BaseComponent {
 
   initializeTags() {
     const inputVal = this.$input.val().trim();
-    this.tags = inputVal === "" ? [] : inputVal.split(",");
+    this.tags = inputVal === '' ? [] : inputVal.split(',');
   }
 
   clearInput() {
-    this.$nextInput.val("");
+    this.$nextInput.val('');
   }
 
   tagsToString(): string {
-    return this.tags.join(",");
+    return this.tags.join(',');
   }
 
   tagHtml(value: string | number): string {
@@ -190,7 +202,7 @@ class TagPicker extends BaseComponent {
   writeTags() {
     this.$input.val(this.tagsToString());
 
-    const tagsHtml = map(this.tags, this.tagHtml).join("");
+    const tagsHtml = map(this.tags, this.tagHtml).join('');
     this.$tagsContainer.html(tagsHtml);
   }
 
@@ -199,7 +211,8 @@ class TagPicker extends BaseComponent {
     const autoComplete = new AutoComplete({
       values: this.autoCompleteValues,
       onClick: this.onAutoCompleteClick,
-      onFocus: this.onAutoCompleteFocus
+      onFocus: this.onAutoCompleteFocus,
+      onBlur: this.closeAutoCompleteOnBlur
     });
     this.$autoComplete.append(autoComplete.render());
   }
@@ -227,19 +240,41 @@ class TagPicker extends BaseComponent {
   }
 
   showAutoCompleteIfEmpty() {
-    if (!(this.$nextInput.val() || this.autoCompleteValues.length))  {
-      this.fetchAutoCompleteValues("");
+    if (!(this.$nextInput.val() || this.autoCompleteValues.length)) {
+      this.fetchAutoCompleteValues('');
     }
   }
 
+  onInputBlur() {
+    this.saveTagIfAutoCompleteEmpty();
+    this.closeAutoCompleteOnBlur();
+  }
+
+  closeAutoCompleteOnBlur() {
+    setTimeout(() => {
+      if (!this.isFocused()) {
+        this.autoCompleteValues = [];
+        this.clearAutoComplete();
+      }
+    }, 100);
+  }
+
+  isFocused() {
+    return (
+      this.$input.is(':focus') ||
+      this.$autoComplete.find('.auto-complete__item').is(':focus')
+    );
+  }
+
   saveTagIfAutoCompleteEmpty() {
-    if (this.$nextInput.val() && !this.autoCompleteValues.length)  {
+    console.log(this.$nextInput.val(), this.autoCompleteValues.length);
+    if (this.$nextInput.val() && !this.autoCompleteValues.length) {
       this.finishTag();
     }
   }
 
   endsWithComma(value): boolean {
-    return value.slice(-1) === ",";
+    return value.slice(-1) === ',';
   }
 
   removeComma(value): string {
