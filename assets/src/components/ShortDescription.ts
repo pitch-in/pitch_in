@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import $ = require("jquery");
 import BaseComponent from "./BaseComponent";
 

@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import { each } from "lodash";
 
 import datepicker from "./datepicker";
 import HideOn from "./HideOn";
@@ -10,7 +10,7 @@ const topComponents = [HideOn, ShortDescription, Tags];
 export default function($: JQueryStatic) {
   datepicker();
 
-  _.each(topComponents, Component => {
+  each(topComponents, Component => {
     $(`[data-${Component.selector}]`).each(function() {
       new Component($(this));
     });
