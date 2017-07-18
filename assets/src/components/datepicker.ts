@@ -1,11 +1,11 @@
 // Any jquery
-const $ = require("jquery");
+const $ = require('jquery');
 
 // Datepicker
-import "@fengyuanchen/datepicker";
+import '@fengyuanchen/datepicker';
 
 export default function setUpDatepickers() {
   $('[data-toggle="datepicker"]').datepicker({
-    format: "m/d/yyyy"
+    format: 'm/d/yyyy'
   });
 }
