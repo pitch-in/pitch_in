@@ -22,7 +22,7 @@
   <div class="top-bar submenu" id="top-nav">
     <ul class="vertical large-horizontal menu">
       <li>
-        <%= link "First Time Here?", to: "#first-time-here" %>
+        <%= link "New to Pitch In?", to: "#first-time-here" %>
       </li>
       <li>
         <%= link "How This Works", to: "#how-this-works" %>

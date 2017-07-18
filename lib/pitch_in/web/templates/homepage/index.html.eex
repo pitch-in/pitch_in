@@ -22,7 +22,7 @@
   <div class="row column">
     <%= render PitchIn.Web.HomepageView, "_first_time_here.html", conn: @conn %>
 
-    <section class="content-block" id="new-to-pitch-in">
+    <section class="content-block" id="first-time-here">
       <div class="row home__fill-row">
         <div class="small-12 medium-6 columns home__fill-block home__fill-block--teal flex-column">
           <h1 class="text-center white">New to Pitch In?</h1>
@@ -47,6 +47,18 @@
           <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
             class="image home-the-organizers">
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block" id="how-this-works">
+      <h2>How This Works</h2>
+      <p>Take a look at how volunteers and campaigns can use Pitch In to connect.</p>
+      <div class="row">
+        <div class="small-12 medium-6 medium-offset-3 columns">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/JLPGdFh_bh8?rel=0&amp;showinfo=0"  frameborder="0" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </section>
