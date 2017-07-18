@@ -6,7 +6,7 @@
           <li>
             <a class="logo" href="/">
               <img src="<%= webpack_path(@conn, "/img/shovels.svg") %>" />
-              <h3 class="name">Pitch In</h3>
+              <h3 class="name show-for-medium">Pitch In</h3>
             </a>
           </li>
         </ul>
