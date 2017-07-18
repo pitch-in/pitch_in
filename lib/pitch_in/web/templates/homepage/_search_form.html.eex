@@ -8,7 +8,7 @@
       <p class="input-description">
         What's important to you?
       </p>
-      <%= text_input f, :issues, data_tags: "issues", placeholder: "e.g. women, environment" %>
+      <%= text_input f, :issues, data_tags: "issues", placeholder: "e.g. women, environment", autocomplete: "off" %>
       <%= error_tag f, :issues %>
     </div>
     <div>
