@@ -22,11 +22,33 @@
   <div class="row column">
     <%= render PitchIn.Web.HomepageView, "_first_time_here.html", conn: @conn %>
 
-    <section class="content-block" id="how-this-works">
-      <h2>How this works</h2>
-      <p>
-      You’ve already taken the first step by coming here. Our mission is for you to use passions and skills to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need.
-      </p>
+    <section class="content-block" id="new-to-pitch-in">
+      <div class="row home__fill-row">
+        <div class="small-12 medium-6 columns home__fill-block home__fill-block--teal flex-column">
+          <h1 class="text-center white">New to Pitch In?</h1>
+
+          <p class="white">
+            You’ve already taken the first step by coming here. Our mission is for you to use passions and skills to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need.
+          </p>
+
+          <div class="flex-spacer"></div>
+
+            <%= link "Learn more", to: html_path(@conn, :faq), class: "hollow white button" %>
+        </div>
+        <div class="small-12 medium-3 columns flex-center">
+          <strong class="text-center home__callout">
+            Listen to our interview on
+            <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands">
+              The Organizers Podcast.
+            </a>
+          </strong>
+        </div>
+        <div class="small-12 medium-3 columns flex-column justify-end">
+          <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
+            class="image home-the-organizers">
+          </a>
+        </div>
+      </div>
     </section>
 
     <section class="content-block" id="why-pitch-in">
@@ -45,17 +67,6 @@
     </section>
 
     <%= render PitchIn.Web.HtmlView, "about_us.html", conn: @conn %>
-
-    <div class="content-block flex-row align-center">
-      <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
-         class="image home-the-organizers standard-margin-right">
-      </a>
-      <strong>
-        Check out our interview on the podcast
-        <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands">
-          The Organizers</a>!
-      </strong>
-    </div>
 
     <section class="content-block" id="contact-us">
       <%= render(

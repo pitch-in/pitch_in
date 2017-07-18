@@ -1,4 +1,5 @@
-.parallax-slider, .home-background {
+.parallax-slider,
+.home-background {
   filter: blur(2px) brightness(0.85);
   z-index: -1;
 }
@@ -43,7 +44,7 @@
 }
 
 .home-the-organizers {
-  @include image("../img/homepage/the-organizers.jpg", 4.5rem);
+  @include image("../img/homepage/the-organizers.jpg", 100%);
 }
 
 .call-to-action-footer {
@@ -52,4 +53,28 @@
   &__header {
     color: $white;
   }
+}
+
+.row.home__fill-row {
+  margin: -0.5rem;
+}
+
+.home__fill-block {
+  padding: 0.5rem;
+
+  &--teal {
+    background: $teal;
+  }
+}
+
+.home__block-header {
+  text-align: center;
+
+  &--white {
+    color: $white;
+  }
+}
+
+.home__callout {
+  font-size: 1.5rem;
 }
