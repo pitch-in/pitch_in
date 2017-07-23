@@ -1,0 +1,37 @@
+.icon {
+  @mixin icon($url) {
+    $size: 2rem;
+    height: 2rem;
+    width: 2rem;
+    background-image: url("../img/icons/#{$url}");
+    display: inline-block;
+  }
+
+  &--question {
+    @include icon('question.svg');
+  }
+  &--facebook {
+    @include icon('facebook.png');
+  }
+  &--twitter {
+    @include icon('twitter.png');
+  }
+  &--email {
+    @include icon('email.png');
+  }
+}
+
+.fi {
+  &.success {
+    color: $green;
+  }
+  &.alert {
+    color: $red;
+  }
+  &.primary {
+    color: $blue;
+  }
+  &.secondary {
+    color: $gray;
+  }
+}
