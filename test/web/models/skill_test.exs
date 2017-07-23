@@ -1,7 +1,7 @@
 defmodule PitchIn.SkillTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.Skill
+  alias PitchIn.Web.Skill
 
   @valid_attrs %{skill: "some content"}
   @invalid_attrs %{}

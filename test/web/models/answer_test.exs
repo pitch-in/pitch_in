@@ -1,7 +1,7 @@
 defmodule PitchIn.AnswerTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.Answer
+  alias PitchIn.Web.Answer
 
   @valid_attrs %{message: "some content", share_address: true, share_email: true, share_phone: true}
   @invalid_attrs %{}
