@@ -13,6 +13,7 @@ defmodule PitchIn.Web.User do
   alias PitchIn.Web.Answer
   alias PitchIn.Politics.SearchAlert
   alias PitchIn.Politics.NeedSearch
+  alias PitchIn.Referrals.Referral
 
   schema "users" do
     many_to_many :campaigns, Campaign, join_through: "campaign_staff"
@@ -20,6 +21,7 @@ defmodule PitchIn.Web.User do
     has_many :answers, Answer
     has_many :search_alerts, SearchAlert
     has_many :need_searches, NeedSearch
+    has_many :referrals, Referral
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string
