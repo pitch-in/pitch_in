@@ -56,6 +56,7 @@ config :pitch_in, :staging_auth,
   realm: "Staging"
 
 config :pitch_in, :cert, "success"
+config :pitch_in, :facebook_id, "fb_id"
 
 config :comeonin,
   bcrypt_log_rounds: 4

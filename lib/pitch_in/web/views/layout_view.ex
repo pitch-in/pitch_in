@@ -4,12 +4,14 @@ defmodule PitchIn.Web.LayoutView do
   def meta_data(conn) do
     view = Phoenix.Controller.view_module(conn)
     template = Phoenix.Controller.view_template(conn)
+    fb_id = Application.get_env(:pitch_in, :facebook_id)
 
     default_data = %{
       title: nil,
       description: "We are a meeting place to connect progressive volunteers of all skill levels with the local campaigns and causes they care about.",
       type: "website",
-      image: "/img/logo_blue.png"
+      image: "/img/logo_blue.png",
+      fb_id: fb_id
     }
 
     data = 
