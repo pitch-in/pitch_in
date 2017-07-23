@@ -1,43 +1,41 @@
 $foundation-palette: (
   primary: $blue,
   secondary: $gray-blue,
-  success: $teal,
+  success: $green,
   warning: $yellow,
-  alert: $red,
+  alert: $red
 );
 
-$button-sizes: (
-  tiny: 0.6rem,
-  small: 0.75rem,
-  default: 1rem,
-  large: 1.25rem
-);
+$button-sizes: (tiny: 0.6rem, small: 0.75rem, default: 1rem, large: 1.25rem);
 $header-styles: (
-  small: (
-    'h1': ('font-size': 40),
-    'h2': ('font-size': 32),
-    'h3': ('font-size': 24),
-    'h4': ('font-size': 16),
-    'h5': ('font-size': 8),
-    'h6': ('font-size': 0)
-  ),
-  medium: (
-    'h1': ('font-size': 40),
-    'h2': ('font-size': 32),
-    'h3': ('font-size': 24),
-    'h4': ('font-size': 16),
-    'h5': ('font-size': 8),
-    'h6': ('font-size': 0)
-  )
+  small:
+    (
+      'h1': ('font-size': 40),
+      'h2': ('font-size': 32),
+      'h3': ('font-size': 24),
+      'h4': ('font-size': 16),
+      'h5': ('font-size': 8),
+      'h6': ('font-size': 0)
+    ),
+  medium:
+    (
+      'h1': ('font-size': 40),
+      'h2': ('font-size': 32),
+      'h3': ('font-size': 24),
+      'h4': ('font-size': 16),
+      'h5': ('font-size': 8),
+      'h6': ('font-size': 0)
+    )
 );
 
 // Global
 $body-background: $off-white;
-$base-font-family:  "Open Sans", sans-serif;
+$base-font-family: "Open Sans", sans-serif;
 $global-margin: 0.5rem;
 $paragraph-margin-bottom: 0.5rem;
 
-$header-font-family: Phosphate, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-family: Phosphate, "Helvetica Neue", "Helvetica", Helvetica, Arial,
+  sans-serif;
 $header-font-weight: bold;
 $header-font-style: normal;
 $header-color: $gray-blue;

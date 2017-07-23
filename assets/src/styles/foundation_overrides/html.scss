@@ -12,7 +12,8 @@
     display: flex;
   }
 
-  &.success, &.alert {
+  &.success,
+  &.alert {
     // Success buttons are black color for some reason.
     color: $white;
 
@@ -27,6 +28,10 @@
 
   &.cyan {
     background-color: $cyan;
+  }
+
+  &.teal {
+    background-color: $teal;
   }
 
   &.warning.hollow {
@@ -76,7 +81,6 @@
     @include breakpoint(medium) {
       margin-right: $button-margin;
       margin-bottom: 0;
-
     }
   }
 }
@@ -104,7 +108,8 @@ select {
   }
 }
 
-.column, .columns {
+.column,
+.columns {
   padding-right: 1rem;
   padding-left: 1rem;
 
@@ -122,4 +127,3 @@ select {
     }
   }
 }
-

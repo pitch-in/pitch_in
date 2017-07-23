@@ -22,7 +22,7 @@
     </div>
 
     <div class="expanded button-group">
-      <%= submit "Search", class: "success button" %>
+      <%= submit "Search", class: "teal button" %>
     </div>
   <% end %>
 </div>
