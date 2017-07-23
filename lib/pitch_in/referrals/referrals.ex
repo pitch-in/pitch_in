@@ -9,6 +9,9 @@ defmodule PitchIn.Referrals do
 
   alias PitchIn.Referrals.Referral
   alias PitchIn.Web.User
+  alias PitchIn.Email
+
+  @email Application.get_env(:pitch_in, :email, Email)
 
   def add_referral(%User{} = referrer, email) do
     changeset =
