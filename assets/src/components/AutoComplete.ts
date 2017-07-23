@@ -1,4 +1,3 @@
-import { bindAll } from 'lodash';
 import AutoCompleteItem from './AutoCompleteItem';
 
 export interface IAutoCompleteProps {
@@ -10,9 +9,7 @@ export interface IAutoCompleteProps {
 
 export default class AutoComplete {
   public $element: JQuery;
-  constructor(public props: IAutoCompleteProps) {
-    bindAll(this, ['renderItem']);
-  }
+  constructor(public props: IAutoCompleteProps) {}
 
   render() {
     const { values } = this.props;
@@ -24,7 +21,7 @@ export default class AutoComplete {
     return this.$element;
   }
 
-  renderItem(value) {
+  renderItem = value => {
     const { onClick, onFocus, onBlur } = this.props;
 
     const item = new AutoCompleteItem({
@@ -34,5 +31,5 @@ export default class AutoComplete {
       onBlur
     });
     return item.render();
-  }
+  };
 }

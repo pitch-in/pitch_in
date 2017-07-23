@@ -1,4 +1,4 @@
-import { bindAll, reject, includes, trim, uniq, map } from 'lodash';
+import { compose, reject, contains, trim, uniq, map, join } from 'ramda';
 import $ = require('jquery');
 import BaseComponent from './BaseComponent';
 import AutoComplete from './AutoComplete';
@@ -70,19 +70,6 @@ class TagPicker extends BaseComponent {
 
     this.render();
 
-    bindAll(this, [
-      'onKeyPress',
-      'onInput',
-      'onInputBlur',
-      'onTagClick',
-      'finishTag',
-      'showAutoCompleteIfEmpty',
-      'onAutoCompleteClick',
-      'onAutoCompleteFocus',
-      'closeAutoCompleteOnBlur',
-      'saveTagIfAutoCompleteEmpty'
-    ]);
-
     this.element.on('keydown', this.$nextInput, this.onKeyPress);
     this.element.on('input', this.$nextInput, this.onInput);
     this.$nextInput.focus(this.showAutoCompleteIfEmpty);
@@ -95,10 +82,10 @@ class TagPicker extends BaseComponent {
     }
   }
 
-  onKeyPress(event) {
+  onKeyPress = event => {
     const key = event.which;
 
-    if (includes(confirmKeys, key)) {
+    if (contains(key, confirmKeys)) {
       this.finishTag();
       event.preventDefault();
     } else if (key === Keys.Backspace && this.$nextInput.val() === '') {
@@ -106,9 +93,9 @@ class TagPicker extends BaseComponent {
     } else if (key === Keys.Escape) {
       this.clearAutoComplete();
     }
-  }
+  };
 
-  onInput() {
+  onInput = (): void => {
     const value: string = this.$nextInput.val();
 
     if (this.endsWithComma(value)) {
@@ -119,7 +106,7 @@ class TagPicker extends BaseComponent {
     } else {
       this.fetchAutoCompleteValues(value);
     }
-  }
+  };
 
   fetchAutoCompleteValues(value) {
     if (this.tagType !== 'issues') {
@@ -144,10 +131,10 @@ class TagPicker extends BaseComponent {
     this.render();
   }
 
-  onTagClick(event) {
+  onTagClick = (event): void => {
     const tag = $(event.currentTarget);
     this.removeTag(tag.text());
-  }
+  };
 
   render() {
     this.writeTags();
@@ -166,11 +153,11 @@ class TagPicker extends BaseComponent {
   }
 
   removeTag(value: string) {
-    this.tags = reject(this.tags, tag => tag === value);
+    this.tags = reject(tag => tag === value, this.tags);
     this.renderAndFocus();
   }
 
-  finishTag() {
+  finishTag = (): void => {
     const nextTag = this.$nextInput.val();
     if (trim(nextTag) === '') {
       return;
@@ -180,7 +167,7 @@ class TagPicker extends BaseComponent {
     this.tags = uniq(this.tags);
 
     this.render();
-  }
+  };
 
   initializeTags() {
     const inputVal = this.$input.val().trim();
@@ -202,7 +189,8 @@ class TagPicker extends BaseComponent {
   writeTags() {
     this.$input.val(this.tagsToString());
 
-    const tagsHtml = map(this.tags, this.tagHtml).join('');
+    const tagsHtml = compose(join(''), map(this.tagHtml))(this.tags);
+
     this.$tagsContainer.html(tagsHtml);
   }
 
@@ -217,10 +205,9 @@ class TagPicker extends BaseComponent {
     this.$autoComplete.append(autoComplete.render());
   }
 
-  setAutoCompleteValues(tags: string) {
+  setAutoCompleteValues(tags: string[]) {
     const inputValue = this.$nextInput.val();
-    const filteredValues = reject(tags, tag => tag === inputValue);
-    console.log(filteredValues);
+    const filteredValues = reject(tag => tag === inputValue, tags);
     this.autoCompleteValues = filteredValues;
   }
 
@@ -228,36 +215,36 @@ class TagPicker extends BaseComponent {
     this.$autoComplete.empty();
   }
 
-  onAutoCompleteClick(value) {
+  onAutoCompleteClick = (value): void => {
     this.autoCompleteValues = [];
     this.$nextInput.val(value);
     this.finishTag();
     this.renderAndFocus();
-  }
+  };
 
-  onAutoCompleteFocus(value) {
+  onAutoCompleteFocus = (value): void => {
     this.$nextInput.val(value);
-  }
+  };
 
-  showAutoCompleteIfEmpty() {
+  showAutoCompleteIfEmpty = (): void => {
     if (!(this.$nextInput.val() || this.autoCompleteValues.length)) {
       this.fetchAutoCompleteValues('');
     }
-  }
+  };
 
-  onInputBlur() {
+  onInputBlur = (): void => {
     this.saveTagIfAutoCompleteEmpty();
     this.closeAutoCompleteOnBlur();
-  }
+  };
 
-  closeAutoCompleteOnBlur() {
+  closeAutoCompleteOnBlur = () => {
     setTimeout(() => {
       if (!this.isFocused()) {
         this.autoCompleteValues = [];
         this.clearAutoComplete();
       }
     }, 100);
-  }
+  };
 
   isFocused() {
     return (
@@ -266,12 +253,12 @@ class TagPicker extends BaseComponent {
     );
   }
 
-  saveTagIfAutoCompleteEmpty() {
+  saveTagIfAutoCompleteEmpty = (): void => {
     console.log(this.$nextInput.val(), this.autoCompleteValues.length);
     if (this.$nextInput.val() && !this.autoCompleteValues.length) {
       this.finishTag();
     }
-  }
+  };
 
   endsWithComma(value): boolean {
     return value.slice(-1) === ',';

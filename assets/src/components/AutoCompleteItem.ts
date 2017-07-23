@@ -1,5 +1,3 @@
-import { bindAll } from 'lodash';
-
 export interface IAutoCompleteItemProps {
   value: string;
   onClick: (value: string) => void;
