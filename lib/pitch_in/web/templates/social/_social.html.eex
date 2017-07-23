@@ -1,0 +1,23 @@
+<div class="social">
+  <strong>Refer a friend</strong>
+  <div class="social__icon-list flex-spacing">
+    <a 
+      class="icon--facebook"
+      title="<%= title("Facebook") %>"
+      href="<%= facebook_link(@conn, @campaign, @ask) %>"
+      target="_blank"
+    ></a>
+    <a 
+      class="icon--twitter"
+      title="<%= title("Twitter") %>"
+      href="<%= twitter_link(@conn, @campaign, @ask) %>"
+      target="_blank"
+    ></a>
+    <a 
+      class="icon--email" 
+      title="<%= title("Email") %>"
+      href="<%= email_link(@conn, @campaign, @ask) %>"
+      target="_blank"
+    ></a>
+  </div>
+</div>

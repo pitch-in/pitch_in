@@ -9,5 +9,10 @@
   <div class="small-12 <%= if @ask, do: "medium-6" %> columns">
     <%= render PitchIn.Web.CampaignView, "_summary.html", conn: @conn, campaign: @campaign %>
   </div>
+
+  <div class="columns">
+    <hr>
+    <%= render SocialView, "_social.html", conn: @conn, campaign: @campaign, ask: assigns[:ask] %>
+  </div>
 </div>
 

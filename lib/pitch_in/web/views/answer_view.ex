@@ -5,6 +5,7 @@ defmodule PitchIn.Web.AnswerView do
 
   alias PitchIn.Web.Campaign
   alias PitchIn.Web.Ask
+  alias PitchIn.Web.SocialView
   alias PitchIn.Web.SharedView
 
   @reason_texts %{
