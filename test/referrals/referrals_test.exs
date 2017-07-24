@@ -6,13 +6,18 @@ defmodule PitchIn.Referrals.ReferralTest do
   alias PitchIn.Web.User
 
   describe "add_referral" do
-    test "adds the referral" do
+    setup do
       referrer = insert!(:user)
       email = "test@example.com"
-      
+
+      {:ok, referrer: referrer, email: email}
+    end
+
+    test "adds the referral", %{referrer: referrer, email: email} do
       assert {:ok, %Referral{referrer: referrer, email: email}} = Referrals.add_referral(referrer, email)
     end
   end
+
 
   # describe "list_issues" do
   #   setup do

@@ -10,5 +10,7 @@ defmodule PitchIn.Repo.Migrations.CreateReferrals do
       timestamps()
     end
 
+    create index(:referrals, :code)
+    create unique_index(:referrals, [:email, :referrer_id], name: :referrals_email_referrer_index)
   end
 end

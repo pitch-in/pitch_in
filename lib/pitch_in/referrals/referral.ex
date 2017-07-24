@@ -23,6 +23,7 @@ defmodule PitchIn.Referrals.Referral do
     |> cast(params, [:email])
     |> put_change(:code, generate_code())
     |> validate_required([:email])
+    |> unique_constraint(:email, name: :referrals_email_referrer_index)
   end
 
   defp generate_code() do

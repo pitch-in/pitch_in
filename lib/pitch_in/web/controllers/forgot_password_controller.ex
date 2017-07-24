@@ -7,8 +7,8 @@ defmodule PitchIn.Web.ForgotPasswordController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
-  @mailer Application.get_env(:pitch_in, :mailer, Mailer)
   @email Application.get_env(:pitch_in, :email, Email)
+  @mailer Application.get_env(:pitch_in, :mailer, Mailer)
 
   def create(conn, %{"forgot_password" => params}) do
     email = params["email"]

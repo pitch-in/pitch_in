@@ -1,5 +1,7 @@
 defmodule PitchIn.Test.Mocks.Email do
+  alias PitchIn.Web.User
   alias PitchIn.Web.ContactUs
+  alias PitchIn.Referrals.Referral
 
   def staff_welcome_email(email_address, conn, user, campaign) do
     send self(), {:staff_welcome_email, email_address, conn, user, campaign}
@@ -27,6 +29,10 @@ defmodule PitchIn.Test.Mocks.Email do
 
   def accepted_answer_email(email_address, conn, campaign, answer) do
     send self(), {:accepted_answer_email, email_address, conn, campaign, answer}
+  end
+
+  def referral_email(conn, %Referral{} = referral, %User{} = referrer) do
+    send self(), {:referral_email, conn, referral, referrer}
   end
 
   def contact_us_email(conn, %ContactUs{} = contact_us) do
