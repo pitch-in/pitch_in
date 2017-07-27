@@ -4,6 +4,7 @@
   <%= for referral <- @referrals do %>
     <div>
       <%= referral.email %>
+      <%= referral.code %>
     </div>
   <% end %>
 

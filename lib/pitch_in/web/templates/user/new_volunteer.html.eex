@@ -20,6 +20,11 @@
       <%= error_tag f, :email %>
     </div>
 
+    <div class="form-group">
+      <%= label :referral, :code %>
+      <%= text_input :referral, :code, value: @code %>
+    </div>
+
     <%= inputs_for f, :pro, fn i -> %>
       <div class="form-group">
         <%= label i, :phone %>

@@ -27,6 +27,13 @@ defmodule PitchIn.Referrals do
     Repo.all(from r in Referral, where: r.referrer_id == ^referrer_id)
   end
 
+  def get_referral_by_code(email, code) do
+    case Repo.get_by(Referral, email: email, code: code) do
+      nil -> {:error}
+      referral -> {:ok, referral}
+    end
+  end
+
   def filter_open_referrals(referrals) do
 
   end
