@@ -1,6 +1,6 @@
 {
   "name": "pitch-in",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "repository": {},
   "license": "MIT",
   "scripts": {
@@ -9,9 +9,7 @@
     "deploy": "rimraf ./priv/static && webpack --config ./webpack.production.config.js --progress --profile --colors --display-error-details",
     "lint": "tslint ."
   },
-  "keywords": [
-    "politics"
-  ],
+  "keywords": ["politics"],
   "author": "Will Ockelmann-Wagner",
   "dependencies": {
     "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
