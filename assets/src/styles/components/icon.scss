@@ -10,6 +10,15 @@
   &--question {
     @include icon('question.svg');
   }
+  &--search {
+    @include icon('search.svg');
+  }
+  &--match {
+    @include icon('match.svg');
+  }
+  &--impact {
+    @include icon('impact.svg');
+  }
   &--facebook {
     @include icon('facebook.png');
   }
