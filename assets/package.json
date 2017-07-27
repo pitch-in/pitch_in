@@ -1,4 +1,6 @@
 {
+  "name": "pitch-in",
+  "version": "1.2.3",
   "repository": {},
   "license": "MIT",
   "scripts": {
@@ -7,24 +9,22 @@
     "deploy": "rimraf ./priv/static && webpack --config ./webpack.production.config.js --progress --profile --colors --display-error-details",
     "lint": "tslint ."
   },
-  "keywords": [
-    "politics"
-  ],
+  "keywords": ["politics"],
   "author": "Will Ockelmann-Wagner",
   "dependencies": {
     "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
     "@types/jquery": "^2.0.40",
-    "@types/lodash": "^4.14.43",
     "@types/node": "^6.0.46",
+    "@types/ramda": "^0.24.4",
     "file-loader": "^0.9.0",
     "foundation-sites": "^6.3.0",
     "jquery": "^3.1.1",
     "jquery-mask-plugin": "^1.14.10",
     "jquery-parallax.js": "^1.4.3",
-    "lodash": "^4.17.2",
     "motion-ui": "^1.2.2",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
+    "ramda": "^0.24.1",
     "resolve-url-loader": "^1.6.1"
   },
   "devDependencies": {

@@ -1,0 +1,28 @@
+<div class="content-block text-left">
+  <%= form_for @search_changeset, search_path(@conn, :index), [
+    as: :filter, method: :get, csrf_token: false, enforce_utf8: false
+  ], fn f -> %>
+    <h2>Search ways to help</h2>
+    <div>
+      <%= label f, :issues, "Keywords" %>
+      <p class="input-description">
+        What's important to you?
+      </p>
+      <%= text_input f, :issues, data_tags: "issues", placeholder: "e.g. women, environment", autocomplete: "off" %>
+      <%= error_tag f, :issues %>
+    </div>
+    <div>
+      <%= label f, :skills, "Talents" %>
+      <div class=""></div>
+      <p class="input-description">
+        What can you do?
+      </p>
+      <%= text_input f, :skills, data_tags: "skills", placeholder: "e.g. data, web development" %>
+      <%= error_tag f, :skills %>
+    </div>
+
+    <div class="expanded button-group">
+      <%= submit "Search", class: "teal button" %>
+    </div>
+  <% end %>
+</div>

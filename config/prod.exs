@@ -48,6 +48,7 @@ config :pitch_in, :staging_auth,
   realm: "Staging"
 
 config :pitch_in, :cert, System.get_env("CERT_KEY") || "cert_test.success"
+config :pitch_in, :facebook_id, System.get_env("FACEBOOK_APP_ID")
 
 config :pitch_in, :server_env, System.get_env("SERVER_ENV")
 

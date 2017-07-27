@@ -71,8 +71,8 @@ module.exports = {
       exclude: /node_modules/,
       loaders: ['babel-loader', 'ts-loader']
     }, {
-      test: /\.jsx?$/,
-      exclude: /node_modules\/lodash/,
+      // foundation needs to be run through babel.
+      test: /node_modules\/foundation-sites\/.*\.jsx?$/,
       loaders: ['babel-loader']
     }, {
       test: /\.json?$/,

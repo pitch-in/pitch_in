@@ -1,7 +1,7 @@
-import * as _ from "lodash";
-import $ = require("jquery");
+import $ = require('jquery');
+import { contains } from 'ramda';
 
-import BaseComponent from "./BaseComponent";
+import BaseComponent from './BaseComponent';
 
 export default class HideOn extends BaseComponent {
   private controllingElement: JQuery;
@@ -25,11 +25,11 @@ export default class HideOn extends BaseComponent {
 
   private isShown() {
     const value = this.controllingElement.val();
-    const checked: boolean = this.controllingElement.is(":checked");
+    const checked: boolean = this.controllingElement.is(':checked');
 
     return (
       this.data.showCase === value ||
-      (this.data.showCases && _.includes(this.data.showCases, value)) ||
+      (this.data.showCases && contains(value, this.data.showCases)) ||
       (this.data.showChecked && checked) ||
       (this.data.showChecked === false && !checked)
     );
@@ -43,5 +43,5 @@ export default class HideOn extends BaseComponent {
     this.element.show();
   }
 
-  static selector = "hide-on";
+  static selector = 'hide-on';
 }

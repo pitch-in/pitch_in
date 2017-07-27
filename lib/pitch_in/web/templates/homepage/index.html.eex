@@ -2,12 +2,18 @@
   <%= render "_home_navbar.html", conn: @conn %>
   <section class="home-section text-center" >
     <div class="home-background"></div>
-    <div class="column" >
-      <img class="home-logo" src="<%= webpack_path(@conn, "/img/logo.svg") %>" />
-
-      <h1 class="capitalize text-shadow-dark">
-        Democratize our Democracy
-      </h1>
+    <div class="row">
+      <div class="small-12 large-6 columns">
+        <h1 class="capitalize home__header">
+          Progressive volunteer platform
+        </h1>
+        <h2 class="home__subhead">
+          Connect to causes and issues you care about.
+        </h2>
+      </div>
+      <div class="small-12 large-6 columns">
+        <%= render "_search_form.html", conn: @conn, search_changeset: @search_changeset %>
+      </div>
     </div>
   </section>
 
@@ -16,11 +22,45 @@
   <div class="row column">
     <%= render PitchIn.Web.HomepageView, "_first_time_here.html", conn: @conn %>
 
+    <section class="content-block" id="first-time-here">
+      <div class="row home__fill-row">
+        <div class="small-12 medium-6 columns home__fill-block home__fill-block--teal flex-column">
+          <h1 class="text-center white">New to Pitch In?</h1>
+
+          <p class="white">
+            You’ve already taken the first step by coming here. Our mission is for you to use passions and skills to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need.
+          </p>
+
+          <div class="flex-spacer"></div>
+
+            <%= link "Learn more", to: html_path(@conn, :faq), class: "hollow white button" %>
+        </div>
+        <div class="small-12 medium-3 columns flex-center">
+          <strong class="text-center home__callout">
+            Listen to our interview on
+            <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands">
+              The Organizers Podcast.
+            </a>
+          </strong>
+        </div>
+        <div class="small-12 medium-3 columns flex-column justify-end">
+          <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
+            class="image home-the-organizers">
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="content-block" id="how-this-works">
-      <h2>How this works</h2>
-      <p>
-      You’ve already taken the first step by coming here. Our mission is for you to use passions and skills to strengthen progressive movements and make activism your new favorite hobby. We evaluate your interests, your skills and your availability to connect you with campaigns in need.
-      </p>
+      <h2>How This Works</h2>
+      <p>Take a look at how volunteers and campaigns can use Pitch In to connect.</p>
+      <div class="row">
+        <div class="small-12 medium-6 medium-offset-3 columns">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/JLPGdFh_bh8?rel=0&amp;showinfo=0"  frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="content-block" id="why-pitch-in">
@@ -40,17 +80,6 @@
 
     <%= render PitchIn.Web.HtmlView, "about_us.html", conn: @conn %>
 
-    <div class="content-block flex-row align-center">
-      <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands"
-         class="image home-the-organizers standard-margin-right">
-      </a>
-      <strong>
-        Check out our interview on the podcast
-        <a href="https://www.theorganizerspodcast.com/single-post/2017/04/12/19-Pitch-In-Colorado-Stands">
-          The Organizers</a>!
-      </strong>
-    </div>
-
     <section class="content-block" id="contact-us">
       <%= render(
         PitchIn.Web.ContactUsView,
@@ -62,12 +91,6 @@
       ) %>
     </section>
 
-    <section class="list-header content-block first-time-here">
-      <div class="expanded stacked-for-small action-buttons button-group">
-        <%= link "Get involved", to: user_path(@conn, :new), class: "large alert action button" %>
-        <div class="or-text">or</div>
-        <%= link "Make a Campaign", to: user_path(@conn, :new, staff: true), class: "large hollow alert action button" %>
-      </div>
-    </section>
+    <%= render "_call_to_action_footer.html", conn: @conn %>
   </div>
 </div>

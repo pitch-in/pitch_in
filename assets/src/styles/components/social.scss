@@ -1,0 +1,11 @@
+.social {
+  @include flex(row);
+  &__text {
+    flex-grow: 1;
+  }
+
+  &__icon-list {
+    @include flex(row);
+    @include row-flex-spacing();
+  }
+}

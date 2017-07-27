@@ -25,7 +25,6 @@ body::before {
   left: 0;
   right: 0;
 
-
   .top-bar {
     &, & ul {
       background: $light-blue;
@@ -122,4 +121,8 @@ body::before {
       background: $blue;
     }
   }
+}
+
+.navbar__button {
+  margin-bottom: 0 !important;
 }

@@ -10,15 +10,6 @@ defmodule PitchIn.Tags do
   alias PitchIn.Tags.Issue
   alias PitchIn.Web.Campaign
 
-  @doc """
-  Returns the list of issues.
-
-  ## Examples
-
-      iex> list_issues()
-      [%Issue{}, ...]
-
-  """
   def list_issues(opts \\ []) do
     filter = Keyword.get(opts, :filter, "")
     count = Keyword.get(opts, :count, 10)

@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "taskName": "server",
+  "command": "mix",
+  "isShellCommand": true,
+  "showOutput": "always",
+  "suppressTaskName": true,
+  "args": [],
+  "tasks":[
+    {
+      "taskName": "server",
+      "args": ["phx.server"],
+      "isBuildCommand": true
+    }
+  ]
+}

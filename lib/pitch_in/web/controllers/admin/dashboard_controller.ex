@@ -5,8 +5,8 @@ defmodule PitchIn.Web.Admin.DashboardController do
   alias PitchIn.Web.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
-  alias PitchIn.Web.NeedSearch
-  alias PitchIn.Web.SearchAlert
+  alias PitchIn.Politics.NeedSearch
+  alias PitchIn.Politics.SearchAlert
 
   def index(conn, _) do
     users_count = user_query |> full_count

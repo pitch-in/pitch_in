@@ -1,0 +1,26 @@
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin row-flex-spacing {
+  &.flex-spacing > * {
+    margin-left: 5px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+@mixin column-flex-spacing {
+  &.flex-spacing > * {
+    margin-top: 5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

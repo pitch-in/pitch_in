@@ -3,7 +3,7 @@ defmodule PitchIn.Mixfile do
 
   def project do
     [app: :pitch_in,
-     version: "1.2.2",
+     version: "1.2.3",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -53,7 +53,7 @@ defmodule PitchIn.Mixfile do
      {:hackney, "~> 1.7.0", override: true},
      {:httpoison, "~> 0.11.1"},
      {:poison, "~> 2.0"},
-     {:credo, "~> 0.7", only: [:dev, :test]},
+     {:credo, "~> 0.8.1", only: [:dev, :test], runtime: false},
      {:ex_machina, "~> 2.0", only: :test},
 
      {:ueberauth, "~> 0.4"},
