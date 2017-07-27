@@ -8,6 +8,7 @@ defmodule PitchIn.Referrals do
   alias PitchIn.Repo
 
   alias PitchIn.Referrals.Referral
+  alias PitchIn.Referrals.ReferralForm
   alias PitchIn.Web.User
 
   @starting_slots 5
@@ -22,7 +23,8 @@ defmodule PitchIn.Referrals do
   end
 
   def list_referrals(%User{} = referrer) do
-    Repo.all(Referral, referrer_id: referrer.id)
+    referrer_id = referrer.id
+    Repo.all(from r in Referral, where: r.referrer_id == ^referrer_id)
   end
 
   def filter_open_referrals(referrals) do
@@ -48,7 +50,17 @@ defmodule PitchIn.Referrals do
     @starting_slots - (total_count - closed_count)
   end
 
+  def validate_referral(params \\ %{}) do
+    changeset = referral_changeset(params)
+
+    if changeset.valid? do
+      {:ok, apply_changes(changeset)}
+    else 
+      {:error, changeset}
+    end
+  end
+
   def referral_changeset(params \\ %{}) do
-    Referral.changeset(%Referral{}, params)
+    ReferralForm.changeset(%ReferralForm{}, params)
   end
 end

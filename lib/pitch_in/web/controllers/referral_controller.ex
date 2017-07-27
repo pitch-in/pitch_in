@@ -23,8 +23,9 @@ defmodule PitchIn.Web.ReferralController do
     render(conn, "new.html", user: user, changeset: changeset)
   end
 
-  def create(conn, %{"referral" => %{"email" => email}}, user) do
-    with {:ok, referral} <- Referrals.add_referral(user, email),
+  def create(conn, %{"referral_form" => params}, user) do
+    with {:ok, %{email: email}} <- Referrals.validate_referral(params),
+         {:ok, referral} <- Referrals.add_referral(user, email),
          _ <- email_referral(conn, referral, user)
     do
       conn
@@ -32,7 +33,9 @@ defmodule PitchIn.Web.ReferralController do
       |> redirect(to: referral_path(conn, :index))
     else
       {:error, changeset} ->
-        render(conn, "new.html", user: user, changeset: changeset)
+        conn
+        |> put_flash(:error, "Something went wrong!")
+        |> render("new.html", user: user, changeset: changeset)
     end
   end
 

@@ -21,7 +21,7 @@ defmodule PitchIn.Web.User do
     has_many :answers, Answer
     has_many :search_alerts, SearchAlert
     has_many :need_searches, NeedSearch
-    has_many :referrals, Referral
+    has_many :referrals, Referral, foreign_key: :referrer_id
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string

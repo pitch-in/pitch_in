@@ -19,22 +19,33 @@ defmodule PitchIn.Referrals.ReferralTest do
   end
 
 
-  # describe "list_issues" do
-  #   setup do
-  #     insert!(:issue, issue: "other")
-  #     insert!(:issue, issue: "testing")
-  #     insert!(:issue, issue: "testing")
-  #     :ok
-  #   end
+  describe "list_issues" do
+    setup do
+      user = insert!(:user)
+      other_user = insert!(:user)
 
-  #   test "list_issues/0 returns all issues" do
-  #     assert Tags.list_issues() == ["testing", "other"]
-  #   end
+      insert!(:referral, referrer: user, email: "one@example.com")
+      insert!(:referral, referrer: user, email: "two@example.com")
+      insert!(:referral, referrer: other_user, email: "bad@example.com")
 
-  #   test "list_issues/1 returns filtered issues" do
-  #     assert Tags.list_issues(filter: "the") == ["other"]
-  #   end
-  # end
+      {:ok, user: user}
+    end
+
+    test "returns the user's referrals", %{user: user} do
+      assert length(Referrals.list_referrals(user)) == 2
+    end
+  end
+
+  describe "validate_referral" do
+    test "error for empty emails" do
+      assert {:error, _} = Referrals.validate_referral(%{"email" => ""})
+    end
+
+    test "ok for valid emails" do
+      email = "foo@example.com"
+      assert {:ok, %{email: email}} = Referrals.validate_referral(%{"email" => email})
+    end
+  end
 
 end
 

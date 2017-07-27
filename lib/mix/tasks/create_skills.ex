@@ -30,7 +30,6 @@ defmodule Mix.Tasks.PitchIn.CreateSkills do
       |> Enum.map(fn ask ->
         %{skill: ask.profession, ask_id: ask.id, inserted_at: Timex.now, updated_at: Timex.now}
       end)
-      |> IO.inspect
 
     Repo.insert_all(Skill, new_skills)
   end
