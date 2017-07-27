@@ -1,7 +1,7 @@
 defmodule PitchIn.UserTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.User
+  alias PitchIn.Web.User
 
   @valid_attrs %{email: "some content", is_admin: true, name: "some content"}
   @invalid_attrs %{}

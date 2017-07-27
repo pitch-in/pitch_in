@@ -1,7 +1,7 @@
 defmodule PitchIn.AskTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.Ask
+  alias PitchIn.Web.Ask
 
   @valid_attrs %{description: "some content", experience: 42, length: 42, profession: "some content", role: "some content"}
   @invalid_attrs %{}

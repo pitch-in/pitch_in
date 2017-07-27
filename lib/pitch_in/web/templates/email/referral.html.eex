@@ -1,0 +1,15 @@
+<p>
+  <%= link "Pitch In", to: base_url(@conn, homepage_path(@conn, :index)), title: "Pitch In" %>
+  is a progressive volunteer platform that connects skilled volunteers with local campaigns across the country. <%= @referrer.name %> thinks you might be interested in joining us!
+</p>
+
+<p>
+  You can sign up 
+  <%= link "here", to: base_url(@conn, user_path(@conn, :new, email: @referral.email, code: @referral.code)), title: "Sign Up" %>,
+  or enter the code <strong>@referral.code</strong> in our signup page manually. 
+</p>
+
+<p>
+  Thanks for pitching in!
+</p>
+

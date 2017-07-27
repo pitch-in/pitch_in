@@ -9,6 +9,9 @@ defmodule PitchIn.Web.UserController do
   alias PitchIn.Web.Auth
   alias PitchIn.Web.ErrorView
 
+  alias PitchIn.Referrals
+  alias PitchIn.Referrals.Referral
+
   use PitchIn.Web.Auth, protect: [:show, :edit, :update]
   plug :verify_user when action in [:show, :edit, :update]
 
@@ -19,10 +22,10 @@ defmodule PitchIn.Web.UserController do
 
   def new(conn, params) do
     changeset = 
-      %User{}
+      %User{email: params["email"]}
       |> User.changeset
       |> Ecto.Changeset.put_assoc(:pro, %Pro{})
-    render(conn, "new_volunteer.html", changeset: changeset)
+    render(conn, "new_volunteer.html", changeset: changeset, code: params["code"])
   end
 
   def interstitial(conn, %{"id" => id}) do
@@ -30,7 +33,18 @@ defmodule PitchIn.Web.UserController do
     render(conn, "volunteer_interstitial.html", user: user)
   end
 
-  def create(conn, %{"user" => user_params, "staff" => _}) do
+  def create(conn, %{"user" => user_params, "staff" => _, "referal" => referral_params}) do
+    # TODO: something with this
+    referral =
+      with %{"code" => code} <- referral_params,
+          {:ok, referral} <- Referrals.get_referral_by_code(code)
+      do
+        referral
+      else
+        _ -> %Referral{}
+      end
+      |> IO.inspect
+
     user_params = 
       user_params
       # Use staff email for campaign as a default.

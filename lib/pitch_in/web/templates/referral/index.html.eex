@@ -1,0 +1,13 @@
+<section class="content-block">
+  <h2>My Referrals</h2>
+
+  <%= for referral <- @referrals do %>
+    <div>
+      <%= referral.email %>
+    </div>
+  <% end %>
+
+  <div class="button-group">
+    <%= link "Refer a colleague", to: referral_path(@conn, :new), class: "primary button" %>
+  </div>
+</section>

@@ -7,6 +7,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
   alias PitchIn.Email
   alias PitchIn.Mailer
 
+  @email Application.get_env(:pitch_in, :email, Email)
   @mailer Application.get_env(:pitch_in, :mailer, Mailer)
 
   def create(conn, %{"forgot_password" => params}) do
@@ -24,7 +25,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
         case Repo.update(changeset) do
           {:ok, user} ->
             conn
-            |> Email.password_reset_token_email(user)
+            |> @email.password_reset_token_email(user)
             |> @mailer.deliver_later
             
             redirect_to_email_sent(conn, email)
@@ -66,7 +67,7 @@ defmodule PitchIn.Web.ForgotPasswordController do
       case Repo.update(changeset) do
         {:ok, user} ->
           conn
-          |> Email.password_reset_success_email(user)
+          |> @email.password_reset_success_email(user)
           |> @mailer.deliver_later
 
           conn
