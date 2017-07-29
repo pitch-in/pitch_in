@@ -6,7 +6,7 @@
 <p>
   You can sign up 
   <%= link "here", to: base_url(@conn, user_path(@conn, :new, email: @referral.email, code: @referral.code)), title: "Sign Up" %>,
-  or enter the code <strong>@referral.code</strong> in our signup page manually. 
+  or enter the code <strong><%= @referral.code %></strong> in our signup page manually. 
 </p>
 
 <p>
