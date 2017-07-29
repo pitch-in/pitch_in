@@ -7,9 +7,9 @@ defmodule PitchIn.Factory do
   alias PitchIn.Repo
 
   alias PitchIn.Tags.Issue
-  alias PitchIn.Web.Campaign
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Pro
+  alias PitchIn.Campaigns.Campaign
+  alias PitchIn.Users.User
+  alias PitchIn.Users.Pro
   alias PitchIn.Referrals.Referral
   alias PitchIn.Tokens 
 

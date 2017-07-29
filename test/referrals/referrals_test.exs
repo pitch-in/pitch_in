@@ -3,7 +3,7 @@ defmodule PitchIn.Referrals.ReferralTest do
 
   alias PitchIn.Referrals
   alias PitchIn.Referrals.Referral
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   describe "add_referral" do
     setup do

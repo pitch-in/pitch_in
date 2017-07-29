@@ -18,7 +18,7 @@ config :pitch_in, PitchIn.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :pitch_in, PitchIn.Mailer,
+config :pitch_in, PitchIn.Mail.Mailer,
   adapter: Bamboo.SendgridAdapter,
   server: "smtp.domain",
   port: 1025,
@@ -36,10 +36,10 @@ config :pitch_in, :staging_auth,
 config :pitch_in, :cert, "success"
 config :pitch_in, :facebook_id, "fb_id"
 
-config :pitch_in, PitchIn.Mailer,
+config :pitch_in, PitchIn.Mail.Mailer,
   api_key: "mailer_key"
 
-config :pitch_in, PitchIn.Email,
+config :pitch_in, PitchIn.Mail.Email,
   test_email: "test@pitch-in.us",
   from_email: "from@pitch-in.us",
   contact_us_email: "contact_us@pitch-in.us",

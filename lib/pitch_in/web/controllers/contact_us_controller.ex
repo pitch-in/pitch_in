@@ -2,8 +2,8 @@ defmodule PitchIn.Web.ContactUsController do
   use PitchIn.Web, :controller
   use PitchIn.Web.Auth, pass_user: true
 
-  alias PitchIn.Email
-  alias PitchIn.Mailer
+  alias PitchIn.Mail.Email
+  alias PitchIn.Mail.Mailer
   alias PitchIn.Web.ContactUs
 
   def index(conn, _, user) do

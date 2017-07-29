@@ -1,4 +1,4 @@
-<%= next_steps PitchIn.Web.User, @user, "creating an account, #{@user.name}!", fn step_name -> %>
+<%= next_steps PitchIn.Users.User, @user, "creating an account, #{@user.name}!", fn step_name -> %>
   <%= case step_name do %>
     <% :search -> %>
       <%= next_step "Search", to: search_path(@conn, :index), color: "primary" do %>

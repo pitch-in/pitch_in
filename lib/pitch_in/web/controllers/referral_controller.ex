@@ -3,10 +3,10 @@ defmodule PitchIn.Web.ReferralController do
 
   use PitchIn.Web.Auth, protect: :all, pass_user: true
 
-  alias PitchIn.Email
-  alias PitchIn.Mailer
+  alias PitchIn.Mail.Email
+  alias PitchIn.Mail.Mailer
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
   alias PitchIn.Referrals
   alias PitchIn.Referrals.Referral
 

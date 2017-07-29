@@ -2,10 +2,10 @@ defmodule PitchIn.Web.ForgotPasswordController do
   use PitchIn.Web, :controller
 
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
   alias PitchIn.Web.Auth
-  alias PitchIn.Email
-  alias PitchIn.Mailer
+  alias PitchIn.Mail.Email
+  alias PitchIn.Mail.Mailer
 
   @email Application.get_env(:pitch_in, :email, Email)
   @mailer Application.get_env(:pitch_in, :mailer, Mailer)

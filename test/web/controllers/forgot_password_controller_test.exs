@@ -1,7 +1,7 @@
 defmodule PitchIn.Web.ForgotPasswordControllerTest do
   use PitchIn.Web.ConnCase
   
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   test "renders form for forgot password ", %{conn: conn} do
     conn = get conn, forgot_password_path(conn, :index)

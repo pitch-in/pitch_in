@@ -1,7 +1,7 @@
 defmodule PitchIn.HomepageControllerTest do
   use PitchIn.Web.ConnCase
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
   alias PitchIn.Referrals.Referral
 
   test "index", %{conn: conn} do

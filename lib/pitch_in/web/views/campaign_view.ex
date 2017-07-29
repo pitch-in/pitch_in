@@ -5,7 +5,7 @@ defmodule PitchIn.Web.CampaignView do
 
   import PitchIn.Web.ArchivableView, only: [archivable_index: 3, select_options: 1]
 
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Tags.Issue
   alias PitchIn.Web.SharedView
 

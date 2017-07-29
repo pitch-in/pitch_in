@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.Skill do
+defmodule PitchIn.Tags.Skill do
   use PitchIn.Web, :model
 
   alias PitchIn.Web.Ask

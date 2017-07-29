@@ -4,8 +4,8 @@ defmodule PitchIn.Web.Auth do
   """
 
   alias PitchIn.Repo
-  alias PitchIn.Web.User
-  alias PitchIn.Web.CampaignStaff
+  alias PitchIn.Users.User
+  alias PitchIn.Campaigns.CampaignStaff
   alias PitchIn.Web.ErrorView
   import Ecto
   import Ecto.Query

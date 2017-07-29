@@ -1,8 +1,8 @@
-defmodule PitchIn.Web.Campaign do
+defmodule PitchIn.Campaigns.Campaign do
   use PitchIn.Web, :model
   use PitchIn.Web.NextSteps
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
   alias PitchIn.Tags.Issue

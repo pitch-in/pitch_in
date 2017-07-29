@@ -2,7 +2,7 @@ defmodule PitchIn.Web.AskController do
   use PitchIn.Web, :controller
 
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
 
   use PitchIn.Web.Auth, protect: [:new, :create, :edit, :update, :interstitial]
   plug :check_campaign_staff

@@ -40,7 +40,7 @@ config :pitch_in, PitchIn.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :pitch_in, PitchIn.Mailer,
+config :pitch_in, PitchIn.Mail.Mailer,
   adapter: Bamboo.SendgridAdapter,
   server: "smtp.domain",
   port: 1025,

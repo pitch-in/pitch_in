@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.User do
+defmodule PitchIn.Users.User do
   @moduledoc """
   A volunteer or campaign user.
   """
@@ -7,8 +7,8 @@ defmodule PitchIn.Web.User do
   use PitchIn.Web.NextSteps
 
   alias PitchIn.Tokens
-  alias PitchIn.Web.Pro
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Users.Pro
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
   alias PitchIn.Politics.SearchAlert

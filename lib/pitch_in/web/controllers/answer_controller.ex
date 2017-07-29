@@ -2,11 +2,11 @@ defmodule PitchIn.Web.AnswerController do
   use PitchIn.Web, :controller
 
   alias Plug.Conn
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
-  alias PitchIn.Email
-  alias PitchIn.Mailer
+  alias PitchIn.Mail.Email
+  alias PitchIn.Mail.Mailer
   alias PitchIn.Web.Auth
   alias PitchIn.Web.ErrorView
 

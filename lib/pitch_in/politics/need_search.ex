@@ -1,7 +1,7 @@
 defmodule PitchIn.Politics.NeedSearch do
   use PitchIn.Web, :model
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   schema "need_searches" do
     belongs_to :user, User

@@ -1,4 +1,4 @@
-defmodule PitchIn.Mail.Email do
+defmodule PitchIn.Email do
   @moduledoc """
   Defines emails the app can send.
   """
@@ -9,9 +9,9 @@ defmodule PitchIn.Mail.Email do
   alias PitchIn.Web.ContactUs
   alias PitchIn.Referrals.Referral
 
-  @pitch_in_email Application.get_env(:pitch_in, PitchIn.Mail.Email)[:from_email]
-  @contact_us_email Application.get_env(:pitch_in, PitchIn.Mail.Email)[:contact_us_email]
-  @template_id Application.get_env(:pitch_in, PitchIn.Mail.Email)[:basic_template_id]
+  @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
+  @contact_us_email Application.get_env(:pitch_in, PitchIn.Email)[:contact_us_email]
+  @template_id Application.get_env(:pitch_in, PitchIn.Email)[:basic_template_id]
 
   def staff_welcome_email(email_address, conn, user, campaign) do
     email_address
