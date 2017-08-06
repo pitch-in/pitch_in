@@ -1,5 +1,5 @@
-defmodule PitchIn.Test.Mocks.Email do
-  alias PitchIn.Web.User
+defmodule PitchIn.Test.Mocks.Mail.Email do
+  alias PitchIn.Users.User
   alias PitchIn.Web.ContactUs
   alias PitchIn.Referrals.Referral
 

@@ -8,7 +8,7 @@ defmodule PitchIn.Tags do
   alias PitchIn.Repo
 
   alias PitchIn.Tags.Issue
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
 
   def list_issues(opts \\ []) do
     filter = Keyword.get(opts, :filter, "")
@@ -39,5 +39,19 @@ defmodule PitchIn.Tags do
       |> Issue.changeset(%{issue: value})
 
     Repo.insert(changeset)
+  end
+
+  def clean_up_issues(issues) do
+    issues
+    # Trim each issue.
+    |> Enum.map(fn {i, issue} ->
+      issue = Map.update!(issue, "issue", &(String.trim(&1)))
+      {i, issue}
+    end)
+    # Remove blank issues.
+    |> Enum.reject(fn {_i, issue} ->
+      issue["issue"] == ""
+    end)
+    |> Enum.into(%{})
   end
 end

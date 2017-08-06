@@ -9,7 +9,7 @@ defmodule PitchIn.Referrals do
 
   alias PitchIn.Referrals.Referral
   alias PitchIn.Referrals.ReferralForm
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   @starting_slots 5
 
@@ -34,8 +34,10 @@ defmodule PitchIn.Referrals do
     end
   end
 
-  def filter_open_referrals(referrals) do
 
+  def filter_open_referrals(referrals) do
+    referrals
+    |> Enum.filter()
   end
 
   def filter_pending_referrals(referrals) do

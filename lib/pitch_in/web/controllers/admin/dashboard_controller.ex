@@ -1,8 +1,8 @@
 defmodule PitchIn.Web.Admin.DashboardController do
   use PitchIn.Web, :controller
 
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Users.User
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
   alias PitchIn.Politics.NeedSearch

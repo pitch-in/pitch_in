@@ -2,7 +2,7 @@ defmodule PitchIn.Web.PrefilledAskController do
   use PitchIn.Web, :controller
 
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.PrefilledAsk
 
   use PitchIn.Web.Auth, protect: :all

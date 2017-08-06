@@ -7,7 +7,7 @@ defmodule PitchIn.Politics do
   import Ecto.{Query, Changeset}, warn: false
   alias PitchIn.Repo
 
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Need
   alias PitchIn.Politics.NeedSearch
   alias PitchIn.Politics.SearchAlert

@@ -27,7 +27,7 @@ config :pitch_in, PitchIn.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
-config :pitch_in, PitchIn.Mailer,
+config :pitch_in, PitchIn.Mail.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY"),
   server: "smtp.domain",
@@ -36,7 +36,7 @@ config :pitch_in, PitchIn.Mailer,
   ssl: false, # can be `true`
   retries: 1
 
-config :pitch_in, PitchIn.Email,
+config :pitch_in, PitchIn.Mail.Email,
   test_email: System.get_env("TEST_EMAIL"),
   from_email: System.get_env("FROM_EMAIL"),
   contact_us_email: System.get_env("CONTACT_US_EMAIL"),

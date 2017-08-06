@@ -4,7 +4,7 @@ defmodule PitchIn.Referrals.Referral do
   """
   use PitchIn.Web, :model
 
-  alias PitchIn.Web.User 
+  alias PitchIn.Users.User 
   alias PitchIn.Tokens 
 
   schema "referrals" do

@@ -4,7 +4,7 @@ defmodule PitchIn.Tags.Issue do
   """
   use PitchIn.Web, :model
 
-  alias PitchIn.Web.Campaign 
+  alias PitchIn.Campaigns.Campaign 
 
   schema "issues" do
     field :issue, :string

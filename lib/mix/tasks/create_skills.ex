@@ -12,7 +12,7 @@ defmodule Mix.Tasks.PitchIn.CreateSkills do
 
   alias PitchIn.Repo
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Skill
+  alias PitchIn.Tags.Skill
 
   def run(_args) do
     [:postgrex, :ecto, :tzdata]

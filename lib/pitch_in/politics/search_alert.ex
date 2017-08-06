@@ -1,7 +1,7 @@
 defmodule PitchIn.Politics.SearchAlert do
   use PitchIn.Web, :model
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   schema "search_alerts" do
     belongs_to :user, User

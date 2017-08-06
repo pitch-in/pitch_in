@@ -1,11 +1,11 @@
 defmodule PitchIn.Web.UserController do
   use PitchIn.Web.NextSteps
   use PitchIn.Web, :controller
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Pro
-  alias PitchIn.Web.Campaign
-  alias PitchIn.Email
-  alias PitchIn.Mailer
+  alias PitchIn.Users.User
+  alias PitchIn.Users.Pro
+  alias PitchIn.Campaigns.Campaign
+  alias PitchIn.Mail.Email
+  alias PitchIn.Mail.Mailer
   alias PitchIn.Web.Auth
   alias PitchIn.Web.ErrorView
 
@@ -33,18 +33,7 @@ defmodule PitchIn.Web.UserController do
     render(conn, "volunteer_interstitial.html", user: user)
   end
 
-  def create(conn, %{"user" => user_params, "staff" => _, "referal" => referral_params}) do
-    # TODO: something with this
-    referral =
-      with %{"code" => code} <- referral_params,
-          {:ok, referral} <- Referrals.get_referral_by_code(code)
-      do
-        referral
-      else
-        _ -> %Referral{}
-      end
-      |> IO.inspect
-
+  def create(conn, %{"user" => user_params, "staff" => _}) do
     user_params = 
       user_params
       # Use staff email for campaign as a default.
@@ -80,7 +69,18 @@ defmodule PitchIn.Web.UserController do
     end
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, %{"user" => user_params, "referal" => referral_params}) do
+    # TODO: something with this
+    referral =
+      with %{"code" => code} <- referral_params,
+          {:ok, referral} <- Referrals.get_referral_by_code(code)
+      do
+        referral
+      else
+        _ -> %Referral{}
+      end
+      |> IO.inspect
+
     changeset = 
       %User{}
       |> User.volunteer_registration_changeset(user_params)

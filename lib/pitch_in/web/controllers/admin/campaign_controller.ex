@@ -2,7 +2,7 @@ defmodule PitchIn.Web.Admin.CampaignController do
   use PitchIn.Web, :controller
   import PitchIn.Utils
 
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.CampaignView
 
   def index(conn, _params) do
