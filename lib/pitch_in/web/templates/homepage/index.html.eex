@@ -33,7 +33,7 @@
 
           <div class="flex-spacer"></div>
 
-            <%= link "Learn more", to: html_path(@conn, :faq), class: "hollow white button" %>
+            <%= link "Learn more", to: html_path(@conn, :about_us), class: "hollow white button" %>
         </div>
         <div class="small-12 medium-3 columns flex-center">
           <strong class="text-center home__callout">
@@ -77,8 +77,6 @@
       Free up your campaign to do the hard and important work on the ground. We’ll help you connect with tech do-gooders to do the rest. 
       </p>
     </section>
-
-    <%= render PitchIn.Web.HtmlView, "about_us.html", conn: @conn %>
 
     <section class="content-block" id="contact-us">
       <%= render(
