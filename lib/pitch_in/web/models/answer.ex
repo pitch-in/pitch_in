@@ -2,9 +2,9 @@ defmodule PitchIn.Web.Answer do
   use PitchIn.Web, :model
   use PitchIn.Web.NextSteps
 
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
 
   @derive [PitchIn.Archivable]
 

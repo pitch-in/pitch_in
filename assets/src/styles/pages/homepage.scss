@@ -49,9 +49,12 @@
 
 .call-to-action-footer {
   background: $black;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 
   &__header {
     color: $white;
+    margin: 0;
   }
 }
 
@@ -77,4 +80,33 @@
 
 .home__callout {
   font-size: 1.5rem;
+}
+
+.testimonial {
+  @include flex(row);
+  background: $blue;
+  padding: 0.5rem;
+
+  &__img {
+    height: 80%;
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  &__text,
+  &__header {
+    color: $white;
+  }
+
+  &__text {
+    flex-grow: 1;
+  }
+}
+
+.maceo-img {
+  @include image('../img/homepage/maceo.jpg', 100%);
+  &::after {
+    border-radius: 50%;
+    background-position: center center;
+  }
 }

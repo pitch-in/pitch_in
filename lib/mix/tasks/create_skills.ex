@@ -12,7 +12,7 @@ defmodule Mix.Tasks.PitchIn.CreateSkills do
 
   alias PitchIn.Repo
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Skill
+  alias PitchIn.Tags.Skill
 
   def run(_args) do
     [:postgrex, :ecto, :tzdata]
@@ -30,7 +30,6 @@ defmodule Mix.Tasks.PitchIn.CreateSkills do
       |> Enum.map(fn ask ->
         %{skill: ask.profession, ask_id: ask.id, inserted_at: Timex.now, updated_at: Timex.now}
       end)
-      |> IO.inspect
 
     Repo.insert_all(Skill, new_skills)
   end

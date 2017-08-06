@@ -3,7 +3,7 @@ defmodule PitchIn.Web.AnswerView do
   use PitchIn.Web.NextStepView
   use PitchIn.Web.ArchivableView
 
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.SharedView
 

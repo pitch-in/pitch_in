@@ -16,6 +16,9 @@
           <li class="show-for-large">
             <%= link "Manage Campaigns", to: campaign_path(@conn, :index) %>
           </li>
+          <li class="show-for-large">
+            <%= link "Refer Friends", to: referral_path(@conn, :index) %>
+          </li>
         <% end %>
       </ul>
     </div>
@@ -73,6 +76,9 @@
     </div>
     <div class="top-bar-right">
       <ul class="vertical large-horizontal menu">
+        <li class="hide-for-large">
+          <%= link "Refer Friends", to: referral_path(@conn, :index) %>
+        </li>
         <li class="hide-for-large">
           <%= link "Donate", to: "https://secure.actblue.com/contribute/page/pitch-in-app?refcode=website" %>
         </li>

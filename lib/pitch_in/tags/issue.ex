@@ -3,9 +3,8 @@ defmodule PitchIn.Tags.Issue do
   An important political issue for a campaign or user.
   """
   use PitchIn.Web, :model
-  # use Ecto.Schema
 
-  alias PitchIn.Web.Campaign 
+  alias PitchIn.Campaigns.Campaign 
 
   schema "issues" do
     field :issue, :string

@@ -7,9 +7,9 @@ defmodule PitchIn.Politics.Search do
   import Ecto.Query
   alias PitchIn.Repo
   alias PitchIn.Politics.NeedSearch
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
-  alias PitchIn.Web.Skill
+  alias PitchIn.Tags.Skill
   alias PitchIn.Tags.Issue
 
   @ask_match_rating """

@@ -1,4 +1,4 @@
-<%= next_steps PitchIn.Web.Campaign, @campaign, "registering #{@campaign.name}", fn step_name -> %>
+<%= next_steps PitchIn.Campaigns.Campaign, @campaign, "registering #{@campaign.name}", fn step_name -> %>
   <%= case step_name do %>
     <% :first_need -> %>
       <%= next_step "Create Need", to: campaign_ask_path(@conn, :new, @campaign), color: "success" do %>

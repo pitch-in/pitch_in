@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.User do
+defmodule PitchIn.Users.User do
   @moduledoc """
   A volunteer or campaign user.
   """
@@ -7,12 +7,13 @@ defmodule PitchIn.Web.User do
   use PitchIn.Web.NextSteps
 
   alias PitchIn.Tokens
-  alias PitchIn.Web.Pro
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Users.Pro
+  alias PitchIn.Campaigns.Campaign
   alias PitchIn.Web.Ask
   alias PitchIn.Web.Answer
   alias PitchIn.Politics.SearchAlert
   alias PitchIn.Politics.NeedSearch
+  alias PitchIn.Referrals.Referral
 
   schema "users" do
     many_to_many :campaigns, Campaign, join_through: "campaign_staff"
@@ -20,6 +21,7 @@ defmodule PitchIn.Web.User do
     has_many :answers, Answer
     has_many :search_alerts, SearchAlert
     has_many :need_searches, NeedSearch
+    has_many :referrals, Referral, foreign_key: :referrer_id
     field :name, :string
     field :is_admin, :boolean, default: false
     field :email, :string

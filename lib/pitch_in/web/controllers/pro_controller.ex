@@ -3,8 +3,8 @@ defmodule PitchIn.Web.ProController do
   use PitchIn.Web.Auth, protect: :all, pass_user: true
   plug :verify_user when action in [:show, :update]
 
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Pro
+  alias PitchIn.Users.User
+  alias PitchIn.Users.Pro
   alias PitchIn.Web.ErrorView
 
   def show(conn, %{"id" => _id}, user) do

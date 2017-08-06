@@ -1,7 +1,7 @@
 defmodule PitchIn.Web.ForgotPasswordControllerTest do
   use PitchIn.Web.ConnCase
   
-  alias PitchIn.Web.User
+  alias PitchIn.Users.User
 
   test "renders form for forgot password ", %{conn: conn} do
     conn = get conn, forgot_password_path(conn, :index)
@@ -18,6 +18,13 @@ defmodule PitchIn.Web.ForgotPasswordControllerTest do
     user = Repo.get(User, user.id)
     assert user.reset_digest
 
+    user_id = user.id
+    assert_received {
+      :password_reset_token_email, 
+      _conn,
+      %User{id: ^user_id}
+    }
+
     assert redirected_to(conn) == forgot_password_path(conn, :email_sent, email: user.email)
   end
 
@@ -30,6 +37,9 @@ defmodule PitchIn.Web.ForgotPasswordControllerTest do
 
     user = Repo.get(User, user.id)
     refute user.reset_digest
+
+
+    refute_received { :password_reset_token_email, _, _ }
 
     assert redirected_to(conn) == forgot_password_path(conn, :email_sent, email: "bad@email.com")
   end

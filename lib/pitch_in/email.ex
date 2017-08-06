@@ -1,13 +1,17 @@
-defmodule PitchIn.Email do
+defmodule PitchIn.Mail.Email do
   @moduledoc """
   Defines emails the app can send.
   """
   use Bamboo.Phoenix, view: PitchIn.Web.EmailView
   import Bamboo.SendgridHelper
 
-  @pitch_in_email Application.get_env(:pitch_in, PitchIn.Email)[:from_email]
-  @contact_us_email Application.get_env(:pitch_in, PitchIn.Email)[:contact_us_email]
-  @template_id Application.get_env(:pitch_in, PitchIn.Email)[:basic_template_id]
+  alias PitchIn.Users.User
+  alias PitchIn.Web.ContactUs
+  alias PitchIn.Referrals.Referral
+
+  @pitch_in_email Application.get_env(:pitch_in, PitchIn.Mail.Email)[:from_email]
+  @contact_us_email Application.get_env(:pitch_in, PitchIn.Mail.Email)[:contact_us_email]
+  @template_id Application.get_env(:pitch_in, PitchIn.Mail.Email)[:basic_template_id]
 
   def staff_welcome_email(email_address, conn, user, campaign) do
     email_address
@@ -58,7 +62,14 @@ defmodule PitchIn.Email do
     |> render("accepted_answer.html", conn: conn, campaign: campaign, answer: answer)
   end
 
-  def contact_us_email(_conn, %PitchIn.Web.ContactUs{
+  def referral_email(conn, %Referral{} = referral, %User{} = referrer) do
+    referral.email
+    |> base_email
+    |> subject("#{referrer.name} invited you to Pitch In!")
+    |> render("referral.html", conn: conn, referral: referral, referrer: referrer)
+  end
+
+  def contact_us_email(_conn, %ContactUs{
     subject: user_subject,
     body: user_body,
     email: from_email,

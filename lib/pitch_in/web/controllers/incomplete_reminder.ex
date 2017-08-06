@@ -10,7 +10,7 @@ defmodule PitchIn.Web.IncompleteReminder do
   import Phoenix.HTML.Link
 
   alias PitchIn.Repo
-  alias PitchIn.Web.CampaignStaff
+  alias PitchIn.Campaigns.CampaignStaff
 
   def init(opts) do
     opts

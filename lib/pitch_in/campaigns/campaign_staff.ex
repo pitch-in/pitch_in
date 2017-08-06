@@ -1,4 +1,4 @@
-defmodule PitchIn.Web.CampaignStaff do
+defmodule PitchIn.Campaigns.CampaignStaff do
   use PitchIn.Web, :model
 
   schema "campaign_staff" do

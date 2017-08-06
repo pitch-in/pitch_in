@@ -3,8 +3,8 @@ defmodule PitchIn.Tags.TagsTest do
 
   alias PitchIn.Tags
   alias PitchIn.Tags.Issue
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Campaign
+  alias PitchIn.Users.User
+  alias PitchIn.Campaigns.Campaign
 
   describe "list_issues" do
     setup do

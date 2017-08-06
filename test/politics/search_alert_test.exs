@@ -1,7 +1,7 @@
-defmodule PitchIn.SearchAlertTest do
+defmodule PitchIn.Politics.SearchAlertTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.SearchAlert
+  alias PitchIn.Politics.SearchAlert
 
   @valid_attrs %{issue: "some content", profession: "some content", role: "some content", years_experience: 42}
   @invalid_attrs %{}

@@ -7,9 +7,11 @@ defmodule PitchIn.Factory do
   alias PitchIn.Repo
 
   alias PitchIn.Tags.Issue
-  alias PitchIn.Web.Campaign
-  alias PitchIn.Web.User
-  alias PitchIn.Web.Pro
+  alias PitchIn.Campaigns.Campaign
+  alias PitchIn.Users.User
+  alias PitchIn.Users.Pro
+  alias PitchIn.Referrals.Referral
+  alias PitchIn.Tokens 
 
   def build(:issue) do
     %Issue{issue: "testing"}
@@ -42,6 +44,17 @@ defmodule PitchIn.Factory do
     %Pro{
       phone: "5551234567"
     }
+  end
+
+  def build(:referral) do
+    %Referral{
+      email: sequence(:email, &"bob+#{&1}@canibuildit.com"),
+      code: Tokens.token(6)
+    }
+  end
+
+  def with_referrer(%Referral{} = referral) do
+    %Referral{referral | referrer: build(:user)}
   end
 
   def with_user(%Pro{} = pro) do

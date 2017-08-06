@@ -1,7 +1,7 @@
-defmodule PitchIn.IssueTest do
+defmodule PitchIn.Tags.IssueTest do
   use PitchIn.ModelCase
 
-  alias PitchIn.Issue
+  alias PitchIn.Tags.Issue
 
   @valid_attrs %{issue: "some content"}
   @invalid_attrs %{}

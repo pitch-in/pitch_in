@@ -91,6 +91,8 @@
       ) %>
     </section>
 
+    <%= render "_testimonial.html" %>
+
     <%= render "_call_to_action_footer.html", conn: @conn %>
   </div>
 </div>
